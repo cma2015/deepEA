@@ -1,8 +1,8 @@
-## deepEA
+## DeepEA
 
 - deepEA is a Galaxy-based framework for exploration and large-scale analysis of epitranscriptome sequencing data.
 
-## How to use deepEA
+## How to use DeepEA
 
 - More details about how to use deepEA are presented at http://bioinfo.nwafu.edu.cn:4003
 - Test datasets can de downloaded from XXX
