@@ -1,0 +1,95 @@
+<tool id="Calling_pseudoU" name="Calling pseudoU"  version='18.09'>
+  <description>from the Pseudo-seq data</description>
+  <command><![CDATA[
+	#if $type.RNA_modification_type == "pseudoU":
+		docker run -v /home/songjie/PEAC/galaxy/tools/PEACtools/:/home/galaxy/tools/mytools/ 
+			   -v /home/songjie/PEAC/galaxy/database/files/000:/home/songjie/PEAC/galaxy/database/files/000 malab/pea 
+   		Rscript /home/galaxy/tools/mytools/Calling_pse.R
+		$type.input_BAM
+		$type.RNA_modification_type  
+		$type.Refgenome
+		$out_peaks 
+		$type.paired.pairedtype
+		$type.level 
+		$type.thread ;								
+
+	#end if
+
+
+  ]]></command>
+  <inputs>
+	<conditional name="type">
+		<param name="RNA_modification_type" type="select" label="RNA modification type">
+			<option value="pseudoU" selected="true">Pseudouridine</option>
+		</param>
+
+	<when value="pseudoU">
+		<param name="input_BAM" type="data" format="bam,BAM" label="Read BAM files" />
+		<param name="Refgenome" type="data" format="fa,fasta,fas" label="Reference genome" />
+		<conditional name="paired">
+			<param name="pairedtype" type="select"  label="Paired-end or Single-end" >
+				<option value="F" selected="true">Single-end</option>
+				<option value="T" >Paired-end</option>
+			</param>
+		</conditional>
+
+		<param name="level" type="text"  value="0.05"  label="Significance level"  />
+		<param name="thread" type="integer" value="1" max='6' min='1' label="Thread" />
+	</when>
+
+
+	</conditional>
+	
+  </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs> 
+	<data name="out_peaks" format="tsv" label="${type.RNA_modification_type} CMRs">
+	<filter>type['RNA_modification_type'] == "pseudoU"</filter>
+	</data>
+  </outputs>
+<help><![CDATA[
+.. class:: infomark
+
+**What it does**
+
+**Callling pseudoU** : Calculate the pseudouridine ratio from the pseudo-seq data.
+
+-----
+
+.. class:: infomark
+
+**Inputs**
+
+- **Read BAM files:** The input control experiment in BAM format. 
+
+- **Reference genome:** The Reference genome sequences with FASTA format.
+
+-----
+
+.. class:: infomark
+
+**Parameters**
+
+- **Paired-end or Single-end**: select parameters indicating the input is single-end or paired-end
+
+- **Significance level**: p-value cutoff for peak detection
+
+- **Thread**: the number of cpus to be used for parallel computing
+
+
+.. class:: infomark
+
+**Outputs**
+
+- A list containing the position and ratio for each pseudouridine.
+
+
+]]></help>
+    <citations>
+        <citation type="doi">10.1038/nature13802</citation>
+    </citations>
+</tool>
+
+

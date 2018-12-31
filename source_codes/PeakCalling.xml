@@ -1,0 +1,140 @@
+<tool id="Calling_peaks" name="Peak calling" version='18.09'>
+  <description>from the MeRIP-seq data</description>
+  <command><![CDATA[
+	#if $type.RNA_modification_type == "m6A":
+	echo $type.RNA_modification_type ;
+	#if $type.Method.peakcalling_Method == "SlidingWindow":
+		docker run -v /home/songjie/PEAC/galaxy/tools/PEACtools/:/home/galaxy/tools/mytools/ 
+			   -v /home/songjie/PEAC/galaxy/database/files/000:/home/songjie/PEAC/galaxy/database/files/000 malab/pea 
+   		Rscript /home/galaxy/tools/mytools/MeRIP-peakcalling.R
+		$type.input_BAM
+		$type.IP_BAM 
+		$type.Method.peakcalling_Method  
+		$type.Refgenome
+		$m6A_out_peaks 
+		$type.paired.pairedtype
+		$type.level
+		$type.ratio ;				
+		##cat /home/software/peakcalling/peak.peaks | sed 's/ //g' >  $m6A_out_peaks ;
+		##rm /home/software/peakcalling/peak.peaks ;
+	#else 
+		docker run -v /home/songjie/PEAC/galaxy/tools/PEACtools/:/home/galaxy/tools/mytools/ 
+			   -v /home/songjie/PEAC/galaxy/database/files/000:/home/songjie/PEAC/galaxy/database/files/000 malab/pea 
+		Rscript /home/galaxy/tools/mytools/MeRIP-peakcalling.R
+		$type.input_BAM
+		$type.IP_BAM 
+		$type.Method.peakcalling_Method  
+		$type.GTF
+		$m6A_out_peaks 		
+		$type.paired.pairedtype
+		$type.level
+		$type.ratio ;						
+		##cat /home/software/peakcalling/peak.peaks | sed 's/ //g'  >  $m6A_out_peaks ;	
+		##rm /home/software/peakcalling/peak.peaks ;
+	#end if
+	#end if
+
+
+
+
+	##cat /root/ncbi/public/sra/SRR531911.sra >  $SRA_data ;
+	##/home/software/sratoolkit.2.9.1-ubuntu64/bin/fastq-dump -A $SRA_data -M $minReadLen -O /home/software/fastq  ;
+	##cat /home/software/fastq/* > $fastq ;
+
+
+  ]]></command>
+  <inputs>
+	<conditional name="type">
+		<param name="RNA_modification_type" type="select" label="RNA modification type">
+			<option value="m6A" selected="true">N6-Methyladenosine (or other MeRIP-seq based sequencing)</option>
+		</param>
+
+	<when value="m6A">
+		<param name="input_BAM" type="data" format="bam,BAM" label="Input sample" />
+		<param name="IP_BAM" type="data" format="bam,BAM" label="RIP sample" />
+		<param name="Refgenome" type="data" format="fa,fasta,fas" label="Reference genome" />
+		<param name="GTF" type="data" format="gtf,gff,gff3" label="Reference annotation file (GTF)" />
+
+		<conditional name="Method">
+			<param name="peakcalling_Method" type="select" format="bam,BAM" label="Peak Callling method" >
+				<option value="SlidingWindow" >SlidingWindow</option>
+				<option value="MACS2" selected="true" >MACS2</option>
+				<option value="MetPeak" >MetPeak</option>
+				<option value="exomePeak" >exomePeak</option>
+				<option value="BayesPeak" >BayesPeak</option>
+			</param>
+		</conditional>
+
+		<conditional name="paired">
+			<param name="pairedtype" type="select"  label="Paired-end or Single-end" >
+				<option value="F" selected="true">Single-end</option>
+				<option value="T" >Paired-end</option>
+			</param>
+		</conditional>
+
+		<param name="level" type="text"  value="0.05"  label="Significance level"  />
+		<param name="ratio" type="text" value="-1" label="Ratio (log2)" help="The ratio between the normalized mapped reads number in input and IP samples, respectively." />
+
+
+
+	</when>
+
+
+	</conditional>
+	
+  </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs> 
+	<data name="m6A_out_peaks" format="bed" label="${type.RNA_modification_type} peaks">
+	<filter>type['RNA_modification_type'] == "m6A"</filter>
+	</data>
+  </outputs>
+<help><![CDATA[
+.. class:: infomark
+
+**What it does**
+
+**Peak calling** is used to identify enriched genomic regions in MeRIP-seq or ChIP-seq experiments. The function is implemented using the **peakCalling** function in PEA package (zhai *et al*., 2018)
+
+
+-----
+
+.. class:: infomark
+
+**Inputs**
+
+- **Input sample:** The input control experiment in BAM format. 
+
+- **RIP sample:** The RIP experiment in BAM format.
+
+- **Reference genome:** The Reference genome sequences with FASTA format.
+
+- **Reference annotation file:** The Reference genome annotation file with GTF/GFF3 format.
+
+-----
+
+.. class:: infomark
+
+**Parameters**
+
+- **Peak callling method**: select the method used for peak calling, the default is "MACS2", more details about different peak calling method can be see from https://github.com/cma2015/PEA
+
+- **Paired-end or Single-end**: select parameters indicating the input is single-end or paired-end
+
+- **Significance level**: p-value cutoff for peak detection
+
+- **Ratio (log2)**: the ratio between the normalized mapped reads number in input and IP samples, respectively.
+
+.. class:: infomark
+
+**Outputs**
+
+- The enriched peak region matrix in BED format.
+
+
+]]></help>
+</tool>
+
+

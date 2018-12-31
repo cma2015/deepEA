@@ -1,0 +1,278 @@
+<tool id="different_modify" name="Differential CMRs analysis"  version='18.09'>
+    <description>for multi-experiment</description>
+    <command><![CDATA[
+#import re
+#import json
+
+## Adapted from DESeq2 wrapper
+#set $temp_factor_names = list()
+#set $temp_factor = list()
+
+#for $g in $rep_group:
+
+    #set $peak_files = list()
+    #set $peak_repeat = list()
+    #set $bam_files = list()
+    #set $bam_controls = list()
+
+    #for $file in $g.peaks:
+        #set $file_name = str($g.groupName) + "-"+ str($g.groupName2) + "-" + re.sub('[^\w\-]', '_', str($file.element_identifier)) + "-peaks.bed"
+        ln -sf '${file}' '${file_name}' &&
+        $peak_files.append($file_name)
+    #end for
+
+    #for $bam in $g.bamreads:
+        #set $bam_name = re.sub('[^\w\-]', '_', str($bam.element_identifier))
+        #set $bam_file = $bam_name + "-bamreads.bam"
+        #set $bam_index = $bam_name + "-bamreads.bai"
+        ln -sf '${bam}' '${bam_file}' &&
+        ln -sf '${bam.metadata.bam_index}' '${bam_index}' &&
+        $bam_files.append($bam_file)
+    #end for
+
+    $temp_factor.append( {str($g.groupName): $peak_files} )
+    $temp_factor.append( {str($g.groupName): $bam_files} )
+
+    #if str( $g.bamcontrol ) != 'None':
+        #for $ctrl in $g.bamcontrol:
+            #set $ctrl_name = re.sub('[^\w\-]', '_', str($ctrl.element_identifier))
+            #set $ctrl_file = $ctrl_name + "-bamcontrol.bam"
+            #set ctrl_index = $ctrl_name + "-bamcontrol.bai"
+            #if $ctrl_file not in json.dumps($temp_factor):
+                ln -sf '${ctrl}' '${ctrl_file}' &&
+                ln -sf '${ctrl.metadata.bam_index}' '${ctrl_index}' &&
+            #end if
+            $bam_controls.append($ctrl_file)
+        #end for
+        $temp_factor.append( {str($g.groupName): $bam_controls} )
+    #end if
+
+#end for
+
+$temp_factor.reverse()
+$temp_factor_names.append(["Condition", $temp_factor])
+
+
+Rscript '$__tool_directory__/different_modify.R'
+
+    -i '#echo json.dumps(temp_factor_names)#'
+    -o '$outfile'
+    -t $th
+    -f $out.format
+    -p '$plots'
+
+    #if $scorecol:
+        -n "$scorecol"
+    #end if
+    #if $lowerbetter:
+        -l "$lowerbetter"
+    #end if
+    #if $summits:
+        -s "$summits"
+    #end if
+
+    #if $out.rdata:
+        -r
+    #end if
+
+    #if $out.analysis_info:
+        -a
+    #end if
+
+]]>
+    </command>
+    <inputs>
+        <repeat name="rep_group" title="Group" min="2" max="6" default="2">
+            <param name="groupName" type="text" label="Name"
+            help="Name for the Group that the peak and BAM files belong to e.g. Resistant/Responsive (two Groups must be specified for DiffBind). NOTE: Please only use letters, numbers or underscores.">
+                <sanitizer>
+                    <valid initial="string.letters,string.digits"><add value="_" /></valid>
+                </sanitizer>
+                <validator type="empty_field" />
+            </param>
+            <param name="groupName2" type="text" value="rep1" label="Replicate" help="Result of your Peak calling experiment"/>
+            <param name="peaks" type="data" format="bed" multiple="true" label="Peak files" help="Result of your Peak calling experiment"/>
+            <param name="bamreads" type="data" format="bam" multiple="true" label="RIP BAM files" help="Specify the Read BAM files used in the Peak calling. The input order of the BAM files for the samples MUST match the input order of the peaks files."/>
+            <param name="bamcontrol" type="data" format="bam" multiple="true" optional="True" label="Input BAM files" help="If specifying a control BAM file, all samples are required to specify one, see Help section below. The input order of the BAM files for the samples MUST match the input order of the peaks files."/>
+        </repeat>
+
+        <param name="scorecol" type="integer" min="0" value="8" label="Score Column" help="Column in peak files that contains peak scores. Default: 8 (narrowPeak)">
+            <sanitizer>
+                <valid initial="string.digits"/>
+            </sanitizer>
+        </param>
+        <param name="lowerbetter" type="boolean" truevalue="True" falsevalue="" checked="False" label="Lower score is better?" help="DiffBind by default assumes that a higher score indicates a better peak, for example narrowPeaks -log10pvalue. If this is not the case, for example if the score is a p-value or FDR, set this option to Yes. Default: No" />
+        <param name="summits" type="integer" min="0" optional="True" label="Summits" help="Extend peaks Nbp up- and downstream of the summit. For punctate peaks it is advisable to extend (e.g. 250bp), see the DiffBind User Guide">
+            <sanitizer>
+                <valid initial="string.digits"/>
+            </sanitizer>
+        </param>
+        <param name="th" type="float" value="0.05" min="0" max="1" label="FDR Threshold" help="Significance threshold; all sites with FDR less than or equal to this value will be included in the output. A value of 1 will output all binding sites. Default: 0.05"/>
+
+        <!-- Output Options -->
+        <section name="out" expanded="false" title="Output Options">
+            <param name="format" type="select" label="Output Format">
+                <option value="interval">Interval</option>
+                <option value="bed" selected="True">BED</option>
+                <option value="tabular">Tabular (tab-separated)</option>
+            </param>
+            <param name="pdf" type="boolean" truevalue="True" falsevalue="" checked="False" label="Visualising the analysis results" help="output an additional PDF file" />
+
+            <param name="rdata" type="boolean" truevalue="True" falsevalue="" checked="False" label="Output RData file?" help="Output all the data used by R to construct the plots and tables, can be loaded into R. Default: No"/>
+            <param name="analysis_info" type="boolean" truevalue="True" falsevalue="False" checked="False" label="Output analysis info?" help="If this option is set to Yes, information from the dba.count and dba.analyze commmands will be output in a text file. Default: No"/>
+        </section>
+    </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+    <outputs>
+        <data name="outfile" format="interval" label="${tool.name} on ${on_string}: Differentially CMRs">
+            <change_format>
+                <when input="out.format" value="bed" format="bed" />
+                <when input="out.format" value="tabular" format="tsv" />
+            </change_format>
+        </data>
+        <data name="plots" format="pdf" label="${tool.name} on ${on_string}: Plots">
+            <filter>out['pdf']</filter>
+        </data>
+
+        <data name="rdata" format="rdata" from_work_dir="DiffBind_analysis.RData" label="${tool.name} on ${on_string}: RData file">
+            <filter>out['rdata']</filter>
+        </data>
+        <data name="analysis_info" format="txt" from_work_dir="DiffBind_analysis_info.txt" label="${tool.name} on ${on_string}: Analysis info">
+            <filter>out['analysis_info']</filter>
+        </data>
+    </outputs>
+
+    <tests>
+        <!-- Ensure outputs work -->
+        <test expect_num_outputs="6">
+            <repeat name="rep_group">
+                <param name="groupName" value="Resistant"/>
+                <param name="peaks" ftype="bed" value="BT474_ER_1.bed.gz,BT474_ER_2.bed.gz"/>
+                <param name="bamreads" ftype="bam" value="BT474_ER_1.bam,BT474_ER_2.bam" />
+            </repeat>
+            <repeat name="rep_group">
+                <param name="groupName" value="Responsive"/>
+                <param name="peaks" ftype="bed" value="MCF7_ER_1.bed.gz,MCF7_ER_2.bed.gz"/>
+                <param name="bamreads" ftype="bam" value="MCF7_ER_1.bam,MCF7_ER_2.bam" />
+            </repeat>
+            <param name="scorecol" value="5" />
+            <param name="format" value="interval"/>
+            <param name="pdf" value="True" />
+            <param name="binding_matrix" value="True" />
+            <param name="rdata" value="True" />
+            <param name="analysis_info" value="True"/>
+            <output name="outfile" ftype="interval" value="out_diffbind.interval" />
+            <output name="plots" value="out_plots.pdf" compare="sim_size" />
+            <output name="binding_matrix" value="out_binding_matrix.tab" />
+            <output name="rdata" value="DiffBind_analysis.RData" compare="sim_size"/>
+            <output name="analysis_info" compare="sim_size" >
+                <assert_contents>
+                    <has_text text="SessionInfo"/>
+                </assert_contents>
+            </output>
+        </test>
+        <!-- Ensure control BAMs input works -->
+        <test expect_num_outputs="1">
+            <repeat name="rep_group">
+                <param name="groupName" value="Resistant"/>
+                <param name="peaks" ftype="bed" value="BT474_ER_1.bed.gz,BT474_ER_2.bed.gz"/>
+                <param name="bamreads" ftype="bam" value="BT474_ER_1.bam,BT474_ER_2.bam" />
+                <param name="bamcontrol" ftype="bam" value="input1.bam,input2.bam" />
+            </repeat>
+            <repeat name="rep_group">
+                <param name="groupName" value="Responsive"/>
+                <param name="peaks" ftype="bed" value="MCF7_ER_1.bed.gz,MCF7_ER_2.bed.gz"/>
+                <param name="bamreads" ftype="bam" value="MCF7_ER_1.bam,MCF7_ER_2.bam" />
+                <param name="bamcontrol" ftype="bam" value="input1.bam,input2.bam" />
+            </repeat>
+            <param name="scorecol" value="5" />
+            <param name="format" value="interval"/>
+            <output name="outfile" ftype="interval" value="out_diffbind_ctrl.interval" />
+        </test>
+        <!-- Ensure BED output works -->
+        <test expect_num_outputs="1">
+            <repeat name="rep_group">
+                <param name="groupName" value="Resistant"/>
+                <param name="peaks" ftype="bed" value="BT474_ER_1.bed.gz,BT474_ER_2.bed.gz"/>
+                <param name="bamreads" ftype="bam" value="BT474_ER_1.bam,BT474_ER_2.bam" />
+            </repeat>
+            <repeat name="rep_group">
+                <param name="groupName" value="Responsive"/>
+                <param name="peaks" ftype="bed" value="MCF7_ER_1.bed.gz,MCF7_ER_2.bed.gz"/>
+                <param name="bamreads" ftype="bam" value="MCF7_ER_1.bam,MCF7_ER_2.bam" />
+            </repeat>
+            <param name="scorecol" value="5" />
+            <param name="format" value="bed"/>
+            <output name="outfile" ftype="bed" value="out_diffbind.bed" />
+        </test>
+        <!-- Ensure tabular output works -->
+        <test expect_num_outputs="1">
+            <repeat name="rep_group">
+                <param name="groupName" value="Resistant"/>
+                <param name="peaks" ftype="bed" value="BT474_ER_1.bed.gz,BT474_ER_2.bed.gz"/>
+                <param name="bamreads" ftype="bam" value="BT474_ER_1.bam,BT474_ER_2.bam" />
+            </repeat>
+            <repeat name="rep_group">
+                <param name="groupName" value="Responsive"/>
+                <param name="peaks" ftype="bed" value="MCF7_ER_1.bed.gz,MCF7_ER_2.bed.gz"/>
+                <param name="bamreads" ftype="bam" value="MCF7_ER_1.bam,MCF7_ER_2.bam" />
+            </repeat>
+            <param name="scorecol" value="5" />
+            <param name="format" value="tabular"/>
+            <output name="outfile" ftype="tabular" file="out_diffbind.tab" />
+        </test>
+    </tests>
+    <help><![CDATA[
+
+.. class:: infomark
+
+**What it does**
+
+The primary emphasis of 'Differential CMRs analysis' is on identifying sites that are differentially modified
+between two sample groups. It includes functions to support the processing of peak sets, including overlapping and merging peak sets, 
+counting sequencing reads overlapping intervals in peak sets and identifying statistically significantly differentially bound sites based on
+evidence of binding affinity (measured by differences in reading densities). 
+The module builds on 'Diffbind' R package to provide a set of standardized plots to aid analysis.
+
+**Note** : This tool requires a minimum of four samples (two groups with two replicates each).**
+
+
+-----
+
+.. class:: infomark
+
+**Inputs**
+
+- **Name:** The experiment name. 
+- **Replicate:** The replicate name.
+- **Peak files:** The peak regions in BED format.
+- **RIP BAM files:** The RIP experiment in BAM format.
+- **Input BAM files:** The input control experiment in BAM format.
+
+
+**Note**: You have to specify the name of the Group and the peak and BAM files for the two Groups you want to compare in the tool form above **Name**.
+
+
+.. class:: infomark
+
+**Outputs**
+
+This tool outputs
+
+    * a table of differentially CMRs in Interval, BED format
+
+Optionally, under **Output Options** you can choose following parameters to output
+
+    * a PDF of plots (Heatmap, PCA, MA, Volcano, Boxplots)
+    * an RData file of the R objects generated
+    * a text file with information on the analysis (number of Intervals, FriP scores, method used)
+
+
+]]>
+    </help>
+    <citations>
+        <citation type="doi">doi:10.1038/nature10730</citation>
+    </citations>
+</tool>

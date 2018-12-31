@@ -1,0 +1,153 @@
+<tool id="GO" name="Functional Enrichment Analysis" version='18.09'>
+  <description>GO and KEGG</description>
+  <command><![CDATA[
+
+	Rscript $__tool_directory__/GO_KEGG.R $species_name $gene_list $inputType.type $geneNameType.NameType $go_level $local_hub.local $kegg.kegg_analysis  
+	$Table_GO
+	$Figure_GO
+	$Figure_GO_level
+	$Table_Kegg
+
+  ]]></command>
+  <inputs>
+	<param name="species_name" type="text" value="Arabidopsis" label="The species name." />
+	<param name="gene_list" type="data" format="tsv,txt" label="The modification gene list." />
+
+	<conditional name="inputType">
+		<param name="type" type="select" label="The function of gene list generation." >
+			<option value="Annotation" selected="true">Annotation function</option>
+		</param>
+	</conditional>
+
+	<conditional name="geneNameType">
+		<param name="NameType" type="select" label="The type of gene names coding (Orgdb support)." >
+			<option value="TAIR" selected="true">TAIR (TAIR Identifiers)</option>
+			<option value="ENTREZID" >ENTREZID (Entrez gene Identifiers)</option>
+			<option value="ENSEMBL" >ENSEMBL (The ensembl ID as indicated by ensembl)</option>
+			<option value="GO" >GO (GO Identifiers associated with a gene of interest)</option>
+		</param>
+	</conditional>
+
+	<param name="go_level" type="text" value="3" label="The go enrichment level." />
+
+	<conditional name="local_hub">
+		<param name="local" type="select" label="Whether to use the local AnnotationHub database?" >
+			<option value="TRUE" selected="true">TRUE</option>
+			<option value="FALSE"  >FALSE </option>
+		</param>
+	</conditional>
+
+	<conditional name="kegg">
+		<param name="kegg_analysis" type="select" label="Whether to perform kegg analysis?" >
+			<option value="TRUE" selected="true">TRUE</option>
+			<option value="FALSE"  >FALSE </option>
+		</param>
+	</conditional>
+
+
+  </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs> 
+	<data name="Table_GO" format="intermine_tabular" label="${tool.name} on ${on_string}:Table_GO.txt">
+	</data>
+	<data name="Figure_GO" format="pdf" label="${tool.name} on ${on_string}:Figure_GO.pdf">
+	</data>
+	<data name="Figure_GO_level" format="pdf" label="${tool.name} on ${on_string}:Figure_GO_level.pdf">
+	</data>
+	<data name="Table_Kegg" format="intermine_tabular" label="${tool.name} on ${on_string}:Table_Kegg.txt">
+	<filter>kegg['kegg_analysis'] == "TRUE"</filter>
+	</data>
+  </outputs>
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+Performs integrated analyses of a set of CMRs against a
+genome annotation file for a specific organism,
+identifying the overlabs genes.
+
+-------------
+
+.. class:: infomark
+
+**Inputs**
+
+**The species name** - Species name to be analyzed
+
+**The modification gene list** - List of genes to be analyzed, only the first column wiil be analyzed.
+
+**The type of gene names coding (Orgdb support)** - Type of gene name，support : TAIR, ENTREZID, ENSEMBL, GO
+
+-------------
+
+.. class:: infomark
+
+**Outputs**
+
+There will be four files output, respectively:
+
+**Table_GO** - Q-value ascending GO terms.
+
+====== ============ =================================
+Column Name         Description
+====== ============ =================================
+     1 ID           Terms ID
+     2 Description  Terms function
+     3 GeneRatio    Gene Ratio
+     4 BgRatio      BgRatio
+     5 pvalue       p-value
+     6 p.adjust     p.adjust
+     7 qvalue       FDR
+     8 Type         GO term type:MF BP CC
+====== ============ =================================
+
+------
+
+**Table_Kegg** - Q-value ascending GO terms.
+
+====== ===========  =================================
+Column Name         Description
+====== ===========  =================================
+     1 ID           Pathway ID
+     2 Description  Pathway function
+     3 GeneRatio    Gene Ratio
+     4 BgRatio      BgRatio
+     5 pvalue       p-value
+     6 p.adjust     p.adjust
+     8 qvalue       FDR
+====== ===========  =================================
+
+-------
+
+**Figure_GO** - **Bar plot** and  **Dot plot** and **Enrichment Map**：
+
+.. image:: static/plot/Figure_GO.png
+    :width: 500 px
+    :scale: 100 %   
+    :align: center
+
+-------
+
+
+**Figure_GO_level** - Equal level of GO enrichment ：
+
+
+.. image:: static/plot/Figure_GO_level.png
+    :width: 500 px
+    :scale: 100 %   
+    :align: center
+
+
+
+</help>
+    <citations>
+        <citation type="doi">10.1089/omi.2011.0118</citation>
+        <citation type="doi">10.1093/bioinformatics/btu684</citation>
+    </citations>
+</tool>
+
+

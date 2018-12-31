@@ -1,0 +1,133 @@
+<tool id="distribute" name="CMRs Distribution"  version='18.09'>
+  <description></description>
+  <command><![CDATA[
+
+	ln -sf '${gff}' '${gff}.gff' ;
+	Rscript $__tool_directory__/distribution.R 
+		$input_seq 
+		'${gff}.gff'
+		$modification.type 
+		$ext.plot 
+		$distribute1.plot 
+		$distribute2.plot 
+		$peaks_over_Chromosomes.plot 
+		$distanse_between_TSS.plot 
+		$RNA_type.plot 
+		$RNA_region_type.plot 
+		$out_figure ;
+
+
+
+  ]]></command>
+  <inputs>
+	<param name="input_seq" type="data" format="encodepeak,bed" label="The peak calling region." />
+	<param name="gff" type="data" format="gff,gtf,gff3" label="Reference GFF" />
+	<conditional name="modification">
+		<param name="type" type="select" label="The peak calling result type" >
+			<option value="Peaks" selected="true" >peaks</option>
+			<option value="Sites">sites </option>
+		</param>
+	</conditional>
+	<conditional name="ext">
+		<param name="plot" type="select" label="Output file type" >
+			<option value="pdf">pdf</option>
+		</param>
+	</conditional>
+	<conditional name="distribute1">
+		<param name="plot" type="select" label="Distribution on mRNA and lncRNA" >
+			<option value="TRUE" selected="true">TRUE</option>
+			<option value="FALSE"  >FALSE </option>
+		</param>
+	</conditional>
+	<conditional name="distribute2">
+		<param name="plot" type="select" label="Distribution on gene feature" >
+			<option value="TRUE" selected="true">TRUE</option>
+			<option value="FALSE"  >FALSE </option>
+		</param>
+	</conditional>
+	<conditional name="peaks_over_Chromosomes">
+		<param name="plot" type="select" label="Distribution on chromosomes" >
+			<option value="TRUE" selected="true">TRUE</option>
+			<option value="FALSE"  >FALSE </option>
+		</param>
+	</conditional>
+	<conditional name="distanse_between_TSS">
+		<param name="plot" type="select" label="Mean coverage on TSS and TES" >
+			<option value="TRUE" selected="true">TRUE</option>
+			<option value="FALSE"  >FALSE </option>
+		</param>
+	</conditional>
+	<conditional name="RNA_type">
+		<param name="plot" type="select" label="Percent overlapped with different RNA type" >
+			<option value="TRUE" selected="true">TRUE</option>
+			<option value="FALSE"  >FALSE </option>
+		</param>
+	</conditional>
+	<conditional name="RNA_region_type">
+		<param name="plot" type="select" label="Percent overlapped with gene feature" >
+			<option value="TRUE" selected="true">TRUE</option>
+			<option value="FALSE"  >FALSE </option>
+		</param>
+	</conditional>	
+  </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs> 
+	<data name="out_figure" format="pdf" label= "${tool.name} on ${on_string}: Distribution feature.pdf">
+	</data>
+  </outputs>
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+This function is designed for visualization of CMRs distributions at different levels including chromosome, gene, RNA feature and transcript level.
+
+-------------
+
+.. class:: infomark
+
+**Input**
+
+- **CMR region** - A tab seperated matrix
+
+	**Example:**
+
+			====== ========== =================================
+			Chr    Start      End
+			====== ========== =================================
+			1      100        201
+			2      1892       2002
+			3      153        321
+			====== ========== =================================
+
+-------------
+
+- **Reference GFF** - The annotion file requires the standard **gff/gff3** format, recommended download from ensemble plant database.
+
+
+-------------
+
+.. class:: infomark
+
+**Outputs**
+
+- For **Annotated CMRs in the gene region:**
+
+	.. image:: static/plot/distribute.png
+	    :width: 500 px
+	    :scale: 100 %   
+	    :align: center
+
+
+</help>
+    <citations>
+        <citation type="doi">10.1093/nar/gkx120</citation>
+        <citation type="doi">10.1155/2016/8367534</citation>
+        <citation type="doi">10.1093/bioinformatics/btv145</citation>
+    </citations>
+</tool>
+
+

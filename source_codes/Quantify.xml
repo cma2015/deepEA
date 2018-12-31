@@ -1,0 +1,58 @@
+<tool id="quantify" name="Quantify Measure"  version='18.09'>
+  <description>Calculate the level of modification in the peaks region</description>
+  <command><![CDATA[
+ 	 ln -sf '${Input_BAM}' '${Input_BAM}.bam' ;
+	 ln -sf '${IP_BAM}'  '${IP_BAM}.bam' ;
+	 ln -sf '${Peaks}' '${Peaks}.bed' ;
+
+	Rscript $__tool_directory__/peak_methylation_level.R  
+	'${Input_BAM}.bam'
+	'${IP_BAM}.bam'
+	'${Peaks}.bed'
+	$minimal_counts  
+	$modification_level;
+  ]]></command>
+  <inputs>
+		<param name="Input_BAM" type="data" format="bam,BAM" label="Input sample" />
+		<param name="IP_BAM" type="data" format="bam,BAM" label="RIP sample" />
+		<param name="Peaks" type="data" format="bed,narrowpeak" label="Peaks" />
+		<param name="minimal_counts" type="text" value="10" format="bed,narrowpeak" label="Minimal counts" />
+
+  </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs> 
+	<data name="modification_level" format="tsv" label="${tool.name} on ${on_string}: Modification level.txt">
+	</data>
+  </outputs>
+   <help><![CDATA[
+.. class:: infomark
+
+**What it does**
+
+This function can be used to calculate the modification level for each peaks region.
+
+-----
+
+.. class:: infomark
+
+**Inputs**
+
+- **Input sample:** The input control experiment in BAM format. 
+- **RIP sample:** The RIP experiment in BAM format.
+- **Peaks:** The peak regions in BED format.
+
+-----
+
+.. class:: infomark
+
+**Outputs**
+
+    A tab seperated matrix containing eight columns ( "MFPKM_FC"    "MFPKM_ip"    "Reads_ip"    "MFPKM_input" "Reads_input  "Reads_FC"    "log10.p"     "log10.fdr")
+
+]]></help>
+
+</tool>
+
+

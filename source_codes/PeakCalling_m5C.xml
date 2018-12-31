@@ -1,0 +1,212 @@
+<tool id="peakcalling_m5C" name="Calling m5C"  version='18.09'>
+  <description> from the RNA-BSseq data</description>
+  <command><![CDATA[
+	#if $type.RNA_modification_type == "m5C":
+	#if $type.m5CMethod.m5CMethod_peakcalling_Method == "meRanGs":
+
+		/home/software/meRanTK-1.2.0/meRanGh mkbsidx 
+		-t $type.thread 
+		-fa $type.Refgenome 
+		-id /home/software/m5C_index  ;
+
+
+		#if $type.readtype.single_or_paired == "se":
+
+			cat $type.readtype.fastq_in > /home/software/m5C_res/m5C.fq ;
+			/home/software/meRanTK-1.2.0/meRanGh align 
+			 -o /home/software/m5C_res
+			 -f /home/software/m5C_res/m5C.fq
+			 -t $type.thread 
+			 -S meRanGh.sam 
+			 -MM 
+			 -id /home/software/m5C_index 
+			 -GTF  $type.GTF ;
+
+
+
+		#elif $type.readtype.single_or_paired == "pair_of_files":
+			cat $type.readtype.fastq_r1_in > /home/software/m5C_res/m5C1.fq ;
+			cat $type.readtype.fastq_r2_in > /home/software/m5C_res/m5C2.fq ;
+
+			/home/software/meRanTK-1.2.0/meRanGh align 
+			-o /home/software/m5C_res
+			-f /home/software/m5C_res/m5C1.fq
+			-r /home/software/m5C_res/m5C2.fq
+			-t $type.thread 
+			-S meRanGh.sam 
+			-MM 
+			-id /home/software/m5C_index 
+			-GTF  $type.GTF	
+ 			-bg
+ 			-mbgc 10 
+ 			-mbp ;
+		#end if
+
+
+		/home/software/meRanTK-1.2.0/meRanCall 
+		-p 2 
+		-s /home/software/m5C_res/meRanGh_sorted.bam
+		-f $type.Refgenome  
+		-gref 
+		-o /home/software/m5C_res/res.txt 
+		-md 50 
+		-cr 0.99 
+ 		-fdr $type.fdr   
+		-mBQ 30 
+		-bed63 
+		-sc 5 ;
+		cat /home/software/m5C_res/res.bed > $m5C_out_peaks
+
+		#end if
+	#elif $type.m5CMethod.m5CMethod_peakcalling_Method == "meRanT":
+		
+		cat $type.Refgenome > /home/software/m5C_index/genome.fa ;
+
+		/home/software/meRanTK-1.2.0/meRanT mkbsidx 
+		-fa /home/software/m5C_index/genome.fa
+		-id /home/software/m5C_index  ;
+
+		/home/software/meRanTK-1.2.0/util/mkRefSeq2GeneMap.pl –f /home/software/m5C_index/genome.fa –m /home/software/m5C_index/refSeqRNA2GeneName.map ;
+
+		#if $type.readtype.single_or_paired == "se":
+
+			cat $type.readtype.fastq_in > /home/software/m5C_res/m5C.fq ;
+
+
+			/home/software/meRanTK-1.2.0/meRanT align 
+			-t $type.thread 
+			-f /home/software/m5C_res/m5C.fq
+			-i2g /home/software/m5C_index/refSeqRNA2GeneName.map
+			-o /home/software/m5C_res
+			-S meRanT_test.sam  
+			-x /home/software/m5C_index/genome_C2T ;
+
+		#elif $type.readtype.single_or_paired == "pair_of_files":
+			cat $type.readtype.fastq_r1_in > /home/software/m5C_res/m5C1.fq ;
+			cat $type.readtype.fastq_r2_in > /home/software/m5C_res/m5C2.fq ;
+
+			/home/software/meRanTK-1.2.0/meRanT align 
+			-t $type.thread 
+			-f /home/software/m5C_res/m5C1.fq
+			-r /home/software/m5C_res/m5C2.fq
+			-i2g /home/software/m5C_index/refSeqRNA2GeneName.map
+			-o /home/software/m5C_res
+			-S meRanT_test.sam  
+			-x /home/software/m5C_index/genome_C2T ;
+		#end if
+
+		/home/software/meRanTK-1.2.0/meRanCall 
+		-p 2 
+		-s /home/software/m5C_res/meRanGh.sam
+		-f /home/software/m5C_index/genome.fa
+		-tref 
+		-o /home/software/m5C_res/res.txt
+		-md 50 
+		-cr 0.99 
+		-mBQ 30 
+		-sc 5 ;
+
+
+		cat /home/software/m5C_res/res.bed > $m5C_out_peaks
+
+	
+	#end if
+
+
+
+
+	##cat /root/ncbi/public/sra/SRR531911.sra >  $SRA_data ;
+	##/home/software/sratoolkit.2.9.1-ubuntu64/bin/fastq-dump -A $SRA_data -M $minReadLen -O /home/software/fastq  ;
+	##cat /home/software/fastq/* > $fastq ;
+
+
+  ]]></command>
+  <inputs>
+	<conditional name="type">
+		<param name="RNA_modification_type" type="select" label="RNA modification type">
+			<option value="m5C">5-methylcytosine</option>
+		</param>
+
+	<when value="m5C">
+		<conditional name="m5CMethod">
+			<param name="m5CMethod_peakcalling_Method" type="select" format="bam,BAM" label="Alignment method" >
+				<option value="meRanGs" selected="true">Align RNA-BSseq reads to a reference genome</option>
+				<option value="meRanT" >Align RNA-BSseq reads to a set of reference transcripts</option>
+			</param>
+		</conditional>
+
+		<param name="Refgenome" type="data" format="fa,fasta,fas" label="Reference genome" />
+		<param name="GTF" type="data" format="gtf,gff" label="Reference annotation file (GTF)" />
+		<param name="thread" type="integer" value="2" max='6' min='1' label="Thread" />
+		<param name="fdr" type="text" value="0.01" label="FDR" />
+		<conditional name="readtype">
+			<param name="single_or_paired" type="select" label="Single-end or paired-end reads?">
+				<option value="se" selected="true">Single-end</option>
+				<option value="pair_of_files">Paired-end (two separate input files)</option>
+			</param>
+			<when value="se">
+				<param name="fastq_in" type="data" format="fastq,fq,fastqsanger,fastqsanger.gz" label="FASTQ file" />
+			</when>
+			<when value="pair_of_files">
+				<param name="fastq_r1_in" type="data" format="fastq,fq,fastqsanger,fastqsanger.gz" label="Input FASTQ file (R1/first of pair)" />
+				<param name="fastq_r2_in" type="data" format="fastq,fq,fastqsanger,fastqsanger,fastqsanger.gz" label="Input FASTQ file (R2/second of pair)" />
+			</when>
+		</conditional>		
+
+	</when>
+
+	</conditional>
+	
+  </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs> 
+	<data name="m5C_out_peaks" format="bed" label="${type.RNA_modification_type} CMRs">
+	<filter>type['RNA_modification_type'] == "m5C"</filter>
+	</data>
+  </outputs>
+<help>
+
+.. class:: infomark
+
+**What it does**
+
+This function can be used to perform bisulfite sequencing (BS-Seq) read mapping, comprehensive methylation calling using meRanTK
+
+.. class:: infomark
+
+**Inputs**
+
+- **FASTQ file:** The FASTQ format sequencing file.
+
+.. class:: infomark
+
+**Parameters**
+
+- **Alignment method:** Select a method used for read mapping.
+
+- **Reference genome:** The reference genome sequences in FASTA format.
+
+- **Reference annotation file (GTF):** The reference annotation file in GTF format.
+
+- **Thread:** The number of threads used parallel computing.
+
+- **FDR:** The FDR cutoff used for filter CMR.
+
+- **Single-end or Paired-end reads?:** Select if the input fastq is single-end or paried-end.
+
+.. class:: infomark
+
+**Outputs**
+
+- **m5C_out_peaks:** The detected m5C sites.
+
+</help>
+
+
+
+
+</tool>
+
+

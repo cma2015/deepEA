@@ -1,0 +1,101 @@
+<tool id="annotation" name="Gene Annotation for CMRs" version='18.09'>
+  <description></description>
+  <command><![CDATA[
+
+	ln -sf '${gff}' '${gff}.gff' ;
+	Rscript $__tool_directory__/annotation.R $peak1 '${gff}.gff' $Type.type $outfile_anno;
+
+  ]]></command>
+  <inputs>
+	<param name="peak1" type="data" format="bed,encodepeak" label="CMR region" />
+	<param name="gff" type="data" format="gff,gtf,gff3" label="Reference GFF" />
+	<conditional name="Type">
+		<param name="type" type="select" label="Annotation mode" >
+			<option value="gene_to_type">Annotated CMRs in the Gene Region</option>
+			<option value="peak_to_gene">Annotation of CMRs</option>
+		</param>
+	</conditional>
+  </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs> 
+	<data name="outfile_anno" format="tsv" label="${tool.name} on ${on_string}: Gene annotation.txt">
+	</data>
+  </outputs>
+ <help>
+
+.. class:: infomark
+
+**What it does**
+
+Performs integrated analyses of a set of CMRs against a
+genome annotation file for a specific organism,
+identifying the overlabs genes.
+
+-------------
+
+.. class:: infomark
+
+**Input**
+
+**CMR region** - The CMR data must be in a tabular file (as **bed**) with at least 3 columns of data
+for each CMR (one CMR per line):
+
+====== ========== =================================
+Column Name       Description
+====== ========== =================================
+     1 chr        Chromosome name
+     2 start      Start position of the CMRs
+     3 end        End position of the CMRs
+====== ========== =================================
+
+-------------
+
+**Reference GFF** - The annotion file requires the standard **gff/gff3** format, recommended download from ensemble plant database.
+
+**Annotation mode** - Output file mode after gene annotation:
+
+* **Annotated CMRs in the gene region** - The result is based on genes, which can be used for the next step of enrichment analysis.
+* **Annotation of CMRs** - The result is based on CMRs, which can be showed in details.
+
+-------------
+
+.. class:: infomark
+
+**Outputs**
+
+The key output of the tool is to map CMRs to their overlapping genes and provide a list of correspondences.
+
+
+* When selecting **Annotated CMRs in the gene region**  :
+
+====== ========== =================================
+Column Name       Description
+====== ========== =================================
+     1 gene       Unique gene name
+     2 CMRs       CMRs within genes
+====== ========== =================================
+
+----------
+
+* When selecting **Annotation of CMRs**  :
+
+====== ========== =================================
+Column Name       Description
+====== ========== =================================
+     1 chr        CMRs Chromosome name
+     2 start      Start position of the CMRs
+     3 end        End position of the CMRs
+     4 width      Width of the CMRs
+     5 strand     Strand of the CMRs
+     6 gene       Unique gene name
+====== ========== =================================
+
+
+</help>
+
+
+</tool>
+
+

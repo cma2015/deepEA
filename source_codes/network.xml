@@ -1,0 +1,91 @@
+<tool id="Network_analyze" name="CMR Driven Network Analysis"  version='18.09'>
+  <description>based on RWR</description>
+  <command><![CDATA[
+	Rscript $__tool_directory__/network.R $Ara_PPI_raw $Gene_list $analysis_num $Restart_probability $out_list $out_figure ;
+  ]]></command>
+  <inputs>
+	<param name="Ara_PPI_raw" type="data" format="tsv,txt" label="Gene-Gene/Protein-Protein interaction network" />
+	<param name="Gene_list" type="data" format="tsv,txt" label="Gene list" />
+	<param name="analysis_num" type="integer" value="15" min="1" max="199" label="The number of top ranked nodes" />
+	<param name="Restart_probability" type="float" value="0.8" min="0.5" max="1"  label="The probability of restarting to a seed gene node after each step" />
+  </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs> 
+	<data name="out_list" format="tsv" label="${tool.name} on ${on_string}: CMR-driven gene list.txt">
+	</data>
+	<data name="out_figure" format="pdf" label="${tool.name} on ${on_string}: CMR-driven Network analysis.pdf">
+	</data>
+  </outputs>
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+**Random walk-and-restart (RWR)** methods are used to retrieve key gene nodes in the PPI network or others. 
+These associated node genes have important topological structures and functions based on modified genes or differentially modified genes.
+
+-------------
+
+.. class:: infomark
+
+**Inputs**
+
+- **Gene-Gene/Protein-Protein interaction network:** A TAB seperated matrix with two columns, each column represents a node in the network, each line indicates a link.
+
+    - **Example**
+
+        ====== ==========================
+        Node 1 Node 2                    
+        ====== ==========================
+        Gene 1 Gene 3
+        Gene 3 Gene 5   
+        ====== ==========================
+
+------------------
+
+**Gene list** - List of genes to be analyzed, only the first column wiil be analyzed.
+
+
+-------------
+
+.. class:: infomark
+
+**Outputs**
+
+There will be two files output， respectively:
+
+
+* **CMR-driven gene list**
+
+
+====== ========================== =================================
+Column Name                       Description
+====== ========================== =================================
+     1 NodeNames                  CMR Driven Gene ID
+     2 Score        			  Score
+====== ========================== =================================
+
+------
+
+
+* **CMR-driven Network analysis** 
+
+.. image:: static/plot/network.png
+    :width: 500 px
+    :scale: 100 %   
+    :align: center
+
+
+
+ 
+
+</help>
+    <citations>
+        <citation type="doi">10.1093/bioinformatics/bty637</citation>
+    </citations>
+</tool>
+
+
