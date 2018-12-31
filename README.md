@@ -8,7 +8,7 @@
 - Test datasets can de downloaded from http://bioinfo.nwafu.edu.cn:4003/library/list#folders/F5969b1f7201f12ae
 
 ## How to access help
-* If users encounter any bugs or issues, feel free to leave a message at Github [issues](<https://github.com/cma2015/deepEA/issues>). We will try our best to deal with all issues as soon as possible.
+* If users encounter any bugs or issues, feel free to leave a message at Github [issues](<https://github.com/cma2015/DeepEA/issues>). We will try our best to deal with all issues as soon as possible.
 * In addition, if any suggestions are available, feel free to contact: __Jie Song__ <q2516581@126.com> or __Jingjing Zhai__ <zhaijingjing603@gmail.com> 
 
 
