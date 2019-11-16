@@ -1,0 +1,18 @@
+# ----------------------- #
+#      Main Configs       #
+# ----------------------- #
+
+url: http://cma2015.github.io/DeepEA
+title: DeepEA
+subtitle: A web-based platform for exploring epitranscriptome sequencing data
+email: zhaijingjing603@gmail.com
+author: The DeepEA Team
+github: https://github.com/cma2015/DeepEA
+
+# ----------------------- #
+#    Jekyll & Plugins     #
+# ----------------------- #
+
+# Build settings
+markdown: kramdown
+permalink: pretty
