@@ -1,0 +1,56 @@
+
+.filtr-item {
+    padding: 1em;
+}
+.item-desc {
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    position: absolute;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 1em;
+    z-index: 1;
+    bottom: 1em;
+    left: 1em;
+    right: 1em;
+}
+
+/* Filter controls */
+.simplefilter li, .multifilter li, .sortandshuffle li {
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    margin: 0 0.4em;
+	letter-spacing: 1px;
+}
+.simplefilter li {
+    background: #00959F;
+    border-radius: 6px 13px 6px 13px;
+}
+.simplefilter li.active {
+    color: #fff;
+    background: #BE4157
+}
+/* Shuffle and sort controls */
+select {
+    padding: 1rem 1rem;
+    text-transform: uppercase;
+}
+.sortandshuffle .shuffle-btn {
+    background-color: #dec800;
+}
+.sortandshuffle .sort-btn {
+    background-color: #de0000;
+}
+.sortandshuffle .sort-btn.active {
+    background-color: #9d0000;
+}
+
+
+/*----*/
+ul.simplefilter {
+    text-align: center;
+	margin-bottom: 2em;
+}
