@@ -56,12 +56,14 @@ DeepEA is a Galaxy-based framework for exploring large-scale analysis of epitran
 * Double click the EXE file to open it;
 * Follow the wizard instruction and complete installation;
 * Search docker, select ___Docker for Windows___ in the search results and clickit.
-#### For Mac OS X (Test on macOS Sierra version 10.12.6 and macOS High Sierra version 10.13.3):
+
+### For Mac OS X (Test on macOS Sierra version 10.12.6 and macOS High Sierra version 10.13.3):
 * Download [Docker](<https://download.docker.com/mac/stable/Docker.dmg>) for Mac os <br>
 * Double click the DMG file to open it;
 * Drag the docker into Applications and complete installation;
 * Start docker from Launchpad by click it.
-#### For Ubuntu (Test on Ubuntu 16.04 LTS):
+
+### For Ubuntu (Test on Ubuntu 16.04 LTS):
 
 ```bash
 # Update the apt package index:
