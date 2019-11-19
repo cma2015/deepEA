@@ -113,37 +113,58 @@ Then DeepEA local server can be accessed via `http://localhost:8080`
 ## Data Preparation
 
 This sub-module provides three funcitons (see following table for details) to prepare epitranscriptome data.
-
-Tool | Description | Input | Output | Reference
---- | --- | --- | --- | ---
-[Obtain Genome Sequences and Annotation](http://bioinfo.nwafu.edu.cn:4006/?tool_id=Obtain_Genome_or_Transcriptome_Sequences_and_Annotation&version=18.09&__identifer=dclshuq6eet) | Fetch genome, cDNA, CDS sequences and annotation from Enseml automatically | Select an Ensembl database; Select a species; Select dada type | FASTA format sequences or GTF annotation | In-house scripts
-[Obtain Epitranscriptome Sequencing and Reads](http://bioinfo.nwafu.edu.cn:4006/?tool_id=Obtain_Epitranscriptome_Sequencing_Reads&version=18.09&__identifer=3bj51oj9isq) | Fetch epitranscriptome sequencing reads from NCBI's SRA database | SRR accession or HTTP/FTP link | Sequencing files in SRA/FASTQ format  | [SRA Toolkit](https://www.ncbi.nlm.nih.gov/sra/docs/toolkitsoft)
-[Sequencing Data Preprocessing](http://bioinfo.nwafu.edu.cn:4006/?tool_id=Convert_Format&version=18.09&__identifer=uib940h4pb) | xxx | xxx | xxx | In-house scripts
-
+<div style="text-align:center">
+<table border="1" align="center" cellspacing="0" cellpadding="">
+    <thead>
+        <tr>
+            <th>Tool</th>
+            <th>Description</th>
+            <th>Input</th>
+            <th>Output</th>
+            <th>References</th>
+        </tr>
+    </thead>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Obtain_Genome_or_Transcriptome_Sequences_and_Annotation&version=18.09&__identifer=dclshuq6eet">Obtain Genome Sequences and Annotation</a></td>
+        <td>Fetch genome, cDNA, CDS sequences and annotation from Enseml automatically</td>
+        <td>Select an Ensembl database; Select a species; Select dada type</td>
+        <td>FASTA format sequences or GTF annotation</td>
+        <td>In-house scripts</td>
+   </tr>
+   <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Obtain_Epitranscriptome_Sequencing_Reads&version=18.09&__identifer=3bj51oj9isq">Obtain Epitranscriptome Sequencing and Reads</a></td>
+        <td>Fetch epitranscriptome sequencing reads from NCBI's SRA database</td>
+        <td>SRR accession or HTTP/FTP link</td>
+        <td>Sequencing files in SRA/FASTQ format</td>
+        <td><a href="https://www.ncbi.nlm.nih.gov/sra/docs/toolkitsoft">SRA Toolkit</a></td>
+   </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Convert_Format&version=18.09&__identifer=uib940h4pb">Sequence Data Preprocessing</a></td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+   </tr>
+ </table>
+</div>
 
 ## Quality Control
 **Quality Control** submodule consisted of a suite of tools focused on different levels of quality assessment including reads quality, alignment quality and CMR quality, Thus, three functions are implemented including **Assess Reads Quality**, **Assess Alignment Quality** and **Assess CMR quality**. The details of as follows:
 
-<!-- 
-| Tool | Description | Main functions | Input | Output | Programs | Reference |
-| --- | --- | --- | --- | --- | --- | --- |
-| [Assess Reads Quality](http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_Reads_Quality&version=18.09&__identifer=gr96n8z0sag) | This tool integrates FastQC and fastp to perform quality control from raw epitranscriptome sequencing reads | Reads trimming and generate reads quality report including sequence quality, GC content, etc |  Sequencing reads in FASTQ format | Clean reads or reads quality report in HTML format |  [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/),[fastp](https://github.com/OpenGene/fastp) | [Chen *et al*., 2018, Bioinformatics](https://doi.org/10.1093/bioinformatics/bty560), [Babraham Bioinformatics](http://www.bioinformatics.babraham.ac.uk/projects/fastqc) | 
-| [Assess Alignment Quality](http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_Alignment_Quality&version=18.01&__identifer=3uvvorrbx2s) | This function is used to generate quality assessment. | Evaluate alignment quality | Reads alignment fies in SAM/BAM format| Alignment quality report in HTML format | [trumpet](https://github.com/skyhorsetomoon/Trumpet) |  [Zhang et al., 2018, BMC Bioinformatics](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2266-3) | 
-| [Assess CMR Quality](http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_CMR_Regions_Quality&version=18.01&__identifer=yu0s7b4tvw7) | This tool aims to quantify CMR signal strength by counting reads and calculating RPKM in binding site intervals | Quantify CMRs | Alignments in SAM/BAM format | CMR quantification matrix | [DiffBind](https://bioconductor.org/packages/release/bioc/html/DiffBind.html) | [Wu *et al*., 2016, frontiers in Genetics](https://www.frontiersin.org/articles/10.3389/fgene.2015.00169/full) | -->
-
-
+<div style="text-align:center">
 <table border="1" align="center" cellspacing="0" cellpadding="">
 <thead>
-<tr><th>Tool</th><th>Description</th><th>Main functions</th><th>Input</th><th>Output</th><th>Programs</th><th>Reference</th></tr></thead>
+<tr><th>Tool</th><th>Description</th><th>Main functions</th><th>Input</th><th>Output</th><th>Programs</th><th>Reference</th>
+</tr>
+</thead>
 <tbody><tr><td><a href='http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_Reads_Quality&amp;version=18.09&amp;__identifer=gr96n8z0sag'>Assess Reads Quality</a></td><td>This tool integrates FastQC and fastp to perform quality control from raw epitranscriptome sequencing reads</td><td>Reads trimming and generate reads quality report including sequence quality, GC content, etc</td><td>Sequencing reads in FASTQ format</td><td>Clean reads or reads quality report in HTML format</td><td><a href='https://www.bioinformatics.babraham.ac.uk/projects/fastqc/'>FastQC</a>,<a href='https://github.com/OpenGene/fastp'>fastp</a></td><td><a href='https://doi.org/10.1093/bioinformatics/bty560'>Chen <em>et al</em>., 2018, Bioinformatics</a>, <a href='http://www.bioinformatics.babraham.ac.uk/projects/fastqc'>Babraham Bioinformatics</a></td></tr><tr><td><a href='http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_Alignment_Quality&amp;version=18.01&amp;__identifer=3uvvorrbx2s'>Assess Alignment Quality</a></td><td>This function is used to generate quality assessment.</td><td>Evaluate alignment quality</td><td>Reads alignment fies in SAM/BAM format</td><td>Alignment quality report in HTML format</td><td><a href='https://github.com/skyhorsetomoon/Trumpet'>trumpet</a></td><td><a href='https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2266-3'>Zhang et al., 2018, BMC Bioinformatics</a></td></tr><tr><td><a href='http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_CMR_Regions_Quality&amp;version=18.01&amp;__identifer=yu0s7b4tvw7'>Assess CMR Quality</a></td><td>This tool aims to quantify CMR signal strength by counting reads and calculating RPKM in binding site intervals</td><td>Quantify CMRs</td><td>Alignments in SAM/BAM format</td><td>CMR quantification matrix</td><td><a href='https://bioconductor.org/packages/release/bioc/html/DiffBind.html'>DiffBind</a></td><td><a href='https://www.frontiersin.org/articles/10.3389/fgene.2015.00169/full'>Wu <em>et al</em>., 2016, frontiers in Genetics</a></td></tr></tbody>
 </table>
+</div>
 
 # Core-analysis
-
-
 
 # Advanced-analysis
 
 # How to access help
 * If users encounter any bugs or issues, feel free to leave a message at Github [issues](<https://github.com/cma2015/DeepEA/issues>). We will try our best to deal with all issues as soon as possible.
-* In addition, if any suggestions are available, feel free to contact: __Jingjing Zhai <zhaijingjing603@gmail.com> or __Chuang Ma__ <chuangma2006@gmail.com>
+* In addition, if any suggestions are available, feel free to contact: Jingjing Zhai <zhaijingjing603@gmail.com> or Chuang Ma <chuangma2006@gmail.com>
