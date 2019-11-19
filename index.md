@@ -18,12 +18,7 @@ DeepEA is a Galaxy-based framework for exploring large-scale analysis of epitran
 	- [DeepEA quick start](#deepea-quick-start)
 - [Pre-analysis](pre-analysis)
 	- [Data Preparation](#data-preparation)
-		- [Obtain Genome Sequences and Annotation](#obtain-genome-sequences-and-annotation)
-		- [Obtain Epitranscriptome Sequencing Reads](#obtain-epitranscriptome-sequencing-reads)
 	- [Quality control](#quality-control)
-		- [Assess Reads Quality](#assess-reads-quality)
-		- [Assess Alignment Quality](#assess-alignment-quality)
-		- [Assess CMR Regions Quality](#assess-cmr-regions-quality)
 - [Core-analysis](#core-analysis)
 	- [CMR Profiling](#cmr-profiling)
 		- [Align Reads to Genome](#align-reads-to-genome)
@@ -47,7 +42,7 @@ DeepEA is a Galaxy-based framework for exploring large-scale analysis of epitran
 
 
 # Installation
-## Docker installation  
+## Docker installation
 
 > Official installation tutorial is available at [here](https://docs.docker.com/install)
 
@@ -58,7 +53,7 @@ DeepEA is a Galaxy-based framework for exploring large-scale analysis of epitran
 * Search docker, select ___Docker for Windows___ in the search results and clickit.
 
 ### For Mac OS X (Test on macOS Sierra version 10.12.6 and macOS High Sierra version 10.13.3):
-* Download [Docker](<https://download.docker.com/mac/stable/Docker.dmg>) for Mac os <br>
+* Download [Docker](<https://download.docker.com/mac/stable/Docker.dmg>) for Mac OS X
 * Double click the DMG file to open it;
 * Drag the docker into Applications and complete installation;
 * Start docker from Launchpad by click it.
@@ -98,7 +93,7 @@ $ docker run hello-world
 
 
 
-## DeepEA quick start 
+## DeepEA quick start
 
 DeepEA has been packaged into a docker image, which can be easily installed as a local server by following command.
 
@@ -109,40 +104,36 @@ docker run -it malab/deepea /bin/bash
 bash run.sh
 ```
 
-Then DeepEA local server can be accessed via http <font color=red>http://localhost:8080</font>
+Then DeepEA local server can be accessed via `http://localhost:8080`
 
 # Pre-analysis
 
-**Pre-analysis** module is composed of two sub-modules: [Data Preparation](#data-preparation) and [Quality Control](#quality-control). These two sub-modules made up the important components of Epitranscriptome.
+**Pre-analysis** module is composed of two sub-modules: [Data Preparation](#data-preparation) and [Quality Control](#quality-control). These two sub-modules make up the important components of Epitranscriptome.
 
 ## Data Preparation
 
-### Obtain Genome Sequences and Annotation
-This function allows users to fetch genome/transcriptome sequences and annotation automatically from [Ensembl](https://www.ensembl.org) and other sites (Ensembl Bacteria, Ensembl Fungi, Ensembl Plants, Ensembl Protists and Ensembl Metazoa).
+This sub-module provides three funcitons (see following table for details) to prepare epitranscriptome data.
 
-XXX-insert-an-image
+Tool | Description | Input | Output | Reference
+--- | --- | --- | --- | ---
+[Obtain Genome Sequences and Annotation](http://bioinfo.nwafu.edu.cn:4006/?tool_id=Obtain_Genome_or_Transcriptome_Sequences_and_Annotation&version=18.09&__identifer=dclshuq6eet) | Fetch genome, cDNA, CDS sequences and annotation from Enseml automatically | Select an Ensembl database; Select a species; Select dada type | FASTA format sequences or GTF annotation | In-house scripts
+[Obtain Epitranscriptome Sequencing and Reads](http://bioinfo.nwafu.edu.cn:4006/?tool_id=Obtain_Epitranscriptome_Sequencing_Reads&version=18.09&__identifer=3bj51oj9isq) | Fetch epitranscriptome sequencing reads from NCBI's SRA database | SRR accession or HTTP/FTP link | Sequencing files in SRA/FASTQ format  | [SRA Toolkit](https://www.ncbi.nlm.nih.gov/sra/docs/toolkitsoft)
+[Sequencing Data Preprocessing](http://bioinfo.nwafu.edu.cn:4006/?tool_id=Convert_Format&version=18.09&__identifer=uib940h4pb) | xxx | xxx | xxx | In-house scripts
 
-### Obtain Epitranscriptome Sequencing Reads
-This function wrapped NCBI's SRA Toolkit which allows users to automatically download epitranscriptome sequencing data stored in NCBI's SRA and GEO databases, following by converting format from SRA to FASTQ format.
-
-XXX-insert-an-image
 
 ## Quality Control
 **Quality Control** submodule consisted of a suite of tools focused on different levels of quality assessment including reads quality, alignment quality and CMR quality, Thus, three functions are implemented including **Assess Reads Quality**, **Assess Alignment Quality** and **Assess CMR quality**. The details of as follows:
 
-### Assess Reads Quality
+Tool | Description | Main functions | Input | Output | Programs | Reference 
+--- | --- | --- | --- | --- | --- | --- | ---
+[Assess Reads Quality](http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_Reads_Quality&version=18.09&__identifer=gr96n8z0sag) | This tool integrates FastQC and fastp to perform quality control from raw epitranscriptome sequencing reads | Reads trimming and generate reads quality report including sequence quality, GC content, etc |  Sequencing reads in FASTQ format | Clean reads or reads quality report in HTML format |  [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/),[fastp](https://github.com/OpenGene/fastp) | [Chen *et al*., 2018, Bioinformatics](https://doi.org/10.1093/bioinformatics/bty560), [Babraham Bioinformatics](http://www.bioinformatics.babraham.ac.uk/projects/fastqc)
+[Assess Alignment Quality](http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_Alignment_Quality&version=18.01&__identifer=3uvvorrbx2s) | This function is used to generate quality assessment. Taking alignments in SAM/BAM format as input, Assess Alignment Quality can generate the statistics of sequencing reads distribution with respect to different genmic regions | Evaluate alignment quality | Reads alignment fies in SAM/BAM format| Alignment quality report in HTML format | [trumpet](https://github.com/skyhorsetomoon/Trumpet) |  [Zhang et al., 2018, BMC Bioinformatics](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2266-3)
+[Assess CMR Quality](http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_CMR_Regions_Quality&version=18.01&__identifer=yu0s7b4tvw7) | This tool aims to quantify CMR signal strength by counting reads and calculating RPKM in binding site intervals | Quantify CMRs | Alignments in SAM/BAM format | CMR quantification matrix | [DiffBind](https://bioconductor.org/packages/release/bioc/html/DiffBind.html) | [Wu *et al*., 2016, frontiers in Genetics](https://www.frontiersin.org/articles/10.3389/fgene.2015.00169/full)
 
-XXX-insert-an-image
-
-### Assess Alignment Quality
-
-XXX-insert-an-image
-
-### Assess CMR Regions Quality
-
-XXX-insert-an-image
 
 # Core-analysis
+
+
 
 # Advanced-analysis
 
