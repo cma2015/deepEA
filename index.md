@@ -22,24 +22,20 @@ DeepEA is a Galaxy-based framework for exploring large-scale analysis of epitran
 - [Core-analysis](#core-analysis)
 	- [CMR Profiling](#cmr-profiling)
 		- [Align Reads to Genome](#align-reads-to-genome)
-			- [Tophat2](#tophat2)
-			- [Bowtie2](#bowtie2)
-			- [STAR](#star)
-			- [HISAT2](#hisat2)
 		- [CMR Calling](#cmr-calling)
-			- [Peak Calling from the MeRIP-Seq data](#peak-calling-from-the-merip-seq-data)
-			- [Calling m5C from the RNA-BSeq data](#calling-m5c-from-the-rna-bseq-data)
-			- [CMR Calling from the miCLIP-Seq data](#calling-m5c-from-the-miclip-seq-data)
-			- [Calling pseudouridine from CeU-Seq data](#calling-pseudouridine-from-ceu-seq-data)
-		- [Merge Biological Replicates](#merge-biological-replicates)
+		- [Detect Differential CMR Regions](#detect-differential-cmr-regions)
+    - [Machine Learning-based CMR Prediction](#machine-learning-based-cmr-prediction)
+        - [Sequence feature extraction](#sequence-feature-extraction)
+        - [Feature engineering](#feature-engineering)
+        - [Machine learning-based CMR prediction](#machine-learning-based-cmr-prediction)
+- [Advanced-analysis](#advanced-analysis)
 	- [CMR Annotation and Visualization](#cmr-annotation-and-visualization)
 		- [Distribution Analysis](#distribution-analysis)
 		- [Motif Analysis](#motif-analysis)
 		- [Sequence Logo Visualization](#sequence-logo-visualization)
 		- [Functional Enrichment Analysis](#functional-enrichment-analysis)
-- [Advanced-analysis](#advanced-analysis)
+    - [Multi-omics Integration Analysis](#multi-omics-integration-analysis)
 - [How to access help](#how-to-access-help)
-
 
 # Installation
 ## Docker installation
@@ -114,13 +110,13 @@ Then DeepEA local server can be accessed via `http://localhost:8080`
 
 This sub-module provides three funcitons (see following table for details) to prepare epitranscriptome data.
 <div style="text-align:center">
-<table border="1" align="center" cellspacing="0" cellpadding="">
+<table border="2" align="center" cellspacing="0" cellpadding="">
     <tr>
-        <td><b>Tool_v2</b></td>
-        <td>Description</td>
-        <td>Input</td>
-        <td>Output</td>
-        <td>References</td>
+        <td><b>Tools</b></td>
+        <td><b>Description</b></td>
+        <td><b>Input</b></td>
+        <td><b>Output</b></td>
+        <td><b>References</b></td>
     </tr>
     <tr>
         <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Obtain_Genome_or_Transcriptome_Sequences_and_Annotation&version=18.09&__identifer=dclshuq6eet">Obtain Genome Sequences and Annotation</a></td>
@@ -150,51 +146,139 @@ This sub-module provides three funcitons (see following table for details) to pr
 **Quality Control** submodule consisted of a suite of tools focused on different levels of quality assessment including reads quality, alignment quality and CMR quality, Thus, three functions are implemented including **Assess Reads Quality**, **Assess Alignment Quality** and **Assess CMR quality**. The details of as follows:
 
 <div style="text-align:center">
-<table border="1" align="center" cellspacing="0" cellpadding="">
-<thead>
-<tr>
-    <th align="center">Tool</th>
-    <th align="center">Description</th>
-    <th align="center">Main functions</th>
-    <th align="center">Input</th>
-    <th align="center">Output</th>
-    <th align="center">Programs</th>
-    <th align="center">Reference</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-    <td><a href='http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_Reads_Quality&amp;version=18.09&amp;__identifer=gr96n8z0sag'>Assess Reads Quality</a></td>
-    <td>This tool integrates FastQC and fastp to perform quality control from raw epitranscriptome sequencing reads</td>
-    <td>Reads trimming and generate reads quality report including sequence quality, GC content, etc</td>
-    <td>Sequencing reads in FASTQ format</td>
-    <td>Clean reads or reads quality report in HTML format</td>
-    <td><a href='https://www.bioinformatics.babraham.ac.uk/projects/fastqc/'>FastQC</a>,<a href='https://github.com/OpenGene/fastp'>fastp</a></td>
-    <td><a href='https://doi.org/10.1093/bioinformatics/bty560'>Chen <em>et al</em>., 2018, Bioinformatics</a>, <a href='http://www.bioinformatics.babraham.ac.uk/projects/fastqc'>Babraham Bioinformatics</a></td>
-</tr>
-<tr>
-    <td><a href='http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_Alignment_Quality&amp;version=18.01&amp;__identifer=3uvvorrbx2s'>Assess Alignment Quality</a></td>
-    <td>This function is used to generate quality assessment.</td>
-    <td>Evaluate alignment quality</td>
-    <td>Reads alignment fies in SAM/BAM format</td>
-    <td>Alignment quality report in HTML format</td>
-    <td><a href='https://github.com/skyhorsetomoon/Trumpet'>trumpet</a></td>
-    <td><a href='https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2266-3'>Zhang et al., 2018, BMC Bioinformatics</a></td>
-</tr>
-<tr>
-    <td><a href='http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_CMR_Regions_Quality&amp;version=18.01&amp;__identifer=yu0s7b4tvw7'>Assess CMR Quality</a></td>
-    <td>This tool aims to quantify CMR signal strength by counting reads and calculating RPKM in binding site intervals</td>
-    <td>Quantify CMRs</td>
-    <td>Alignments in SAM/BAM format</td>
-    <td>CMR quantification matrix</td>
-    <td><a href='https://bioconductor.org/packages/release/bioc/html/DiffBind.html'>DiffBind</a></td>
-    <td><a href='https://www.frontiersin.org/articles/10.3389/fgene.2015.00169/full'>Wu <em>et al</em>., 2016, frontiers in Genetics</a></td>
-</tr>
-</tbody>
+<table border="2" align="center" cellspacing="0" cellpadding="">
+    <tr>
+        <td><b>Tool</b></td>
+        <td><b>Description</b></td>
+        <td><b>Main functions</b></td>
+        <td><b>Input</b></td>
+        <td><b>Output</b></td>
+        <td><b>Programs</b></td>
+        <td><b>Reference</b></td>
+    </tr>
+    <tr>
+        <td><a href='http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_Reads_Quality&amp;version=18.09&amp;__identifer=gr96n8z0sag'>Assess Reads Quality</a></td>
+        <td>This tool integrates FastQC and fastp to perform quality control from raw epitranscriptome sequencing reads</td>
+        <td>Reads trimming and generate reads quality report including sequence quality, GC content, etc</td>
+        <td>Sequencing reads in FASTQ format</td>
+        <td>Clean reads or reads quality report in HTML format</td>
+        <td><a href='https://www.bioinformatics.babraham.ac.uk/projects/fastqc/'>FastQC</a>,<a href='https://github.com/OpenGene/fastp'>fastp</a></td>
+        <td><a href='https://doi.org/10.1093/bioinformatics/bty560'>Chen <em>et al</em>., 2018, Bioinformatics</a>, <a href='http://www.bioinformatics.babraham.ac.uk/projects/fastqc'>Babraham Bioinformatics</a></td>
+    </tr>
+    <tr>
+        <td><a href='http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_Alignment_Quality&amp;version=18.01&amp;__identifer=3uvvorrbx2s'>Assess Alignment Quality</a></td>
+        <td>This function is used to generate quality assessment.</td>
+        <td>Evaluate alignment quality</td>
+        <td>Reads alignment fies in SAM/BAM format</td>
+        <td>Alignment quality report in HTML format</td>
+        <td><a href='https://github.com/skyhorsetomoon/Trumpet'>trumpet</a></td>
+        <td><a href='https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2266-3'>Zhang et al., 2018, BMC Bioinformatics</a></td>
+    </tr>
+    <tr>
+        <td><a href='http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_CMR_Regions_Quality&amp;version=18.01&amp;__identifer=yu0s7b4tvw7'>Assess CMR Quality</a></td>
+        <td>This tool aims to quantify CMR signal strength by counting reads and calculating RPKM in binding site intervals</td>
+        <td>Quantify CMRs</td>
+        <td>Alignments in SAM/BAM format</td>
+        <td>CMR quantification matrix</td>
+        <td><a href='https://bioconductor.org/packages/release/bioc/html/DiffBind.html'>DiffBind</a></td>
+        <td><a href='https://www.frontiersin.org/articles/10.3389/fgene.2015.00169/full'>Wu <em>et al</em>., 2016, frontiers in Genetics</a></td>
+    </tr>
 </table>
 </div>
 
 # Core-analysis
+**Core-analysis** module consists of **CMR Profiling** and **Machine Learning-based CMR Prediction**, of which **CMR Profiling** provides step-by-step functions required for epitranscriptome reads mapping, CMR Calling and differential CMR analysis, while **Machine Learning-based CMR Prediction** is designed to automatically complete the three main steps for constructing a CMR predictor including **Sequence Feature Extraction**, **Feature Engineering** and **Machine Learning-based Classification**
+
+## Align Reads to Genome
+Several commonly used aligners are wrapped to align epitranscriptome reads to genome. Currently, [Tophat2](https://ccb.jhu.edu/software/tophat/index.shtml), [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml), [STAR](), [HISAT2]() and [bwa-mem]() are available.
+
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="">
+    <tr>
+        <td><b>Tools</b></td>
+        <td><b>Description</b></td>
+        <td><b>Input</b></td>
+        <td><b>Output</b></td>
+        <td><b>References</b></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=tophat2&version=18.09&__identifer=jztsfk48b9">Tophat2</a></td>
+        <td>Accurate alignment of transcriptomes in the presence of insertions, deletions and gene fusions</td>
+        <td>Sequencing reads in FASTQ format</td>
+        <td>Alignments in SAM/BAM format</td>
+        <td><a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36">Kim <em>et al</em>., 2013, Genome Biology</a></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=bowtie2&version=18.09&__identifer=x9j53etnvzb">Bowtie2</a></td>
+        <td>A fast gapped-read alignment tool</td>
+        <td>Sequencing reads in FASTQ format</td>
+        <td>Alignments in SAM/BAM format</td>
+        <td><a href="https://www.nature.com/articles/nmeth.1923">Langmead <em>et al</em>., 2012, Nature Methods</a></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=star&version=18.09&__identifer=gd64qwrc1pp">STAR</a></td>
+        <td>An ultrafast universal RNA-seq aligner</td>
+        <td>Sequencing reads in FASTQ format</td>
+        <td>Alignments in SAM/BAM format</td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/29/1/15/272537">Alexander <em>et al</em>., 2013, Bioinformatics</a></td>
+   </tr>
+   <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=hisat2&version=18.09&__identifer=zds4b1pt998">HISAT2</a></td>
+        <td>A fast spliced aligner with low memory requirements</td>
+        <td>Sequencing reads in FASTQ format</td>
+        <td>Alignments in SAM/BAM format</td>
+        <td><a href="https://www.nature.com/articles/nmeth.3317">Kim <em>et al</em>., 2015, Nature Methods</a></td>
+   </tr>
+   <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=bwa-mem&version=18.09&__identifer=eo9vnwpvp9">bwa-mem</a></td>
+        <td>Fast and accurate short read alignment with Burrows–Wheeler transform</td>
+        <td>Sequencing reads in FASTQ format</td>
+        <td>Alignments in SAM/BAM format</td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/25/14/1754/225615">Li <em>et al</em>., 2009, Bioinformatics</a></td>
+   </tr>
+ </table>
+</div>
+
+## CMR Calling
+**CMR Calling** implements four pipelines for MeRIP-Seq, m6A miCLIP-Seq, CeU-Seq and RNA-BSSeq, respectively.
+
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="">
+    <tr>
+        <td><b>Tools</b></td>
+        <td><b>Description</b></td>
+        <td><b>Input</b></td>
+        <td><b>Output</b></td>
+        <td><b>Programs</b></td>
+        <td><b>References</b></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Calling_peaks&version=18.09&__identifer=gz3la9l6aur">Peak calling from the MeRIP-Seq data</a></td>
+        <td>Identifying enriched genomic regions from MeRIP-Seq experiment</td>
+        <td>Alignments of IP and input in SAM/BAM format and Reference genome sequences in FASTA format</td>
+        <td>CMR regions in BED format</td>
+        <td><a href="https://github.com/cma2015/PEA">PEA</a></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/34/21/3747/5021690">Zhai <em>et al</em>., 2018, Bioinformatics</a></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=peakcalling_m5C&version=18.09&__identifer=kgd6vgn38w">Calling m5C from the RNA-BSseq data</a></td>
+        <td>Performing bisulfite sequencing (BS-Seq) read mapping, comprehensive methylation calling using meRanTK</td>
+        <td>Sequencing reads in FASTQ format and reference genome sequences in FASTTA format</td>
+        <td>m5C sites in BED format</td>
+        <td><a href="http://icbi.at/software/meRanTK">meRanTK</a></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/34/21/3747/5021690">Dietmar <em>et al</em>., 2016, Bioinformatics</a></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Calling_pseudoU&version=18.09&__identifer=nrfo2zxngp">Calling Ψ from CeU-Seq data</a></td>
+        <td>Identifying pseudouridylation from CeU-Seq</td>
+        <td>Alignments in SAM/BAM format and cDNA sequences in FASTA format</td>
+        <td>Pseudoridylation sites in BED format</td>
+        <td>In-house scripts</td>
+        <td><a href="https://www.nature.com/articles/nchembio.1836">Li <em>et al</em>., 2015, Nature Chemical Biology</a></td>
+    </tr>
+ </table>
+</div>
+
 
 # Advanced-analysis
 
