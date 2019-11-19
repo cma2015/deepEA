@@ -115,15 +115,13 @@ Then DeepEA local server can be accessed via `http://localhost:8080`
 This sub-module provides three funcitons (see following table for details) to prepare epitranscriptome data.
 <div style="text-align:center">
 <table border="1" align="center" cellspacing="0" cellpadding="">
-    <thead>
-        <tr>
-            <th align="center">Tool_v1</th>
-            <th align="center">Description</th>
-            <th align="center">Input</th>
-            <th align="center">Output</th>
-            <th align="center">References</th>
-        </tr>
-    </thead>
+    <tr>
+        <td><b>Tool_v2</b></td>
+        <td>Description</td>
+        <td>Input</td>
+        <td>Output</td>
+        <td>References</td>
+    </tr>
     <tr>
         <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Obtain_Genome_or_Transcriptome_Sequences_and_Annotation&version=18.09&__identifer=dclshuq6eet">Obtain Genome Sequences and Annotation</a></td>
         <td>Fetch genome, cDNA, CDS sequences and annotation from Enseml automatically</td>
