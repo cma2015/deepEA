@@ -190,7 +190,7 @@ This sub-module provides three funcitons (see following table for details) to pr
 **Core-analysis** module consists of **CMR Profiling** and **Machine Learning-based CMR Prediction**, of which **CMR Profiling** provides step-by-step functions required for epitranscriptome reads mapping, CMR Calling and differential CMR analysis, while **Machine Learning-based CMR Prediction** is designed to automatically complete the three main steps for constructing a CMR predictor including **Sequence Feature Extraction**, **Feature Engineering** and **Machine Learning-based Classification**
 
 ## Align Reads to Genome
-Several commonly used aligners are wrapped to align epitranscriptome reads to genome. Currently, [Tophat2](https://ccb.jhu.edu/software/tophat/index.shtml), [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml), [STAR](), [HISAT2]() and [bwa-mem]() are available.
+Several commonly used aligners are wrapped to align epitranscriptome reads to genome. Currently, [Tophat2](https://ccb.jhu.edu/software/tophat/index.shtml), [Bowtie2](http://bowtie-bio.sourceforge.net/bowtie2/index.shtml), [STAR](https://github.com/alexdobin/STAR), [HISAT2](http://www.ccb.jhu.edu/software/hisat/index.shtml) and [bwa-mem](http://bio-bwa.sourceforge.net/bwa.shtml) are available.
 
 <div style="text-align:center">
 <table border="2" align="center" cellspacing="0" cellpadding="">
@@ -220,7 +220,7 @@ Several commonly used aligners are wrapped to align epitranscriptome reads to ge
         <td>An ultrafast universal RNA-seq aligner</td>
         <td>Sequencing reads in FASTQ format</td>
         <td>Alignments in SAM/BAM format</td>
-        <td><a href="https://academic.oup.com/bioinformatics/article/29/1/15/272537">Alexander <em>et al</em>., 2013, Bioinformatics</a></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/29/1/15/272537">Dobin <em>et al</em>., 2013, Bioinformatics</a></td>
    </tr>
    <tr>
         <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=hisat2&version=18.09&__identifer=zds4b1pt998">HISAT2</a></td>
@@ -266,7 +266,7 @@ Several commonly used aligners are wrapped to align epitranscriptome reads to ge
         <td>Sequencing reads in FASTQ format and reference genome sequences in FASTTA format</td>
         <td>m5C sites in BED format</td>
         <td><a href="http://icbi.at/software/meRanTK">meRanTK</a></td>
-        <td><a href="https://academic.oup.com/bioinformatics/article/34/21/3747/5021690">Dietmar <em>et al</em>., 2016, Bioinformatics</a></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/32/5/782/1744216">Rieder <em>et al</em>., 2016, Bioinformatics</a></td>
     </tr>
     <tr>
         <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Calling_pseudoU&version=18.09&__identifer=nrfo2zxngp">Calling Ψ from CeU-Seq data</a></td>
@@ -281,6 +281,7 @@ Several commonly used aligners are wrapped to align epitranscriptome reads to ge
 
 
 # Advanced-analysis
+
 
 # How to access help
 * If users encounter any bugs or issues, feel free to leave a message at Github [issues](<https://github.com/cma2015/DeepEA/issues>). We will try our best to deal with all issues as soon as possible.

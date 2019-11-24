@@ -31,7 +31,7 @@ h6 {
     padding-bottom: 50px;
     text-align: center;
     color: #000000;
-    background: url(../img/logo_background.png) no-repeat center center;
+    /* background: url(../img/logo_background.png) no-repeat center center; */
     background-size: cover;
 }
 
