@@ -25,7 +25,7 @@ DeepEA is a Galaxy-based framework for exploring large-scale analysis of epitran
 		- [CMR Calling](#cmr-calling)
 		- [Detect Differential CMR Regions](#detect-differential-cmr-regions)
     - [Machine Learning-based CMR Prediction](#machine-learning-based-cmr-prediction)
-        - [Sequence feature extraction](#sequence-feature-extraction)
+        - [Feature encoding](#feature-encoding)
         - [Feature engineering](#feature-engineering)
         - [Machine learning-based CMR prediction](#machine-learning-based-cmr-prediction)
 - [Advanced-analysis](#advanced-analysis)
@@ -279,6 +279,29 @@ Several commonly used aligners are wrapped to align epitranscriptome reads to ge
  </table>
 </div>
 
+## Machine Learning-based CMR Prediction
+This sub-module provides a pipeline for transcriptome-wide CMR prediction based on machine learning.
+
+### Feature encoding
+
+- **Sequence-level features**
+
+    <div style="text-align:center">
+    <table border="2" align="center" cellspacing="0" cellpadding="">
+        <tr>
+            <td><b>Feature</b></td>
+            <td><b>Description</b></td>
+            <td><b>Dimension</b></td>
+        </tr>
+        <tr>
+            <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Calling_peaks&version=18.09&__identifer=gz3la9l6aur">Peak calling from the MeRIP-Seq data</a></td>
+            <td>Identifying enriched genomic regions from MeRIP-Seq experiment</td>
+            <td>Alignments of IP and input in SAM/BAM format and Reference genome sequences in FASTA format</td>
+        </tr>
+    </table>
+    </div>
+
+- Genomic features
 
 # Advanced-analysis
 
