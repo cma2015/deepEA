@@ -284,7 +284,7 @@ This sub-module provides a pipeline for transcriptome-wide CMR prediction using 
 
 ### Feature encoding
 
-- **Sequence-derived features**
+- **Sequence-derived features (v1)**
 
 
 <div style="text-align:center">
@@ -317,11 +317,10 @@ This sub-module provides a pipeline for transcriptome-wide CMR prediction using 
         <td>256</td>
     </tr>
     <tr>
-        <td rowspan="8">Autocorrelation-base features</td>
+        <td rowspan="6">Autocorrelation-base features</td>
         <td>DAC (<B><U>D</U></B>inucleotide-based <B><U>a</U></B>uto <B><U>c</U></B>ovariance)</td>
-        <!-- <td><img src="./assets/img/elixir_germany.png" alt="小女孩" /></td>
-        <td>x</td> -->
         <td>xxx</td>
+        <td>xx</td>
     </tr>
     <tr>
         <td>DCC (<B><U>D</U></B>inucleotide-based <B><U>c</U></B>ross <B><U>c</U></B>ovariance)</td>
@@ -373,7 +372,7 @@ This sub-module provides a pipeline for transcriptome-wide CMR prediction using 
 </table>
 </div>
 
-- **Genomic-derived features**
+
 
 ### Machine learning-based classification
 
