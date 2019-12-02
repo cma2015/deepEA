@@ -276,7 +276,7 @@ Several commonly used aligners are wrapped to align epitranscriptome reads to ge
         <td>In-house scripts</td>
         <td><a href="https://www.nature.com/articles/nchembio.1836">Li <em>et al</em>., 2015, Nature Chemical Biology</a></td>
     </tr>
- </table>
+</table>
 </div>
 
 ## Machine Learning-based CMR Prediction
@@ -286,8 +286,8 @@ This sub-module provides a pipeline for transcriptome-wide CMR prediction using 
 
 - **Sequence-derived features**
 
-    <div style="text-align:center">
-    <table border="2" align="center" cellspacing="0" cellpadding="">
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="">
         <tr>
             <td><b>Type</b></td>
             <td><b>Feature</b></td>
@@ -369,8 +369,8 @@ This sub-module provides a pipeline for transcriptome-wide CMR prediction using 
             <td>A, C, G, U are encoded as a vector of three features (1,1,1), (0,1,0), (1,0,0) and (0,0,1), respectively</td>
             <td>3*<I>L</I></td>
         </tr>
-    </table>
-    </div>
+</table>
+</div>
 
 - **Genomic-derived features**
 
