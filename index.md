@@ -284,8 +284,7 @@ This sub-module provides a pipeline for transcriptome-wide CMR prediction using 
 
 ### Feature encoding
 
-- **Sequence-derived features (v1)**
-
+- Sequence-derived features (v2)
 
 <div style="text-align:center">
 <table border="2" align="center" cellspacing="0" cellpadding="">
@@ -373,9 +372,9 @@ This sub-module provides a pipeline for transcriptome-wide CMR prediction using 
 </div>
 
 
-
 ### Machine learning-based classification
 
+xxx
 
 # Advanced-analysis
 
