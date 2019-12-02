@@ -284,7 +284,7 @@ This sub-module provides a pipeline for transcriptome-wide CMR prediction using 
 
 ### Feature encoding
 
-Sequence-derived features (v2)
+- **Sequence-derived features**
 
 <div style="text-align:center">
 <table border="2" align="center" cellspacing="0" cellpadding="">
@@ -371,7 +371,24 @@ Sequence-derived features (v2)
 </table>
 </div>
 
+Genomic-derived features v2
 
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="">
+     <tr>
+        <td><b>Type</b></td>
+        <td><b>Feature</b></td>
+        <td><b>Description</b></td>
+        <td><b>Dimension</b></td>
+    </tr>
+    <tr>
+        <td>x</td>
+        <td>x</td>
+        <td>x</td>
+        <td>x</td>
+    </tr>
+</table>
+</div>
 
 ### Machine learning-based classification
 
