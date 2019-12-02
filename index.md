@@ -335,17 +335,17 @@ Sequence-derived features (v2)
         <td>MAC (<B><U>M</U></B>oran <B><U>a</U></B>uto<B><U>c</U></B>orrelation)</td>
         <td>xxx</td>
         <td>xxx</td>
-    <tr>
+    </tr>
     <tr>
         <td>GAC (<B><U>G</U></B>eary <B><U>a</U></B>uto<B><U>c</U></B>orrelation)</td>
         <td>xxx</td>
         <td>xxx</td>
-    <tr>
+    </tr>
     <tr>
         <td>NMBAC (<B><U>N</U></B>ormalized <B><U>M</U></B>oreau-<B><U>B</U></B>roto <B><U>a</U></B>uto<B><U>c</U></B>orrelation)</td>
         <td>It measures the corelatio of the same properties between two residues separated by a distance of <I>lag</I> along the sequence.</td>
         <td>xxx</td>
-    <tr>
+    </tr>
     <tr>
         <td rowspan="2">Pseudo nucleotide composition</td>
         <td>PC-PseDNC-General</td>
