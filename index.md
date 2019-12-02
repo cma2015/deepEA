@@ -284,7 +284,93 @@ This sub-module provides a pipeline for transcriptome-wide CMR prediction using 
 
 ### Feature encoding
 
-- Sequence-derived features (v2)
+Sequence-derived features (v2)
+
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="">
+    <tr>
+        <td><b>Type</b></td>
+        <td><b>Feature</b></td>
+        <td><b>Description</b></td>
+        <td><b>Dimension</b></td>
+    </tr>
+    <tr>
+        <td rowspan="4">Nucleic acid composition related features</td>
+        <td>1mer</td>
+        <td>The frequency of mono-nucleotide</td>
+        <td>4</td>
+    </tr>
+    <tr>
+        <td>2mer</td>
+        <td>The frequency of di-nucleotide</td>
+        <td>16</td>
+    </tr>
+    <tr>
+        <td>3mer</td>
+        <td>The frequency of tri-nucleotide</td>
+        <td>64</td>
+    </tr>
+    <tr>
+        <td>4mer</td>
+        <td>The frequency of tetra-nucleotide</td>
+        <td>256</td>
+    </tr>
+    <tr>
+        <td rowspan="6">Autocorrelation-base features</td>
+        <td>DAC (<B><U>D</U></B>inucleotide-based <B><U>a</U></B>uto <B><U>c</U></B>ovariance)</td>
+        <td>xxx</td>
+        <td>xx</td>
+    </tr>
+    <tr>
+        <td>DCC (<B><U>D</U></B>inucleotide-based <B><U>c</U></B>ross <B><U>c</U></B>ovariance)</td>
+        <td>xxx</td>
+        <td>xxx</td>
+    </tr>
+    <tr>
+        <td>DACC (<B><U>D</U></B>inucleotide-based <B><U>a</U></B>uto-<B><U>c</U></B>ross <B><U>c</U></B>ovariance)</td>
+        <td>A combination of DAC and DCC</td>
+        <td>xxx</td>
+    </tr>
+    <tr>
+        <td>MAC (<B><U>M</U></B>oran <B><U>a</U></B>uto<B><U>c</U></B>orrelation)</td>
+        <td>xxx</td>
+        <td>xxx</td>
+    <tr>
+    <tr>
+        <td>GAC (<B><U>G</U></B>eary <B><U>a</U></B>uto<B><U>c</U></B>orrelation)</td>
+        <td>xxx</td>
+        <td>xxx</td>
+    <tr>
+    <tr>
+        <td>NMBAC (<B><U>N</U></B>ormalized <B><U>M</U></B>oreau-<B><U>B</U></B>roto <B><U>a</U></B>uto<B><U>c</U></B>orrelation)</td>
+        <td>It measures the corelatio of the same properties between two residues separated by a distance of <I>lag</I> along the sequence.</td>
+        <td>xxx</td>
+    <tr>
+    <tr>
+        <td rowspan="2">Pseudo nucleotide composition</td>
+        <td>PC-PseDNC-General</td>
+        <td>x</td>
+        <td>x</td>
+    </tr>
+    <tr>
+        <td>SC-PseDNC-General</td>
+        <td>x</td>
+        <td>x</td>
+    </tr>
+    <tr>
+        <td rowspan="2">Binary encoding</td>
+        <td>Binary encoding</td>
+        <td>A, C, G, U are encoded with (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1), respectively</td>
+        <td>4*<I>L</I></td>
+    </tr>
+    <tr>
+        <td>Binary encoding based on structural chemical properties</td>
+        <td>A, C, G, U are encoded as a vector of three features (1,1,1), (0,1,0), (1,0,0) and (0,0,1), respectively</td>
+        <td>3*<I>L</I></td>
+    </tr>
+</table>
+</div>
+
 
 
 ### Machine learning-based classification
