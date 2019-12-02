@@ -26,8 +26,8 @@ DeepEA is a Galaxy-based framework for exploring large-scale analysis of epitran
 		- [Detect Differential CMR Regions](#detect-differential-cmr-regions)
     - [Machine Learning-based CMR Prediction](#machine-learning-based-cmr-prediction)
         - [Feature encoding](#feature-encoding)
-        - [Feature engineering](#feature-engineering)
-        - [Machine learning-based CMR prediction](#machine-learning-based-cmr-prediction)
+        - [Feature selection](#feature-selection)
+        - [Machine learning-based classification](#machine-learning-based-classification)
 - [Advanced-analysis](#advanced-analysis)
 	- [CMR Annotation and Visualization](#cmr-annotation-and-visualization)
 		- [Distribution Analysis](#distribution-analysis)
@@ -280,28 +280,102 @@ Several commonly used aligners are wrapped to align epitranscriptome reads to ge
 </div>
 
 ## Machine Learning-based CMR Prediction
-This sub-module provides a pipeline for transcriptome-wide CMR prediction based on machine learning.
+This sub-module provides a pipeline for transcriptome-wide CMR prediction using machine learning technology. This pipeline is consisted of [Feature encoding](#feature-encoding), [Feature selection](#feature-selection) and [Machine learning-based classification](#machine-learning-based-classification)
 
 ### Feature encoding
 
-- **Sequence-level features**
+- **Sequence-derived features**
 
-<div style="text-align:center">
-<table border="2" align="center" cellspacing="0" cellpadding="">
-    <tr>
-        <td><b>Feature</b></td>
-        <td><b>Description</b></td>
-        <td><b>Dimension</b></td>
-    </tr>
-    <tr>
-        <td>binary based on structural chemical properties</td>
-        <td><img src="/assets/img/previous_logo.png"  alt="" /></td>
-        <td>N*3</td>
-    </tr>
-</table>
-</div>
+    <div style="text-align:center">
+    <table border="2" align="center" cellspacing="0" cellpadding="">
+        <tr>
+            <td><b>Type</b></td>
+            <td><b>Feature</b></td>
+            <td><b>Description</b></td>
+            <td><b>Dimension</b></td>
+        </tr>
+        <tr>
+            <td rowspan="4">Nucleic acid composition related features</td>
+            <td>1mer</td>
+            <td>The frequency of mono-nucleotide</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>2mer</td>
+            <td>The frequency of di-nucleotide</td>
+            <td>16</td>
+        </tr>
+        <tr>
+            <td>3mer</td>
+            <td>The frequency of tri-nucleotide</td>
+            <td>64</td>
+        </tr>
+        <tr>
+            <td>4mer</td>
+            <td>The frequency of tetra-nucleotide</td>
+            <td>256</td>
+        </tr>
+        <tr>
+            <td rowspan="8">Autocorrelation-base features</td>
+            <td>DAC (<B><U>D</U></B>inucleotide-based <B><U>a</U></B>uto <B><U>c</U></B>ovariance)</td>
+            <!-- <td><img src="./assets/img/elixir_germany.png" alt="小女孩" /></td>
+            <td>x</td> -->
+            <td>xxx</td>
+        </tr>
+        <tr>
+            <td>DCC (<B><U>D</U></B>inucleotide-based <B><U>c</U></B>ross <B><U>c</U></B>ovariance)</td>
+            <td>xxx</td>
+            <td>xxx</td>
+        </tr>
+        <tr>
+            <td>DACC (<B><U>D</U></B>inucleotide-based <B><U>a</U></B>uto-<B><U>c</U></B>ross <B><U>c</U></B>ovariance)</td>
+            <td>A combination of DAC and DCC</td>
+            <td>xxx</td>
+        </tr>
+        <tr>
+            <td>MAC (<B><U>M</U></B>oran <B><U>a</U></B>uto<B><U>c</U></B>orrelation)</td>
+            <td>xxx</td>
+            <td>xxx</td>
+        <tr>
+        <tr>
+            <td>GAC (<B><U>G</U></B>eary <B><U>a</U></B>uto<B><U>c</U></B>orrelation)</td>
+            <td>xxx</td>
+            <td>xxx</td>
+        <tr>
+        <tr>
+            <td>NMBAC (<B><U>N</U></B>ormalized <B><U>M</U></B>oreau-<B><U>B</U></B>roto <B><U>a</U></B>uto<B><U>c</U></B>orrelation)</td>
+            <td>It measures the corelatio of the same properties between two residues separated by a distance of <I>lag</I> along the sequence.</td>
+            <td>xxx</td>
+        <tr>
+        <tr>
+            <td rowspan="2">Pseudo nucleotide composition</td>
+            <td>PC-PseDNC-General</td>
+            <td>x</td>
+            <td>x</td>
+        </tr>
+        <tr>
+            <td>SC-PseDNC-General</td>
+            <td>x</td>
+            <td>x</td>
+        </tr>
+        <tr>
+            <td rowspan="2">Binary encoding</td>
+            <td>Binary encoding</td>
+            <td>A, C, G, U are encoded with (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1), respectively</td>
+            <td>4*<I>L</I></td>
+        </tr>
+        <tr>
+            <td>Binary encoding based on structural chemical properties</td>
+            <td>A, C, G, U are encoded as a vector of three features (1,1,1), (0,1,0), (1,0,0) and (0,0,1), respectively</td>
+            <td>3*<I>L</I></td>
+        </tr>
+    </table>
+    </div>
 
-- Genomic features
+- **Genomic-derived features**
+
+### Machine learning-based classification
+
 
 # Advanced-analysis
 
