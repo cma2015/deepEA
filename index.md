@@ -286,20 +286,20 @@ This sub-module provides a pipeline for transcriptome-wide CMR prediction based 
 
 - **Sequence-level features**
 
-    <div style="text-align:center">
-    <table border="2" align="center" cellspacing="0" cellpadding="">
-        <tr>
-            <td><b>Feature</b></td>
-            <td><b>Description</b></td>
-            <td><b>Dimension</b></td>
-        </tr>
-        <tr>
-            <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Calling_peaks&version=18.09&__identifer=gz3la9l6aur">Peak calling from the MeRIP-Seq data</a></td>
-            <td>Identifying enriched genomic regions from MeRIP-Seq experiment</td>
-            <td>Alignments of IP and input in SAM/BAM format and Reference genome sequences in FASTA format</td>
-        </tr>
-    </table>
-    </div>
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="">
+    <tr>
+        <td><b>Feature</b></td>
+        <td><b>Description</b></td>
+        <td><b>Dimension</b></td>
+    </tr>
+    <tr>
+        <td>binary based on structural chemical properties</td>
+        <td><img src="/assets/img/previous_logo.png"  alt="" /></td>
+        <td>N*3</td>
+    </tr>
+</table>
+</div>
 
 - Genomic features
 
