@@ -284,7 +284,7 @@ This sub-module provides a pipeline for transcriptome-wide CMR prediction using 
 
 ### Feature encoding
 
-- **Sequence-derived features**
+**Sequence-derived features**
 
 <div style="text-align:center">
 <table border="2" align="center" cellspacing="0" cellpadding="">
@@ -293,12 +293,14 @@ This sub-module provides a pipeline for transcriptome-wide CMR prediction using 
         <td><b>Feature</b></td>
         <td><b>Description</b></td>
         <td><b>Dimension</b></td>
+        <td><b>Reference</b></td>
     </tr>
     <tr>
         <td rowspan="4">Nucleic acid composition related features</td>
         <td>1mer</td>
         <td>The frequency of mono-nucleotide</td>
         <td>4</td>
+        <td rowspan="4"><a href="https://academic.oup.com/bib/article-abstract/20/4/1280/4763667?redirectedFrom=fulltext">Liu <em>et al</em>., 2017, Briefings in Bioinformatics</a></td>
     </tr>
     <tr>
         <td>2mer</td>
@@ -318,74 +320,188 @@ This sub-module provides a pipeline for transcriptome-wide CMR prediction using 
     <tr>
         <td rowspan="6">Autocorrelation-base features</td>
         <td>DAC (<B><U>D</U></B>inucleotide-based <B><U>a</U></B>uto <B><U>c</U></B>ovariance)</td>
-        <td>xxx</td>
-        <td>xx</td>
+        <td>DAC measures the correlation of the same physicochemical index between two dinucleotides seperated by a distance of <I>d</I> along the sequence</td>
+        <td><I>N</I>*<I>d</I></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/25/20/2655/194053">Dong <em>et al</em>., 2009, Bioinformatics</a> <a href="https://academic.oup.com/nar/article/36/9/3025/1104168">Guo <em>et al</em>., 2008, Nucleic Acids Research</a> <a href="https://academic.oup.com/bioinformatics/article/31/1/119/2366158">Chen <em>et al</em>., 2015, Bioinformatics</a></td>
     </tr>
     <tr>
         <td>DCC (<B><U>D</U></B>inucleotide-based <B><U>c</U></B>ross <B><U>c</U></B>ovariance)</td>
-        <td>xxx</td>
-        <td>xxx</td>
+        <td>DCC measures the correlation of two different physicochemical indices between two dinucleotides separated by a distance of <I>d</I> nucleotide acids along the sequence</td>
+        <td><I>N</I>*(<I>N-1</I>)*<I>d</I></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/25/20/2655/194053">Dong <em>et al</em>., 2009, Bioinformatics</a> <a href="https://academic.oup.com/bioinformatics/article/31/1/119/2366158">Chen <em>et al</em>., 2015, Bioinformatics</a></td>
     </tr>
     <tr>
         <td>DACC (<B><U>D</U></B>inucleotide-based <B><U>a</U></B>uto-<B><U>c</U></B>ross <B><U>c</U></B>ovariance)</td>
         <td>A combination of DAC and DCC</td>
-        <td>xxx</td>
+        <td><I>N</I>*<I>N</I>*<I>d</I></td>
+         <td><a href="https://academic.oup.com/bioinformatics/article/25/20/2655/194053">Dong <em>et al</em>., 2009, Bioinformatics</a> <a href="https://academic.oup.com/nar/article/36/9/3025/1104168">Guo <em>et al</em>., 2008, Nucleic Acids Research</a> <a href="https://academic.oup.com/bioinformatics/article/31/1/119/2366158">Chen <em>et al</em>., 2015, Bioinformatics</a></td>
     </tr>
     <tr>
         <td>MAC (<B><U>M</U></B>oran <B><U>a</U></B>uto<B><U>c</U></B>orrelation)</td>
-        <td>xxx</td>
-        <td>xxx</td>
+        <td>MAC measures the correlation of the same properties between two residues separated by a distance of <I>d</I> along the sequence</td>
+        <td><I>N</I>*<I>k</I>*<I>d</I></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/31/1/119/2366158">Chen <em>et al</em>., 2015, Bioinformatics</a> <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/bip.360270308">Horne <em>et al</em>., 1988, Biopolymers</a></td>
     </tr>
     <tr>
         <td>GAC (<B><U>G</U></B>eary <B><U>a</U></B>uto<B><U>c</U></B>orrelation)</td>
-        <td>xxx</td>
-        <td>xxx</td>
+        <td>GAC measures the correlation of the same properties between two residues separated by a distance of <I>d</I> along the sequence</td>
+        <td><I>N</I>*<I>k</I>*<I>d</I></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/31/1/119/2366158">Chen <em>et al</em>., 2015, Bioinformatics</a> <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/ajpa.20250">Sokal <em>et al</em>., 2006, American
+journal of physical anthropology</a></td>
     </tr>
     <tr>
         <td>NMBAC (<B><U>N</U></B>ormalized <B><U>M</U></B>oreau-<B><U>B</U></B>roto <B><U>a</U></B>uto<B><U>c</U></B>orrelation)</td>
         <td>It measures the corelatio of the same properties between two residues separated by a distance of <I>lag</I> along the sequence.</td>
-        <td>xxx</td>
+        <td><I>N</I>*<I>d</I></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/31/1/119/2366158">Chen <em>et al</em>., 2015, Bioinformatics</a> <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/ajpa.20250">Feng <em>et al</em>., 2000, Journal of protein chemistry</a></td>
     </tr>
     <tr>
         <td rowspan="2">Pseudo nucleotide composition</td>
         <td>PC-PseDNC-General</td>
-        <td>x</td>
-        <td>x</td>
+        <td>General parallel correlatio pseudo dinucleotide composition</td>
+        <td>16+&lambda;</td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/31/1/119/2366158">Chen <em>et al</em>., 2015, Bioinformatics</a></td>
     </tr>
     <tr>
         <td>SC-PseDNC-General</td>
-        <td>x</td>
-        <td>x</td>
+        <td>General series correlation pseudo dinucleotide composition</td>
+        <td>16+&lambda;</td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/31/1/119/2366158">Chen <em>et al</em>., 2015, Bioinformatics</a></td>
     </tr>
     <tr>
         <td rowspan="2">Binary encoding</td>
         <td>Binary encoding</td>
         <td>A, C, G, U are encoded with (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1), respectively</td>
         <td>4*<I>L</I></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/34/21/3747/5021690">Zhai <em>et al</em>., 2018, Bioinformatics</a> <a href="https://www.frontiersin.org/articles/10.3389/fpls.2018.00519/full">Song <em>et al</em>., 2018, Frontiers in Plant Science</a></td>
     </tr>
     <tr>
         <td>Binary encoding based on structural chemical properties</td>
         <td>A, C, G, U are encoded as a vector of three features (1,1,1), (0,1,0), (1,0,0) and (0,0,1), respectively</td>
         <td>3*<I>L</I></td>
+        <td><a href="https://academic.oup.com/nar/article/47/7/e41/5319125#133859200">Chen <em>et al</em>., 2019, Nucleic Acids Research</a></td>
     </tr>
 </table>
 </div>
 
-Genomic-derived features v2
+**Note:**
+- *N* is the number of physicochemical indices, here is 22;
+- *L* is the sequence length;
+- *d* is the length between two seperated nucleotides.
+- <body><I>&lambda;</I></body> is an interger, representing the highest counted rank of the correlation along a RNA sequence.
 
+**Genomic-derived features**
 <div style="text-align:center">
 <table border="2" align="center" cellspacing="0" cellpadding="">
      <tr>
         <td><b>Type</b></td>
         <td><b>Feature</b></td>
         <td><b>Description</b></td>
-        <td><b>Dimension</b></td>
     </tr>
     <tr>
-        <td>x</td>
-        <td>x</td>
-        <td>x</td>
-        <td>x</td>
+        <td rowspan="12">Dummy variables indicating whether the site is overlapped to the topological on the major RNA transcript</td>
+        <td>Five prime UTR</td>
+        <td>Binary value indicating whether CMR is overlapped with five prime UTR</td>
+    </tr>
+    <tr>
+        <td>Three prime UTR</td>
+        <td>Binary value indicating whether CMR is overlapped with three prime UTR</td>
+    </tr>
+    <tr>
+        <td>Stop codons</td>
+        <td>Binary value indicating whether CMR is overlapped with stop codons</td>
+    </tr>
+    <tr>
+        <td>Start codons</td>
+        <td>Binary value indicating whether CMR is overlapped with start codons</td>
+    </tr>
+    <tr>
+        <td>Downstream 100bp of TSS (Transcription Start Sites)</td>
+        <td>Binary value indicating whether CMR is located at the downstream 100bp of TSS</td>
+    </tr>
+    <tr>
+        <td>Exons containing stop codons</td>
+        <td>Binary value indicating whether stop codons are located at the exon containing CMR</td>
+    </tr>
+    <tr>
+        <td>Alternative exons</td>
+        <td>Binary value indicating the exon containing CMR is an alternative exon</td>
+    </tr>
+    <tr>
+        <td>Constitutive exons</td>
+        <td>Binary value indicating the exon containing CMR is a constitutive exon</td>
+    </tr>
+    <tr>
+        <td>Internal exons</td>
+        <td>Binary value indicating the exon containing CMR is an internal exon</td>
+    </tr>
+    <tr>
+        <td>Long exons</td>
+        <td>Binary value indicating the exon containing CMR is a long exon (exon length >= 400bp)</td>
+    </tr>
+    <tr>
+        <td>Five prime 500bp of the last exon</td>
+        <td>Binary value indicating whether the exon containing CMR is located at the five prime 500bp of the last exon</td>
+    </tr>
+    <tr>
+        <td>Five prime 500bp of the last exon containing stop codons</td>
+        <td>Binary value indicating whether the exon containing CMR is located at the five prime 500bp of the last exon containing stop codons</td>
+    </tr>
+    <tr>
+        <td rowspan="3">Relative position on the region</td>
+        <td>Relative position on five prime UTR</td>
+        <td>An integer value indicating the relative position of CMR on five prime UTR</td>
+    </tr>
+    <tr>
+        <td>Relative position on three prime UTR</td>
+        <td>An integer value indicating the relative position of CMR on three prime UTR</td>
+    </tr>
+    <tr>
+        <td>Relative position on exon</td>
+        <td>An integer value indicating the relative position of CMR on the exon containing CMR</td>
+    </tr>
+    <tr>
+        <td rowspan="3">The region length in bp</td>
+        <td>The length of five prime UTR</td>
+        <td>An interger value indicating the length of the five prime UTR containing CMR</td>
+    </tr>
+    <tr>
+        <td>The length of three prime UTR</td>
+        <td>An interger value indicating the length of three three prime UTR containing CMR</td>
+    </tr>
+    <tr>
+        <td>Mature transcript length</td>
+        <td>An interger value indicating the length of the mature transcript containing CMR</td>
+    </tr>
+    <tr>
+        <td rowspan="3">Nucleotide distances toward the splicing junctions or the nearest neighboring sites</td>
+        <td>Distance to the five prime splicing junction</td>
+        <td>An interger indicating the distance to the five prime splicing junction</td>
+    </tr>
+    <tr>
+        <td>Distance to the three prime splicing junction</td>
+        <td>An interger indicating the distance to the three prime splicing junction</td>
+    </tr>
+    <tr>
+        <td>Distance to the closest neighbor truncated at 200bp</td>
+        <td>An interger indicating the distance to the closest neighbor truncated at 200bp</td>
+    </tr>
+    <tr>
+        <td rowspan="4">Attributes of the genes of transcripts</td>
+        <td>sncRNA</td>
+        <td>Binary value indicating if the gene containing CMR is a sncRNA</td>
+    </tr>
+    <tr>
+        <td>lncRNA</td>
+        <td>Binary value indicating if the gene containing CMR is a lncRNA</td>
+    </tr>
+    <tr>
+        <td>House keeping genes</td>
+        <td>Binary value indicating if the gene containing CMR is a house keeping gene</td>
+    </tr>
+    <tr>
+        <td>miRNA targeted genes</td>
+        <td>Binary value indicating if the gene containing CMR is an miRNA target gene</td>
     </tr>
 </table>
 </div>
