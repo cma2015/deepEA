@@ -397,11 +397,13 @@ journal of physical anthropology</a></td>
         <td><b>Type</b></td>
         <td><b>Feature</b></td>
         <td><b>Description</b></td>
+        <td><b>Reference</b></td>
     </tr>
     <tr>
         <td rowspan="12">Dummy variables indicating whether the site is overlapped to the topological on the major RNA transcript</td>
         <td>Five prime UTR</td>
         <td>Binary value indicating whether CMR is overlapped with five prime UTR</td>
+        <td rowspan="25"><a href="https://academic.oup.com/nar/article/47/7/e41/5319125#133859200">Chen <em>et al</em>., 2019, Nucleic Acids Research</a></td>
     </tr>
     <tr>
         <td>Three prime UTR</td>
@@ -507,11 +509,52 @@ journal of physical anthropology</a></td>
 </div>
 
 ### Machine learning-based classification
+In this module, several commonly-used machine learning classification algorithms are implemented to construct a CMR predictor. The detailes are described as follows:
 
-xxx
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="">
+    <tr>
+        <td><b>Algorithms</b></td>
+        <td><b>Description</b></td>
+        <td colspan="4"><b>Parameters</b></td>
+    </tr>
+    <tr>
+        <td>Random Forest</td>
+        <td>xxx</td>
+        <td colspan="4"><B>&#9312;</B> Number of trees to grow;<br> <B>&#9313;</B> The number of threads used for parallel computation.</td>
+    </tr>
+    <tr>
+        <td>Support Vector Machine</td>
+        <td>xxx</td>
+        <td>For Polynomial kernel function:<br><B>&#9312;</B> degree<br> <B>&#9313;</B> gamma<br><B>&#9314;</B> coef0</td>
+        <td>For radial basis kernel function:<br><B>&#9312;</B> gamma<br></td>
+        <td>For sigmoid kernel function:<br><B>&#9312;</B> gamma<br></td>
+        <td>For linear kernel function, no required parameters</td>
+    </tr>
+    <tr>
+        <td>Decision Tree</td>
+        <td>xxx</td>
+        <td colspan="4"><B>&#9312;</B> Number of trees to grow;<br> <B>&#9313;</B> The number of threads used for parallel computation.</td>
+    </tr>
+    <tr>
+        <td>XGBoost</td>
+        <td>xxx</td>
+        <td colspan="4"><B>&#9312;</B> Learning rate<br> <B>&#9313;</B> Number of trees to grow<br> <B>&#9314;</B> The number of threads used for parallel computation<br></td>
+    </tr>
+    <tr>
+        <td>Logistic Regression</td>
+        <td>xxx</td>
+        <td colspan="4"><B>&#9312;</B> Optimization algorithm<br> <B>&#9313;</B> The number of threads used for parallel computation<br></td>
+    </tr>
+</table>
+</div>
 
 # Advanced-analysis
+This module provides comprehensive CMR annotation and interactive visualization, both HTML format with interactive figures and tables and PDF format with publication-ready figures are available to analyze the distribution of CMRs in the genome and transcriptome.
 
+## CMR Annotation and Visualization
+
+## Multi-omics Integration Analysis
 
 # How to access help
 * If users encounter any bugs or issues, feel free to leave a message at Github [issues](<https://github.com/cma2015/DeepEA/issues>). We will try our best to deal with all issues as soon as possible.
