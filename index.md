@@ -385,7 +385,7 @@ journal of physical anthropology</a></td>
 - *N* is the number of physicochemical indices, here is 22;
 - *L* is the sequence length;
 - *d* is the length between two seperated nucleotides.
-- <body><I>&lambda;</I></body> is an interger, representing the highest counted rank of the correlation along a RNA sequence.
+- <I>&lambda;</I> is an interger, representing the highest counted rank of the correlation along a RNA sequence.
 
 **Genomic-derived features**
 <div style="text-align:center">
@@ -640,7 +640,8 @@ This functions is designed to correlate CMR-realted gene with different type of 
 
 # Examples
 - [CMRs distribution](http://cma2015.github.io/DeepEA/demo_output/CMR_distribution_single_case.html)
-- [De-novo motif discovery](http://cma2015.github.io/DeepEA/demo_output/de-novo_motif_discovery.html)
+- [De-novo motif discovery for dreme](http://cma2015.github.io/DeepEA/demo_output/dreme.html)
+- [De-novo motif discovery for meme-chip](http://cma2015.github.io/DeepEA/demo_output/meme-chip.html)
 - [Correlate CMR with gene length](http://cma2015.github.io/DeepEA/demo_output/CMR_genomic_features_for_gene_length.html)
 - [Correlate CMR with exon length](http://cma2015.github.io/DeepEA/demo_output/CMR_genomic_features_for_exon_length.html)
 - [Correlate CMR with intron length](http://cma2015.github.io/DeepEA/demo_output/CMR_genomic_features_for_intron_length.html)
