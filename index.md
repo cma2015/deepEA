@@ -10,8 +10,8 @@ DeepEA is a Galaxy-based framework for exploring large-scale analysis of epitran
 
 <div id="top"></div>
 
-[<img align="left" src="assets/img/deNBI_logo.jpg" height="35px" alt="de.NBI" valign="middle">](http://www.denbi.de)
-[<img align="center" src="assets/img/elixir_germany.png" height="55px" alt="ELIXIR Germany" valign="middle">](https://www.elixir-europe.org)
+<!-- [<img align="left" src="assets/img/deNBI_logo.jpg" height="35px" alt="de.NBI" valign="middle">](http://www.denbi.de)
+[<img align="center" src="assets/img/elixir_germany.png" height="55px" alt="ELIXIR Germany" valign="middle">](https://www.elixir-europe.org) -->
 
 - [Installation](#installation)
 	- [Docker installation](#docker-installation)
@@ -523,10 +523,10 @@ In this module, several commonly-used machine learning classification algorithms
     <tr>
         <td>Support Vector Machine (SVM)</td>
         <td>Given a set of training examples, each marked as belonging to one or the other of two categories, an SVM training algorithm builds a model that assigns new examples to one category or the other, making it a non-probabilistic binary linear classifier (although methods such as Platt scaling exist to use SVM in a probabilistic classification setting)</td>
-        <td>For Polynomial kernel function:<br><B>&#9312;</B> degree<br> <B>&#9313;</B> gamma<br><B>&#9314;</B> coef0</td>
-        <td>For radial basis kernel function:<br><B>&#9312;</B> gamma<br></td>
-        <td>For sigmoid kernel function:<br><B>&#9312;</B> gamma<br></td>
-        <td>For linear kernel function, no required parameters</td>
+        <td>Polynomial kernel:<br><B>&#9312;</B> degree<br> <B>&#9313;</B> gamma<br><B>&#9314;</B> coef0</td>
+        <td>Radial basis kernel:<br> gamma<br></td>
+        <td>Sigmoid kernel:<br> gamma<br></td>
+        <td>Linear kernel, no required parameters</td>
     </tr>
     <tr>
         <td>Decision Tree</td>
@@ -600,13 +600,56 @@ This module provides comprehensive CMR annotation and interactive visualization,
 
 
 ## Multi-omics Integration Analysis
+This functions is designed to correlate CMR-realted gene with different type of genomic features including **Gene length analysis**, **Exon length analysis**, **Intron length analysis**, **Exon number analysis** and **GC content analysis**. The more detailed descriptions are listed as below:
+
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="">
+    <tr>
+        <td><b>Genomic features</b></td>
+        <td><b>Correlation</b></td>
+        <td><b>Difference</b></td>
+        <td><b>Description</b></td>
+    </tr>
+    <tr>
+        <td>Gene length analysis</td>
+        <td><img align="left" src="assets/img/Correlation_CMR_gene_length.png" alt="Correlation of CMR-related genes with gene length analysis" valign="middle"></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Exon length analysis</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Intron length analysis</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Exon number analysis</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>GC content analysis</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+</div>
+
 
 # Examples
 - [CMRs distribution for single-case analysis](http://cma2015.github.io/DeepEA/demo_output/CMR_distribution_single_case.html)
 - [CMRs distribution for group-case analysis](http://cma2015.github.io/DeepEA/demo_output/CMR_distribution_group_case.html)
 - [De-novo motif discovery](http://cma2015.github.io/DeepEA/demo_output/de-novo_motif_discovery.html)
 - [Motif enrichment](http://cma2015.github.io/DeepEA/demo_output/Motif_enrichment.html)
-- [Correlate CMR with other Omics Signal]()
+- [Correlate CMR with other Genomic Feature]()
 - [Correlate CMR with other Omics Signal]()
 
 # How to access help
