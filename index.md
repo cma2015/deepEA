@@ -600,7 +600,7 @@ This module provides comprehensive CMR annotation and interactive visualization,
 
 
 ## Multi-omics Integration Analysis
-This functions is designed to correlate CMR-realted gene with different type of genomic features including **Gene length analysis**, **Exon length analysis**, **Intron length analysis**, **Exon number analysis** and **GC content analysis**. To be specific, we split the  genome in a sliding window of 100 (default) adjacent genes with step size of 10 (default), and calculate the frequency of CMR genes in each window (100 adjacent genes
+This functions is designed to correlate CMR-realted gene with different type of genomic features including **Gene length analysis**, **Exon length analysis**, **Intron length analysis**, **Exon number analysis** and **GC content analysis**. To be specific, we split the  genome in a sliding window of 100 (default) adjacent genes with step size of 10 (default), and calculate the frequency of CMR genes in each window (100 adjacent genes).
 
 <div style="text-align:center">
 <table border="2" align="center" cellspacing="0" cellpadding="">
