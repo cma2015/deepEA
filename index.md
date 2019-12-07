@@ -611,28 +611,28 @@ This functions is designed to correlate CMR-realted gene with different type of 
     </tr>
     <tr>
         <td>Gene length analysis</td>
-        <td><img align="left" src="assets/img/Correlation_CMR_gene_length.png" alt="Correlation of CMR-related genes with gene length analysis" valign="middle"></td>
-        <td><img align="left" src="assets/img/Difference_CMR_gene_length.png" alt="Difference of CMR-related genes with gene length analysis" valign="middle"></td>
+        <td><img align="left" src="assets/img/Correlation_CMR_gene_length.png" alt="Correlation of CMR-related genes with gene length analysis" width="15px" valign="middle"></td>
+        <td><img align="left" src="assets/img/Difference_CMR_gene_length.png" alt="Difference of CMR-related genes with gene length analysis" width="15px" valign="middle"></td>
     </tr>
     <tr>
         <td>Exon length analysis</td>
-        <td><img align="left" src="assets/img/Correlation_CMR_exon_length.png" alt="Correlation of CMR-related genes with exon length analysis" valign="middle"></td>
-        <td><img align="left" src="assets/img/Difference_CMR_exon_length.png" alt="Difference of CMR-related genes with exon length analysis" valign="middle"></td>
+        <td><img align="left" src="assets/img/Correlation_CMR_exon_length.png" alt="Correlation of CMR-related genes with exon length analysis" width="15px" valign="middle"></td>
+        <td><img align="left" src="assets/img/Difference_CMR_exon_length.png" alt="Difference of CMR-related genes with exon length analysis" width="15px" valign="middle"></td>
     </tr>
     <tr>
         <td>Intron length analysis</td>
-        <td><img align="left" src="assets/img/Correlation_CMR_intron_length.png" alt="Correlation of CMR-related genes with intron length analysis" valign="middle"></td>
-        <td><img align="left" src="assets/img/Difference_CMR_intron_length.png" alt="Difference of CMR-related genes with intron length analysis" valign="middle"></td>
+        <td><img align="left" src="assets/img/Correlation_CMR_intron_length.png" alt="Correlation of CMR-related genes with intron length analysis" width="15px" valign="middle"></td>
+        <td><img align="left" src="assets/img/Difference_CMR_intron_length.png" alt="Difference of CMR-related genes with intron length analysis" width="15px" valign="middle"></td>
     </tr>
     <tr>
         <td>Exon number analysis</td>
-        <td><img align="left" src="assets/img/Correlation_CMR_exon_number.png" alt="Correlation of CMR-related genes with exon number analysis" valign="middle"></td>
-        <td><img align="left" src="assets/img/Difference_CMR_exon_number.png" alt="Difference of CMR-related genes with exon number analysis" valign="middle"></td>
+        <td><img align="left" src="assets/img/Correlation_CMR_exon_number.png" alt="Correlation of CMR-related genes with exon number analysis" width="15px" valign="middle"></td>
+        <td><img align="left" src="assets/img/Difference_CMR_exon_number.png" alt="Difference of CMR-related genes with exon number analysis" width="15px" valign="middle"></td>
     </tr>
     <tr>
         <td>GC content analysis</td>
-        <td><img align="left" src="assets/img/Correlation_CMR_GC_content.png" alt="Correlation of CMR-related genes with GC content analysis" valign="middle"></td>
-        <td><img align="left" src="assets/img/Difference_CMR_GC_content.png" alt="Difference of CMR-related genes with GC content analysis" valign="middle"></td>
+        <td><img align="left" src="assets/img/Correlation_CMR_GC_content.png" alt="Correlation of CMR-related genes with GC content analysis" width="15px" valign="middle"></td>
+        <td><img align="left" src="assets/img/Difference_CMR_GC_content.png" alt="Difference of CMR-related genes with GC content analysis" width="15px"valign="middle"></td>
     </tr>
 </table>
 </div>
