@@ -30,11 +30,8 @@ DeepEA is a Galaxy-based framework for exploring large-scale analysis of epitran
         - [Machine learning-based classification](#machine-learning-based-classification)
 - [Advanced-analysis](#advanced-analysis)
 	- [CMR Annotation and Visualization](#cmr-annotation-and-visualization)
-		- [Distribution Analysis](#distribution-analysis)
-		- [Motif Analysis](#motif-analysis)
-		- [Sequence Logo Visualization](#sequence-logo-visualization)
-		- [Functional Enrichment Analysis](#functional-enrichment-analysis)
     - [Multi-omics Integration Analysis](#multi-omics-integration-analysis)
+- [Examples](#examples)
 - [How to access help](#how-to-access-help)
 
 # Installation
@@ -519,13 +516,13 @@ In this module, several commonly-used machine learning classification algorithms
         <td colspan="4"><b>Parameters</b></td>
     </tr>
     <tr>
-        <td>Random Forest</td>
-        <td>xxx</td>
+        <td>Random Forest (RF)</td>
+        <td>RF is an ensemble learning method for classification, regression and other tasks that operates by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes (classification) or mean prediction (regression) of the individual trees</td>
         <td colspan="4"><B>&#9312;</B> Number of trees to grow;<br> <B>&#9313;</B> The number of threads used for parallel computation.</td>
     </tr>
     <tr>
-        <td>Support Vector Machine</td>
-        <td>xxx</td>
+        <td>Support Vector Machine (SVM)</td>
+        <td>Given a set of training examples, each marked as belonging to one or the other of two categories, an SVM training algorithm builds a model that assigns new examples to one category or the other, making it a non-probabilistic binary linear classifier (although methods such as Platt scaling exist to use SVM in a probabilistic classification setting)</td>
         <td>For Polynomial kernel function:<br><B>&#9312;</B> degree<br> <B>&#9313;</B> gamma<br><B>&#9314;</B> coef0</td>
         <td>For radial basis kernel function:<br><B>&#9312;</B> gamma<br></td>
         <td>For sigmoid kernel function:<br><B>&#9312;</B> gamma<br></td>
@@ -533,17 +530,17 @@ In this module, several commonly-used machine learning classification algorithms
     </tr>
     <tr>
         <td>Decision Tree</td>
-        <td>xxx</td>
+        <td>A decision tree is a decision support tool that uses a tree-like model of decisions and their possible consequences, including chance event outcomes, resource costs, and utility. It is one way to display an algorithm that only contains conditional control statements</td>
         <td colspan="4"><B>&#9312;</B> Number of trees to grow;<br> <B>&#9313;</B> The number of threads used for parallel computation.</td>
     </tr>
     <tr>
         <td>XGBoost</td>
-        <td>xxx</td>
+        <td>It provides a gradient boosting framework for classification</td>
         <td colspan="4"><B>&#9312;</B> Learning rate<br> <B>&#9313;</B> Number of trees to grow<br> <B>&#9314;</B> The number of threads used for parallel computation<br></td>
     </tr>
     <tr>
         <td>Logistic Regression</td>
-        <td>xxx</td>
+        <td>In statistics, the logistic model (or logit model) is used to model the probability of a certain class or event existing such as pass/fail, win/lose, alive/dead or healthy/sick</td>
         <td colspan="4"><B>&#9312;</B> Optimization algorithm<br> <B>&#9313;</B> The number of threads used for parallel computation<br></td>
     </tr>
 </table>
@@ -554,7 +551,63 @@ This module provides comprehensive CMR annotation and interactive visualization,
 
 ## CMR Annotation and Visualization
 
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="">
+    <tr>
+        <td><b>Functions</b></td>
+        <td><b>Description</b></td>
+        <td><b>Input</b></td>
+        <td><b>Output</b></td>
+        <td><b>References</b></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=CMR_distribution&version=18.09&__identifer=328vozxeap">CMRs Distribution</a></td>
+        <td>The distribution of CMRs in the genome and transcriptome including the number of peaks in genomic features, the regions of enrichment of CMRs within transcripts, the enrichment of CMRs in transcriptional start/stop site and the enrichment of CMRs in splicing sites;</td>
+        <td><B>&#9312;</B> CMR regions in BED format<br> <B>&#9313;</B>  Genome annotation in GTF/GFF format</td>
+        <td>Comprehensive overview of CMRs distribution in HTML or PDF format</td>
+        <td>In-house scripts</td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=De_novo_motif_discovery&version=18.09&__identifer=rod01zsjan">De-novo Motif Discovery</a></td>
+        <td>This function integrates MEME-ChIP, DREME and HOMER to perform <I>de-novo</I> motif discovery</td>
+        <td>Positive sequences in FASTA format</td>
+        <td>The discovered motifs in HTML format</td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/27/12/1653/257754">Timothy <I>et al</I>., 2011, Bioinformatics</a><br><a href="https://academic.oup.com/bioinformatics/article/27/12/1696/255896">Philip <I>et al</I>., 2011, Bioinformatics</a><br><a href="https://doi.org/10.1016/j.molcel.2010.05.004">Heinz <I>et al</I>., 2010, Molecular Cell</a></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Motif_enrichment&version=18.09&__identifer=wwnbsugl6yd">Motif Enrichment</a></td>
+        <td>This function integrates AME and CentriMo to perform motif enrichment</td>
+        <td><B>&#9312;</B> Sequence file in FASTA format<br><B>&#9313;</B> Motif file in MEME format</td>
+        <td>The motif enrichment in HTML format</td>
+        <td><a href="http://www.biomedcentral.com/1471-2105/11/165">Robert <I>et al</I>., 2010, BMC Bioinformatics</a><br> <a href="https://academic.oup.com/nar/article/40/17/e128/2411117">Timothy <I>et al</I>., 2012, Nucleic Acids Research</a><br></td>
+    </tr>
+    <tr>
+        <td><a href = "http://bioinfo.nwafu.edu.cn:4006/?tool_id=Sequence_logo_visualization&version=18.09&__identifer=ci3ahyxsn6p">Sequence Logo Visualization</a></td>
+        <td>Visualize motifs in sequences</td>
+        <td>Sequences in FASTA format</td>
+        <td>Motif logo in PDF format</td>
+        <td>In-house scripts</td>
+    </tr>
+    <tr>
+        <td><a href = "http://bioinfo.nwafu.edu.cn:4006/?tool_id=Functional_enrichment_analysis&version=18.09&__identifer=y44oe05v30i">Functional Enrichment Analysis</a></td>
+        <td>Perform GO or KEGG enrichment analysis for any species</td>
+        <td>Gene list</td>
+        <td>The enriched GO/KEGG terms</td>
+        <td><a href = "https://doi.org/10.1089/omi.2011.0118">Yu <I>et al</I>., 2012, OMICS</a></td>
+    </tr>
+</table>
+</div>
+
+
 ## Multi-omics Integration Analysis
+
+# Examples
+- [CMRs distribution for single-case analysis](http://cma2015.github.io/DeepEA/demo_output/CMR_distribution_single_case.html)
+- [CMRs distribution for group-case analysis](http://cma2015.github.io/DeepEA/demo_output/CMR_distribution_group_case.html)
+- [De-novo motif discovery](http://cma2015.github.io/DeepEA/demo_output/de-novo_motif_discovery.html)
+- [Motif enrichment](http://cma2015.github.io/DeepEA/demo_output/Motif_enrichment.html)
+- [Correlate CMR with other Omics Signal]()
+- [Correlate CMR with other Omics Signal]()
 
 # How to access help
 * If users encounter any bugs or issues, feel free to leave a message at Github [issues](<https://github.com/cma2015/DeepEA/issues>). We will try our best to deal with all issues as soon as possible.
