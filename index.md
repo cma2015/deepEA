@@ -1,6 +1,35 @@
 ---
 layout: default
 ---
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>轮播图</title>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/carousel.css">
+    <link rel="stylesheet" href="assets/css/user-index.css">
+</head>
+
+<body>
+    <div id="carousel"></div>
+    <div id="other"></div>
+    <script src="assets/js/carousel.js"></script>
+    <script>
+        var carousel = new Carousel({
+            wrap: document.getElementById("carousel"),
+            urlArr: ["assets/img/1.jpg", "assets/img/2.jpg", "assets/img/3.jpg", "assets/img/4.jpg", "assets/img/5.jpg", "assets/img/6.jpg"]
+        });
+        // var other = new Carousel({
+        //     wrap: document.getElementById("other"),
+        //     urlArr: ["http://pic.58pic.com/58pic/15/13/46/96w58PICQY4_1024.jpg", "img/1.jpg", "img/2.jpg", "img/3.jpg"]
+        // });
+    </script>
+</body>
+</html>
 
 # About
 ![docker pulls](https://img.shields.io/docker/pulls/malab/pea.svg)
@@ -12,7 +41,7 @@ DeepEA is a Galaxy-based framework for exploring large-scale analysis of epitran
 
 <!-- [<img align="left" src="assets/img/deNBI_logo.jpg" height="35px" alt="de.NBI" valign="middle">](http://www.denbi.de)
 [<img align="center" src="assets/img/elixir_germany.png" height="55px" alt="ELIXIR Germany" valign="middle">](https://www.elixir-europe.org) -->
-
+# Table of Contents
 - [Installation](#installation)
 	- [Docker installation](#docker-installation)
 	- [DeepEA quick start](#deepea-quick-start)
@@ -506,7 +535,7 @@ journal of physical anthropology</a></td>
 </div>
 
 ### Machine learning-based classification
-In this module, several commonly-used machine learning classification algorithms are implemented to construct a CMR predictor. The detailes are described as follows:
+In this module, several commonly-used machine learning classification algorithms are implemented to construct a CMR predictor. The details are described as follows:
 
 <div style="text-align:center">
 <table border="2" align="center" cellspacing="0" cellpadding="">
@@ -526,7 +555,7 @@ In this module, several commonly-used machine learning classification algorithms
         <td>Polynomial kernel:<br><B>&#9312;</B> degree<br> <B>&#9313;</B> gamma<br><B>&#9314;</B> coef0</td>
         <td>Radial basis kernel:<br> gamma<br></td>
         <td>Sigmoid kernel:<br> gamma<br></td>
-        <td>Linear kernel, no required parameters</td>
+        <td>Linear kernel:<br> / </td>
     </tr>
     <tr>
         <td>Decision Tree</td>
