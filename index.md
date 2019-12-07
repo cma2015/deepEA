@@ -600,7 +600,7 @@ This module provides comprehensive CMR annotation and interactive visualization,
 
 
 ## Multi-omics Integration Analysis
-This functions is designed to correlate CMR-realted gene with different type of genomic features including **Gene length analysis**, **Exon length analysis**, **Intron length analysis**, **Exon number analysis** and **GC content analysis**. The more detailed descriptions are listed as below:
+This functions is designed to correlate CMR-realted gene with different type of genomic features including **Gene length analysis**, **Exon length analysis**, **Intron length analysis**, **Exon number analysis** and **GC content analysis**. To be specific, we split the  genome in a sliding window of 100 (default) adjacent genes with step size of 10 (default), and calculate the frequency of CMR genes in each window (100 adjacent genes
 
 <div style="text-align:center">
 <table border="2" align="center" cellspacing="0" cellpadding="">
@@ -608,49 +608,44 @@ This functions is designed to correlate CMR-realted gene with different type of 
         <td><b>Genomic features</b></td>
         <td><b>Correlation</b></td>
         <td><b>Difference</b></td>
-        <td><b>Description</b></td>
     </tr>
     <tr>
         <td>Gene length analysis</td>
         <td><img align="left" src="assets/img/Correlation_CMR_gene_length.png" alt="Correlation of CMR-related genes with gene length analysis" valign="middle"></td>
-        <td></td>
-        <td></td>
+        <td><img align="left" src="assets/img/Difference_CMR_gene_length.png" alt="Difference of CMR-related genes with gene length analysis" valign="middle"></td>
     </tr>
     <tr>
         <td>Exon length analysis</td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><img align="left" src="assets/img/Correlation_CMR_exon_length.png" alt="Correlation of CMR-related genes with exon length analysis" valign="middle"></td>
+        <td><img align="left" src="assets/img/Difference_CMR_exon_length.png" alt="Difference of CMR-related genes with exon length analysis" valign="middle"></td>
     </tr>
     <tr>
         <td>Intron length analysis</td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><img align="left" src="assets/img/Correlation_CMR_intron_length.png" alt="Correlation of CMR-related genes with intron length analysis" valign="middle"></td>
+        <td><img align="left" src="assets/img/Difference_CMR_intron_length.png" alt="Difference of CMR-related genes with intron length analysis" valign="middle"></td>
     </tr>
     <tr>
         <td>Exon number analysis</td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><img align="left" src="assets/img/Correlation_CMR_exon_number.png" alt="Correlation of CMR-related genes with exon number analysis" valign="middle"></td>
+        <td><img align="left" src="assets/img/Difference_CMR_exon_number.png" alt="Difference of CMR-related genes with exon number analysis" valign="middle"></td>
     </tr>
     <tr>
         <td>GC content analysis</td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><img align="left" src="assets/img/Correlation_CMR_GC_content.png" alt="Correlation of CMR-related genes with GC content analysis" valign="middle"></td>
+        <td><img align="left" src="assets/img/Difference_CMR_GC_content.png" alt="Difference of CMR-related genes with GC content analysis" valign="middle"></td>
     </tr>
 </table>
 </div>
 
 
 # Examples
-- [CMRs distribution for single-case analysis](http://cma2015.github.io/DeepEA/demo_output/CMR_distribution_single_case.html)
-- [CMRs distribution for group-case analysis](http://cma2015.github.io/DeepEA/demo_output/CMR_distribution_group_case.html)
+- [CMRs distribution](http://cma2015.github.io/DeepEA/demo_output/CMR_distribution_single_case.html)
 - [De-novo motif discovery](http://cma2015.github.io/DeepEA/demo_output/de-novo_motif_discovery.html)
-- [Motif enrichment](http://cma2015.github.io/DeepEA/demo_output/Motif_enrichment.html)
-- [Correlate CMR with other Genomic Feature]()
-- [Correlate CMR with other Omics Signal]()
+- [Correlate CMR with gene length](http://cma2015.github.io/DeepEA/demo_output/CMR_genomic_features_for_gene_length.html)
+- [Correlate CMR with exon length](http://cma2015.github.io/DeepEA/demo_output/CMR_genomic_features_for_exon_length.html)
+- [Correlate CMR with intron length](http://cma2015.github.io/DeepEA/demo_output/CMR_genomic_features_for_intron_length.html)
+- [Correlate CMR with exon number](http://cma2015.github.io/DeepEA/demo_output/CMR_genomic_features_for_exon_number.html)
+- [Correlate CMR with GC content](http://cma2015.github.io/DeepEA/demo_output/CMR_genomic_features_for_GC_content.html)
 
 # How to access help
 * If users encounter any bugs or issues, feel free to leave a message at Github [issues](<https://github.com/cma2015/DeepEA/issues>). We will try our best to deal with all issues as soon as possible.
