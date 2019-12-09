@@ -1,0 +1,951 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="DeepEA: a Galaxy-based framework for exploration and large-scale analysis of epitranscriptome sequencing data">
+    <meta name="author" content="The DeepEA Team">
+
+    <title>DeepEA</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="assets/css/landing-page.css" rel="stylesheet">
+	<style>
+            canvas {
+                display: block;
+                width: 100%;
+                height:115%;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        </style>
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+function grid(o,a,b,c,d){
+
+	var t=document.getElementById(o).getElementsByTagName("tr");
+
+	for(var i=0;i<t.length;i++){
+		
+		t[i].style.backgroundColor=(t[i].sectionRowIndex%2==0)?a:b;
+		
+		t[i].onclick=function(){
+			if(this.x!="1"){
+				this.x="1";
+				this.style.backgroundColor=d;
+			}else{
+				this.x="0";
+				this.style.backgroundColor=(this.sectionRowIndex%2==0)?a:b;
+			}
+		}
+
+		t[i].onmouseover=function(){
+			if(this.x!="1")this.style.backgroundColor=c;
+		}
+		
+		t[i].onmouseout=function(){
+			if(this.x!="1")this.style.backgroundColor=(this.sectionRowIndex%2==0)?a:b;
+		}
+	}
+}
+</script>
+	
+</head>
+
+	<body onload="init(70)">
+	<canvas id="canvas"></canvas>
+		<script>
+			//更新页面用requestAnimationFrame替代setTimeout
+			window.requestAnimationFrame = window.requestAnimationFrame 
+										|| window.mozRequestAnimationFrame 
+										|| window.webkitRequestAnimationFrame 
+										|| window.msRequestAnimationFrame;
+			
+			var canvas = document.getElementById('canvas');
+			var ctx = canvas.getContext('2d');
+			
+			var w = canvas.width = canvas.offsetWidth;
+			var h = canvas.height = canvas.offsetHeight;
+			var circles = [];
+			var current_circle = new currentCircle(0, 0);
+			
+			function init(num) {
+				for(var i = 0; i < num; i ++) {
+					circles.push(new circle(Math.random() * w, Math.random() * h));
+				}
+				draw();
+			}
+			
+			function draw() {
+				ctx.clearRect(0, 0, w, h);
+				for(var i = 0; i < circles.length; i ++) {
+					circles[i].move(w, h);
+					circles[i].drawCircle(ctx);
+					for(var j = i + 1; j < circles.length; j++) {
+						circles[i].drawLine(ctx, circles[j]);
+					}
+				} 
+				if (current_circle.x) {
+					current_circle.drawCircle(ctx);
+					for (var k = 0; k < circles.length; k++) {
+						current_circle.drawLine(ctx, circles[k])
+					}
+				}
+				requestAnimationFrame(draw);
+			}
+			window.onmousemove = function(e) {
+				e = e || window.event;
+				current_circle.x = e.clientX;
+				current_circle.y = e.clientY;
+			}
+			window.onmouseout = function() {
+				current_circle.x = null;
+				current_circle.y = null;
+			 }
+			
+			
+			//创建对象:圆
+			//x, y为坐标点, r为半径, _mx, _my为移动的距离
+			function circle(x, y) {
+				this.x = x;
+				this.y = y;
+				this.r = Math.random() * 10;
+				this._mx = 1 - (Math.random() * 2);
+				this._my = 1 - (Math.random() * 2);
+				
+				//canvas画圆
+				this.drawCircle = drawCircle;
+				function drawCircle(ctx) {
+					ctx.beginPath();
+					ctx.arc(this.x, this.y, this.r, 0, 360);
+					ctx.fillStyle = 'rgba(204, 204, 204, 0.3)';
+					ctx.fill();
+				}
+				
+				this.move = move;
+				function move(w, h) {
+					this._mx = (this.x < w && this.x > 0) ? this._mx : (-this._mx);
+					this._my = (this.y < h && this.y > 0) ? this._my : (-this._my);
+					this.x += this._mx / 2;
+					this.y += this._my / 2;
+				}
+				
+				//canvas画线
+				//画直线是两个圆连线，为了避免直线过多，给圆圈距离设置了一个值，距离很远的圆圈，就不做连线处理
+				this.drawLine = drawLine;
+				function drawLine(ctx, _circle) {
+					var dx = this.x - _circle.x;
+					var dy = this.y - _circle.y;
+					var d = Math.sqrt(dx * dx + dy * dy);
+					if (d < 150) {
+						ctx.beginPath();
+						ctx.moveTo(this.x, this.y);//起点
+						ctx.lineTo(_circle.x, _circle.y);//终点
+						ctx.strokeStyle = 'rgba(204, 204, 204, 0.3)';
+						ctx.stroke();
+					}
+				}
+			}
+			
+			function currentCircle(x, y) {
+				circle.call(this, x, y);
+				
+				this.drawCircle = drawCircle;
+				function drawCircle(ctx) {
+					ctx.beginPath();
+					ctx.arc(this.x, this.y, 8, 0, 360);
+					ctx.fillStyle = 'rgba(255, 77, 54, 0.6)';
+					ctx.fill();
+				}
+			}
+		</script>
+		<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll" href="#home">DeepEA</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="page-scroll" href="#about">About</a></li>
+                <li><a class="page-scroll" href="#installation">Installation</a></li>
+                <li><a class="page-scroll" href="#pre-analysis">Pre-analysis</a></li>
+                <li><a class="page-scroll" href="#core-analysis">Core-analysis</a></li>
+                <li><a class="page-scroll" href="#advanced-analysis">Advanced-analysis</a></li>
+                <li><a class="page-scroll" href="#examples">Examples</a></li>
+                <li><a class="page-scroll" href="#how-to-access-help">Contact</a></li>
+                <li><a class="page-scroll" href="https://github.com/cma2015/DeepEA">GitHub</a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<section id="home">
+<!-- Header -->
+    <div class="intro-header">
+	
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1>DeepEA</h1>				
+                        <h3>A web-based platform for exploring epitranscriptome sequencing data</h3>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+	
+    <!-- /.intro-header -->
+</section>
+
+
+        <div class="content-section-a">
+            <div class="container">
+               <div class="lead">
+              
+
+<h1 id="about">About</h1>
+<p><img src="assets/img/pulls_pea.svg" alt="docker pulls" />
+<img src="assets/img/star_pea.svg" alt="docker stars" /></p>
+
+<p>DeepEA is a Galaxy-based framework for exploring large-scale analysis of epitranscriptome sequencing data. DeepEA is an upgrated version of PEA, which is a special designed R toolkit for plant epitranscriptome analysis. In the current version of DeepEA, a variety of modules and functions including Data Preparation, Quality Control, CMR (chemical modifications of RNA) profiling and analysis, CMR annotation, CMR prediction and related visualization are implemented to enable users perform large-scale, reproducible epitranscriptome analysis. In addition, by taking advantages of multiple instance learning (MIL) algorithms, DeepEA can precisely localize CMRs in peak regions. This can reduce the false positive CMRs generated by MeRIP-Seq/m6A-Seq/m5C-RIP-Seq, as which can localize CMRs to transcript regions of 100-200 nucleotide long but fail to accurately identify CMRs at single-nucleotide solution. The deePEA project is hosted on https://github.com/cma2015/DeepEA. The DeepEA web server can accessed via http://bioinfo.nwafu.edu.cn:4006.</p>
+
+<div id="top"></div>
+
+<!-- [<img align="left" src="assets/img/deNBI_logo.jpg" height="35px" alt="de.NBI" valign="middle">](http://www.denbi.de)
+[<img align="center" src="assets/img/elixir_germany.png" height="55px" alt="ELIXIR Germany" valign="middle">](https://www.elixir-europe.org) -->
+<h1 id="table-of-contents">Table of Contents</h1>
+<ul>
+  <li><a href="#installation">Installation</a>
+    <ul>
+      <li><a href="#docker-installation">Docker installation</a></li>
+      <li><a href="#deepea-quick-start">DeepEA quick start</a></li>
+    </ul>
+  </li>
+  <li><a href="#pre-analysis">Pre-analysis</a>
+    <ul>
+      <li><a href="#data-preparation">Data Preparation</a></li>
+      <li><a href="#quality-control">Quality control</a></li>
+    </ul>
+  </li>
+  <li><a href="#core-analysis">Core-analysis</a>
+    <ul>
+      <li><a href="#cmr-profiling">CMR Profiling</a>
+        <ul>
+          <li><a href="#align-reads-to-genome">Align Reads to Genome</a></li>
+          <li><a href="#cmr-calling">CMR Calling</a></li>
+          <li><a href="#detect-differential-cmr-regions">Detect Differential CMR Regions</a></li>
+        </ul>
+      </li>
+      <li><a href="#machine-learning-based-cmr-prediction">Machine Learning-based CMR Prediction</a>
+        <ul>
+          <li><a href="#feature-encoding">Feature encoding</a></li>
+          <li><a href="#feature-selection">Feature selection</a></li>
+          <li><a href="#machine-learning-based-classification">Machine learning-based classification</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#advanced-analysis">Advanced-analysis</a>
+    <ul>
+      <li><a href="#cmr-annotation-and-visualization">CMR Annotation and Visualization</a></li>
+      <li><a href="#multi-omics-integration-analysis">Multi-omics Integration Analysis</a></li>
+    </ul>
+  </li>
+  <li><a href="#examples">Examples</a></li>
+  <li><a href="#how-to-access-help">How to access help</a></li>
+</ul>
+
+<h1 id="installation">Installation</h1>
+<h2 id="docker-installation">Docker installation</h2>
+
+<blockquote>
+  <p>Official installation tutorial is available at <a href="https://docs.docker.com/install">here</a></p>
+</blockquote>
+
+<h3 id="for-windows-test-on-windows-10-enterprise-version">For Windows (Test on Windows 10 Enterprise version):</h3>
+<ul>
+  <li>Download <a href="https://download.docker.com/win/stable/Docker%20for%20Windows%20Installer.exe">Docker</a> for windows &lt;/br&gt;</li>
+  <li>Double click the EXE file to open it;</li>
+  <li>Follow the wizard instruction and complete installation;</li>
+  <li>Search docker, select <strong><em>Docker for Windows</em></strong> in the search results and clickit.</li>
+</ul>
+
+<h3 id="for-mac-os-x-test-on-macos-sierra-version-10126-and-macos-high-sierra-version-10133">For Mac OS X (Test on macOS Sierra version 10.12.6 and macOS High Sierra version 10.13.3):</h3>
+<ul>
+  <li>Download <a href="https://download.docker.com/mac/stable/Docker.dmg">Docker</a> for Mac OS X</li>
+  <li>Double click the DMG file to open it;</li>
+  <li>Drag the docker into Applications and complete installation;</li>
+  <li>Start docker from Launchpad by click it.</li>
+</ul>
+
+<h3 id="for-ubuntu-test-on-ubuntu-1604-lts">For Ubuntu (Test on Ubuntu 16.04 LTS):</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Update the apt package index:</span>
+<span class="nb">sudo </span>apt-get update
+<span class="c"># Install packages to allow apt to use a repository over HTTPS:</span>
+<span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="se">\</span>
+    apt-transport-https <span class="se">\</span>
+    ca-certificates <span class="se">\</span>
+    curl <span class="se">\</span>
+    software-properties-common
+<span class="c"># Add Docker’s official GPG key</span>
+curl <span class="nt">-fsSL</span> https://download.docker.com/linux/ubuntu/gpg | <span class="nb">sudo </span>apt-key add -
+<span class="nb">sudo </span>apt-key fingerprint 0EBFCD88
+<span class="nb">sudo </span>add-apt-repository <span class="se">\</span>
+   <span class="s2">"deb [arch=amd64] https://download.docker.com/linux/ubuntu </span><span class="se">\</span><span class="s2">
+   </span><span class="si">$(</span>lsb_release <span class="nt">-cs</span><span class="si">)</span><span class="s2"> </span><span class="se">\</span><span class="s2">
+   stable"</span>
+<span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install </span>docker-
+<span class="c"># Verify that Docker CE is installed correctly by running the hello-world image</span>
+<span class="nb">sudo </span>docker run hello-world
+</code></pre></div></div>
+
+<h3 id="verify-if-docker-is-installed-correctly">Verify if Docker is installed correctly</h3>
+
+<p>Once Docker installation is completed, we can run <strong>__hello-world</strong>__ image to verify if Docker is installed correctly. Open terminal in Mac OS X and Linux operating system and open CMD for Windows operating system, then type the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run hello-world
+</code></pre></div></div>
+<p><strong><font color =red>Note</font>:</strong> root permission is required for Linux operating system, if you want to manage docker as a non-root user, please refer <a href="https://docs.docker.com/install/linux/linux-postinstall">here</a></p>
+
+<h2 id="deepea-quick-start">DeepEA quick start</h2>
+
+<p>DeepEA has been packaged into a docker image, which can be easily installed as a local server by following command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># pull DeepEA from docker hub</span>
+docker pull malab/deepea
+docker run <span class="nt">-it</span> malab/deepea /bin/bash
+bash run.sh
+</code></pre></div></div>
+
+<p>Then DeepEA local server can be accessed via <code class="language-plaintext highlighter-rouge">http://localhost:8080</code></p>
+
+<h1 id="pre-analysis">Pre-analysis</h1>
+
+<p><strong>Pre-analysis</strong> module is composed of two sub-modules: <a href="#data-preparation">Data Preparation</a> and <a href="#quality-control">Quality Control</a>. These two sub-modules make up the important components of Epitranscriptome.</p>
+
+<h2 id="data-preparation">Data Preparation</h2>
+
+<p>This sub-module provides three funcitons (see following table for details) to prepare epitranscriptome data.</p>
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid1">
+    <tr>
+        <td><b>Tools</b></td>
+        <td><b>Description</b></td>
+        <td><b>Input</b></td>
+        <td><b>Output</b></td>
+        <td><b>References</b></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Obtain_Genome_or_Transcriptome_Sequences_and_Annotation&amp;version=18.09&amp;__identifer=dclshuq6eet">Obtain Genome Sequences and Annotation</a></td>
+        <td>Fetch genome, cDNA, CDS sequences and annotation from Enseml automatically</td>
+        <td>Select an Ensembl database; Select a species; Select dada type</td>
+        <td>FASTA format sequences or GTF annotation</td>
+        <td>In-house scripts</td>
+   </tr>
+   <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Obtain_Epitranscriptome_Sequencing_Reads&amp;version=18.09&amp;__identifer=3bj51oj9isq">Obtain Epitranscriptome Sequencing and Reads</a></td>
+        <td>Fetch epitranscriptome sequencing reads from NCBI's SRA database</td>
+        <td>SRR accession or HTTP/FTP link</td>
+        <td>Sequencing files in SRA/FASTQ format</td>
+        <td><a href="https://www.ncbi.nlm.nih.gov/sra/docs/toolkitsoft">SRA Toolkit</a></td>
+   </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Convert_Format&amp;version=18.09&amp;__identifer=uib940h4pb">Sequence Data Preprocessing</a></td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+        <td>xxx</td>
+   </tr>
+ </table>
+</div>
+
+<h2 id="quality-control">Quality Control</h2>
+<p><strong>Quality Control</strong> submodule consisted of a suite of tools focused on different levels of quality assessment including reads quality, alignment quality and CMR quality, Thus, three functions are implemented including <strong>Assess Reads Quality</strong>, <strong>Assess Alignment Quality</strong> and <strong>Assess CMR quality</strong>. The details of as follows:</p>
+
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid2">
+    <tr>
+        <td><b>Tool</b></td>
+        <td><b>Description</b></td>
+        <td><b>Main functions</b></td>
+        <td><b>Input</b></td>
+        <td><b>Output</b></td>
+        <td><b>Programs</b></td>
+        <td><b>Reference</b></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_Reads_Quality&amp;version=18.09&amp;__identifer=gr96n8z0sag">Assess Reads Quality</a></td>
+        <td>This tool integrates FastQC and fastp to perform quality control from raw epitranscriptome sequencing reads</td>
+        <td>Reads trimming and generate reads quality report including sequence quality, GC content, etc</td>
+        <td>Sequencing reads in FASTQ format</td>
+        <td>Clean reads or reads quality report in HTML format</td>
+        <td><a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>,<a href="https://github.com/OpenGene/fastp">fastp</a></td>
+        <td><a href="https://doi.org/10.1093/bioinformatics/bty560">Chen <em>et al</em>., 2018, Bioinformatics</a>, <a href="http://www.bioinformatics.babraham.ac.uk/projects/fastqc">Babraham Bioinformatics</a></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_Alignment_Quality&amp;version=18.01&amp;__identifer=3uvvorrbx2s">Assess Alignment Quality</a></td>
+        <td>This function is used to generate quality assessment.</td>
+        <td>Evaluate alignment quality</td>
+        <td>Reads alignment fies in SAM/BAM format</td>
+        <td>Alignment quality report in HTML format</td>
+        <td><a href="https://github.com/skyhorsetomoon/Trumpet">trumpet</a></td>
+        <td><a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2266-3">Zhang et al., 2018, BMC Bioinformatics</a></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Assess_CMR_Regions_Quality&amp;version=18.01&amp;__identifer=yu0s7b4tvw7">Assess CMR Quality</a></td>
+        <td>This tool aims to quantify CMR signal strength by counting reads and calculating RPKM in binding site intervals</td>
+        <td>Quantify CMRs</td>
+        <td>Alignments in SAM/BAM format</td>
+        <td>CMR quantification matrix</td>
+        <td><a href="https://bioconductor.org/packages/release/bioc/html/DiffBind.html">DiffBind</a></td>
+        <td><a href="https://www.frontiersin.org/articles/10.3389/fgene.2015.00169/full">Wu <em>et al</em>., 2016, frontiers in Genetics</a></td>
+    </tr>
+</table>
+</div>
+
+<h1 id="core-analysis">Core-analysis</h1>
+<p><strong>Core-analysis</strong> module consists of <strong>CMR Profiling</strong> and <strong>Machine Learning-based CMR Prediction</strong>, of which <strong>CMR Profiling</strong> provides step-by-step functions required for epitranscriptome reads mapping, CMR Calling and differential CMR analysis, while <strong>Machine Learning-based CMR Prediction</strong> is designed to automatically complete the three main steps for constructing a CMR predictor including <strong>Sequence Feature Extraction</strong>, <strong>Feature Engineering</strong> and <strong>Machine Learning-based Classification</strong></p>
+
+<h2 id="align-reads-to-genome">Align Reads to Genome</h2>
+<p>Several commonly used aligners are wrapped to align epitranscriptome reads to genome. Currently, <a href="https://ccb.jhu.edu/software/tophat/index.shtml">Tophat2</a>, <a href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">Bowtie2</a>, <a href="https://github.com/alexdobin/STAR">STAR</a>, <a href="http://www.ccb.jhu.edu/software/hisat/index.shtml">HISAT2</a> and <a href="http://bio-bwa.sourceforge.net/bwa.shtml">bwa-mem</a> are available.</p>
+
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid3">
+    <tr>
+        <td><b>Tools</b></td>
+        <td><b>Description</b></td>
+        <td><b>Input</b></td>
+        <td><b>Output</b></td>
+        <td><b>References</b></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=tophat2&amp;version=18.09&amp;__identifer=jztsfk48b9">Tophat2</a></td>
+        <td>Accurate alignment of transcriptomes in the presence of insertions, deletions and gene fusions</td>
+        <td>Sequencing reads in FASTQ format</td>
+        <td>Alignments in SAM/BAM format</td>
+        <td><a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-4-r36">Kim <em>et al</em>., 2013, Genome Biology</a></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=bowtie2&amp;version=18.09&amp;__identifer=x9j53etnvzb">Bowtie2</a></td>
+        <td>A fast gapped-read alignment tool</td>
+        <td>Sequencing reads in FASTQ format</td>
+        <td>Alignments in SAM/BAM format</td>
+        <td><a href="https://www.nature.com/articles/nmeth.1923">Langmead <em>et al</em>., 2012, Nature Methods</a></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=star&amp;version=18.09&amp;__identifer=gd64qwrc1pp">STAR</a></td>
+        <td>An ultrafast universal RNA-seq aligner</td>
+        <td>Sequencing reads in FASTQ format</td>
+        <td>Alignments in SAM/BAM format</td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/29/1/15/272537">Dobin <em>et al</em>., 2013, Bioinformatics</a></td>
+   </tr>
+   <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=hisat2&amp;version=18.09&amp;__identifer=zds4b1pt998">HISAT2</a></td>
+        <td>A fast spliced aligner with low memory requirements</td>
+        <td>Sequencing reads in FASTQ format</td>
+        <td>Alignments in SAM/BAM format</td>
+        <td><a href="https://www.nature.com/articles/nmeth.3317">Kim <em>et al</em>., 2015, Nature Methods</a></td>
+   </tr>
+   <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=bwa-mem&amp;version=18.09&amp;__identifer=eo9vnwpvp9">bwa-mem</a></td>
+        <td>Fast and accurate short read alignment with Burrows–Wheeler transform</td>
+        <td>Sequencing reads in FASTQ format</td>
+        <td>Alignments in SAM/BAM format</td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/25/14/1754/225615">Li <em>et al</em>., 2009, Bioinformatics</a></td>
+   </tr>
+ </table>
+</div>
+
+<h2 id="cmr-calling">CMR Calling</h2>
+<p><strong>CMR Calling</strong> implements four pipelines for MeRIP-Seq, m6A miCLIP-Seq, CeU-Seq and RNA-BSSeq, respectively.</p>
+
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid4">
+    <tr>
+        <td><b>Tools</b></td>
+        <td><b>Description</b></td>
+        <td><b>Input</b></td>
+        <td><b>Output</b></td>
+        <td><b>Programs</b></td>
+        <td><b>References</b></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Calling_peaks&amp;version=18.09&amp;__identifer=gz3la9l6aur">Peak calling from the MeRIP-Seq data</a></td>
+        <td>Identifying enriched genomic regions from MeRIP-Seq experiment</td>
+        <td>Alignments of IP and input in SAM/BAM format and Reference genome sequences in FASTA format</td>
+        <td>CMR regions in BED format</td>
+        <td><a href="https://github.com/cma2015/PEA">PEA</a></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/34/21/3747/5021690">Zhai <em>et al</em>., 2018, Bioinformatics</a></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=peakcalling_m5C&amp;version=18.09&amp;__identifer=kgd6vgn38w">Calling m5C from the RNA-BSseq data</a></td>
+        <td>Performing bisulfite sequencing (BS-Seq) read mapping, comprehensive methylation calling using meRanTK</td>
+        <td>Sequencing reads in FASTQ format and reference genome sequences in FASTTA format</td>
+        <td>m5C sites in BED format</td>
+        <td><a href="http://icbi.at/software/meRanTK">meRanTK</a></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/32/5/782/1744216">Rieder <em>et al</em>., 2016, Bioinformatics</a></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Calling_pseudoU&amp;version=18.09&amp;__identifer=nrfo2zxngp">Calling Ψ from CeU-Seq data</a></td>
+        <td>Identifying pseudouridylation from CeU-Seq</td>
+        <td>Alignments in SAM/BAM format and cDNA sequences in FASTA format</td>
+        <td>Pseudoridylation sites in BED format</td>
+        <td>In-house scripts</td>
+        <td><a href="https://www.nature.com/articles/nchembio.1836">Li <em>et al</em>., 2015, Nature Chemical Biology</a></td>
+    </tr>
+</table>
+</div>
+
+<h2 id="machine-learning-based-cmr-prediction">Machine Learning-based CMR Prediction</h2>
+<p>This sub-module provides a pipeline for transcriptome-wide CMR prediction using machine learning technology. This pipeline is consisted of <a href="#feature-encoding">Feature encoding</a>, <a href="#feature-selection">Feature selection</a> and <a href="#machine-learning-based-classification">Machine learning-based classification</a></p>
+
+<h3 id="feature-encoding">Feature encoding</h3>
+
+<p><strong>Sequence-derived features</strong></p>
+
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid5">
+    <tr>
+        <td><b>Type</b></td>
+        <td><b>Feature</b></td>
+        <td><b>Description</b></td>
+        <td><b>Dimension</b></td>
+        <td><b>Reference</b></td>
+    </tr>
+    <tr>
+        <td rowspan="4">Nucleic acid composition related features</td>
+        <td>1mer</td>
+        <td>The frequency of mono-nucleotide</td>
+        <td>4</td>
+        <td rowspan="4"><a href="https://academic.oup.com/bib/article-abstract/20/4/1280/4763667?redirectedFrom=fulltext">Liu <em>et al</em>., 2017, Briefings in Bioinformatics</a></td>
+    </tr>
+    <tr>
+        <td>2mer</td>
+        <td>The frequency of di-nucleotide</td>
+        <td>16</td>
+    </tr>
+    <tr>
+        <td>3mer</td>
+        <td>The frequency of tri-nucleotide</td>
+        <td>64</td>
+    </tr>
+    <tr>
+        <td>4mer</td>
+        <td>The frequency of tetra-nucleotide</td>
+        <td>256</td>
+    </tr>
+    <tr>
+        <td rowspan="6">Autocorrelation-base features</td>
+        <td>DAC (<b><u>D</u></b>inucleotide-based <b><u>a</u></b>uto <b><u>c</u></b>ovariance)</td>
+        <td>DAC measures the correlation of the same physicochemical index between two dinucleotides seperated by a distance of <i>d</i> along the sequence</td>
+        <td><i>N</i>*<i>d</i></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/25/20/2655/194053">Dong <em>et al</em>., 2009, Bioinformatics</a> <a href="https://academic.oup.com/nar/article/36/9/3025/1104168">Guo <em>et al</em>., 2008, Nucleic Acids Research</a> <a href="https://academic.oup.com/bioinformatics/article/31/1/119/2366158">Chen <em>et al</em>., 2015, Bioinformatics</a></td>
+    </tr>
+    <tr>
+        <td>DCC (<b><u>D</u></b>inucleotide-based <b><u>c</u></b>ross <b><u>c</u></b>ovariance)</td>
+        <td>DCC measures the correlation of two different physicochemical indices between two dinucleotides separated by a distance of <i>d</i> nucleotide acids along the sequence</td>
+        <td><i>N</i>*(<i>N-1</i>)*<i>d</i></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/25/20/2655/194053">Dong <em>et al</em>., 2009, Bioinformatics</a> <a href="https://academic.oup.com/bioinformatics/article/31/1/119/2366158">Chen <em>et al</em>., 2015, Bioinformatics</a></td>
+    </tr>
+    <tr>
+        <td>DACC (<b><u>D</u></b>inucleotide-based <b><u>a</u></b>uto-<b><u>c</u></b>ross <b><u>c</u></b>ovariance)</td>
+        <td>A combination of DAC and DCC</td>
+        <td><i>N</i>*<i>N</i>*<i>d</i></td>
+         <td><a href="https://academic.oup.com/bioinformatics/article/25/20/2655/194053">Dong <em>et al</em>., 2009, Bioinformatics</a> <a href="https://academic.oup.com/nar/article/36/9/3025/1104168">Guo <em>et al</em>., 2008, Nucleic Acids Research</a> <a href="https://academic.oup.com/bioinformatics/article/31/1/119/2366158">Chen <em>et al</em>., 2015, Bioinformatics</a></td>
+    </tr>
+    <tr>
+        <td>MAC (<b><u>M</u></b>oran <b><u>a</u></b>uto<b><u>c</u></b>orrelation)</td>
+        <td>MAC measures the correlation of the same properties between two residues separated by a distance of <i>d</i> along the sequence</td>
+        <td><i>N</i>*<i>k</i>*<i>d</i></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/31/1/119/2366158">Chen <em>et al</em>., 2015, Bioinformatics</a> <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/bip.360270308">Horne <em>et al</em>., 1988, Biopolymers</a></td>
+    </tr>
+    <tr>
+        <td>GAC (<b><u>G</u></b>eary <b><u>a</u></b>uto<b><u>c</u></b>orrelation)</td>
+        <td>GAC measures the correlation of the same properties between two residues separated by a distance of <i>d</i> along the sequence</td>
+        <td><i>N</i>*<i>k</i>*<i>d</i></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/31/1/119/2366158">Chen <em>et al</em>., 2015, Bioinformatics</a> <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/ajpa.20250">Sokal <em>et al</em>., 2006, American
+journal of physical anthropology</a></td>
+    </tr>
+    <tr>
+        <td>NMBAC (<b><u>N</u></b>ormalized <b><u>M</u></b>oreau-<b><u>B</u></b>roto <b><u>a</u></b>uto<b><u>c</u></b>orrelation)</td>
+        <td>It measures the corelatio of the same properties between two residues separated by a distance of <i>lag</i> along the sequence.</td>
+        <td><i>N</i>*<i>d</i></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/31/1/119/2366158">Chen <em>et al</em>., 2015, Bioinformatics</a> <a href="https://onlinelibrary.wiley.com/doi/abs/10.1002/ajpa.20250">Feng <em>et al</em>., 2000, Journal of protein chemistry</a></td>
+    </tr>
+    <tr>
+        <td rowspan="2">Pseudo nucleotide composition</td>
+        <td>PC-PseDNC-General</td>
+        <td>General parallel correlatio pseudo dinucleotide composition</td>
+        <td>16+&lambda;</td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/31/1/119/2366158">Chen <em>et al</em>., 2015, Bioinformatics</a></td>
+    </tr>
+    <tr>
+        <td>SC-PseDNC-General</td>
+        <td>General series correlation pseudo dinucleotide composition</td>
+        <td>16+&lambda;</td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/31/1/119/2366158">Chen <em>et al</em>., 2015, Bioinformatics</a></td>
+    </tr>
+    <tr>
+        <td rowspan="2">Binary encoding</td>
+        <td>Binary encoding</td>
+        <td>A, C, G, U are encoded with (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (0, 0, 0, 1), respectively</td>
+        <td>4*<i>L</i></td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/34/21/3747/5021690">Zhai <em>et al</em>., 2018, Bioinformatics</a> <a href="https://www.frontiersin.org/articles/10.3389/fpls.2018.00519/full">Song <em>et al</em>., 2018, Frontiers in Plant Science</a></td>
+    </tr>
+    <tr>
+        <td>Binary encoding based on structural chemical properties</td>
+        <td>A, C, G, U are encoded as a vector of three features (1,1,1), (0,1,0), (1,0,0) and (0,0,1), respectively</td>
+        <td>3*<i>L</i></td>
+        <td><a href="https://academic.oup.com/nar/article/47/7/e41/5319125#133859200">Chen <em>et al</em>., 2019, Nucleic Acids Research</a></td>
+    </tr>
+</table>
+</div>
+
+<p><strong>Note:</strong></p>
+<ul>
+  <li><em>N</em> is the number of physicochemical indices, here is 22;</li>
+  <li><em>L</em> is the sequence length;</li>
+  <li><em>d</em> is the length between two seperated nucleotides.</li>
+  <li><i>λ</i> is an interger, representing the highest counted rank of the correlation along a RNA sequence.</li>
+</ul>
+
+<p><strong>Genomic-derived features</strong></p>
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid6">
+     <tr>
+        <td><b>Type</b></td>
+        <td><b>Feature</b></td>
+        <td><b>Description</b></td>
+        <td><b>Reference</b></td>
+    </tr>
+    <tr>
+        <td rowspan="12">Dummy variables indicating whether the site is overlapped to the topological on the major RNA transcript</td>
+        <td>Five prime UTR</td>
+        <td>Binary value indicating whether CMR is overlapped with five prime UTR</td>
+        <td rowspan="25"><a href="https://academic.oup.com/nar/article/47/7/e41/5319125#133859200">Chen <em>et al</em>., 2019, Nucleic Acids Research</a></td>
+    </tr>
+    <tr>
+        <td>Three prime UTR</td>
+        <td>Binary value indicating whether CMR is overlapped with three prime UTR</td>
+    </tr>
+    <tr>
+        <td>Stop codons</td>
+        <td>Binary value indicating whether CMR is overlapped with stop codons</td>
+    </tr>
+    <tr>
+        <td>Start codons</td>
+        <td>Binary value indicating whether CMR is overlapped with start codons</td>
+    </tr>
+    <tr>
+        <td>Downstream 100bp of TSS (Transcription Start Sites)</td>
+        <td>Binary value indicating whether CMR is located at the downstream 100bp of TSS</td>
+    </tr>
+    <tr>
+        <td>Exons containing stop codons</td>
+        <td>Binary value indicating whether stop codons are located at the exon containing CMR</td>
+    </tr>
+    <tr>
+        <td>Alternative exons</td>
+        <td>Binary value indicating the exon containing CMR is an alternative exon</td>
+    </tr>
+    <tr>
+        <td>Constitutive exons</td>
+        <td>Binary value indicating the exon containing CMR is a constitutive exon</td>
+    </tr>
+    <tr>
+        <td>Internal exons</td>
+        <td>Binary value indicating the exon containing CMR is an internal exon</td>
+    </tr>
+    <tr>
+        <td>Long exons</td>
+        <td>Binary value indicating the exon containing CMR is a long exon (exon length &gt;= 400bp)</td>
+    </tr>
+    <tr>
+        <td>Five prime 500bp of the last exon</td>
+        <td>Binary value indicating whether the exon containing CMR is located at the five prime 500bp of the last exon</td>
+    </tr>
+    <tr>
+        <td>Five prime 500bp of the last exon containing stop codons</td>
+        <td>Binary value indicating whether the exon containing CMR is located at the five prime 500bp of the last exon containing stop codons</td>
+    </tr>
+    <tr>
+        <td rowspan="3">Relative position on the region</td>
+        <td>Relative position on five prime UTR</td>
+        <td>An integer value indicating the relative position of CMR on five prime UTR</td>
+    </tr>
+    <tr>
+        <td>Relative position on three prime UTR</td>
+        <td>An integer value indicating the relative position of CMR on three prime UTR</td>
+    </tr>
+    <tr>
+        <td>Relative position on exon</td>
+        <td>An integer value indicating the relative position of CMR on the exon containing CMR</td>
+    </tr>
+    <tr>
+        <td rowspan="3">The region length in bp</td>
+        <td>The length of five prime UTR</td>
+        <td>An interger value indicating the length of the five prime UTR containing CMR</td>
+    </tr>
+    <tr>
+        <td>The length of three prime UTR</td>
+        <td>An interger value indicating the length of three three prime UTR containing CMR</td>
+    </tr>
+    <tr>
+        <td>Mature transcript length</td>
+        <td>An interger value indicating the length of the mature transcript containing CMR</td>
+    </tr>
+    <tr>
+        <td rowspan="3">Nucleotide distances toward the splicing junctions or the nearest neighboring sites</td>
+        <td>Distance to the five prime splicing junction</td>
+        <td>An interger indicating the distance to the five prime splicing junction</td>
+    </tr>
+    <tr>
+        <td>Distance to the three prime splicing junction</td>
+        <td>An interger indicating the distance to the three prime splicing junction</td>
+    </tr>
+    <tr>
+        <td>Distance to the closest neighbor truncated at 200bp</td>
+        <td>An interger indicating the distance to the closest neighbor truncated at 200bp</td>
+    </tr>
+    <tr>
+        <td rowspan="4">Attributes of the genes of transcripts</td>
+        <td>sncRNA</td>
+        <td>Binary value indicating if the gene containing CMR is a sncRNA</td>
+    </tr>
+    <tr>
+        <td>lncRNA</td>
+        <td>Binary value indicating if the gene containing CMR is a lncRNA</td>
+    </tr>
+    <tr>
+        <td>House keeping genes</td>
+        <td>Binary value indicating if the gene containing CMR is a house keeping gene</td>
+    </tr>
+    <tr>
+        <td>miRNA targeted genes</td>
+        <td>Binary value indicating if the gene containing CMR is an miRNA target gene</td>
+    </tr>
+</table>
+</div>
+
+<h3 id="machine-learning-based-classification">Machine learning-based classification</h3>
+<p>In this module, several commonly-used machine learning classification algorithms are implemented to construct a CMR predictor. The details are described as follows:</p>
+
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid7">
+    <tr>
+        <td><b>Algorithms</b></td>
+        <td><b>Description</b></td>
+        <td colspan="4"><b>Parameters</b></td>
+    </tr>
+    <tr>
+        <td>Random Forest (RF)</td>
+        <td>RF is an ensemble learning method for classification, regression and other tasks that operates by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes (classification) or mean prediction (regression) of the individual trees</td>
+        <td colspan="4"><b>&#9312;</b> Number of trees to grow;<br /> <b>&#9313;</b> The number of threads used for parallel computation.</td>
+    </tr>
+    <tr>
+        <td>Support Vector Machine (SVM)</td>
+        <td>Given a set of training examples, each marked as belonging to one or the other of two categories, an SVM training algorithm builds a model that assigns new examples to one category or the other, making it a non-probabilistic binary linear classifier (although methods such as Platt scaling exist to use SVM in a probabilistic classification setting)</td>
+        <td>Polynomial kernel:<br /><b>&#9312;</b> degree<br /> <b>&#9313;</b> gamma<br /><b>&#9314;</b> coef0</td>
+        <td>Radial basis kernel:<br /> gamma<br /></td>
+        <td>Sigmoid kernel:<br /> gamma<br /></td>
+        <td>Linear kernel:<br /> / </td>
+    </tr>
+    <tr>
+        <td>Decision Tree</td>
+        <td>A decision tree is a decision support tool that uses a tree-like model of decisions and their possible consequences, including chance event outcomes, resource costs, and utility. It is one way to display an algorithm that only contains conditional control statements</td>
+        <td colspan="4"><b>&#9312;</b> Number of trees to grow;<br /> <b>&#9313;</b> The number of threads used for parallel computation.</td>
+    </tr>
+    <tr>
+        <td>XGBoost</td>
+        <td>It provides a gradient boosting framework for classification</td>
+        <td colspan="4"><b>&#9312;</b> Learning rate<br /> <b>&#9313;</b> Number of trees to grow<br /> <b>&#9314;</b> The number of threads used for parallel computation<br /></td>
+    </tr>
+    <tr>
+        <td>Logistic Regression</td>
+        <td>In statistics, the logistic model (or logit model) is used to model the probability of a certain class or event existing such as pass/fail, win/lose, alive/dead or healthy/sick</td>
+        <td colspan="4"><b>&#9312;</b> Optimization algorithm<br /> <b>&#9313;</b> The number of threads used for parallel computation<br /></td>
+    </tr>
+</table>
+</div>
+
+<h1 id="advanced-analysis">Advanced-analysis</h1>
+<p>This module provides comprehensive CMR annotation and interactive visualization, both HTML format with interactive figures and tables and PDF format with publication-ready figures are available to analyze the distribution of CMRs in the genome and transcriptome.</p>
+
+<h2 id="cmr-annotation-and-visualization">CMR Annotation and Visualization</h2>
+
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid8">
+    <tr>
+        <td><b>Functions</b></td>
+        <td><b>Description</b></td>
+        <td><b>Input</b></td>
+        <td><b>Output</b></td>
+        <td><b>References</b></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=CMR_distribution&amp;version=18.09&amp;__identifer=328vozxeap">CMRs Distribution</a></td>
+        <td>The distribution of CMRs in the genome and transcriptome including the number of peaks in genomic features, the regions of enrichment of CMRs within transcripts, the enrichment of CMRs in transcriptional start/stop site and the enrichment of CMRs in splicing sites;</td>
+        <td><b>&#9312;</b> CMR regions in BED format<br /> <b>&#9313;</b>  Genome annotation in GTF/GFF format</td>
+        <td>Comprehensive overview of CMRs distribution in HTML or PDF format</td>
+        <td>In-house scripts</td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=De_novo_motif_discovery&amp;version=18.09&amp;__identifer=rod01zsjan">De-novo Motif Discovery</a></td>
+        <td>This function integrates MEME-ChIP, DREME and HOMER to perform <i>de-novo</i> motif discovery</td>
+        <td>Positive sequences in FASTA format</td>
+        <td>The discovered motifs in HTML format</td>
+        <td><a href="https://academic.oup.com/bioinformatics/article/27/12/1653/257754">Timothy <i>et al</i>., 2011, Bioinformatics</a><br /><a href="https://academic.oup.com/bioinformatics/article/27/12/1696/255896">Philip <i>et al</i>., 2011, Bioinformatics</a><br /><a href="https://doi.org/10.1016/j.molcel.2010.05.004">Heinz <i>et al</i>., 2010, Molecular Cell</a></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Motif_enrichment&amp;version=18.09&amp;__identifer=wwnbsugl6yd">Motif Enrichment</a></td>
+        <td>This function integrates AME and CentriMo to perform motif enrichment</td>
+        <td><b>&#9312;</b> Sequence file in FASTA format<br /><b>&#9313;</b> Motif file in MEME format</td>
+        <td>The motif enrichment in HTML format</td>
+        <td><a href="http://www.biomedcentral.com/1471-2105/11/165">Robert <i>et al</i>., 2010, BMC Bioinformatics</a><br /> <a href="https://academic.oup.com/nar/article/40/17/e128/2411117">Timothy <i>et al</i>., 2012, Nucleic Acids Research</a><br /></td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Sequence_logo_visualization&amp;version=18.09&amp;__identifer=ci3ahyxsn6p">Sequence Logo Visualization</a></td>
+        <td>Visualize motifs in sequences</td>
+        <td>Sequences in FASTA format</td>
+        <td>Motif logo in PDF format</td>
+        <td>In-house scripts</td>
+    </tr>
+    <tr>
+        <td><a href="http://bioinfo.nwafu.edu.cn:4006/?tool_id=Functional_enrichment_analysis&amp;version=18.09&amp;__identifer=y44oe05v30i">Functional Enrichment Analysis</a></td>
+        <td>Perform GO or KEGG enrichment analysis for any species</td>
+        <td>Gene list</td>
+        <td>The enriched GO/KEGG terms</td>
+        <td><a href="https://doi.org/10.1089/omi.2011.0118">Yu <i>et al</i>., 2012, OMICS</a></td>
+    </tr>
+</table>
+</div>
+
+<h2 id="multi-omics-integration-analysis">Multi-omics Integration Analysis</h2>
+<p>This functions is designed to correlate CMR-realted gene with different type of genomic features including <strong>Gene length analysis</strong>, <strong>Exon length analysis</strong>, <strong>Intron length analysis</strong>, <strong>Exon number analysis</strong> and <strong>GC content analysis</strong>. To be specific, we split the  genome in a sliding window of 100 (default) adjacent genes with step size of 10 (default), and calculate the frequency of CMR genes in each window (100 adjacent genes). v5</p>
+
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid9">
+    <tr>
+        <td><b>Genomic features</b></td>
+        <td><b>Correlation</b></td>
+        <td><b>Difference</b></td>
+    </tr>
+    <tr>
+        <td>Gene length analysis</td>
+        <td><img align="middle" src="assets/img/Correlation_CMR_gene_length.png" alt="Correlation of CMR-related genes with gene length analysis" height="300px" width="300px" valign="middle" /></td>
+        <td><img align="middle" src="assets/img/Difference_CMR_gene_length.png" alt="Difference of CMR-related genes with gene length analysis" height="200px" width="200px" valign="middle" /></td>
+    </tr>
+    <tr>
+        <td>Exon length analysis</td>
+        <td><img align="middle" src="assets/img/Correlation_CMR_exon_length.png" alt="Correlation of CMR-related genes with exon length analysis" height="300px" width="300px" valign="middle" /></td>
+        <td><img align="middle" src="assets/img/Difference_CMR_exon_length.png" alt="Difference of CMR-related genes with exon length analysis" height="200px" width="200px" valign="middle" /></td>
+    </tr>
+    <tr>
+        <td>Intron length analysis</td>
+        <td><img align="middle" src="assets/img/Correlation_CMR_intron_length.png" alt="Correlation of CMR-related genes with intron length analysis" height="300px" width="300px" valign="middle" /></td>
+        <td><img align="middle" src="assets/img/Difference_CMR_intron_length.png" alt="Difference of CMR-related genes with intron length analysis" height="200px" width="200px" valign="middle" /></td>
+    </tr>
+    <tr>
+        <td>Exon number analysis</td>
+        <td><img align="middle" src="assets/img/Correlation_CMR_exon_number.png" alt="Correlation of CMR-related genes with exon number analysis" height="300px" width="300px" valign="middle" /></td>
+        <td><img align="middle" src="assets/img/Difference_CMR_exon_number.png" alt="Difference of CMR-related genes with exon number analysis" height="200px" width="200px" valign="middle" /></td>
+    </tr>
+    <tr>
+        <td>GC content analysis</td>
+        <td><img align="middle" src="assets/img/Correlation_CMR_GC_content.png" alt="Correlation of CMR-related genes with GC content analysis" height="300px" width="300px" valign="middle" /></td>
+        <td><img align="middle" src="assets/img/Difference_CMR_GC_content.png" alt="Difference of CMR-related genes with GC content analysis" height="200px" width="200px" valign="middle" /></td>
+    </tr>
+</table>
+</div>
+
+<h1 id="examples">Examples</h1>
+<ul>
+  <li><a href="http://cma2015.github.io/DeepEA/demo_output/CMR_distribution_single_case.html">CMRs distribution</a></li>
+  <li><a href="http://cma2015.github.io/DeepEA/demo_output/dreme.html">De-novo motif discovery for dreme</a></li>
+  <li><a href="http://cma2015.github.io/DeepEA/demo_output/meme-chip.html">De-novo motif discovery for meme-chip</a></li>
+  <li><a href="http://cma2015.github.io/DeepEA/demo_output/CMR_genomic_features_for_gene_length.html">Correlate CMR with gene length</a></li>
+  <li><a href="http://cma2015.github.io/DeepEA/demo_output/CMR_genomic_features_for_exon_length.html">Correlate CMR with exon length</a></li>
+  <li><a href="http://cma2015.github.io/DeepEA/demo_output/CMR_genomic_features_for_intron_length.html">Correlate CMR with intron length</a></li>
+  <li><a href="http://cma2015.github.io/DeepEA/demo_output/CMR_genomic_features_for_exon_number.html">Correlate CMR with exon number</a></li>
+  <li><a href="http://cma2015.github.io/DeepEA/demo_output/CMR_genomic_features_for_GC_content.html">Correlate CMR with GC content</a></li>
+</ul>
+
+<h1 id="how-to-access-help">How to access help</h1>
+<ul>
+  <li>If users encounter any bugs or issues, feel free to leave a message at Github <a href="https://github.com/cma2015/DeepEA/issues">issues</a>. We will try our best to deal with all issues as soon as possible.</li>
+  <li>In addition, if any suggestions are available, feel free to contact: Jingjing Zhai <a href="mailto:zhaijingjing603@gmail.com">zhaijingjing603@gmail.com</a> or Chuang Ma <a href="mailto:chuangma2006@gmail.com">chuangma2006@gmail.com</a></li>
+</ul>
+
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-inline">
+                    <li><a href="#home">Home</a></li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li><a href="#about">About</a></li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li><a href="#usage">Usage</a></li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li><a href="#training">Training</a></li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li><a href="#credit">Credit</a></li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li><a href="https://github.com/cma2015/DeepEA">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+        <!-- jQuery Version 1.11.0 -->
+<script src="assets/js/jquery-1.11.0.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+//grid("名称","奇数行背景","偶数行背景","鼠标经过背景","点击后背景");
+grid("grid1","#fff","#F5F5F5","#FFFFCC","#0066CC");
+grid("grid2","#fff","#F5F5F5","#FFFFCC","#0066CC");
+grid("grid3","#fff","#F5F5F5","#FFFFCC","#0066CC");
+grid("grid4","#fff","#F5F5F5","#FFFFCC","#0066CC");
+grid("grid5","#fff","#F5F5F5","#FFFFCC","#0066CC");
+grid("grid6","#fff","#F5F5F5","#FFFFCC","#0066CC");
+grid("grid7","#fff","#F5F5F5","#FFFFCC","#0066CC");
+grid("grid8","#fff","#F5F5F5","#FFFFCC","#0066CC");
+grid("grid9","#fff","#F5F5F5","#FFFFCC","#0066CC");
+</script>
+<!-- Custom Theme JavaScript -->
+<script src="assets/js/landing-page.js"></script>
+
+	</body>
+</html>
