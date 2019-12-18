@@ -14,5 +14,5 @@ DeepEA: A web-based platform for exploring epitranscriptome sequencing data.
 
 ## How to access help
 * If users encounter any bugs or issues, feel free to leave a message at Github [issues](<https://github.com/cma2015/DeepEA/issues>). We will try our best to deal with all issues as soon as possible.
-* In addition, if any suggestions are available, feel free to contact: __Jingjing Zhai <zhaijingjing603@gmail.com> or __Chuang Ma__ <chuangma2006@gmail.com>
+* In addition, if any suggestions are available, feel free to contact: __Jingjing Zhai__ <zhaijingjing603@gmail.com> or __Chuang Ma__ <chuangma2006@gmail.com>
 
