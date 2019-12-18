@@ -17,6 +17,8 @@
     <link href="assets/css/landing-page.css" rel="stylesheet">
 	<link href="assets/css/canvas.css" rel="stylesheet">
 	<link href="assets/css/lunbo.css" rel="stylesheet">
+	<link href="assets/css/button.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="assets/css/alert.css">
 	<script src="assets/js/lunbo.js"></script>
 	<script src="assets/js/table.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
@@ -27,26 +29,26 @@
 	<canvas id="canvas"></canvas>
 		<script>
 			//更新页面用requestAnimationFrame替代setTimeout
-			window.requestAnimationFrame = window.requestAnimationFrame 
-										|| window.mozRequestAnimationFrame 
-										|| window.webkitRequestAnimationFrame 
+			window.requestAnimationFrame = window.requestAnimationFrame
+										|| window.mozRequestAnimationFrame
+										|| window.webkitRequestAnimationFrame
 										|| window.msRequestAnimationFrame;
-			
+
 			var canvas = document.getElementById('canvas');
 			var ctx = canvas.getContext('2d');
-			
+
 			var w = canvas.width = canvas.offsetWidth;
 			var h = canvas.height = canvas.offsetHeight;
 			var circles = [];
 			var current_circle = new currentCircle(0, 0);
-			
+
 			function init(num) {
 				for(var i = 0; i < num; i ++) {
 					circles.push(new circle(Math.random() * w, Math.random() * h));
 				}
 				draw();
 			}
-			
+
 			function draw() {
 				ctx.clearRect(0, 0, w, h);
 				for(var i = 0; i < circles.length; i ++) {
@@ -55,7 +57,7 @@
 					for(var j = i + 1; j < circles.length; j++) {
 						circles[i].drawLine(ctx, circles[j]);
 					}
-				} 
+				}
 				if (current_circle.x) {
 					current_circle.drawCircle(ctx);
 					for (var k = 0; k < circles.length; k++) {
@@ -64,26 +66,16 @@
 				}
 				requestAnimationFrame(draw);
 			}
-			window.onmousemove = function(e) {
-				e = e || window.event;
-				current_circle.x = e.clientX;
-				current_circle.y = e.clientY;
-			}
-			window.onmouseout = function() {
-				current_circle.x = null;
-				current_circle.y = null;
-			 }
-			
-			
-			//创建对象:圆
-			//x, y为坐标点, r为半径, _mx, _my为移动的距离
+
+
+
 			function circle(x, y) {
 				this.x = x;
 				this.y = y;
 				this.r = Math.random() * 10;
 				this._mx = 1 - (Math.random() * 2);
 				this._my = 1 - (Math.random() * 2);
-				
+
 				//canvas画圆
 				this.drawCircle = drawCircle;
 				function drawCircle(ctx) {
@@ -92,7 +84,7 @@
 					ctx.fillStyle = 'rgba(204, 204, 204, 0.3)';
 					ctx.fill();
 				}
-				
+
 				this.move = move;
 				function move(w, h) {
 					this._mx = (this.x < w && this.x > 0) ? this._mx : (-this._mx);
@@ -100,7 +92,7 @@
 					this.x += this._mx / 2;
 					this.y += this._my / 2;
 				}
-				
+
 				//canvas画线
 				//画直线是两个圆连线，为了避免直线过多，给圆圈距离设置了一个值，距离很远的圆圈，就不做连线处理
 				this.drawLine = drawLine;
@@ -117,10 +109,10 @@
 					}
 				}
 			}
-			
+
 			function currentCircle(x, y) {
 				circle.call(this, x, y);
-				
+
 				this.drawCircle = drawCircle;
 				function drawCircle(ctx) {
 					ctx.beginPath();
@@ -146,8 +138,8 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li><a class="page-scroll" href="#about">About</a></li>
-<!--                 <li><a class="page-scroll" href="#installation">Installation</a></li>
- -->                <li><a class="page-scroll" href="#pre-analysis">Pre-analysis</a></li>
+                <li><a class="page-scroll" href="#installation">Installation</a></li>
+                <li><a class="page-scroll" href="#pre-analysis">Pre-analysis</a></li>
                 <li><a class="page-scroll" href="#core-analysis">Core-analysis</a></li>
                 <li><a class="page-scroll" href="#advanced-analysis">Advanced-analysis</a></li>
                 <li><a class="page-scroll" href="#examples">Examples</a></li>
@@ -162,24 +154,45 @@
 
 <section id="home">
 <!-- Header -->
+
     <div class="intro-header">
-	
+
         <div class="container">
 
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
-                        <h1>DeepEA</h1>				
+                        <h1>DeepEA</h1>
                         <h3>A web-based platform for exploring epitranscriptome sequencing data</h3>
+							<div class="panel">
+
+  <div class="button-effect">
+    <a class="effect effect-2" style='text-decoration:none;' data-toggle="modal" href="#login-modal" title="Test Data">Test Data</a>
+    <a class="effect effect-2" style='text-decoration:none;' href="https://cma2015.github.io/DeepEA/" tilte="User Manual">User Manual</a>
+  </div>
+</div>
+<div class="modal" id="login-modal">
+	<a class="close" data-dismiss="modal">×</a>
+	<h1>Download</h1>
+	<div class="button-effect">
+	<a class="effect effect-2"  style='text-decoration:none;' href="https://deepea.nwafu.edu.cn/static/test_data/1-PRE-ANALYSIS.zip">test1</a></br></br>
+	<a class="effect effect-2" style='text-decoration:none;' href="https://deepea.nwafu.edu.cn/static/test_data/2-CORE-ANALYSIS.zip">test2</a></br></br>
+	<a class="effect effect-2" style='text-decoration:none;'  href="https://deepea.nwafu.edu.cn/static/test_data/3-ADVANCED-ANALYSIS.zip">test3</a></br></br>
+	</div>
+</div>
+
                     </div>
+
                 </div>
+
             </div>
+
 
         </div>
         <!-- /.container -->
 
     </div>
-	
+
     <!-- /.intro-header -->
 </section>
 
@@ -187,7 +200,7 @@
         <div class="content-section-a">
             <div class="container">
                <div class="lead">
-              
+
 
 <h1 id="about">About</h1>
 <p><img src="assets/img/pulls_pea.svg" alt="docker pulls" />
@@ -209,7 +222,7 @@
 			</div>
 			<div class="box-2">
 				<ul>
-					
+
 				</ul>
 			</div>
 			<div class="box-3">
@@ -222,12 +235,12 @@
 
 <h1 id="table-of-contents">Table of Contents</h1>
 <ul>
-  <!-- <li><a href="#installation">Installation</a>
+  <li><a href="#installation">Installation</a>
     <ul>
       <li><a href="#docker-installation">Docker installation</a></li>
       <li><a href="#deepea-quick-start">DeepEA quick start</a></li>
     </ul>
-  </li> -->
+  </li>
   <li><a href="#pre-analysis">Pre-analysis</a>
     <ul>
       <li><a href="#data-preparation">Data Preparation</a></li>
@@ -261,7 +274,7 @@
   <li><a href="#how-to-access-help">How to access help</a></li>
 </ul>
 
-<!-- <h1 id="installation">Installation</h1>
+<h1 id="installation">Installation</h1>
 <h2 id="docker-installation">Docker installation</h2>
 
 <blockquote>
@@ -325,7 +338,7 @@ docker run <span class="nt">-it</span> malab/deepea /bin/bash
 bash run.sh
 </code></pre></div></div>
 
-<p>Then DeepEA local server can be accessed via <code class="language-plaintext highlighter-rouge">https://localhost:8080</code></p> -->
+<p>Then DeepEA local server can be accessed via <code class="language-plaintext highlighter-rouge">https://localhost:8080</code></p>
 
 <h1 id="pre-analysis">Pre-analysis</h1>
 
@@ -342,7 +355,7 @@ bash run.sh
         <td><b>Description</b></td>
         <td><b>Input</b></td>
         <td><b>Output</b></td>
-        <td><b>References</b></td>
+        <td><b>Reference</b></td>
     </tr>
     <tr>
         <td><a href="https://deepea.nwafu.edu.cn/?tool_id=Obtain_Genome_or_Transcriptome_Sequences_and_Annotation&version=18.09&__identifer=hu4175p4gw" target="_blank">Obtain Genome Sequences and Annotation</a></td>
@@ -427,7 +440,7 @@ bash run.sh
         <td><b>Description</b></td>
         <td><b>Input</b></td>
         <td><b>Output</b></td>
-        <td><b>References</b></td>
+        <td><b>Reference</b></td>
     </tr>
     <tr>
         <td><a href="https://deepea.nwafu.edu.cn/?tool_id=tophat2&version=18.09&__identifer=8ug4tmah3wl" target="_blank">Tophat2</a></td>
@@ -478,7 +491,7 @@ bash run.sh
         <td><b>Input</b></td>
         <td><b>Output</b></td>
         <td><b>Programs</b></td>
-        <td><b>References</b></td>
+        <td><b>Reference</b></td>
     </tr>
     <tr>
         <td><a href="https://deepea.nwafu.edu.cn/?tool_id=Calling_peaks&version=18.09&__identifer=lveislweqml" target="_blank">Peak calling from the MeRIP-Seq data</a></td>
@@ -793,7 +806,7 @@ journal of physical anthropology</a></td>
         <td><b>Description</b></td>
         <td><b>Input</b></td>
         <td><b>Output</b></td>
-        <td><b>References</b></td>
+        <td><b>Reference</b></td>
     </tr>
     <tr>
         <td><a href="https://deepea.nwafu.edu.cn/?tool_id=CMR_distribution&version=18.09&__identifer=k8f29ft0p3m" target="_blank">CMRs Distribution</a></td>
@@ -893,7 +906,7 @@ journal of physical anthropology</a></td>
                 </div>
             </div>
 </div>
-        
+
         <!-- Footer -->
 <footer>
     <div class="container">

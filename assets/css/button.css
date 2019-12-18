@@ -1,0 +1,91 @@
+body .panel {
+  width: 850px;
+  margin: 70px auto 0px auto;
+  text-align: center;
+  background-color:rgba(255,255,255,0);
+}
+b
+body .panel .button-effect {
+  padding: 30px 0px;
+}
+body .panel .button-effect h2 {
+  font-family: 'Droid Serif', serif;
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+body .panel .button-effect a {
+  margin-right: 17px;
+}
+body .panel .button-effect a:nth-child(1) {
+  background-color: #87CEFA;
+}
+body .panel .button-effect a:nth-child(2) {
+  background-color: #87CEFA;
+}
+.button-effect a:nth-child(1) {
+  background-color: #87CEFA;
+}
+.button-effect a:nth-child(4) {
+  background-color: #87CEFA;
+}
+.button-effect a:nth-child(7) {
+  background-color: #87CEFA;
+}
+body .panel .button-effect a:last-child {
+  margin-right: 0px;
+}
+
+/* button styles !!!YOU NEED THEM 
+!!!ALSO YOU NEED TO ADD FONTWESOME */
+.effect {
+  text-align: center;
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+  text-transform: capitalize;
+  /* background-color: - add your own background-color */
+  font-family: 'Roboto', sans-serif;
+  /* put your font-family */
+  font-size: 18px;
+  padding: 20px 0px;
+  width: 150px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+/* effect-2 styles */
+.effect.effect-2 {
+  -webkit-transition: all 0.2s linear 0s;
+  transition: all 0.2s linear 0s;
+}
+.effect.effect-2:before {
+  content: "\f0a4";
+  font-family: FontAwesome;
+  font-size: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: absolute;
+  top: 0;
+  right: -30px;
+  width: 30px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 0px 6px 6px 0px;
+  -webkit-transition: all 0.2s linear 0s;
+  transition: all 0.2s linear 0s;
+  text-align: center;
+}
+.effect.effect-2:hover {
+  text-indent: -30px;
+}
+.effect.effect-2:hover:before {
+  right: 0;
+  text-indent: 0px;
+}

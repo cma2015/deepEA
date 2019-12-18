@@ -30,7 +30,7 @@ if(window.attachEvent){
 			var current = 0;
 			
 			var timer;
-			timer = setInterval(go,1500);
+			timer = setInterval(go,3000);
 			function go(){
 				for(var j =0;j<$length;j++){
 					$box1[j].style.display = "none";
