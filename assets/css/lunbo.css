@@ -1,0 +1,18 @@
+.box{padding: 0;margin: 0;width: 764px;height: 493px;margin: 20px auto;overflow: hidden;position: relative;}
+.box-1 ul{padding: 0;margin: 0;}
+.box-1 ul li{padding: 0;margin: 0;width: 764px;height: 493px;position: relative;overflow: hidden;}
+.box-1 ul li img{padding: 0;margin: 0;display:block;width: 764px;height: 493px;}
+.box-1 ul li h2{padding: 0;margin: 0;position: absolute;left: 0;bottom: 0;height: 40px;width:300px;background: rgba(125,125,120,.4);text-indent: 2em;
+						padding-right:500px ;font-size: 15px;line-height: 40px;text-overflow: ellipsis;overflow: hidden;
+						white-space: nowrap;font-weight: normal;color: ghostwhite}
+.box-2{padding: 0;margin: 0;position: absolute;right: 10px;bottom: 14px;}
+.box-2 ul li{padding: 0;margin: 0;float:left;width: 12px;height: 12px;overflow: hidden; margin: 0 5px; border-radius: 50%;
+						background: rgba(0,0,0,0.5);text-indent: 100px;cursor: pointer;}
+.box-2 ul .on{padding: 0;margin: 0;background: rgba(255,255,255,0.6);}
+.box-3 span{padding: 0;margin: 0;position: absolute;color: white;background: rgba(125,125,120,.3);width: 50px;height: 80px;
+						top:50%; font-family: "宋体";line-height: 80px;font-size:60px;margin-top: -40px;
+						text-align: center;cursor: pointer;}
+.box-3 .prev{padding: 0;margin: 0;left: 10px;}
+.box-3 .next{padding: 0;margin: 0;right: 10px;}
+.box-3 span::selection{padding: 0;margin: 0;background: transparent;}
+.box-3 span:hover{padding: 0;margin: 0;background: rgba(125,125,120,.8);}
