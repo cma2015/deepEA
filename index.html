@@ -28,7 +28,6 @@
 	<body  onload="init(70)">
 	<canvas id="canvas"></canvas>
 		<script>
-			//更新页面用requestAnimationFrame替代setTimeout
 			window.requestAnimationFrame = window.requestAnimationFrame
 										|| window.mozRequestAnimationFrame
 										|| window.webkitRequestAnimationFrame
@@ -76,7 +75,6 @@
 				this._mx = 1 - (Math.random() * 2);
 				this._my = 1 - (Math.random() * 2);
 
-				//canvas画圆
 				this.drawCircle = drawCircle;
 				function drawCircle(ctx) {
 					ctx.beginPath();
@@ -93,8 +91,7 @@
 					this.y += this._my / 2;
 				}
 
-				//canvas画线
-				//画直线是两个圆连线，为了避免直线过多，给圆圈距离设置了一个值，距离很远的圆圈，就不做连线处理
+
 				this.drawLine = drawLine;
 				function drawLine(ctx, _circle) {
 					var dx = this.x - _circle.x;
@@ -102,8 +99,8 @@
 					var d = Math.sqrt(dx * dx + dy * dy);
 					if (d < 150) {
 						ctx.beginPath();
-						ctx.moveTo(this.x, this.y);//起点
-						ctx.lineTo(_circle.x, _circle.y);//终点
+						ctx.moveTo(this.x, this.y);//start
+						ctx.lineTo(_circle.x, _circle.y);//end
 						ctx.strokeStyle = 'rgba(204, 204, 204, 0.3)';
 						ctx.stroke();
 					}
@@ -162,7 +159,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
-                        <h1>DeepEA</h1>
+                        <h1>Welcome to DeepEA</h1>
                         <h3>A web-based platform for exploring epitranscriptome sequencing data</h3>
 							<div class="panel">
 
@@ -175,9 +172,9 @@
 	<a class="close" data-dismiss="modal">×</a>
 	<h1>Download</h1>
 	<div class="button-effect">
-	<a class="effect effect-2"  style='text-decoration:none;' href="https://deepea.nwafu.edu.cn/static/test_data/1-PRE-ANALYSIS.zip">test1</a></br></br>
-	<a class="effect effect-2" style='text-decoration:none;' href="https://deepea.nwafu.edu.cn/static/test_data/2-CORE-ANALYSIS.zip">test2</a></br></br>
-	<a class="effect effect-2" style='text-decoration:none;'  href="https://deepea.nwafu.edu.cn/static/test_data/3-ADVANCED-ANALYSIS.zip">test3</a></br></br>
+	<a class="effect effect-2"  style='text-decoration:none;' href="https://deepea.nwafu.edu.cn/static/test_data/1-PRE-ANALYSIS.zip">PRE-ANALYSIS</a></br></br>
+	<a class="effect effect-2" style='text-decoration:none;' href="https://deepea.nwafu.edu.cn/static/test_data/2-CORE-ANALYSIS.zip">CORE-ANALYSIS</a></br></br>
+	<a class="effect effect-2" style='text-decoration:none;'  href="https://deepea.nwafu.edu.cn/static/test_data/3-ADVANCED-ANALYSIS.zip">ADVANCED-ANALYSIS</a></br></br>
 	</div>
 </div>
 
@@ -206,16 +203,16 @@
 <p><img src="assets/img/pulls_pea.svg" alt="docker pulls" />
 <img src="assets/img/star_pea.svg" alt="docker stars" /></p>
 
-<p>DeepEA is a Galaxy-based framework for exploring large-scale analysis of epitranscriptome sequencing data. DeepEA is an upgrated version of PEA, which is a special designed R toolkit for plant epitranscriptome analysis. In the current version of DeepEA, a variety of modules and functions including Data Preparation, Quality Control, CMR (chemical modifications of RNA) profiling and analysis, Machine learning-based CMR prediction, CMR annotation and visualization and multi-Omics integration analysis are implemented to enable users perform large-scale, reproducible epitranscriptome analysis. The DeePEA project is hosted on https://github.com/cma2015/DeepEA. The DeepEA web server can accessed via https://deepea.nwafu.edu.cn.</p>
+<p>DeepEA is a Galaxy-based framework for exploring large-scale analysis of epitranscriptome sequencing data. Currently it integrated a suit of tools required for epitranscriptome analysis including Data Preparation, Quality Control, CMR (chemical modifications of RNA) profiling and analysis, Machine learning-based CMR prediction, CMR annotation and visualization and multi-Omics integration analysis. DeepEA provided an easy-to-use interface and detailed description to help researchers without any programming background to analyze epitranscriptome sequencing data easily. DeepEA project is hosted on https://github.com/cma2015/DeepEA. The DeepEA demo server can be accessed via https://deepea.nwafu.edu.cn.</p>
 <div class="box">
 			<div class="box-1">
 				<ul>
 					<li>
-						<img src="assets/img/lunbo1.jpg" alt="这里是第一场图片"></img>
+						<img src="assets/img/Functions_in_DeepEA.jpg" alt="Functions in DeepEA"></img>
 						<h2>Functions in DeepEA</h2>
 					</li>
 					<li>
-						<img src="assets/img/lunbo2.jpg" alt="这里是第二张图片"></img>
+						<img src="assets/img/DeepEA_logo.jpg" alt="DeepEA logo"></img>
 						<h2>DeepEA logo</h2>
 					</li>
 				</ul>
@@ -237,9 +234,11 @@
 <ul>
   <li><a href="#installation">Installation</a>
     <ul>
-      <li><a href="#docker-installation">Docker installation</a></li>
-      <li><a href="#deepea-quick-start">DeepEA quick start</a></li>
+        <li><a href="#docker-installation">Docker installation</a></li>
+        <li><a href="#deepea-quick-start">DeepEA quick start</a></li>
+        <li><a href="#how-to-upload-data">How to upload data</a></li>
     </ul>
+
   </li>
   <li><a href="#pre-analysis">Pre-analysis</a>
     <ul>
@@ -326,7 +325,13 @@ curl <span class="nt">-fsSL</span> https://download.docker.com/linux/ubuntu/gpg 
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run hello-world
 </code></pre></div></div>
-<p><strong><font color =red>Note</font>:</strong> root permission is required for Linux operating system, if you want to manage docker as a non-root user, please refer <a href="https://docs.docker.com/install/linux/linux-postinstall" target="_blank">here</a></p>
+
+
+<div text-align="center">
+    <img src="assets/img/Verify_docker.png"  width="1100px" align="middle"/>
+</div>
+
+<p><strong><font color =red>Note</font>: root permission is required for Linux operating system, if you want to manage docker as a non-root user, please refer <a href="https://docs.docker.com/install/linux/linux-postinstall" target="_blank">here</a></strong></p>
 
 <h2 id="deepea-quick-start">DeepEA quick start</h2>
 
@@ -340,10 +345,13 @@ bash run.sh
 
 <p>Then DeepEA local server can be accessed via <code class="language-plaintext highlighter-rouge">https://localhost:8080</code></p>
 
+<h2 id="#how-to-upload-data">How to upload data</h2>
+
 <h1 id="pre-analysis">Pre-analysis</h1>
 
 <p><strong>Pre-analysis</strong> module is composed of two sub-modules: <a href="#data-preparation">Data Preparation</a> and <a href="#quality-control">Quality Control</a>. These two sub-modules make up the important components of Epitranscriptome.</p>
-<p><strong><font color =red>Note</font>:</strong>Test data and description for this section is available at <a href="./test_data/1-PRE-ANALYSIS.zip" target="_blank" download="1-PRE-ANALYSIS.zip">here</a>. Test data description is available at <a href="PRE_ANALYSIS.pdf" target="_blank">here</a></p>
+
+
 
 <h2 id="data-preparation">Data Preparation</h2>
 
