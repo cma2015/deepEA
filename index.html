@@ -18,7 +18,6 @@
 	<link href="assets/css/canvas.css" rel="stylesheet">
 	<link href="assets/css/lunbo.css" rel="stylesheet">
 	<link href="assets/css/button.css" rel="stylesheet">
-	<link href="assets/css/table.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="assets/css/alert.css">
 	<script src="assets/js/lunbo.js"></script>
 	<script src="assets/js/table.js"></script>
@@ -343,7 +342,7 @@ curl <span class="nt">-fsSL</span> https://download.docker.com/linux/ubuntu/gpg 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># pull DeepEA from docker hub</span>
 docker pull malab/deepea
 docker run <span class="nt">-it -p 8080:80</span> malab/deepea /bin/zsh
-bash /home/DeepEA_v2/galaxy/run.sh
+bash /home/DeepEA/galaxy/run.sh
 </code></pre></div></div>
 
 <p>Then DeepEA local server can be accessed via <code class="language-plaintext highlighter-rouge">https://localhost:8080</code></p>
@@ -370,8 +369,8 @@ bash /home/DeepEA_v2/galaxy/run.sh
 
 <p>DeepEA has been tested in following OS versions and browsers</p>
 
-<div style="text-align:center" class="table-wrapper"> 
-<table class="fl-table" border="2" align="center" cellspacing="0" cellpadding="" id="grid1">
+<div style="text-align:center">
+    <table border="2" align="center" cellspacing="0" cellpadding="" id="grid1">
         <tr>
             <td><b>OS</b></td>
             <td><b>Version</b></td>
@@ -416,8 +415,8 @@ bash /home/DeepEA_v2/galaxy/run.sh
 <h2 id="data-preparation">Data Preparation</h2>
 
 <p>This sub-module provides three funcitons (see following table for details) to prepare epitranscriptome data.</p>
-<div style="text-align:center" class="table-wrapper"> 
-<table class="fl-table" border="2" align="center" cellspacing="0" cellpadding="" id="grid2">
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid1">
     <tr>
         <td><b>Tools</b></td>
         <td><b>Description</b></td>
@@ -456,8 +455,8 @@ bash /home/DeepEA_v2/galaxy/run.sh
 <h2 id="quality-control">Quality Control</h2>
 <p><strong>Quality Control</strong> submodule consisted of a suite of tools focused on different levels of quality assessment including reads quality, alignment quality and CMR quality, Thus, three functions are implemented including <strong>Assess Reads Quality</strong>, <strong>Assess Alignment Quality</strong> and <strong>Assess CMR quality</strong>. The details of as follows:</p>
 
-<div style="text-align:center" class="table-wrapper"> 
-<table class="fl-table" border="2" align="center" cellspacing="0" cellpadding="" id="grid3">
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid2">
     <tr>
         <td><b>Tool</b></td>
         <td><b>Description</b></td>
@@ -508,8 +507,8 @@ bash /home/DeepEA_v2/galaxy/run.sh
 <h2 id="align-reads-to-genome">Align Reads to Genome</h2>
 <p>Several commonly used aligners are wrapped to align epitranscriptome reads to genome. Currently, <a href="https://ccb.jhu.edu/software/tophat/index.shtml" target="_blank">Tophat2</a>, <a href="https://bowtie-bio.sourceforge.net/bowtie2/index.shtml" target="_blank">Bowtie2</a>, <a href="https://github.com/alexdobin/STAR">STAR</a>, <a href="https://www.ccb.jhu.edu/software/hisat/index.shtml" target="_blank">HISAT2</a> and <a href="https://bio-bwa.sourceforge.net/bwa.shtml" target="_blank">bwa-mem</a> are available.</p>
 
-<div style="text-align:center" class="table-wrapper"> 
-<table class="fl-table" border="2" align="center" cellspacing="0" cellpadding="" id="grid4">
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid3">
     <tr>
         <td><b>Tools</b></td>
         <td><b>Description</b></td>
@@ -556,8 +555,8 @@ bash /home/DeepEA_v2/galaxy/run.sh
 <h2 id="cmr-calling">CMR Calling</h2>
 <p><strong>CMR Calling</strong> implements four pipelines for MeRIP-Seq, m6A miCLIP-Seq, CeU-Seq and RNA-BSSeq, respectively.</p>
 
-<div style="text-align:center" class="table-wrapper"> 
-<table class="fl-table" border="2" align="center" cellspacing="0" cellpadding="" id="grid5">
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid4">
     <tr>
         <td><b>Tools</b></td>
         <td><b>Description</b></td>
@@ -581,7 +580,7 @@ bash /home/DeepEA_v2/galaxy/run.sh
         <td>Performing bisulfite sequencing (BS-Seq) read mapping, comprehensive methylation calling using meRanTK</td>
         <td>Sequencing reads in FASTQ format and reference genome sequences in FASTTA format</td>
         <td>m5C sites in BED format</td>
-        <td>~10 mins</td>
+        <td>~10 mins using 2 threads</td>
         <td><a href="https://icbi.at/software/meRanTK">meRanTK</a></td>
         <td><a href="https://academic.oup.com/bioinformatics/article/32/5/782/1744216" target="_blank">Rieder <em>et al</em>., 2016, Bioinformatics</a></td>
     </tr>
@@ -590,7 +589,7 @@ bash /home/DeepEA_v2/galaxy/run.sh
         <td>Identifying pseudouridylation from CeU-Seq</td>
         <td>Alignments in SAM/BAM format and cDNA sequences in FASTA format</td>
         <td>Pseudoridylation sites in BED format</td>
-        <td>~4 mins</td>
+        <td>~1 mins</td>
         <td>In-house scripts</td>
         <td><a href="https://www.nature.com/articles/nchembio.1836" target="_blank">Li <em>et al</em>., 2015, Nature Chemical Biology</a></td>
     </tr>
@@ -604,8 +603,8 @@ bash /home/DeepEA_v2/galaxy/run.sh
 
 <p><strong>Sequence-derived features</strong> (~ 3mins for test data)</p>
 
-<div style="text-align:center" class="table-wrapper"> 
-<table class="fl-table" border="2" align="center" cellspacing="0" cellpadding="" id="grid6">
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid5">
     <tr>
         <td><b>Type</b></td>
         <td><b>Feature</b></td>
@@ -711,8 +710,8 @@ journal of physical anthropology</a></td>
 </ul>
 
 <p><strong>Genomic-derived features</strong> (~ 3mins for test data)</p>
-<div style="text-align:center" class="table-wrapper"> 
-<table class="fl-table" border="2" align="center" cellspacing="0" cellpadding="" id="grid7">
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid6">
      <tr>
         <td><b>Type</b></td>
         <td><b>Feature</b></td>
@@ -832,8 +831,8 @@ journal of physical anthropology</a></td>
 
 <p>The function aims to perform feature selection, currently, seven commonly used algorithms implemented in R package <a href="https://cran.r-project.org/web/packages/caret/vignettes/caret.html">"caret"</a> are wrapped.</p>
 
-<div style="text-align:center" class="table-wrapper"> 
-<table class="fl-table" border="2" align="center" cellspacing="0" cellpadding="" id="grid8">
+<div style="text-align:center">
+    <table border="2" align="center" cellspacing="0" cellpadding="" id="grid6">
          <tr>
             <td><b>Algorithms</b></td>
             <td><b>Description</b></td>
@@ -889,8 +888,8 @@ journal of physical anthropology</a></td>
 <h3 id="machine-learning-based-classification">Machine learning-based classification</h3>
 <p>In this module, several commonly-used machine learning classification algorithms are implemented to construct a CMR predictor. The details are described as follows:</p>
 
-<div style="text-align:center" class="table-wrapper"> 
-<table class="fl-table" border="2" align="center" cellspacing="0" cellpadding="" id="grid9">
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid7">
         <tr width="100%">
             <td width="12%"><b>Algorithms</b></td>
             <td width="30%"><b>Description</b></td>
@@ -932,8 +931,8 @@ journal of physical anthropology</a></td>
 
 <h2 id="cmr-annotation-and-visualization">CMR Annotation and Visualization</h2>
 
-<div style="text-align:center" class="table-wrapper"> 
-<table class="fl-table" border="2" align="center" cellspacing="0" cellpadding="" id="grid10">
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid8">
     <tr>
         <td><b>Functions</b></td>
         <td><b>Description</b></td>
@@ -982,8 +981,8 @@ journal of physical anthropology</a></td>
 <h2 id="multi-omics-integration-analysis">Multi-omics Integration Analysis</h2>
 <p>This functions is designed to correlate CMR-realted gene with different type of genomic features including <strong>Gene length analysis</strong>, <strong>Exon length analysis</strong>, <strong>Intron length analysis</strong>, <strong>Exon number analysis</strong> and <strong>GC content analysis</strong>. To be specific, we split the  genome in a sliding window of 100 (default) adjacent genes with step size of 10 (default), and calculate the frequency of CMR genes in each window (100 adjacent genes)</p>
 
-<div style="text-align:center" class="table-wrapper"> 
-<table class="fl-table" border="2" align="center" cellspacing="0" cellpadding="" id="grid11">
+<div style="text-align:center">
+<table border="2" align="center" cellspacing="0" cellpadding="" id="grid9">
     <tr>
         <td><b>Genomic features</b></td>
         <td><b>Correlation</b></td>
@@ -1080,8 +1079,6 @@ grid("grid6","#fff","#F5F5F5","#FFFFCC","#0066CC");
 grid("grid7","#fff","#F5F5F5","#FFFFCC","#0066CC");
 grid("grid8","#fff","#F5F5F5","#FFFFCC","#0066CC");
 grid("grid9","#fff","#F5F5F5","#FFFFCC","#0066CC");
-grid("grid10","#fff","#F5F5F5","#FFFFCC","#0066CC");
-grid("grid11","#fff","#F5F5F5","#FFFFCC","#0066CC");
 </script>
 <!-- Custom Theme JavaScript -->
 <script src="assets/js/landing-page.js"></script>
