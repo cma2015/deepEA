@@ -1,0 +1,137 @@
+<tool id="hisat2" name="HISAT2" version="18.09">
+  <description></description>
+  <command><![CDATA[
+	bash ${__tool_directory__}/03_hisat2-index.sh '$genomeSequence';
+
+	## HISAT2 alignment
+	hisat2
+	-p $thread
+	#if $algorithm_options.algorithm_options_selector == "advanced":
+		--n-ceil $algorithm_options.Alignment_options.func
+		#if $algorithm_options.Alignment_options.ignore_quals == "yes":
+			--ignore-quals
+		#end if
+		$algorithm_options.Alignment_options.nofw
+		$algorithm_options.Alignment_options.norc
+		--pen-cansplice $algorithm_options.Spliced_alignment.pen_cansplice
+		--pen-noncansplice $algorithm_options.Spliced_alignment.pen_noncansplice
+		--pen-canintronlen $algorithm_options.Spliced_alignment.pen_canintronlen
+		--pen-noncanintronlen $algorithm_options.Spliced_alignment.pen_noncanintronlen
+		--min-intronlen $algorithm_options.Spliced_alignment.min_intronlen
+		--max-intronlen $algorithm_options.Spliced_alignment.max_intronlen
+		--mp $algorithm_options.Scoring_options.mp
+		--sp $algorithm_options.Scoring_options.sp
+		--np $algorithm_options.Scoring_options.np
+		--rdg $algorithm_options.Scoring_options.rdg
+		--rfg $algorithm_options.Scoring_options.rfg
+		--score-min $algorithm_options.Scoring_options.score_min
+		#if $algorithm_options.Scoring_options.no_softclip == "no":
+			--no-softclip
+		#end if
+	#end if
+	-x '$genomeSequence'
+	#if $fqType.single_or_paired == "single":
+		-U ${readSE}
+	#elif $fqType.single_or_paired == "paired":
+		-1 ${readR1}
+		-2 ${readR2}
+	#end if
+	-S $alignmentOutput 2>${__tool_directory__}/hisat2_log.txt;
+	mv ${__tool_directory__}/hisat2_log.txt $alignmentStat;
+
+
+  ]]></command>
+  <inputs>
+	<param name="genomeSequence" type="data" format="fasta" label="Reference genome sequence"/>
+	<conditional name="fqType">
+		<param name="single_or_paired" type="select" label="Single or paired library" display="radio">
+			<option value="single">Single-end</option>
+			<option value="paired">Paired-end</option>
+		</param>
+		<when value="single">
+			<param name="readSE" type="data" format="fastqsanger,fastqsanger.gz,fastq,fq" label="Read file (SE)"/>
+		</when>
+		<when value="paired">
+			<param name="readR1" type="data" format="fastqsanger,fastqsanger.gz,fastq,fq" label="Read file (R1)"/>
+			<param name="readR2" type="data" format="fastqsanger,fastqsanger.gz,fastq,fq" label="Read file (R2)"/>
+		</when>
+	</conditional>
+	<param name="thread" type="integer" value="3" min="1" max="3" label="Thread"/>
+	<conditional name="algorithm_options">
+        <param name="algorithm_options_selector" type="select" label="Algorithm options" display="radio">
+            <option value="basic" selected="true">Basic</option>
+            <option value="advanced">Advanced</option>
+        </param>
+        <when value="basic" />
+        <when value="advanced">
+			<section name="Alignment_options" title="Alignment options" expanded="False">
+                <param name="func" type="text" value="L,0,0.15" label="Func for max # non-A/C/G/Ts permitted in aln" argument="--n-ceil" help=""/>
+				<param name="ignore_quals" type="select" label="Treat all quality values as 30 on Phred?">
+					<option value="no" selected="true">No</option>
+					<option value="yes">Yes</option>
+        		</param>
+				<param argument="--nofw" label="Do not align forward version for read" type="boolean"  truevalue="--nofw" falsevalue="" checked="False" help=""/>
+				<param argument="--norc" label="Do not align reverse-complement for read" type="boolean"  truevalue="--norc" falsevalue="" checked="False" help=""/>
+            </section>
+			<section name="Spliced_alignment" title="Sliced alignment options" expanded="False">
+				<param name="pen_cansplice" type="integer" value="0" label="Penalty for a canonical splice site" argument="--pen-cansplice" help=""/>
+				<param name="pen_noncansplice" type="integer" value="12" label="Penalty for a non-canonical splice site" argument="--pen-noncansplice" help=""/>
+				<param name="pen_canintronlen" type="text" value="G,-8,1" label="Penalty for long introns (G,-8,1) with canonical splice sites" argument="--pen-canintronlen" help=""/>
+				<param name="pen_noncanintronlen" type="text" value="G,-8,1" label="Penalty for long introns (G,-8,1) with noncanonical splice sites" argument="--pen-noncanintronlen" help=""/>
+
+				<param name="min_intronlen" type="integer" value="20" label="Minimum intron length" argument="--min-intronlen" help=""/>
+				<param name="max_intronlen" type="integer" value="500000" label="Maximum intron length" argument="--max-intronlen" help=""/>
+			</section>
+			<section name="Scoring_options" title="Scoring options" expanded="False">
+				<param name="mp" type="text" value="6,2" label="Maximum and minimum penalties for mismatches" argument="--mp" help=""/>
+				<param name="sp" type="text" value="2,1" label="Maximum and minimum penalties for soft-clipping" argument="--sp" help=""/>
+				<param name="np" type="integer" value="1" label="Penalty for non-A/C/G/Ts in read/ref" argument="--np" help=""/>
+				<param name="rdg" type="text" value="5,3" label="Read gap open, extend penalties" argument="--rdg" help=""/>
+				<param name="rfg" type="text" value="5,3" label="Reference gap open, extend penalties" argument="--rfg" help=""/>
+				<param name="score_min" type="text" value="L,0.0,-0.2" label="Minimum acceptable alignment score w/r/t read length" argument="--score-min" help=""/>
+				<param name="no_softclip" type="select" label="Soft-clipping?">
+					<option value="yes" selected="true">Yes</option>
+					<option value="no">No</option>
+        		</param>
+			</section>
+        </when>
+    </conditional>
+  </inputs>
+  <stdio>
+
+  </stdio>
+  <outputs>
+	<data name="alignmentStat" format="txt" label="hisat2_alignment_summary.txt"/>
+	<data name="alignmentOutput" format="sam" label="hisat2_alignment.sam"/>
+  </outputs>
+<help>
+.. class:: infomark
+
+**What it does**
+
+HISAT_ is a fast and sensitive spliced alignment program. As part of HISAT, we have developed a new indexing scheme based on the Burrows-Wheeler transform (BWT) and the FM index, called hierarchical indexing, that employs two types of indexes: (1) one global FM index representing the whole genome, and (2) many separate local FM indexes for small regions collectively covering the genome. Our hierarchical index for the human genome (about 3 billion bp) includes ~48,000 local FM indexes, each representing a genomic region of ~64,000bp. As the basis for non-gapped alignment, the FM index is extremely fast with a low memory footprint, as demonstrated by Bowtie. In addition, HISAT provides several alignment strategies specifically designed for mapping different types of RNA-seq reads. All these together, HISAT enables extremely fast and sensitive alignment of reads, in particular those spanning two exons or more. As a result, HISAT is much faster >50 times than TopHat2 with better alignment quality. Although it uses a large number of indexes, the memory requirement of HISAT is still modest, approximately 4.3 GB for human. HISAT uses the Bowtie2 implementation to handle most of the operations on the FM index. In addition to spliced alignment, HISAT handles reads involving indels and supports a paired-end alignment mode. Multiple processors can be used simultaneously to achieve greater alignment speed. HISAT outputs alignments in SAM format, enabling interoperation with a large number of other tools (e.g. SAMtools, GATK) that use SAM. HISAT is distributed under the GPLv3 license, and it runs on the command line under Linux, Mac OS X and Windows.
+
+.. _HISAT: http://ccb.jhu.edu/software/hisat
+
+
+.. class:: infomark
+
+**Inputs**
+
+**FASTQ** format  sequencing files are required.
+- **Reference genome in FASTA format**
+
+.. class:: infomark
+
+**Outputs**
+
+- Alignments in BAM format
+- Alignment summary generated by HISAT2
+
+
+
+</help>
+    <citations>
+        <citation type="doi">10.1038/nmeth.3317</citation>
+    </citations>
+</tool>

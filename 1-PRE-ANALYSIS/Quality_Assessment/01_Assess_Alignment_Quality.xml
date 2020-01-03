@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<tool id="Assess_Alignment_Quality" name="Assess Alignment Quality" version="18.01">
+    <description></description>
+
+    <command><![CDATA[
+    #import json
+    #import os
+
+    #set $ipBamFile = list()
+    #set $inputBamFile = list()
+    #for $fileone in $bamFiles:
+        $ipBamFile.append(str($fileone.IPbam))
+        $inputBamFile.append(str($fileone.inputbam))
+    #end for
+    #set ipBamFile=",".join(ipBamFile)
+    #set inputBamFile=",".join(inputBamFile)
+
+    Rscript ${__tool_directory__}/01_Assess_Alignment_Quality.R ${__tool_directory__} #echo json.dumps(ipBamFile)# #echo json.dumps(inputBamFile)# $gtfFile $output
+
+    ]]></command>
+
+    <inputs>
+        <repeat name="bamFiles" title="BAM file" min="1">
+            <param name="IPbam" type="data" format="bam"  multiple="false" label="Input the BAM file in IP sample"
+                    help=""/>
+
+            <param name="inputbam" type="data" format="bam" multiple="false" label="Input the BAM file in input sample"
+                    help=""/>
+        </repeat>
+        <param name="gtfFile" type="data" format="gtf" optional="true" label="Input the GTF file"/>
+    </inputs>
+
+    <stdio><exit_code range="1:" level="fatal" description="Error when running trumpet"/></stdio>
+
+    <outputs>
+        <data format="html" name="output" label="Assess_Alignment_Quality.html"/>
+    </outputs>
+
+    <help><![CDATA[
+.. class:: infomark
+
+**What it does**
+
+In this function, we integrated an R package "trumpet" (Zhang *et al*., 2018, *BMC Bioinformatics*) to perform alignment quality assessment.
+
+
+
+-----
+
+.. class:: infomark
+
+**Inputs**
+
+- **BAM file in IP sample**,
+- **BAM file in input sample**
+- **Genome annotation in GTF/GFF3 format**.
+
+-----
+
+.. class:: infomark
+
+**Outputs**
+
+- An HTML report recording the alignment quality.
+
+    ]]></help>
+<citations>
+    <citation type="doi">10.1186/s12859-018-2266-3</citation>
+</citations>
+</tool>

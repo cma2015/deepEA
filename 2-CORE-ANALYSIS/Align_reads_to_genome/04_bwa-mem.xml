@@ -1,0 +1,105 @@
+<tool id="bwa-mem" name="bwa-mem" version="18.09">
+  <description></description>
+  <command><![CDATA[
+	## Build BWA genome index
+	bash ${__tool_directory__}/04_bwa-index.sh '$genomeSequence';
+
+	## BWA alignment
+	bwa mem
+	-t $thread
+	#if  $algorithm_options.algorithm_options_selector == "advanced":
+		-k $algorithm_options.minimum_seed_length
+		-w $algorithm_options.band_width
+		-d $algorithm_options.off_diagonal_X_dropoff
+		-r $algorithm_options.internal_seeds
+		-y $algorithm_options.seed_occurrence
+		-c $algorithm_options.skip_seeds
+		-D $algorithm_options.drop_chains
+		-W $algorithm_options.discard_a_chain
+		-m $algorithm_options.rounds
+		$algorithm_options.S
+		$algorithm_options.P
+	#end if
+	'$genomeSequence'
+	#if $fqType.single_or_paired == "single":
+		$fqType.readSE
+	#elif $fqType.single_or_paired == "paired":
+		$fqType.readR1 $fqType.readR2
+	#end if
+	> $output
+  ]]></command>
+  <inputs>
+	<param name="genomeSequence" type="data" format="fasta" label="Reference genome sequence"/>
+	<conditional name="fqType">
+		<param name="single_or_paired" type="select" label="Single or paired library" display="radio">
+			<option value="single">Single-end</option>
+			<option value="paired">Paired-end</option>
+		</param>
+		<when value="single">
+			<param name="readSE" type="data" format="fastqsanger,fastqsanger.gz,fastq,fq" label="Read file (SE)"/>
+		</when>
+		<when value="paired">
+			<param name="readR1" type="data" format="fastqsanger,fastqsanger.gz,fastq,fq" label="Read file (R1)"/>
+			<param name="readR2" type="data" format="fastqsanger,fastqsanger.gz,fastq,fq" label="Read file (R2)"/>
+		</when>
+	</conditional>
+	<param name="thread" type="integer" value="3" min="1" max="6" label="Thread"/>
+	<conditional name="algorithm_options">
+        <param name="algorithm_options_selector" type="select" label="Algorithm options" display="radio">
+            <option value="basic" selected="true">Basic</option>
+            <option value="advanced">Advanced</option>
+        </param>
+        <when value="basic" />
+        <when value="advanced">
+			<param name="minimum_seed_length" type="integer" value="19" label="Minimum seed length" argument="-k" help="default:19"/>
+            <param name="band_width" type="integer" value="100" label="band width for banded alignment" argument="-w" help="default:100"/>
+			<param name="off_diagonal_X_dropoff" type="integer" value="100" label="off-diagonal X-dropoff" argument="-d" help="default:100"/>
+			<param name="internal_seeds" type="float" value="1.5" label="look for internal seeds inside a seed longer than {-k} * FLOAT" argument="-r" help="default:1.5"/>
+			<param name="seed_occurrence" type="integer" value="20" label="seed occurrence for the 3rd round seeding" argument="-y" help="default:20"/>
+			<param name="skip_seeds" type="integer" value="500" label="Skip seeds with more than INT occurrences" argument="-c" help="default:500"/>
+			<param name="drop_chains" type="float" value="0.5" label="Drop chains shorter than FLOAT fraction of the longest overlapping chain" argument="-D" help="default:0.5"/>
+			<param name="discard_a_chain" type="integer" value="0" label="Discard a chain if seeded bases shorter than INT" argument="-W" help="default:0"/>
+			<param name="rounds" type="integer" value="50" label="Perform at most INT rounds of mate rescues for each read" argument="-m" help="default:50"/>
+			<param argument="-S" label="Skip mate rescue" type="boolean"
+			       truevalue="-S" falsevalue="" checked="False"
+                   help="parameter: -S"/>
+			<param argument="-P" label="Skip pairing" type="boolean"
+			       truevalue="-P" falsevalue="" checked="False"
+                   help="Mate rescue performed unless -S also in use"/>
+        </when>
+    </conditional>
+  </inputs>
+
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs>
+	<data name="output" format="sam" label="bwa_alignment.sam">
+	</data>
+  </outputs>
+  <help>
+.. class:: infomark
+
+**What it does**
+
+BWA-MEM is an alignment algorithm for aligning sequence reads or long query sequences against a large reference genome such as human. It automatically chooses between local and end-to-end alignments, supports paired-end reads and performs chimeric alignment. The algorithm is robust to sequencing errors and applicable to a wide range of sequence lengths from 70bp to a few megabases.
+
+
+.. class:: infomark
+
+**Inputs**
+
+- **FASTQ** format  sequencing files are required.
+- **Reference genome in FASTA format**
+
+.. class:: infomark
+
+**Outputs**
+
+- Alignments in BAM format
+
+  </help>
+    <citations>
+        <citation type="doi">10.1093/bioinformatics/btp324</citation>
+    </citations>
+</tool>

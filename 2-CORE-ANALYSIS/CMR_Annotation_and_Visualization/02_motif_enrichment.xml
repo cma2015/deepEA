@@ -1,0 +1,161 @@
+<tool id="Motif_enrichment" name="Motif Enrichment"  version='18.09'>
+  <description></description>
+  <command><![CDATA[
+    #if $analysis_method.method == "ame":
+        ame
+        --oc ${__tool_directory__}/ame_out
+        #if $analysis_method.control:
+            --control '$analysis_method.control'
+        #else:
+            --control --shuffle--
+        #end if
+        #if  $analysis_method.options_type_ame.options_type_ame_selector == "advanced":
+            --kmer $analysis_method.options_type_ame.kmer
+            --seed $analysis_method.options_type_ame.seed
+            --method $analysis_method.options_type_ame.method
+            --scoring $analysis_method.options_type_ame.scoring
+            --hit-lo-fraction $analysis_method.options_type_ame.hit_lo_fraction
+            --evalue-report-threshold $analysis_method.options_type_ame.evalue_report_threshold
+            --log-fscores=$analysis_method.options_type_ame.log_fscores
+        #end if
+        '$pos_fasta_file' '$motif_file'
+        && mv ${__tool_directory__}/ame_out/ame.html $motif_enrichment;
+        rm -r ${__tool_directory__}/ame_out;
+    #else:
+        centrimo
+        --oc ${__tool_directory__}/centrimo_out
+        #if $analysis_method.bfile:
+            --bfile '$analysis_method.bfile'
+        #end if
+        #if  $analysis_method.options_type_centrimo.options_type_centrimo_selector == "advanced":
+            --score $analysis_method.options_type_centrimo.score
+            $analysis_method.options_type_centrimo.norc
+            $analysis_method.options_type_centrimo.local
+            --ethresh $analysis_method.options_type_centrimo.ethresh
+        #end if
+        '$pos_fasta_file' '$motif_file'
+        && mv ${__tool_directory__}/centrimo_out/centrimo.html $motif_enrichment;
+        rm -r ${__tool_directory__}/centrimo_out;
+    #end if
+  ]]></command>
+  <inputs>
+        <param name="pos_fasta_file" type="data" format="fasta" label="Sequence file in FASTA format"
+               help="positive (primary) sequence file"/>
+        <param name="motif_file" type="data" format="txt" label="Motif file in MEME format"
+               help="user-specific motif file"/>
+        <conditional name="analysis_method">
+            <param name="method" type="select" label="Select a method" display="radio">
+                <option value="ame" selected="true">AME identifies known user-provided motifs </option>
+                <option value="centrimo">CentriMo identifies known or user-provided motifs</option>
+            </param>
+
+            <when value="ame">
+               <param name="control" type="data" format="fasta" optional="true" label="Control sequences" help="If no selection, positive sequences in the input are shuffled to create the negative set"/>
+                <conditional name="options_type_ame">
+                    <param name="options_type_ame_selector" type="select" label="Options Configuration" display="radio">
+                        <option value="basic" selected="true">Basic</option>
+                        <option value="advanced">Advanced</option>
+                    </param>
+                    <when value="basic"/>
+                    <when value="advanced">
+                        <param name="kmer" type="integer" value="2" label="Preserve k-mer frequencies when shuffling letters" help="default: 2"/>
+                        <param name="seed" type="integer" value="1" label="Random number seed" help="default: 2"/>
+
+                        <param name="method" type="select" label="Statistical test">
+                            <option value="fisher" selected="true">fisher</option>
+                            <option value="3dmhg">3dmhg</option>
+                            <option value="4dmhg">4dmhg</option>
+                            <option value="ranksum">ranksum</option>
+                            <option value="pearson">pearson</option>
+                            <option value="spearman">spearman</option>
+                        </param>
+
+                        <param name="scoring" type="select" label="Sequence scoring method">
+                            <option value="avg" selected="true">Average</option>
+                            <option value="max">Maximum</option>
+                            <option value="sum">Sum</option>
+                            <option value="totalhits">Total hits</option>
+                        </param>
+
+                        <param name="hit_lo_fraction" type="float" value="0.25" label="Fraction of maximum log-odds for a hit" help="default: 0.25"/>
+                        <param name="evalue_report_threshold" type="integer" value="10" label="motif significance reporting threshold" help="default: 10"/>
+
+                        <param name="log_fscores" type="select" label="Use log of FASTA scores (pearson) or log of ranks (spearman)">
+                            <option value="pearson" selected="True">pearson</option>
+                            <option value="spearman">spearman</option>
+                        </param>
+
+                    </when>
+                </conditional>
+            </when>
+
+            <when value="centrimo">
+                <param name="bfile" type="data" format="fasta" optional="true" label="0-order background frequency model for PWMs" help="default: base frequencies in input sequences"/>
+                <conditional name="options_type_centrimo">
+                    <param name="options_type_centrimo_selector" type="select" label="Options Configuration">
+                        <option value="basic" selected="true">Basic</option>
+                        <option value="advanced">Advanced</option>
+                    </param>
+                    <when value="basic"/>
+                    <when value="advanced">
+                        <param name="score" type="float" value="0.1" label="Score threshold for PWMs, in bits" help="Sequences without a site with score >= S are ignored"/>
+                        <param argument="--norc" label="Check reverse complement" type="boolean"
+                                truevalue="" falsevalue="--norc" checked="False"
+                                help="Search for motifs also on reverse complement strand"/>
+                        <param argument="--local" label="Compute the enrichment of all regions"               type="boolean" truevalue="--local" falsevalue="" checked="False"
+                               help="default: enrichment of central regions only"/>
+                        <param name="ethresh" type="integer" value="10" label="E-value threshold for including in results" help=""/>
+                    </when>
+                </conditional>
+
+            </when>
+
+        </conditional>
+  </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs>
+	<data name="motif_enrichment" format="html" label="${analysis_method.method}_motifs_enrichment.html">
+	</data>
+  </outputs>
+ <help>
+
+.. class:: infomark
+
+**What it does**
+
+This function integrates AME_ and CentriMo_ to perform motif enrichment using user-provided motifs in `MEME format`_.
+
+.. _`MEME format`: http://meme-suite.org/doc/meme-format.html
+.. _AME: http://meme-suite.org/tools/ame
+.. _CentriMo: http://meme-suite.org/tools/centrimo
+
+
+.. class:: infomark
+
+**Inputs**
+
+- Sequence file in FASTA format
+- Motif file in `MEME format`_
+
+.. _`MEME format`: http://meme-suite.org/doc/meme-format.html
+
+.. class:: infomark
+
+**Outputs**
+
+- An HTML report generated by AME_ or CentriMo_
+
+.. _AME: http://meme-suite.org/tools/ame
+.. _CentriMo: http://meme-suite.org/tools/centrimo
+
+</help>
+
+<citations>
+    <citation type="doi">10.1186/1471-2105-11-165</citation>
+    <citation type="doi">10.1093/nar/gks433</citation>
+</citations>
+
+</tool>
+

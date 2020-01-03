@@ -1,0 +1,61 @@
+<macros>
+
+    <xml name="flag_options">
+        <option value="1">read is paired</option>
+        <option value="2">read is mapped in a proper pair</option>
+        <option value="4" selected="True">read is unmapped</option>
+        <option value="8" selected="True">mate is unmapped</option>
+        <option value="16">read reverse strand</option>
+        <option value="32">mate reverse strand</option>
+        <option value="64">read is the first in a pair</option>
+        <option value="128">read is the second in a pair</option>
+        <option value="256">alignment or read is not primary</option>
+        <option value="512">read fails platform/vendor quality checks</option>
+        <option value="1024">read is a PCR or optical duplicate</option>
+        <option value="2048">supplementary alignment</option>
+    </xml>
+
+    <xml name="citations">
+        <citations>
+            <citation type="bibtex">
+                @misc{SAM_def,
+                title={Definition of SAM/BAM format},
+                url = {https://samtools.github.io/hts-specs/},}
+            </citation>
+            <citation type="doi">10.1093/bioinformatics/btp352</citation>
+            <citation type="doi">10.1093/bioinformatics/btr076</citation>
+            <citation type="doi">10.1093/bioinformatics/btr509</citation>
+            <citation type="bibtex">
+                @misc{Danecek_et_al,
+                Author={Danecek, P., Schiffels, S., Durbin, R.},
+                title={Multiallelic calling model in bcftools (-m)},
+                url = {http://samtools.github.io/bcftools/call-m.pdf},}
+            </citation>
+            <citation type="bibtex">
+                @misc{Durbin_VCQC,
+                Author={Durbin, R.},
+                title={Segregation based metric for variant call QC},
+                url = {http://samtools.github.io/bcftools/rd-SegBias.pdf},}
+            </citation>
+            <citation type="bibtex">
+                @misc{Li_SamMath,
+                Author={Li, H.},
+                title={Mathematical Notes on SAMtools Algorithms},
+                url = {http://www.broadinstitute.org/gatk/media/docs/Samtools.pdf},}
+            </citation>
+            <citation type="bibtex">
+                @misc{SamTools_github,
+                title={SAMTools GitHub page},
+                url = {https://github.com/samtools/samtools},}
+            </citation>
+        </citations>
+    </xml>
+    <xml name="version_command">
+        <version_command><![CDATA[samtools 2>&1 | grep Version]]></version_command>
+    </xml>
+    <xml name="stdio">
+        <stdio>
+            <exit_code range="1:" level="fatal" description="Error" />
+        </stdio>
+    </xml>
+</macros>

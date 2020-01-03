@@ -1,0 +1,208 @@
+#name	species	assembly
+Spiny chromis	acanthochromis_polyacanthus	ASM210954v1
+Panda	ailuropoda_melanoleuca	ailMel1
+Midas cichlid	amphilophus_citrinellus	Midas_v5
+Clown anemonefish	amphiprion_ocellaris	AmpOce1.0
+Orange clownfish	amphiprion_percula	Nemo_v1
+Climbing perch	anabas_testudineus	fAnaTes1.1
+Duck	anas_platyrhynchos_platyrhynchos	CAU_duck1.0
+Anole lizard	anolis_carolinensis	AnoCar2.0
+Pink-footed goose	anser_brachyrhynchus	ASM259213v1
+Ma's night monkey	aotus_nancymaae	Anan_2.0
+Great spotted kiwi	apteryx_haastii	aptHaa1
+Little spotted kiwi	apteryx_owenii	aptOwe1
+Okarito brown kiwi	apteryx_rowi	aptRow1
+Eastern happy	astatotilapia_calliptera	fAstCal1.2
+Mexican tetra	astyanax_mexicanus	Astyanax_mexicanus-2.0
+American bison	bison_bison_bison	Bison_UMD1.0
+Hybrid - Bos Indicus	bos_indicus_hybrid	UOA_Brahman_1
+Wild yak	bos_mutus	BosGru_v2.0
+Cow	bos_taurus	ARS-UCD1.2
+Hybrid - Bos Taurus	bos_taurus_hybrid	UOA_Angus_1
+Caenorhabditis elegans	caenorhabditis_elegans	WBcel235
+Ruff	calidris_pugnax	ASM143184v1
+Spoon-billed sandpiper	calidris_pygmaea	ASM369795v1
+Marmoset	callithrix_jacchus	ASM275486v1
+Elephant shark	callorhinchus_milii	Callorhinchus_milii-6.1.3
+Dog	canis_familiaris	CanFam3.1
+Dingo	canis_lupus_dingo	ASM325472v1
+Goat	capra_hircus	ARS1
+Tarsier	carlito_syrichta	Tarsius_syrichta-2.0.1
+American beaver	castor_canadensis	C.can_genome_v1.0
+Brazilian guinea pig	cavia_aperea	CavAp1.0
+Guinea Pig	cavia_porcellus	Cavpor3.0
+Capuchin	cebus_capucinus	Cebus_imitator-1.0
+Sooty mangabey	cercocebus_atys	Caty_1.0
+Abingdon island giant tortoise	chelonoidis_abingdonii	ASM359739v1
+Long-tailed chinchilla	chinchilla_lanigera	ChiLan1.0
+Vervet-AGM	chlorocebus_sabaeus	ChlSab1.1
+Sloth	choloepus_hoffmanni	choHof1
+Painted turtle	chrysemys_picta_bellii	Chrysemys_picta_bellii-3.0.3
+C.intestinalis	ciona_intestinalis	KH
+C.savignyi	ciona_savignyi	CSAV 2.0
+Angola colobus	colobus_angolensis_palliatus	Cang.pa_1.0
+Japanese quail	coturnix_japonica	Coturnix_japonica_2.0
+Chinese hamster CHOK1GS	cricetulus_griseus_chok1gshd	CHOK1GS_HDv1
+Chinese hamster CriGri	cricetulus_griseus_crigri	CriGri_1.0
+Chinese hamster PICR	cricetulus_griseus_picr	CriGri-PICR
+Australian saltwater crocodile	crocodylus_porosus	CroPor_comp1
+Blue tit	cyanistes_caeruleus	cyaCae2
+Tongue sole	cynoglossus_semilaevis	Cse_v1.0
+Sheepshead minnow	cyprinodon_variegatus	C_variegatus-1.0
+Zebrafish	danio_rerio	GRCz11
+Armadillo	dasypus_novemcinctus	Dasnov3.0
+Kangaroo rat	dipodomys_ordii	Dord_2.0
+Emu	dromaius_novaehollandiae	droNov1
+Drosophila melanogaster	drosophila_melanogaster	BDGP6.22
+Lesser hedgehog tenrec	echinops_telfairi	TENREC
+Electric eel	electrophorus_electricus	Ee_SOAP_WITH_SSPACE
+Hagfish	eptatretus_burgeri	Eburgeri_3.2
+Donkey	equus_asinus_asinus	ASM303372v1
+Horse	equus_caballus	EquCab3.0
+Hedgehog	erinaceus_europaeus	eriEur1
+Northern pike	esox_lucius	Eluc_V3
+Cat	felis_catus	Felis_catus_9.0
+Flycatcher	ficedula_albicollis	FicAlb_1.4
+Damara mole rat	fukomys_damarensis	DMR_v1.0
+Mummichog	fundulus_heteroclitus	Fundulus_heteroclitus-3.0.2
+Cod	gadus_morhua	gadMor1
+Chicken	gallus_gallus	GRCg6a
+Western mosquitofish	gambusia_affinis	ASM309773v1
+Stickleback	gasterosteus_aculeatus	BROAD S1
+Agassiz's desert tortoise	gopherus_agassizii	ASM289641v1
+Gorilla	gorilla_gorilla	gorGor4
+Burton's mouthbrooder	haplochromis_burtoni	AstBur1.0
+Naked mole-rat female	heterocephalus_glaber_female	HetGla_female_1.0
+Naked mole-rat male	heterocephalus_glaber_male	HetGla_1.0
+Tiger tail seahorse	hippocampus_comes	H_comes_QL1_v1
+Human	homo_sapiens	GRCh38.p12
+Huchen	hucho_hucho	ASM331708v1
+Channel catfish	ictalurus_punctatus	IpCoco_1.2
+Squirrel	ictidomys_tridecemlineatus	SpeTri2.0
+Lesser Egyptian jerboa	jaculus_jaculus	JacJac1.0
+Dark-eyed junco	junco_hyemalis	ASM382977v1
+Mangrove rivulus	kryptolebias_marmoratus	ASM164957v1
+Ballan wrasse	labrus_bergylta	BallGen_V1
+Barramundi perch	lates_calcarifer	ASB_HGAPassembly_v1
+Coelacanth	latimeria_chalumnae	LatCha1
+Blue-crowned manakin	lepidothrix_coronata	Lepidothrix_coronata-1.0
+Spotted gar	lepisosteus_oculatus	LepOcu1
+Bengalese finch	lonchura_striata_domestica	LonStrDom1
+Elephant	loxodonta_africana	Loxafr3.0
+Crab-eating macaque	macaca_fascicularis	Macaca_fascicularis_5.0
+Macaque	macaca_mulatta	Mmul_8.0.1
+Pig-tailed macaque	macaca_nemestrina	Mnem_1.0
+Golden-collared manakin	manacus_vitellinus	ASM171598v2
+Drill	mandrillus_leucophaeus	Mleu.le_1.0
+Alpine marmot	marmota_marmota_marmota	marMar2.1
+Zig-zag eel	mastacembelus_armatus	fMasArm1.1
+Zebra mbuna	maylandia_zebra	M_zebra_UMD2a
+Turkey	meleagris_gallopavo	Turkey_2.01
+Budgerigar	melopsittacus_undulatus	Melopsittacus_undulatus_6.3
+Mongolian gerbil	meriones_unguiculatus	MunDraft-v1.0
+Golden Hamster	mesocricetus_auratus	MesAur1.0
+Mouse Lemur	microcebus_murinus	Mmur_3.0
+Prairie vole	microtus_ochrogaster	MicOch1.0
+Ocean sunfish	mola_mola	ASM169857v1
+Opossum	monodelphis_domestica	monDom5
+Swamp eel	monopterus_albus	M_albus_1.0
+Ryukyu mouse	mus_caroli	CAROLI_EIJ_v1.1
+Mouse	mus_musculus	GRCm38.p6
+Mouse 129S1/SvImJ	mus_musculus_129s1svimj	129S1_SvImJ_v1
+Mouse A/J	mus_musculus_aj	A_J_v1
+Mouse AKR/J	mus_musculus_akrj	AKR_J_v1
+Mouse BALB/cJ	mus_musculus_balbcj	BALB_cJ_v1
+Mouse C3H/HeJ	mus_musculus_c3hhej	C3H_HeJ_v1
+Mouse C57BL/6NJ	mus_musculus_c57bl6nj	C57BL_6NJ_v1
+Mouse CAST/EiJ	mus_musculus_casteij	CAST_EiJ_v1
+Mouse CBA/J	mus_musculus_cbaj	CBA_J_v1
+Mouse DBA/2J	mus_musculus_dba2j	DBA_2J_v1
+Mouse FVB/NJ	mus_musculus_fvbnj	FVB_NJ_v1
+Mouse LP/J	mus_musculus_lpj	LP_J_v1
+Mouse NOD/ShiLtJ	mus_musculus_nodshiltj	NOD_ShiLtJ_v1
+Mouse NZO/HlLtJ	mus_musculus_nzohlltj	NZO_HlLtJ_v1
+Mouse PWK/PhJ	mus_musculus_pwkphj	PWK_PhJ_v1
+Mouse WSB/EiJ	mus_musculus_wsbeij	WSB_EiJ_v1
+Shrew mouse	mus_pahari	PAHARI_EIJ_v1.1
+Steppe mouse	mus_spicilegus	MUSP714
+Algerian mouse	mus_spretus	SPRET_EiJ_v1
+Ferret	mustela_putorius_furo	MusPutFur1.0
+Microbat	myotis_lucifugus	Myoluc2.0
+Upper Galilee mountains blind mole rat	nannospalax_galili	S.galili_v1.0
+Lyretail cichlid	neolamprologus_brichardi	NeoBri1.0
+American mink	neovison_vison	NNQGG.v01
+Gibbon	nomascus_leucogenys	Nleu_3.0
+Wallaby	notamacropus_eugenii	Meug_1.0
+Mainland tiger snake	notechis_scutatus	TS10Xv2-PRI
+Chilean tinamou	nothoprocta_perdicaria	notPer1
+Helmeted guineafowl	numida_meleagris	NumMel1.0
+Pika	ochotona_princeps	OchPri2.0-Ens
+Degu	octodon_degus	OctDeg1.0
+Tilapia	oreochromis_niloticus	Orenil1.0
+Platypus	ornithorhynchus_anatinus	OANA5
+Rabbit	oryctolagus_cuniculus	OryCun2.0
+Japanese medaka HdrR	oryzias_latipes	ASM223467v1
+Japanese medaka HNI	oryzias_latipes_hni	ASM223471v1
+Japanese medaka HSOK	oryzias_latipes_hsok	ASM223469v1
+Indian medaka	oryzias_melastigma	Om_v0.7.RACA
+Bushbaby	otolemur_garnettii	OtoGar3
+Sheep	ovis_aries	Oar_v3.1
+Bonobo	pan_paniscus	panpan1.1
+Chimpanzee	pan_troglodytes	Pan_tro_3.0
+Leopard	panthera_pardus	PanPar1.0
+Tiger	panthera_tigris_altaica	PanTig1.0
+Olive baboon	papio_anubis	Panu_3.0
+Paramormyrops kingsleyae	paramormyrops_kingsleyae	PKINGS_0.1
+Great Tit	parus_major	Parus_major1.1
+Chinese softshell turtle	pelodiscus_sinensis	PelSin_1.0
+Periophthalmus magnuspinnatus	periophthalmus_magnuspinnatus	PM.fa
+Northern American deer mouse	peromyscus_maniculatus_bairdii	HU_Pman_2.1
+Lamprey	petromyzon_marinus	Pmarinus_7.0
+Koala	phascolarctos_cinereus	phaCin_unsw_v4.1
+Ugandan red Colobus	piliocolobus_tephrosceles	ASM277652v2
+Amazon molly	poecilia_formosa	Poecilia_formosa-5.1.2
+Sailfin molly	poecilia_latipinna	P_latipinna-1.0
+Shortfin molly	poecilia_mexicana	P_mexicana-1.0
+Guppy	poecilia_reticulata	Guppy_female_1.0_MT
+Central bearded dragon	pogona_vitticeps	pvi1.1
+Orangutan	pongo_abelii	PPYG2
+Hyrax	procavia_capensis	proCap1
+Greater bamboo lemur	prolemur_simus	Prosim_1.0
+Coquerel's sifaka	propithecus_coquereli	Pcoq_1.0
+Megabat	pteropus_vampyrus	pteVam1
+Makobe Island cichlid	pundamilia_nyererei	PunNye1.0
+Red-bellied piranha	pygocentrus_nattereri	Pygocentrus_nattereri-1.0.2
+Rat	rattus_norvegicus	Rnor_6.0
+Black snub-nosed monkey	rhinopithecus_bieti	ASM169854v1
+Golden snub-nosed monkey	rhinopithecus_roxellana	Rrox_v1
+Saccharomyces cerevisiae	saccharomyces_cerevisiae	R64-1-1
+Bolivian squirrel monkey	saimiri_boliviensis_boliviensis	SaiBol1.0
+Argentine black and white tegu	salvator_merianae	HLtupMer3
+Tasmanian devil	sarcophilus_harrisii	Devil_ref v7.0
+Asian bonytongue	scleropages_formosus	ASM162426v1
+Turbot	scophthalmus_maximus	ASM318616v1
+Common canary	serinus_canaria	SCA1
+Greater amberjack	seriola_dumerili	Sdu_1.0
+Yellowtail amberjack	seriola_lalandi_dorsalis	Sedor1
+Shrew	sorex_araneus	sorAra1
+Daurian ground squirrel	spermophilus_dauricus	ASM240643v1
+Tuatara	sphenodon_punctatus	ASM311381v1
+Bicolor damselfish	stegastes_partitus	Stegastes_partitus-1.0.2
+Pig	sus_scrofa	Sscrofa11.1
+Pig USMARC	sus_scrofa_usmarc	USMARCv1.0
+Zebra Finch	taeniopygia_guttata	taeGut3.2.4
+Fugu	takifugu_rubripes	FUGU5
+Tetraodon	tetraodon_nigroviridis	TETRAODON 8.0
+Gelada	theropithecus_gelada	Tgel_1.0
+Tree Shrew	tupaia_belangeri	tupBel1
+Dolphin	tursiops_truncatus	turTru1
+Arctic ground squirrel	urocitellus_parryii	ASM342692v1
+American black bear	ursus_americanus	ASM334442v1
+Polar bear	ursus_maritimus	UrsMar_1.0
+Alpaca	vicugna_pacos	vicPac1
+Common wombat	vombatus_ursinus	bare-nosed_wombat_genome_assembly
+Red fox	vulpes_vulpes	VulVul2.2
+Xenopus	xenopus_tropicalis	JGI 4.2
+Monterrey platyfish	xiphophorus_couchianus	Xiphophorus_couchianus-4.0.1
+Platyfish	xiphophorus_maculatus	X_maculatus-5.0-male
+White-throated sparrow	zonotrichia_albicollis	Zonotrichia_albicollis-1.0.1

@@ -1,0 +1,181 @@
+---
+title: Genomic Feature Analysis of CMR
+output:
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    social: menu
+    source_code: embed
+    theme: cosmo
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(rtracklayer)
+library(plotly)
+library(ggplot2)
+library(seqinr)
+library(GenomicFeatures)
+library(knitr)
+library(kableExtra)
+options(scipen = 20, sstringsAsFactors = F)
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE)
+```
+
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+library(flexdashboard)
+# calculate exon, intron and gene length from txdb according to geneID
+exonLength <- function(geneID, txdb){
+  exonTxdb <- exonsBy(txdb, "gene")
+  tmp <- exonTxdb[geneID]
+  exonLen <- unlist(lapply(tmp,
+                           function(x) sum(width(reduce(x)))))
+  geneGR <- genes(txdb)
+  geneLength <- width(geneGR)
+  names(geneLength) <- geneGR$gene_id
+  geneLength <- geneLength[geneID]
+  resMat <- data.frame(geneID = geneID,
+                       geneLength = geneLength,
+                       exonLength = exonLen)
+  resMat$intronLength <- resMat$geneLength - resMat$exonLength
+  resMat
+}
+
+CMRGene <- read.table(file = CMRGeneDir, sep = "\t", header = F, quote = '',
+                      stringsAsFactors = F)
+CMRGene <- CMRGene$V1
+
+GTF <- import(con = GTFDir)
+GTF <- subset(GTF, GTF$gene_biotype == "protein_coding") # only protein coding gene are used for downstream analysis
+txdb <- makeTxDbFromGFF(file = GTFDir) # from R package GenomicFeatures
+
+seqNames <- na.omit(as.numeric(as.character(unique(seqnames(GTF)@values))))
+GTFdf <- data.frame(GTF)
+
+resFreq <- NULL
+resGeneLength <- NULL
+for(i in 1:length(seqNames)){
+  curGTF <- subset(GTFdf, GTFdf$seqnames == i)
+  curGeneGTF <- subset(curGTF, curGTF$type == "gene")
+  curGeneGTF <- curGeneGTF[order(curGeneGTF$start), ]
+  rownames(curGeneGTF) <- curGeneGTF$gene_id
+  orderGene <- rownames(curGeneGTF)
+
+  curLength <- length(unique(curGTF$gene_id))
+  curStart <- seq(1, curLength - seqLength + stepSize, stepSize)
+  curEnd <- c(curStart[1:(length(curStart)-1)] + seqLength - 1, curLength)
+  curMat <- cbind(curStart, curEnd)
+  CMRFreq <- apply(curMat, 1,
+                   function(x) length(intersect(orderGene[x[1]:x[2]],
+                                                CMRGene))/seqLength)
+  tmpFeature <- exonLength(geneID = orderGene, txdb = txdb)
+  meanGeneLength <- apply(curMat, 1,
+                          function(x) mean(tmpFeature[orderGene[x[1]:x[2]],"geneLength"]))
+  resFreq <- c(resFreq, CMRFreq)
+  resGeneLength <- c(resGeneLength, meanGeneLength)
+}
+```
+
+### Introduction
+The function provides the correlation analysis of CMR genes with multiple gene features including **Mean gene length**, **Mean exon number**, **Mean GC content** and **Mean distance to adjacent gene**. To be specific, we split the maize genome in a sliding window of 100 adjacent genes with step size of 10, and calculate the frequency of CMR genes in each window (100 adjacent genes).
+
+
+Row {data-height=250}
+---------------------------------------------------------------
+
+### Correlation of CMR genes with mean gene length
+
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+df <- data.frame(freq = resFreq*100,
+                 geneLength = resGeneLength/1000)
+p1 <- ggplot(df, aes(x = freq, y = geneLength)) +
+      geom_point(colour = "grey") +
+      geom_smooth(method = "lm", se = FALSE, colour = "red") +
+      labs(x = "Frequency of CMR genes (%)", y = "Mean gene length (1000 bp)")
+ggplotly(p1)
+```
+
+### Statistics of linear regression of CMR genes with mean gene length
+
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+group <- gl(n = 2, k = nrow(df), labels = c("freq","geneLength"))
+values <- c(df$freq, df$geneLength)
+lmRes <- lm(values ~ group)
+res.summary <- summary(lmRes)
+res.table <- data.frame(Stats = c("r.squared",
+                                  "adj.r.squared",
+                                  "fstatistic",
+                                  "sigma",
+                                  "df"),
+                        values = c(res.summary$r.squared,
+                                   res.summary$adj.r.squared,
+                                   paste(res.summary$fstatistic, collapse = " "),
+                                   res.summary$sigma,
+                                   paste(res.summary$df, collapse = " ")))
+knitr::kable(x = res.table, align = 'c') %>%
+  kableExtra::kable_styling(position = 'center', full_width = FALSE,
+                            stripe_color = 'black', latex_options = "bordered")
+```
+
+### Anova analysis of CMR genes with mean gene length
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+knitr::kable(x = t(anova(lmRes)), align = "c") %>%
+  kableExtra::kable_styling(position = "center", full_width = FALSE,
+                            stripe_color = "black", latex_options = "bordered")
+```
+
+Row {data-height=250}
+---------------------------------------------------------------
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+nonCMRGene <- setdiff(unique(GTFdf$gene_id), CMRGene)
+nonCMRGene <- sample(nonCMRGene, size = ratio*length(CMRGene))
+
+cmrFeature <- exonLength(geneID = CMRGene, txdb = txdb)
+nonCMRFeature <- exonLength(geneID = nonCMRGene, txdb = txdb)
+```
+
+### Gene length difference between CMR genes and non-CMR genes
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+cmrStat <- boxplot.stats(cmrFeature$geneLength)$stats
+tmpCMR <- cmrFeature$geneLength[which(cmrFeature$geneLength <= cmrStat[5])]
+noncmrStat <- boxplot.stats(nonCMRFeature$geneLength)$stats
+tmpNonCMR <- nonCMRFeature$geneLength[which(nonCMRFeature$geneLength <= noncmrStat[5])]
+
+df <- data.frame(type = factor(rep(c("CMRGene", "nonCMRGene"),
+                                   c(length(tmpCMR), length(tmpNonCMR)))),
+                 value = c(tmpCMR/1000, tmpNonCMR/1000))
+
+p <- ggplot(df, aes(x=type, y=value, fill=type)) +
+  geom_violin(trim = FALSE) +
+  theme(axis.title.x = element_blank(),
+        #axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        legend.title = element_blank(),
+        legend.position = "none")
+ggplotly(p)
+```
+
+### The statistics of gene length difference between CMR genes and non-CMR genes
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+res <- data.frame(Stats = c("Min", "First quantile", "Median", "Third quantile", "Max"),
+                  CMR = cmrStat, nonCMR = noncmrStat)
+knitr::kable(x = res, align = 'c') %>%
+  kableExtra::kable_styling(position = 'center', full_width = FALSE,
+                            stripe_color = 'black', latex_options = "bordered")
+```
+
+### Density difference between CMR genes and non-CMR genes
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+p <- ggplot(df, aes(x=value, fill=type)) +
+  geom_density(alpha = 0.5) +
+  theme(axis.title.x = element_blank(),
+        #axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        legend.title = element_blank(),
+        legend.position = "none")
+ggplotly(p)
+```

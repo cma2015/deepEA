@@ -1,0 +1,160 @@
+<tool id="Calling_peaks" name="Peak Calling" version='18.09'>
+  <description> from the MeRIP-Seq data</description>
+  <command><![CDATA[
+	#if $Method.peakcalling_Method == "SlidingWindow":
+		Rscript ${__tool_directory__}/00_peak_calling.R -ip $IP_BAM -input $input_BAM -genome $Method.Refgenome -fdr $Method.level -ratio $Method.ratio -out $m6A_out_peaks -m "SlidingWindow" -readsCount $Method.readsCount -cpu $Method.thread -concatenate $Method.concatenate;
+	#elif $Method.peakcalling_Method == "exomePeak":
+		Rscript ${__tool_directory__}/00_peak_calling.R -ip $IP_BAM -input $input_BAM -gtf $Method.GTF -fdr $Method.level -out $m6A_out_peaks -m exomePeak;
+	#elif $Method.peakcalling_Method == "MetPeak":
+		Rscript ${__tool_directory__}/00_peak_calling.R -ip $IP_BAM -input $input_BAM -gtf $Method.GTF -fdr $Method.level -out $m6A_out_peaks -m MetPeak;
+	#elif $Method.peakcalling_Method == "BayesPeak":
+		Rscript ${__tool_directory__}/00_peak_calling.R -ip $IP_BAM -input $input_BAM -gtf $Method.GTF -bin $Method.binSize -iterations $Method.iteration -out $m6A_out_peaks -m BayesPeak;
+	#else
+		#if $Method.nomodel_type.nomodel_type_selector == "create_model":
+			bash ${__tool_directory__}/00_macs2_callpeak.sh $IP_BAM $input_BAM $Method.format $Method.genomeSize "create_model" $Method.cutoff_options.cutoff_options_selector $Method.cutoff_options.measure $Method.nomodel_type.mfold_lower $Method.nomodel_type.mfold_upper $Method.nomodel_type.band_width;
+		#else
+			bash ${__tool_directory__}/00_macs2_callpeak.sh $IP_BAM $input_BAM $Method.format $Method.genomeSize "nomodel" $Method.cutoff_options.cutoff_options_selector $Method.cutoff_options.measure NA NA NA $Method.nomodel_type.extsize $Method.nomodel_type.shift;
+		#end if
+		mv  ${__tool_directory__}/out/macs2_peaks.narrowPeak $m6A_out_peaks;
+    #end if
+
+  ]]></command>
+  <inputs>
+	<param name="input_BAM" type="data" format="bam,BAM" label="Input sample" />
+	<param name="IP_BAM" type="data" format="bam,BAM" label="RIP sample" />
+
+	<conditional name="Method">
+		<param name="peakcalling_Method" type="select" format="bam,BAM" label="Peak calling methods"  display="radio">
+			<option value="SlidingWindow" selected="true">SlidingWindow</option>
+			<option value="exomePeak">exomePeak</option>
+			<option value="MetPeak">MetPeak</option>
+			<option value="BayesPeak">BayesPeak</option>
+			<option value="MACS2">MACS2</option>
+		</param>
+
+		<when value="SlidingWindow">
+			<param name="Refgenome" type="data" format="fa,fasta,fas" label="Reference genome" />
+			<param name="level" type="float"  value="0.05"  label="FDR"/>
+			<param name="ratio" type="float" value="-2" label="Ratio (log2)" help="The ratio between the normalized mapped reads number in input and IP samples, respectively."/>
+			<param name="thread" type="integer" value="1" max='6' min='1' label="Threads"/>
+			<param name="readsCount" type="integer" value="1" label="The minimum number of reads count in IP sample"/>
+			<param name="concatenate" type="integer" value="4" label="The number of windows to be concatenated" help="This method splits the genome into 25-bp bins, then each bin is tested using Fisher's exact test. Finally, continuous significant bins would be concatenated"/>
+		</when>
+
+		<when value="MetPeak">
+			<param name="GTF" type="data" format="gtf,gff,gff3" label="Reference annotation file (GTF)"/>
+			<param name="level" type="text"  value="0.05"  label="FDR"/>
+		</when>
+
+		<when value="exomePeak">
+			<param name="GTF" type="data" format="gtf,gff,gff3" label="Reference annotation file (GTF)"/>
+			<param name="level" type="float"  value="0.05"  label="FDR"/>
+		</when>
+
+		<when value="BayesPeak">
+			<param name="GTF" type="data" format="gtf,gff,gff3" label="Reference annotation file (GTF)"/>
+			<param name="binSize" type="integer"  value="100"  label="Bin size (Reads are collected into bins)"/>
+			<param name="iteration" type="integer"  value="10000"  label="Number of iterations to run the Monte Carlo analysis for."/>
+		</when>
+
+		<when value="MACS2">
+			<param name="format" type="select" label="Format of Input Files" help="For Paired-end BAM (BAMPE) the 'Build model step' will be ignored and the real fragments will be used for each template defined by leftmost and rightmost mapping positions. Default: Single-end BAM">
+				<option value="BAM" selected="True">Single-end BAM</option>
+				<option value="BAMPE">Paired-end BAM</option>
+        	</param>
+
+			<param name="genomeSize" type="text"  value="2.7e9"  label="Effective genome size"/>
+
+			<conditional name="nomodel_type">
+				<param name="nomodel_type_selector" type="select" label="Build Model">
+					<option value="nomodel">Do not build the shifting model (--nomodel)</option>
+					<option value="create_model" selected="true">Build the shifting model</option>
+				</param>
+				<when value="create_model">
+					<param name="mfold_lower" type="integer" value="5" label="Set lower mfold bound" help="Select the lower region within MFOLD range of high confidence enrichment ratio against background to build model. Fold-enrichment in regions must be higher than lower limit (--mfold). Default: 5" />
+					<param name="mfold_upper" type="integer" value="50" label="Set upper mfold bound" help="Select the upper region within MFOLD range of high confidence enrichment ratio against background to build model. Fold-enrichment in regions must be lower than the upper limit (--mfold). Default: 50"/>
+					<param name="band_width" type="integer" value="300"
+					label="Band width for picking regions to compute fragment size"
+					help=" You can set this parameter as the medium fragment size expected from sonication or size selection. Default: 300" />
+				</when>
+				<when value="nomodel">
+					<param name="extsize" type="integer" value="200" label="Set extension size" help="The arbitrary extension size in bp. When nomodel is true, MACS will use this value as fragment size to extend each read towards 3-prime; end, then pile them up. It is exactly twice the number of obsolete SHIFTSIZE. In previous language, each read is moved 5-prime-to-3-prime direction to middle of fragment by 0.5 d, then extended to both direction with 0.5 d. This is equivalent to say each read is extended towards 5-prime-to-3-prime into a d size fragment. --extsize (this option) and --shift (the option below) can be combined when necessary. See --shift option below. Default: 200."/>
+					<param name="shift" type="integer" value="0" label="Set shift size" help="(NOT the legacy --shiftsize option!) The arbitrary shift in bp. Use discretion while setting it other than default value. When NOMODEL is set, MACS will use this value to move cutting ends (5-prime) towards 5-prime-to-3-prime  direction then apply EXTSIZE to extend them to fragments. When this value is negative, ends will be moved toward 3-prime-to-5-prime  direction. Recommended to keep it as default 0 for ChIP-Seq datasets, or -1 * 0.5 of --extsize (option above) together with --extsize option for detecting enriched cutting loci such as certain DNAseI-Seq datasets. Note, you can't set values other than 0 if format is paired-end data (BAMPE). Default: 0"/>
+				</when>
+			</conditional>
+			<conditional name="cutoff_options">
+				<param name="cutoff_options_selector" type="select" label="Peak detection based on" help="default uses q-value">
+					<option value="qvalue" selected="true">q-value</option>
+					<option value="pvalue">p-value</option>
+				</param>
+				<when value="pvalue">
+					<param name="measure" type="float" value="0.05" label="p-value cutoff for peak detection" help="Default: not set"/>
+				</when>
+				<when value="qvalue">
+					<param name="measure" type="float" value="0.05" label="Minimum FDR (q-value) cutoff for peak detection" help="The q-value (minimum FDR) cutoff to call significant regions. Default is 0.05. For broad marks, you can try 0.05 as cutoff. Q-values are calculated from p-values using Benjamini-Hochberg procedure"/>
+				</when>
+			</conditional>
+		</when>
+
+	</conditional>
+
+  </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs>
+	<data name="m6A_out_peaks" format="txt" label="${Method.peakcalling_Method}_peaks.bed">
+	</data>
+  </outputs>
+<help><![CDATA[
+.. class:: infomark
+
+**What it does**
+
+**Peak calling** is used to identify enriched genomic regions in MeRIP-seq or ChIP-seq experiments. The function is implemented using the **peakCalling** function in PEA package (zhai *et al*., 2018)
+
+
+-----
+
+.. class:: infomark
+
+**Inputs**
+
+- **Input sample:** The input control experiment in BAM format.
+
+- **RIP sample:** The RIP experiment in BAM format.
+
+- **Reference genome:** The Reference genome sequences with FASTA format.
+
+- **Reference annotation file:** The Reference genome annotation file with GTF/GFF3 format.
+
+-----
+
+.. class:: infomark
+
+**Parameters**
+
+- **Peak callling method**: select a method to call enriched peaks, the default is "SlidingWindow", more details about different peak calling methods can be seen here_
+
+.. _here: https://github.com/cma2015/PEA
+
+- **Paired-end or Single-end**: select parameters indicating the input is single-end or paired-end
+
+- **Significance level**: p-value cutoff for peak detection
+
+- **Ratio (log2)**: the ratio between the normalized mapped reads number in input and IP samples, respectively.
+
+.. class:: infomark
+
+**Output**
+
+- The enriched peak region matrix in BED format.
+
+
+
+]]></help>
+    <citations>
+        <citation type="doi">10.1093/bioinformatics/bty421</citation>
+    </citations>
+</tool>
+

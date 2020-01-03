@@ -1,0 +1,1015 @@
+#name	species	assembly
+[Candida] arabinofermentans NRRL YB-2248 (GCA_001661425)	_candida_arabinofermentans_nrrl_yb_2248_gca_001661425	Canar1
+[Candida] auris str. 6684 (GCA_001189475)	_candida_auris_gca_001189475	ASM118947v1
+[Candida] auris (GCA_002759435)	_candida_auris_gca_002759435	Cand_auris_B8441_V2
+[Candida] auris (GCA_002775015)	_candida_auris_gca_002775015	Cand_auris_B11221_V1
+[Candida] auris (GCA_003013715)	_candida_auris_gca_003013715	Cand_auris_B11220
+[Candida] auris (GCA_003014415)	_candida_auris_gca_003014415	Cand_auris_B11243
+[Candida] duobushaemulonis str. B09383 (GCA_002926085)	_candida_duobushaemulonis_gca_002926085	CanDuoHae_v1.0
+[Candida] glabrata str. CBS138 (GCA_000002545)	_candida_glabrata_gca_000002545	ASM254v2
+[Candida] glabrata (GCA_001466525)	_candida_glabrata_gca_001466525	ASM146652v1
+[Candida] glabrata (GCA_001466535)	_candida_glabrata_gca_001466535	ASM146653v1
+[Candida] glabrata (GCA_001466565)	_candida_glabrata_gca_001466565	ASM146656v1
+[Candida] glabrata (GCA_001466575)	_candida_glabrata_gca_001466575	ASM146657v1
+[Candida] glabrata (GCA_001466635)	_candida_glabrata_gca_001466635	ASM146663v1
+[Candida] glabrata (GCA_001466685)	_candida_glabrata_gca_001466685	ASM146668v1
+[Candida] glabrata (GCA_002219185)	_candida_glabrata_gca_002219185	ASM221918v1
+[Candida] glabrata (GCA_002219195)	_candida_glabrata_gca_002219195	ASM221919v1
+[Candida] haemulonis str. B11899 (GCA_002926055)	_candida_haemulonis_gca_002926055	CanHae_1.0
+[Candida] intermedia (GCA_900106115)	_candida_intermedia_gca_900106115	CBS 141442 assembly
+[Candida] intermedia (GCA_900106125)	_candida_intermedia_gca_900106125	PYCC 4715 assembly
+[Candida] pseudohaemulonis str. B12108 (GCA_003013735)	_candida_pseudohaemulonis_gca_003013735	Cand_pseudohaemulonii_B12108
+[Candida] tenuis ATCC 10573 (GCA_000223465)	_candida_tenuis_atcc_10573_gca_000223465	Candida tenuis v1.0
+Absidia glauca	absidia_glauca_gca_900079185	AG_v1
+Absidia repens str. NRRL 1336	absidia_repens_gca_002105175	Absrep1
+Acaromyces ingoldii str. MCA 4198 (GCA_003144295)	acaromyces_ingoldii_gca_003144295	Acain1
+Acidomyces richmondensis BFW (GCA_001592465)	acidomyces_richmondensis_bfw_gca_001592465	Acidomyces richmondensis BFW v1.0
+Acidomyces richmondensis (GCA_001572075)	acidomyces_richmondensis_gca_001572075	ASM157207v1
+Acremonium chrysogenum ATCC 11550 (GCA_000769265)	acremonium_chrysogenum_atcc_11550_gca_000769265	ASM76926v1
+Agaricus bisporus var. burnettii JB137-S8 (GCA_000300555)	agaricus_bisporus_var_burnettii_jb137_s8_gca_000300555	Agabi_varbur_1
+Allomyces macrogynus ATCC 38327 (GCA_000151295)	allomyces_macrogynus_atcc_38327_gca_000151295	A_macrogynus_V3
+Alternaria alternata str. SRC1lrK2f (GCA_001642055)	alternaria_alternata_gca_001642055	Altal1
+Amanita muscaria Koide BX008 (GCA_000827485)	amanita_muscaria_koide_bx008_gca_000827485	Amanita muscaria Koide BX008 v1.0
+Amanita thiersii Skay4041 (GCA_002554575)	amanita_thiersii_skay4041_gca_002554575	Amanita thiersii v1.0
+Amorphotheca resinae ATCC 22711 (GCA_003019875)	amorphotheca_resinae_atcc_22711_gca_003019875	Amore1
+Amphiamblys sp. WSBS2006 (GCA_001875675)	amphiamblys_sp_wsbs2006_gca_001875675	ASM187567v1
+Anaeromyces robustus str. S4 (GCA_002104895)	anaeromyces_robustus_gca_002104895	Anaeromyces sp. S4 v1.0
+Anncaliia algerae PRA109 (GCA_000385855)	anncaliia_algerae_pra109_gca_000385855	Annc_alge_PRA109_V4
+Anncaliia algerae PRA339 (GCA_000385875)	anncaliia_algerae_pra339_gca_000385875	Annc_alge_insect_USDA_JJB_V2
+Anthracocystis flocculosa PF-1 (GCA_000417875)	anthracocystis_flocculosa_pf_1_gca_000417875	Pflocc_1.0
+Armillaria gallica str. Ar21-2 (GCA_002307695)	armillaria_gallica_gca_002307695	Armga1
+Armillaria ostoyae (GCA_900157425)	armillaria_ostoyae_gca_900157425	version 2
+Armillaria solidipes str. 28-4 (GCA_002307675)	armillaria_solidipes_gca_002307675	Armost1
+Arthrobotrys oligospora ATCC 24927 (GCA_000225545)	arthrobotrys_oligospora_atcc_24927_gca_000225545	AOL24927 1.0
+Ascochyta rabiei str. ArDII (GCA_001630375)	ascochyta_rabiei_gca_001630375	AscRab1.0
+Ascoidea rubescens DSM 1968 (GCA_001661345)	ascoidea_rubescens_dsm_1968_gca_001661345	Ascru1
+Ascosphaera apis ARSEF 7405 (GCA_001636715)	ascosphaera_apis_arsef_7405_gca_001636715	AAP 1.0
+Ashbya gossypii	ashbya_gossypii	ASM9102v1
+Aspergillus aculeatinus CBS 121060 (GCA_003184765)	aspergillus_aculeatinus_cbs_121060_gca_003184765	Aspacu1
+Aspergillus aculeatus ATCC 16872 (GCA_001890905)	aspergillus_aculeatus_atcc_16872_gca_001890905	Aspac1
+Aspergillus arachidicola str. CBS 117610 (GCA_002749805)	aspergillus_arachidicola_gca_002749805	ASM274980v1
+Aspergillus bombycis str. NRRL26010 (GCA_001792695)	aspergillus_bombycis_gca_001792695	ASM179269v1
+Aspergillus brasiliensis CBS 101740 (GCA_001889945)	aspergillus_brasiliensis_cbs_101740_gca_001889945	Aspbr1
+Aspergillus brunneoviolaceus CBS 621.78 (GCA_003184695)	aspergillus_brunneoviolaceus_cbs_621_78_gca_003184695	Aspbru1
+Aspergillus calidoustus str. SF006504 (GCA_001511075)	aspergillus_calidoustus_gca_001511075	Acal_Allpaths_LG
+Aspergillus campestris IBT 28561 (GCA_002847485)	aspergillus_campestris_ibt_28561_gca_002847485	Aspcam1
+Aspergillus candidus str. CBS 102.13 (GCA_002847045)	aspergillus_candidus_gca_002847045	Aspcand1
+Aspergillus carbonarius ITEM 5010 (GCA_001990825)	aspergillus_carbonarius_item_5010_gca_001990825	Aspca3
+Aspergillus clavatus NRRL 1	aspergillus_clavatus	ASM271v1
+Aspergillus cristatus str. GZAAS20.1005 (GCA_001717485)	aspergillus_cristatus_gca_001717485	ASM171748v1
+Aspergillus ellipticus CBS 707.79 (GCA_003184645)	aspergillus_ellipticus_cbs_707_79_gca_003184645	Aspell1
+Aspergillus eucalypticola CBS 122712 (GCA_003184535)	aspergillus_eucalypticola_cbs_122712_gca_003184535	Aspeuc1
+Aspergillus flavus NRRL3357	aspergillus_flavus	JCVI-afl1-v2.0
+Aspergillus flavus AF70 (GCA_000952835)	aspergillus_flavus_af70_gca_000952835	ASM95283v1
+Aspergillus fumigatus Af293	aspergillus_fumigatus	ASM265v1
+Aspergillus fumigatus (GCA_002234985)	aspergillus_fumigatus_gca_002234985	ASM223498v1
+Aspergillus fumigatus var. RP-2014 (GCA_000731615)	aspergillus_fumigatus_var_rp_2014_gca_000731615	AspFumNiv1.0
+Aspergillus fumigatus Z5 (GCA_001029325)	aspergillus_fumigatus_z5_gca_001029325	ASM102932v1
+Aspergillus fumigatus A1163	aspergillus_fumigatusa1163	ASM15014v1
+Aspergillus glaucus CBS 516.65 (GCA_001890805)	aspergillus_glaucus_cbs_516_65_gca_001890805	Aspgl1
+Aspergillus heteromorphus CBS 117.55 (GCA_003184545)	aspergillus_heteromorphus_cbs_117_55_gca_003184545	Asphet1
+Aspergillus indologenus CBS 114.80 (GCA_003184685)	aspergillus_indologenus_cbs_114_80_gca_003184685	Aspind1
+Aspergillus japonicus CBS 114.51 (GCA_003184785)	aspergillus_japonicus_cbs_114_51_gca_003184785	Aspjap1
+Aspergillus lacticoffeatus CBS 101883 (GCA_003184595)	aspergillus_lacticoffeatus_cbs_101883_gca_003184595	Asplac1
+Aspergillus lentulus (GCA_001445615)	aspergillus_lentulus_gca_001445615	Alt_assembly01
+Aspergillus luchuensis CBS 106.47 (GCA_001890685)	aspergillus_luchuensis_cbs_106_47_gca_001890685	Aspfo1
+Aspergillus luchuensis str. RIB 2604 (GCA_001602395)	aspergillus_luchuensis_gca_001602395	AspL_2604
+Aspergillus neoniger CBS 115656 (GCA_003184625)	aspergillus_neoniger_cbs_115656_gca_003184625	Aspneo1
+Aspergillus nidulans	aspergillus_nidulans	ASM1142v1
+Aspergillus nidulans FGSC A4 (GCA_000149205)	aspergillus_nidulans_fgsc_a4_gca_000149205	ASM14920v2
+Aspergillus niger	aspergillus_niger	ASM285v2
+Aspergillus niger ATCC 1015 (GCA_000230395)	aspergillus_niger_atcc_1015_gca_000230395	ASPNI v3.0
+Aspergillus niger (GCA_001515345)	aspergillus_niger_gca_001515345	ASM151534v1
+Aspergillus niger (GCA_900248155)	aspergillus_niger_gca_900248155	Aniger_ATCC 64974_N402
+Aspergillus nomius NRRL 13137 (GCA_001204775)	aspergillus_nomius_nrrl_13137_gca_001204775	ASM120477v1
+Aspergillus novofumigatus IBT 16806 (GCA_002847465)	aspergillus_novofumigatus_ibt_16806_gca_002847465	Aspnov1
+Aspergillus ochraceoroseus str. SRRC1432 (GCA_000986665)	aspergillus_ochraceoroseus_gca_000986665	ASM98666v1
+Aspergillus ochraceoroseus IBT 24754 (GCA_002846915)	aspergillus_ochraceoroseus_ibt_24754_gca_002846915	Aspergillus ochraceoroseus IBT 24754 v1.1
+Aspergillus oryzae RIB40	aspergillus_oryzae	ASM18445v3
+Aspergillus oryzae 100-8 (GCA_000691885)	aspergillus_oryzae_100_8_gca_000691885	Aspergillus oryzae 100-8
+Aspergillus oryzae 3.042 (GCA_000269785)	aspergillus_oryzae_3_042_gca_000269785	AspOry3042
+Aspergillus oryzae str. BCC7051 (GCA_002007945)	aspergillus_oryzae_gca_002007945	ASM200794v1
+Aspergillus parasiticus SU-1 (GCA_000956085)	aspergillus_parasiticus_su_1_gca_000956085	ASM95608v1
+Aspergillus piperis CBS 112811 (GCA_003184755)	aspergillus_piperis_cbs_112811_gca_003184755	Asppip1
+Aspergillus rambellii str. SRRC1468 (GCA_000986645)	aspergillus_rambellii_gca_000986645	ASM98664v1
+Aspergillus ruber CBS 135680 (GCA_000600275)	aspergillus_ruber_cbs_135680_gca_000600275	Eurhe1
+Aspergillus saccharolyticus JOP 1030-1 (GCA_003184585)	aspergillus_saccharolyticus_jop_1030_1_gca_003184585	Aspsac1
+Aspergillus sclerotiicarbonarius CBS 121057 (GCA_003184635)	aspergillus_sclerotiicarbonarius_cbs_121057_gca_003184635	Aspscle1
+Aspergillus sclerotioniger CBS 115572 (GCA_003184525)	aspergillus_sclerotioniger_cbs_115572_gca_003184525	Aspscl1
+Aspergillus steynii IBT 23096 (GCA_002849105)	aspergillus_steynii_ibt_23096_gca_002849105	Aspste1
+Aspergillus sydowii CBS 593.65 (GCA_001890705)	aspergillus_sydowii_cbs_593_65_gca_001890705	Aspsy1
+Aspergillus taichungensis str. IBT 19404 (GCA_002850765)	aspergillus_taichungensis_gca_002850765	Asptaic1
+Aspergillus terreus NIH2624	aspergillus_terreus	ASM14961v1
+Aspergillus thermomutatus (GCA_002237265)	aspergillus_thermomutatus_gca_002237265	ASM223726v1
+Aspergillus tubingensis CBS 134.48 (GCA_001890745)	aspergillus_tubingensis_cbs_134_48_gca_001890745	Asptu1
+Aspergillus turcosus (GCA_002234965)	aspergillus_turcosus_gca_002234965	ASM223496v1
+Aspergillus turcosus (GCA_002234975)	aspergillus_turcosus_gca_002234975	ASM223497v1
+Aspergillus udagawae str. IFM 46973 (GCA_001078395)	aspergillus_udagawae_gca_001078395	Aud_assembly01
+Aspergillus ustus str. 3.3904 (GCA_000812125)	aspergillus_ustus_gca_000812125	Austus1.0
+Aspergillus uvarum CBS 121591 (GCA_003184745)	aspergillus_uvarum_cbs_121591_gca_003184745	Aspuva1
+Aspergillus vadensis CBS 113365 (GCA_003184925)	aspergillus_vadensis_cbs_113365_gca_003184925	Aspvad1
+Aspergillus versicolor CBS 583.65 (GCA_001890125)	aspergillus_versicolor_cbs_583_65_gca_001890125	Aspve1
+Aspergillus violaceofuscus CBS 115571 (GCA_003184705)	aspergillus_violaceofuscus_cbs_115571_gca_003184705	Aspvio1
+Aspergillus wentii DTO 134E9 (GCA_001890725)	aspergillus_wentii_dto_134e9_gca_001890725	Aspwe1
+Aureobasidium melanogenum CBS 110374 (GCA_000721775)	aureobasidium_melanogenum_cbs_110374_gca_000721775	Aureobasidium pullulans var. melanogenum CBS 110374 v1.0
+Aureobasidium namibiae CBS 147.97 (GCA_000721765)	aureobasidium_namibiae_cbs_147_97_gca_000721765	Aureobasidium pullulans var. namibiae CBS 147.97 v1.0
+Aureobasidium pullulans EXF-150 (GCA_000721785)	aureobasidium_pullulans_exf_150_gca_000721785	Aureobasidium pullulans var. pullulans EXF-150, assembly version 1.0
+Aureobasidium pullulans (GCA_001678115)	aureobasidium_pullulans_gca_001678115	ASM167811v1
+Aureobasidium subglaciale EXF-2481 (GCA_000721755)	aureobasidium_subglaciale_exf_2481_gca_000721755	Aureobasidium pullulans var. subglaciale EXF-2481 v1.0
+Babjeviella inositovora NRRL Y-12698 (GCA_001661335)	babjeviella_inositovora_nrrl_y_12698_gca_001661335	Babin1
+Basidiobolus meristosporus CBS 931.73 (GCA_002104905)	basidiobolus_meristosporus_cbs_931_73_gca_002104905	Basme2finSC
+Batrachochytrium dendrobatidis JAM81 (GCA_000203795)	batrachochytrium_dendrobatidis_jam81_gca_000203795	v1.0
+Batrachochytrium dendrobatidis JEL423 (GCA_000149865)	batrachochytrium_dendrobatidis_jel423_gca_000149865	BD_JEL423
+Batrachochytrium salamandrivorans str. BS (GCA_002006685)	batrachochytrium_salamandrivorans_gca_002006685	Batr_sala_BS_V1
+Baudoinia panamericana UAMH 10762 (GCA_000338955)	baudoinia_panamericana_uamh_10762_gca_000338955	Bauco1
+Beauveria bassiana	beauveria_bassiana	ASM168263v1
+Beauveria bassiana ARSEF 2860 (GCA_000280675)	beauveria_bassiana_arsef_2860_gca_000280675	ASM28067v1
+Beauveria bassiana D1-5 (GCA_000770705)	beauveria_bassiana_d1_5_gca_000770705	BBA1.0
+Beauveria bassiana str. JEF-007 (GCA_002871155)	beauveria_bassiana_gca_002871155	ASM287115v1
+Bifiguratus adelaidae str. AZ0501	bifiguratus_adelaidae_gca_002261195	ASM226119v1
+Bipolaris maydis ATCC 48331 (GCA_000354255)	bipolaris_maydis_atcc_48331_gca_000354255	CocheC4_1
+Bipolaris maydis C5 (GCA_000338975)	bipolaris_maydis_c5_gca_000338975	CocheC5_3
+Bipolaris oryzae ATCC 44560 (GCA_000523455)	bipolaris_oryzae_atcc_44560_gca_000523455	Cochliobolus miyabeanus v1.0
+Bipolaris sorokiniana ND90Pr (GCA_000338995)	bipolaris_sorokiniana_nd90pr_gca_000338995	Cocsa1
+Bipolaris victoriae FI3 (GCA_000527765)	bipolaris_victoriae_fi3_gca_000527765	Cochliobolus victoriae v1.0
+Bipolaris zeicola 26-R-13 (GCA_000523435)	bipolaris_zeicola_26_r_13_gca_000523435	Cochliobolus carbonum v1.0
+Blastomyces dermatitidis ATCC 18188 (GCA_000151595)	blastomyces_dermatitidis_atcc_18188_gca_000151595	BD_ATCC18188_V1
+Blastomyces dermatitidis ATCC 26199 (GCA_000166155)	blastomyces_dermatitidis_atcc_26199_gca_000166155	BD_ATCC26199_V2
+Blastomyces dermatitidis ER-3 (GCA_000003525)	blastomyces_dermatitidis_er_3_gca_000003525	BD_ER3_V1
+Blastomyces gilchristii SLH14081 (GCA_000003855)	blastomyces_gilchristii_slh14081_gca_000003855	BD_SLH14081_V1
+Blastomyces percursus str. EI222 (GCA_001883805)	blastomyces_percursus_gca_001883805	Blas_perc_EI222_V1
+Blumeria graminis	blumeria_graminis	EF2
+Blumeria graminis f. sp. tritici 96224 (GCA_000418435)	blumeria_graminis_f_sp_tritici_96224_gca_000418435	Bgt_454_newbler_assembly
+Botryobasidium botryosum FD-172 SS1 (GCA_000697705)	botryobasidium_botryosum_fd_172_ss1_gca_000697705	Botbo1
+Botrytis cinerea B05.10	botrytis_cinerea	ASM83294v1
+Botrytis cinerea BcDW1 (GCA_000349525)	botrytis_cinerea_bcdw1_gca_000349525	BcDW1
+Botrytis cinerea T4 (GCA_000227075)	botrytis_cinerea_t4_gca_000227075	BotFuc_Mar2011
+Brettanomyces bruxellensis AWRI1499 (GCA_000259595)	brettanomyces_bruxellensis_awri1499_gca_000259595	AWRI1499_v1.0
+Byssochlamys spectabilis No. 5 str. Paecilomyces variotii No. 5 (NBRC109023) (GCA_000497085)	byssochlamys_spectabilis_no_5_gca_000497085	PVAR5_assembly01
+Cadophora sp. DSE1049 (GCA_003073865)	cadophora_sp_dse1049_gca_003073865	Cadsp1
+Calocera cornea HHB12733 (GCA_001632435)	calocera_cornea_hhb12733_gca_001632435	Calco1
+Calocera viscosa TUFC12733 (GCA_001630345)	calocera_viscosa_tufc12733_gca_001630345	Calvi1
+Candida albicans 12C (GCA_000773845)	candida_albicans_12c_gca_000773845	Cand_albi_12C_V2
+Candida albicans 19F (GCA_000775445)	candida_albicans_19f_gca_000775445	Cand_albi_19F_V2
+Candida albicans Ca6 (GCA_000784695)	candida_albicans_ca6_gca_000784695	Cand_albi_Ca6_V2
+Candida albicans GC75 (GCA_000773735)	candida_albicans_gc75_gca_000773735	Cand_albi_GC75_V1
+Candida albicans L26 (GCA_000775455)	candida_albicans_l26_gca_000775455	Cand_albi_L26_V2
+Candida albicans P34048 (GCA_000775465)	candida_albicans_p34048_gca_000775465	Cand_albi_P34048_V1
+Candida albicans P37005 (GCA_000773745)	candida_albicans_p37005_gca_000773745	Cand_albi_P37005_V2
+Candida albicans P37037 (GCA_000773825)	candida_albicans_p37037_gca_000773825	Cand_albi_P37037_V1
+Candida albicans P37039 (GCA_000784515)	candida_albicans_p37039_gca_000784515	Cand_albi_P37039_V1
+Candida albicans P57055 (GCA_000775505)	candida_albicans_p57055_gca_000775505	Cand_albi_P57055_V1
+Candida albicans P57072 (GCA_000773805)	candida_albicans_p57072_gca_000773805	Cand_albi_P57072_V1
+Candida albicans P60002 (GCA_000784525)	candida_albicans_p60002_gca_000784525	Cand_albi_P60002_V1
+Candida albicans P75010 (GCA_000784575)	candida_albicans_p75010_gca_000784575	Cand_albi_P75010_V1
+Candida albicans P75016 (GCA_000784595)	candida_albicans_p75016_gca_000784595	Cand_albi_P75016_V1
+Candida albicans P75063 (GCA_000775525)	candida_albicans_p75063_gca_000775525	Cand_albi_P75063_V1
+Candida albicans P76055 (GCA_000784505)	candida_albicans_p76055_gca_000784505	Cand_albi_P76055_V1
+Candida albicans P76067 (GCA_000784495)	candida_albicans_p76067_gca_000784495	Cand_albi_P76067_V1
+Candida albicans P78042 (GCA_000784615)	candida_albicans_p78042_gca_000784615	Cand_albi_P78042_V1
+Candida albicans P78048 (GCA_000773725)	candida_albicans_p78048_gca_000773725	Cand_albi_P78048_V1
+Candida albicans P87 (GCA_000774085)	candida_albicans_p87_gca_000774085	Cand_albi_P87_V2
+Candida albicans P94015 (GCA_000773755)	candida_albicans_p94015_gca_000773755	Cand_albi_P94015_V1
+Candida albicans SC5314 (GCA_000784635)	candida_albicans_sc5314_gca_000784635	Cand_albi_SC5314_V4
+Candida albicans SC5314 (GCA_000784655)	candida_albicans_sc5314_gca_000784655	Cand_albi_SC5314_V3
+Candida albicans WO-1 (GCA_000149445)	candida_albicans_wo_1_gca_000149445	ASM14944v2
+Candida dubliniensis CD36 (GCA_000026945)	candida_dubliniensis_cd36_gca_000026945	ASM2694v1
+Candida maltosa Xu316 (GCA_000344705)	candida_maltosa_xu316_gca_000344705	Cmaltosa_v01
+Candida orthopsilosis Co 90-125 (GCA_000315875)	candida_orthopsilosis_co_90_125_gca_000315875	ASM31587v1
+Candida parapsilosis str. CDC317 (GCA_000182765)	candida_parapsilosis_gca_000182765	ASM18276v2
+Candida tropicalis MYA-3404 (GCA_000006335)	candida_tropicalis_mya_3404_gca_000006335	ASM633v3
+Capronia coronata CBS 617.96 (GCA_000585585)	capronia_coronata_cbs_617_96_gca_000585585	Capr_coro_CBS_617_96_V1
+Capronia epimyces CBS 606.96 (GCA_000585565)	capronia_epimyces_cbs_606_96_gca_000585565	Capr_epim_CBS_606_96_V1
+Catenaria anguillulae PL171 (GCA_002102555)	catenaria_anguillulae_pl171_gca_002102555	Catan2
+Ceraceosorus bombacis (GCA_900000165)	ceraceosorus_bombacis_gca_900000165	Ceraceosorus bombacis
+Ceraceosorus guamensis str. MCA 4658 (GCA_003144195)	ceraceosorus_guamensis_gca_003144195	Cersp1
+Ceratocystis platani str. CFO (GCA_000978885)	ceratocystis_platani_gca_000978885	ASM97888v1
+Cercospora berteroae (GCA_002933655)	cercospora_berteroae_gca_002933655	Cbert_1
+Cercospora beticola (GCA_002742065)	cercospora_beticola_gca_002742065	CB0940_V2
+Cercospora zeina str. CMW25467 (GCA_002844615)	cercospora_zeina_gca_002844615	ASM284461v1
+Chaetomium globosum CBS 148.51 (GCA_000143365)	chaetomium_globosum_cbs_148_51_gca_000143365	ASM14336v1
+Chaetomium thermophilum var. thermophilum DSM 1495 (GCA_000221225)	chaetomium_thermophilum_var_thermophilum_dsm_1495_gca_000221225	CTHT_3.0
+Choanephora cucurbitarum str. KUS-F28377 (GCA_001683725)	choanephora_cucurbitarum_gca_001683725	ASM168372v1
+Cladophialophora bantiana CBS 173.52 (GCA_000835475)	cladophialophora_bantiana_cbs_173_52_gca_000835475	Clad_bant_CBS_173_52_V1
+Cladophialophora carrionii CBS 160.54 (GCA_000365165)	cladophialophora_carrionii_cbs_160_54_gca_000365165	Clad_carr_CBS_160_54_V1
+Cladophialophora carrionii str. KSF (GCA_001700775)	cladophialophora_carrionii_gca_001700775	ASM170077v1
+Cladophialophora immunda str. CBS 83496 (GCA_000835495)	cladophialophora_immunda_gca_000835495	Clad_immu_CBS83496_V1
+Cladophialophora psammophila CBS 110553 (GCA_000585535)	cladophialophora_psammophila_cbs_110553_gca_000585535	Clad_psam_CBS_110553_V1
+Cladophialophora yegresii CBS 114405 (GCA_000585515)	cladophialophora_yegresii_cbs_114405_gca_000585515	Clad_yegr_CBS_114405_V1
+Claviceps purpurea 20.1 (GCA_000347355)	claviceps_purpurea_20_1_gca_000347355	ASM34735v1
+Clavispora lusitaniae ATCC 42720 (GCA_000003835)	clavispora_lusitaniae_atcc_42720_gca_000003835	ASM383v1
+Clavispora lusitaniae str. CBS 6936 (GCA_001673695)	clavispora_lusitaniae_gca_001673695	ASM167369v2
+Clohesyomyces aquaticus str. CBS 115471 (GCA_002105025)	clohesyomyces_aquaticus_gca_002105025	Cloaq1
+Coccidioides immitis H538.4 (GCA_000149815)	coccidioides_immitis_h538_4_gca_000149815	ASM14981v1
+Coccidioides immitis RMSCC 2394 (GCA_000149895)	coccidioides_immitis_rmscc_2394_gca_000149895	ASM14989v1
+Coccidioides immitis RMSCC 3703 (GCA_000150085)	coccidioides_immitis_rmscc_3703_gca_000150085	ASM15008v1
+Coccidioides immitis RS (GCA_000149335)	coccidioides_immitis_rs_gca_000149335	ASM14933v2
+Coccidioides posadasii C735 delta SOWgp (GCA_000151335)	coccidioides_posadasii_c735_delta_sowgp_gca_000151335	JCVI-cpa1-1.0
+Coccidioides posadasii RMSCC 3488 (GCA_000150055)	coccidioides_posadasii_rmscc_3488_gca_000150055	ASM15005v1
+Coccidioides posadasii str. Silveira (GCA_000170175)	coccidioides_posadasii_str_silveira_gca_000170175	CPS2
+Colletotrichum chlorophyti str. NTL11 (GCA_001937105)	colletotrichum_chlorophyti_gca_001937105	ASM193710v1
+Colletotrichum fioriniae PJ7 (GCA_000582985)	colletotrichum_fioriniae_pj7_gca_000582985	CFIO01
+Colletotrichum gloeosporioides	colletotrichum_gloeosporioides	Colletotrichum gloeosporioides Nara gc-5
+Colletotrichum gloeosporioides Cg-14 (GCA_000446055)	colletotrichum_gloeosporioides_cg_14_gca_000446055	Colletotrichum gloeosporioides1
+Colletotrichum graminicola	colletotrichum_graminicola	C_graminicola_M1_001_V1
+Colletotrichum higginsianum	colletotrichum_higginsianum	ASM31379v2
+Colletotrichum higginsianum IMI 349063 (GCA_001672515)	colletotrichum_higginsianum_imi_349063_gca_001672515	ASM167251v1
+Colletotrichum incanum str. MAFF 238704 (GCA_001625285)	colletotrichum_incanum_gca_001625285	Ci238704v1
+Colletotrichum incanum str. MAFF238712 (GCA_001855235)	colletotrichum_incanum_gca_001855235	ASM185523v1
+Colletotrichum nymphaeae SA-01 (GCA_001563115)	colletotrichum_nymphaeae_sa_01_gca_001563115	CNYM01
+Colletotrichum orbiculare	colletotrichum_orbiculare	Corbiculare240422v01
+Colletotrichum orchidophilum str. IMI 309357 (GCA_001831195)	colletotrichum_orchidophilum_gca_001831195	CORC01
+Colletotrichum salicis str. CBS 607.94 (GCA_001563125)	colletotrichum_salicis_gca_001563125	CSAL01
+Colletotrichum simmondsii str. CBS122122 (GCA_001563135)	colletotrichum_simmondsii_gca_001563135	CSIM01
+Colletotrichum sublineola str. TX430BB (GCA_000696135)	colletotrichum_sublineola_gca_000696135	ASM69613v1
+Colletotrichum tofieldiae str. 0861 (GCA_001625265)	colletotrichum_tofieldiae_gca_001625265	Ct0861v1
+Conidiobolus coronatus NRRL 28638 (GCA_001566745)	conidiobolus_coronatus_nrrl_28638_gca_001566745	Conidiobolus coronatus NRRL28638
+Coniella lustricola str. B22-T-1 (GCA_003019895)	coniella_lustricola_gca_003019895	Coniella lustricola v1.0
+Coniochaeta ligniaria NRRL 30616 (GCA_001879275)	coniochaeta_ligniaria_nrrl_30616_gca_001879275	Conlig v1.0
+Coniophora puteana RWD-64-598 SS2 (GCA_000271625)	coniophora_puteana_rwd_64_598_ss2_gca_000271625	Conpu1
+Coniosporium apollinis CBS 100218 str. CBS 352.97 (GCA_000281105)	coniosporium_apollinis_cbs_100218_gca_000281105	Coni_apol_CBS100218 _V1
+Coprinopsis cinerea okayama7#130 (GCA_000182895)	coprinopsis_cinerea_okayama7_130_gca_000182895	CC3
+Cordyceps brongniartii RCEF 3172 (GCA_001636735)	cordyceps_brongniartii_rcef_3172_gca_001636735	BBO 1.0
+Cordyceps confragosa str. UM487 (GCA_001653215)	cordyceps_confragosa_gca_001653215	ASM165321v1
+Cordyceps confragosa RCEF 1005 (GCA_001636795)	cordyceps_confragosa_rcef_1005_gca_001636795	LEL 1.0
+Cordyceps fumosorosea ARSEF 2679 (GCA_001636725)	cordyceps_fumosorosea_arsef_2679_gca_001636725	ISF 1.0
+Cordyceps militaris CM01 (GCA_000225605)	cordyceps_militaris_cm01_gca_000225605	CmilitarisCM01_v01
+Cordyceps sp. RAO-2017 (GCA_002591385)	cordyceps_sp_rao_2017_gca_002591385	Hirsu2
+Corynespora cassiicola Philippines (GCA_003016335)	corynespora_cassiicola_philippines_gca_003016335	Corynespora cassiicola v1.0
+Cryptococcus amylolentus CBS 6039 (GCA_001720205)	cryptococcus_amylolentus_cbs_6039_gca_001720205	Cryp_amyl_CBS6039_V3
+Cryptococcus amylolentus CBS 6273 (GCA_001720235)	cryptococcus_amylolentus_cbs_6273_gca_001720235	Cryp_amyl_CBS6273_V2
+Cryptococcus depauperatus CBS 7841 (GCA_001720195)	cryptococcus_depauperatus_cbs_7841_gca_001720195	Filo_depa_CBS7841_V1
+Cryptococcus depauperatus CBS 7855 (GCA_001720245)	cryptococcus_depauperatus_cbs_7855_gca_001720245	Filo_depa_CBS7855_V2
+Cryptococcus gattii CA1280 (GCA_000836335)	cryptococcus_gattii_ca1280_gca_000836335	Cryp_gatt_CA1280_V1
+Cryptococcus gattii CA1873 (GCA_000855695)	cryptococcus_gattii_ca1873_gca_000855695	Cryp_gatt_CA1873_V1
+Cryptococcus gattii E566 (GCA_000875815)	cryptococcus_gattii_e566_gca_000875815	Cryp_gatt_E566_V1
+Cryptococcus gattii EJB2 (GCA_000835745)	cryptococcus_gattii_ejb2_gca_000835745	Cryp_gatt_EJB2_V1
+Cryptococcus gattii NT-10 (GCA_000935105)	cryptococcus_gattii_nt_10_gca_000935105	Cryp_gatt_NT-10_V1
+Cryptococcus gattii Ru294 (GCA_000836355)	cryptococcus_gattii_ru294_gca_000836355	Cryp_gatt_Ru294_V1
+Cryptococcus gattii VGII 2001/935-1 (GCA_000835815)	cryptococcus_gattii_vgii_2001_935_1_gca_000835815	Cryp_gatt_2001_935-1_V1
+Cryptococcus gattii VGII 99/473 (GCA_000836455)	cryptococcus_gattii_vgii_99_473_gca_000836455	Cryp_gatt_99_473_V1
+Cryptococcus gattii VGII CA1014 (GCA_000875795)	cryptococcus_gattii_vgii_ca1014_gca_000875795	Cryp_gatt_CA1014_V1
+Cryptococcus gattii VGII CBS 10090 (GCA_000835765)	cryptococcus_gattii_vgii_cbs_10090_gca_000835765	Cryp_gatt_CBS10090_V1
+Cryptococcus gattii VGII LA55 (GCA_000836315)	cryptococcus_gattii_vgii_la55_gca_000836315	Cryp_gatt_LA55_V1
+Cryptococcus gattii VGII MMRL2647 (GCA_000875855)	cryptococcus_gattii_vgii_mmrl2647_gca_000875855	Cryp_gatt_MMRL2647_V2
+Cryptococcus gattii VGII R265 (GCA_000149475)	cryptococcus_gattii_vgii_r265_gca_000149475	CNB2
+Cryptococcus gattii VGII Ram5 (GCA_000836375)	cryptococcus_gattii_vgii_ram5_gca_000836375	Cryp_gatt_Ram5_V1
+Cryptococcus gattii VGIV IND107 (GCA_000835755)	cryptococcus_gattii_vgiv_ind107_gca_000835755	Cryp_gatt_IND107_V2
+Cryptococcus gattii WM276 (GCA_000185945)	cryptococcus_gattii_wm276_gca_000185945	ASM18594v1
+Cryptococcus neoformans var. neoformans JEC21	cryptococcus_neoformans	ASM9104v1
+Cryptococcus neoformans var. grubii 125.91 (GCA_002215885)	cryptococcus_neoformans_var_grubii_125_91_gca_002215885	Cryp_neof_125_91_V1
+Cryptococcus neoformans var. grubii A1-35-8 (GCA_002221985)	cryptococcus_neoformans_var_grubii_a1_35_8_gca_002221985	Cryp_neof_grubii_A1-35-8_V1
+Cryptococcus neoformans var. grubii A2-102-5 (GCA_002222375)	cryptococcus_neoformans_var_grubii_a2_102_5_gca_002222375	Cryp_neof_A2_102_5_V1
+Cryptococcus neoformans var. grubii A5-35-17 (GCA_002222215)	cryptococcus_neoformans_var_grubii_a5_35_17_gca_002222215	Cryp_neof_grubii_A5-35-17_V1
+Cryptococcus neoformans var. grubii AD1-7a (GCA_002220445)	cryptococcus_neoformans_var_grubii_ad1_7a_gca_002220445	Cryp_neof_AD1_7a_V1
+Cryptococcus neoformans var. grubii AD1-83a (GCA_002215765)	cryptococcus_neoformans_var_grubii_ad1_83a_gca_002215765	Cryp_neof_AD1_83a_V1
+Cryptococcus neoformans var. grubii AD2-60a (GCA_002215775)	cryptococcus_neoformans_var_grubii_ad2_60a_gca_002215775	Cryp_neof_AD2_60a_V1
+Cryptococcus neoformans var. grubii Br795 (GCA_002222225)	cryptococcus_neoformans_var_grubii_br795_gca_002222225	Cryp_neof_Br795_V1
+Cryptococcus neoformans var. grubii Bt120 (GCA_002222465)	cryptococcus_neoformans_var_grubii_bt120_gca_002222465	Cryp_neof_Bt120_V1
+Cryptococcus neoformans var. grubii Bt15 (GCA_002222335)	cryptococcus_neoformans_var_grubii_bt15_gca_002222335	Cryp_neof_Bt15_V1
+Cryptococcus neoformans var. grubii Bt1 (GCA_002215705)	cryptococcus_neoformans_var_grubii_bt1_gca_002215705	Cryp_neof_Bt1_V1
+Cryptococcus neoformans var. grubii Bt63 (GCA_002234625)	cryptococcus_neoformans_var_grubii_bt63_gca_002234625	Cryp_neof_Bt63_V1
+Cryptococcus neoformans var. grubii Bt85 (GCA_002215835)	cryptococcus_neoformans_var_grubii_bt85_gca_002215835	Cryp_neof_Bt85_V1
+Cryptococcus neoformans var. grubii C23 (GCA_002215825)	cryptococcus_neoformans_var_grubii_c23_gca_002215825	Cryp_neof_C23_V1
+Cryptococcus neoformans var. grubii c45 (GCA_002215855)	cryptococcus_neoformans_var_grubii_c45_gca_002215855	Cryp_neof_C45_V1
+Cryptococcus neoformans var. grubii c8 (GCA_002222405)	cryptococcus_neoformans_var_grubii_c8_gca_002222405	Cryp_neof_C8_V1
+Cryptococcus neoformans var. grubii CHC193 (GCA_002222295)	cryptococcus_neoformans_var_grubii_chc193_gca_002222295	Cryp_neof_CHC193_V1
+Cryptococcus neoformans var. grubii D17-1 (GCA_002222255)	cryptococcus_neoformans_var_grubii_d17_1_gca_002222255	Cryp_neof_D17_1_V1
+Cryptococcus neoformans var. grubii Gb118 (GCA_002224005)	cryptococcus_neoformans_var_grubii_gb118_gca_002224005	Cryp_neof_Gb118_V1
+Cryptococcus neoformans var. grubii str. V2 (GCA_002215755)	cryptococcus_neoformans_var_grubii_gca_002215755	Cneo_seroA_V2
+Cryptococcus neoformans var. grubii str. KN99 (GCA_002216725)	cryptococcus_neoformans_var_grubii_gca_002216725	ASM221672v1
+Cryptococcus neoformans var. grubii str. CCTP51 (GCA_002217545)	cryptococcus_neoformans_var_grubii_gca_002217545	Cryp_neof_grubii_cng10_V1
+Cryptococcus neoformans var. grubii str. WM-1408 (GCA_002220045)	cryptococcus_neoformans_var_grubii_gca_002220045	Cneo_seroA_WM1408
+Cryptococcus neoformans var. grubii str. RCT54 (GCA_002222015)	cryptococcus_neoformans_var_grubii_gca_002222015	Cryp_neof_grubii_cng8_V1
+Cryptococcus neoformans var. grubii str. CM64 (GCA_002222025)	cryptococcus_neoformans_var_grubii_gca_002222025	Cryp_neof_grubii_cng4_V1
+Cryptococcus neoformans var. grubii str. RCT6 (GCA_002222095)	cryptococcus_neoformans_var_grubii_gca_002222095	Cryp_neof_grubii_cng7_V1
+Cryptococcus neoformans var. grubii str. CM20 (GCA_002222115)	cryptococcus_neoformans_var_grubii_gca_002222115	Cryp_neof_grubii_cng5_V1
+Cryptococcus neoformans var. grubii str. CM50 (GCA_002222135)	cryptococcus_neoformans_var_grubii_gca_002222135	Cryp_neof_grubii_cng1_V1
+Cryptococcus neoformans var. grubii str. CM24 (GCA_002222145)	cryptococcus_neoformans_var_grubii_gca_002222145	Cryp_neof_grubii_cng6_V1
+Cryptococcus neoformans var. grubii str. RCT21 (GCA_002222155)	cryptococcus_neoformans_var_grubii_gca_002222155	Cryp_neof_grubii_cng11_V1
+Cryptococcus neoformans var. grubii str. CM52 (GCA_002222165)	cryptococcus_neoformans_var_grubii_gca_002222165	Cryp_neof_grubii_cng3_V1
+Cryptococcus neoformans var. grubii str. CM36 (GCA_002222245)	cryptococcus_neoformans_var_grubii_gca_002222245	Cryp_neof_grubii_cng2_V1
+Cryptococcus neoformans var. grubii H99 (GCA_000149245)	cryptococcus_neoformans_var_grubii_h99_gca_000149245	CNA3
+Cryptococcus neoformans var. grubii MW-RSA1955 (GCA_002222455)	cryptococcus_neoformans_var_grubii_mw_rsa1955_gca_002222455	Cryp_neof_MW_RSA1955_V1
+Cryptococcus neoformans var. grubii MW-RSA36 (GCA_002222395)	cryptococcus_neoformans_var_grubii_mw_rsa36_gca_002222395	Cryp_neof_MW_RSA36_V1
+Cryptococcus neoformans var. grubii MW-RSA852 (GCA_002220035)	cryptococcus_neoformans_var_grubii_mw_rsa852_gca_002220035	Cryp_neof_MW_RSA852_V1
+Cryptococcus neoformans var. grubii Th84 (GCA_002222315)	cryptococcus_neoformans_var_grubii_th84_gca_002222315	Cryp_neof_Th84_V1
+Cryptococcus neoformans var. grubii Tu259-1 (GCA_002222325)	cryptococcus_neoformans_var_grubii_tu259_1_gca_002222325	Cryp_neof_Tu259_1_V1
+Cryptococcus neoformans var. grubii Tu401-1 (GCA_002222475)	cryptococcus_neoformans_var_grubii_tu401_1_gca_002222475	Cryp_neof_Tu401_1_V1
+Cryptococcus neoformans var. grubii Ze90-1 (GCA_002222385)	cryptococcus_neoformans_var_grubii_ze90_1_gca_002222385	Cryp_neof_Ze90_1_V1
+Cryptococcus neoformans var. neoformans B-3501A (GCA_000149385)	cryptococcus_neoformans_var_neoformans_b_3501a_gca_000149385	ASM14938v1
+Cutaneotrichosporon oleaginosum str. IBC0246 (GCA_001027345)	cutaneotrichosporon_oleaginosum_gca_001027345	Triol1
+Cyberlindnera fabianii str. 65 (GCA_001983305)	cyberlindnera_fabianii_gca_001983305	ASM198330v1
+Cyberlindnera fabianii str. YJS4271 (GCA_003205855)	cyberlindnera_fabianii_gca_003205855	ASM320585v1
+Cyberlindnera jadinii str. CBS1600 (GCA_001245095)	cyberlindnera_jadinii_gca_001245095	cj1
+Cyberlindnera jadinii NRRL Y-1542 (GCA_001661405)	cyberlindnera_jadinii_nrrl_y_1542_gca_001661405	Cybja1
+Cylindrobasidium torrendii FP15055 ss-10 (GCA_000934385)	cylindrobasidium_torrendii_fp15055_ss_10_gca_000934385	Cylto1
+Cyphellophora europaea CBS 101466 (GCA_000365145)	cyphellophora_europaea_cbs_101466_gca_000365145	Phia_euro_CBS_101466_V1
+Dacryopinax primogenitus str. DJM-731 SS1 (GCA_000292625)	dacryopinax_primogenitus_gca_000292625	Dacryopinax sp. DJM 731 SSP1 v1.0
+Dactylellina haptotyla CBS 200.50 (GCA_000441935)	dactylellina_haptotyla_cbs_200_50_gca_000441935	MHA_v2
+Daedalea quercina L-15889 (GCA_001632345)	daedalea_quercina_l_15889_gca_001632345	Daequ1
+Daldinia sp. EC12 (GCA_002120325)	daldinia_sp_ec12_gca_002120325	DalEC12 v.1.0
+Debaryomyces fabryi str. CBS 789 (GCA_001447935)	debaryomyces_fabryi_gca_001447935	debFab1.0
+Debaryomyces hansenii CBS767 (GCA_000006445)	debaryomyces_hansenii_cbs767_gca_000006445	ASM644v2
+Diaporthe ampelina (GCA_001006365)	diaporthe_ampelina_gca_001006365	UCDDA912v1.0
+Diaporthe helianthi str. 7/96 (GCA_001702395)	diaporthe_helianthi_gca_001702395	DHEL01v2
+Dichomitus squalens LYAD-421 SS1 (GCA_000275845)	dichomitus_squalens_lyad_421_ss1_gca_000275845	Dichomitus squalens v1.0
+Diplocarpon rosae (GCA_002317995)	diplocarpon_rosae_gca_002317995	ASM231799v1
+Diplodia corticola str. CBS 112549 (GCA_001883845)	diplodia_corticola_gca_001883845	ASM188384v1
+Diplodia seriata (GCA_001006355)	diplodia_seriata_gca_001006355	UCDDS831v0.1
+Diplodia seriata str. F98.1 (GCA_001975905)	diplodia_seriata_gca_001975905	Dipser v1
+Dothistroma septosporum	dothistroma_septosporum	Dothistroma septosporum NZE10 v1.0
+Drechmeria coniospora str. ARSEF 6962 (GCA_001625195)	drechmeria_coniospora_gca_001625195	ASM162519v1
+Drechslerella stenobrocha 248 (GCA_000525045)	drechslerella_stenobrocha_248_gca_000525045	DREv1
+Edhazardia aedis USNM 41457 (GCA_000230595)	edhazardia_aedis_usnm_41457_gca_000230595	Edha_aedis_V4b
+Elaphomyces granulatus str. OSC145934 (GCA_002240705)	elaphomyces_granulatus_gca_002240705	PX439
+Elsinoe australis str. NL1 (GCA_003013795)	elsinoe_australis_gca_003013795	ASM301379v1
+Emergomyces pasteuriana Ep9510 str. UAMH 9510 (GCA_001883825)	emergomyces_pasteuriana_ep9510_gca_001883825	Emmo_past_UAMH9510_V1
+Emmonsia crescens str. UAMH4076 (GCA_002572855)	emmonsia_crescens_gca_002572855	Emmon_cres_4076_V1
+Emmonsia crescens UAMH 3008 (GCA_001008285)	emmonsia_crescens_uamh_3008_gca_001008285	ASM100828v1
+Emmonsia parva str. UAMH130 (GCA_002572885)	emmonsia_parva_gca_002572885	Emmon_parv_130
+Emmonsia parva UAMH 139 (GCA_001014755)	emmonsia_parva_uamh_139_gca_001014755	ASM101475v1
+Emmonsia sp. CAC-2015a str. CBS 136260 (GCA_001660665)	emmonsia_sp_cac_2015a_gca_001660665	Emmo_afri_EA111
+Encephalitozoon cuniculi EcunIII-L (GCA_001078035)	encephalitozoon_cuniculi_ecuniii_l_gca_001078035	ECIIIL
+Encephalitozoon hellem ATCC 50504 (GCA_000277815)	encephalitozoon_hellem_atcc_50504_gca_000277815	ASM27781v3
+Encephalitozoon intestinalis ATCC 50506 (GCA_000146465)	encephalitozoon_intestinalis_atcc_50506_gca_000146465	ASM14646v1
+Encephalitozoon romaleae SJ-2008 (GCA_000280035)	encephalitozoon_romaleae_sj_2008_gca_000280035	ASM28003v2
+Endocarpon pusillum Z07020 (GCA_000464535)	endocarpon_pusillum_z07020_gca_000464535	EPUS
+Enterocytozoon bieneusi H348 (GCA_000209485)	enterocytozoon_bieneusi_h348_gca_000209485	ASM20948v1
+Enterocytozoon hepatopenaei str. TH1 (GCA_002081675)	enterocytozoon_hepatopenaei_gca_002081675	ASM208167v1
+Enterospora canceri str. GB1 (GCA_002087915)	enterospora_canceri_gca_002087915	ASM208791v1
+Epicoccum nigrum str. ICMP 19927 (GCA_002116315)	epicoccum_nigrum_gca_002116315	ASM211631v1
+Eremothecium cymbalariae DBVPG#7215 (GCA_000235365)	eremothecium_cymbalariae_dbvpg_7215_gca_000235365	ASM23536v1
+Eremothecium gossypii FDAG1 (GCA_000968835)	eremothecium_gossypii_fdag1_gca_000968835	ASM96883v1
+Erysiphe necator (GCA_000798715)	erysiphe_necator_gca_000798715	ASM79871v1
+Erysiphe pulchra (GCA_002918395)	erysiphe_pulchra_gca_002918395	ASM291839v1
+Escovopsis weberi (GCA_001278495)	escovopsis_weberi_gca_001278495	ASM127849v1
+Eutypa lata UCREL1 (GCA_000349385)	eutypa_lata_ucrel1_gca_000349385	UCREL1V03
+Exidia glandulosa HHB12029 (GCA_001632375)	exidia_glandulosa_hhb12029_gca_001632375	Exigl1
+Exophiala aquamarina CBS 119918 (GCA_000709125)	exophiala_aquamarina_cbs_119918_gca_000709125	Exop_aqua_CBS_119918_V1
+Exophiala dermatitidis NIH/UT8656 (GCA_000230625)	exophiala_dermatitidis_nih_ut8656_gca_000230625	Exop_derm_V1
+Exophiala mesophila str. CBS 40295 (GCA_000836275)	exophiala_mesophila_gca_000836275	Exop_meso_CBS40295_V1
+Exophiala oligosperma str. CBS 72588 (GCA_000835515)	exophiala_oligosperma_gca_000835515	Exop_olig_CBS72588_V1
+Exophiala sideris str. CBS 121828 (GCA_000835395)	exophiala_sideris_gca_000835395	Exop_side_CBS121828_V1
+Exophiala spinifera str. CBS 89968 (GCA_000836115)	exophiala_spinifera_gca_000836115	Exop_spin_CBS89968_V1
+Exophiala xenobiotica str. CBS 118157 (GCA_000835505)	exophiala_xenobiotica_gca_000835505	Exop_xeno_CBS118157_V1
+Exserohilum turcica Et28A (GCA_000359705)	exserohilum_turcica_et28a_gca_000359705	Setospaeria trucica Et28A v1.0
+Fibroporia radiculosa str. TFFH 294 (GCA_000313525)	fibroporia_radiculosa_gca_000313525	ASM31352v1
+Fibularhizoctonia sp. CBS 109695 (GCA_001630335)	fibularhizoctonia_sp_cbs_109695_gca_001630335	Fibsp1
+Fistulina hepatica ATCC 64428 (GCA_000934395)	fistulina_hepatica_atcc_64428_gca_000934395	Fishe1
+Fomitiporia mediterranea MF3/22 (GCA_000271605)	fomitiporia_mediterranea_mf3_22_gca_000271605	Fomme1
+Fomitopsis pinicola FP-58527 SS1 (GCA_000344655)	fomitopsis_pinicola_fp_58527_ss1_gca_000344655	Fompi3
+Fonsecaea erecta (GCA_001651985)	fonsecaea_erecta_gca_001651985	ASM165198v1
+Fonsecaea monophora (GCA_001642475)	fonsecaea_monophora_gca_001642475	ASM164247v1
+Fonsecaea multimorphosa CBS 102226 (GCA_000836435)	fonsecaea_multimorphosa_cbs_102226_gca_000836435	Fons_mult_CBS_102226_V1
+Fonsecaea multimorphosa (GCA_001646985)	fonsecaea_multimorphosa_gca_001646985	ASM164698v1
+Fonsecaea nubica (GCA_001646965)	fonsecaea_nubica_gca_001646965	ASM164696v1
+Fonsecaea pedrosoi CBS 271.37 (GCA_000835455)	fonsecaea_pedrosoi_cbs_271_37_gca_000835455	Fons_pedr_CBS_271_37_V1
+Fusarium culmorum UK99	fusarium_culmorum	EF 1
+Fusarium fujikuroi	fusarium_fujikuroi	EF 1
+Fusarium fujikuroi (GCA_001023035)	fusarium_fujikuroi_gca_001023035	ASM102303v1
+Fusarium fujikuroi (GCA_001023045)	fusarium_fujikuroi_gca_001023045	ASM102304v1
+Fusarium fujikuroi (GCA_001023065)	fusarium_fujikuroi_gca_001023065	ASM102306v1
+Fusarium fujikuroi (GCA_900096505)	fusarium_fujikuroi_gca_900096505	version 1
+Fusarium fujikuroi (GCA_900096685)	fusarium_fujikuroi_gca_900096685	version 1
+Fusarium fujikuroi (GCA_900096705)	fusarium_fujikuroi_gca_900096705	version 1
+Fusarium graminearum str. PH-1	fusarium_graminearum	RR 1
+Fusarium graminearum PH-1 (GCA_000240135)	fusarium_graminearum_gca_000240135	ASM24013v3
+Fusarium graminearum str. CS3005 (GCA_000599445)	fusarium_graminearum_gca_000599445	CS3005v1
+Fusarium langsethiae str. Fl201059 (GCA_001292635)	fusarium_langsethiae_gca_001292635	ASM129263v1
+Fusarium mangiferae (GCA_900044065)	fusarium_mangiferae_gca_900044065	Genome assembly version 1
+Fusarium nygamai (GCA_002894225)	fusarium_nygamai_gca_002894225	CS10214v1
+Fusarium oxysporum	fusarium_oxysporum	FO2
+Fusarium oxysporum f. sp. conglutinans race 2 54008 str. 54008 (PHW808) (GCA_000260215)	fusarium_oxysporum_f_sp_conglutinans_race_2_54008_gca_000260215	FO_PHW808_V1
+Fusarium oxysporum f. sp. cubense race 1 (GCA_000350345)	fusarium_oxysporum_f_sp_cubense_race_1_gca_000350345	Foc1_1.0
+Fusarium oxysporum f. sp. cubense race 4 (GCA_000350365)	fusarium_oxysporum_f_sp_cubense_race_4_gca_000350365	Foc4_1.0
+Fusarium oxysporum f. sp. cubense tropical race 4 54006 str. 54006 (II5) (GCA_000260195)	fusarium_oxysporum_f_sp_cubense_tropical_race_4_54006_gca_000260195	FO_II5_V1
+Fusarium oxysporum f. sp. lycopersici 4287 (GCA_000149955)	fusarium_oxysporum_f_sp_lycopersici_4287_gca_000149955	ASM14995v2
+Fusarium oxysporum f. sp. lycopersici MN25 (GCA_000259975)	fusarium_oxysporum_f_sp_lycopersici_mn25_gca_000259975	FO_MN25_V1
+Fusarium oxysporum f. sp. melonis 26406 str. 26406 (melonis) (GCA_000260495)	fusarium_oxysporum_f_sp_melonis_26406_gca_000260495	FO_melonis_V1
+Fusarium oxysporum f. sp. pisi HDV247 (GCA_000260075)	fusarium_oxysporum_f_sp_pisi_hdv247_gca_000260075	FO_HDV247_V1
+Fusarium oxysporum f. sp. radicis-cucumerinum (GCA_001702695)	fusarium_oxysporum_f_sp_radicis_cucumerinum_gca_001702695	ASM170269v2
+Fusarium oxysporum f. sp. radicis-lycopersici 26381 str. 26381 (CL57) (GCA_000260155)	fusarium_oxysporum_f_sp_radicis_lycopersici_26381_gca_000260155	FO_CL57_V1
+Fusarium oxysporum f. sp. raphani 54005 (GCA_000260235)	fusarium_oxysporum_f_sp_raphani_54005_gca_000260235	FO_PHW815_V1
+Fusarium oxysporum f. sp. vasinfectum 25433 str. 25433 (Cotton) (GCA_000260175)	fusarium_oxysporum_f_sp_vasinfectum_25433_gca_000260175	FO_Cotton_V1
+Fusarium oxysporum Fo47 (GCA_000271705)	fusarium_oxysporum_fo47_gca_000271705	FO_Fo47_V1
+Fusarium oxysporum FOSC 3-a (GCA_000271745)	fusarium_oxysporum_fosc_3_a_gca_000271745	FO_FOSC_3_a_V1
+Fusarium oxysporum (GCA_900096695)	fusarium_oxysporum_gca_900096695	version 1
+Fusarium poae (GCA_001675295)	fusarium_poae_gca_001675295	FPOA1.0
+Fusarium proliferatum ET1 (GCA_900067095)	fusarium_proliferatum_et1_gca_900067095	F. proliferatum ET1 version 1
+Fusarium proliferatum (GCA_900029915)	fusarium_proliferatum_gca_900029915	F. proliferatum NRRL62905 version 1
+Fusarium pseudograminearum	fusarium_pseudograminearum	FP7
+Fusarium solani	fusarium_solani	v2.0
+Fusarium venenatum (GCA_900007375)	fusarium_venenatum_gca_900007375	ASM90000737v1
+Fusarium verticillioides	fusarium_verticillioides	ASM14955v1
+Gaeumannomyces tritici R3-111a-1	gaeumannomyces_graminis	Gae_graminis_V2
+Galerina marginata CBS 339.88 (GCA_000697645)	galerina_marginata_cbs_339_88_gca_000697645	Galma1
+Ganoderma sinense ZZ0214-1 (GCA_002760635)	ganoderma_sinense_zz0214_1_gca_002760635	GanSi1.6
+Gelatoporia subvermispora B (GCA_000320605)	gelatoporia_subvermispora_b_gca_000320605	Ceriporiopsis subvermispora B v1.0
+Glarea lozoyensis ATCC 20868 str. 1224 (GCA_000409485)	glarea_lozoyensis_atcc_20868_gca_000409485	GLAREA
+Gloeophyllum trabeum ATCC 11539 (GCA_000344685)	gloeophyllum_trabeum_atcc_11539_gca_000344685	Glotr1_1
+Gonapodya prolifera JEL478 (GCA_001574975)	gonapodya_prolifera_jel478_gca_001574975	Ganpr1
+Grifola frondosa str. 9006-11 (GCA_001683735)	grifola_frondosa_gca_001683735	ASM168373v1
+Grosmannia clavigera kw1407 (GCA_000143105)	grosmannia_clavigera_kw1407_gca_000143105	Sanger-454-IlluminaPA_2.0
+Gymnopus luxurians FD-317 M1 (GCA_000827265)	gymnopus_luxurians_fd_317_m1_gca_000827265	Gymlu1
+Hanseniaspora guilliermondii (GCA_900119595)	hanseniaspora_guilliermondii_gca_900119595	version 1
+Hanseniaspora opuntiae (GCA_001749795)	hanseniaspora_opuntiae_gca_001749795	ASM174979v1
+Hanseniaspora osmophila (GCA_001747045)	hanseniaspora_osmophila_gca_001747045	ASM174704v1
+Hanseniaspora uvarum DSM 2768 (GCA_000968475)	hanseniaspora_uvarum_dsm_2768_gca_000968475	Huva2.0
+Hanseniaspora uvarum (GCA_001747055)	hanseniaspora_uvarum_gca_001747055	ASM174705v1
+Hanseniaspora valbyensis NRRL Y-1626 (GCA_001664025)	hanseniaspora_valbyensis_nrrl_y_1626_gca_001664025	Hanva1_1
+Hebeloma cylindrosporum h7 (GCA_000827355)	hebeloma_cylindrosporum_h7_gca_000827355	Hebeloma cylindrosporum h7 v2.0
+Helicocarpus griseus UAMH5409 (GCA_002573585)	helicocarpus_griseus_uamh5409_gca_002573585	Heli_gris_5409_V1
+Hepatospora eriocheir str. canceri (GCA_002087875)	hepatospora_eriocheir_gca_002087875	ASM208787v1
+Hepatospora eriocheir str. GB1 (GCA_002087885)	hepatospora_eriocheir_gca_002087885	ASM208788v1
+Hesseltinella vesiculosa str. NRRL 3301	hesseltinella_vesiculosa_gca_002104935	Hesve2
+Heterobasidion irregulare TC 32-1 (GCA_000320585)	heterobasidion_irregulare_tc_32_1_gca_000320585	Heterobasidion irregulare v2.0
+Hirsutella minnesotensis 3608 (GCA_000956045)	hirsutella_minnesotensis_3608_gca_000956045	ASM95604v1
+Histoplasma capsulatum G186AR (GCA_000150115)	histoplasma_capsulatum_g186ar_gca_000150115	ASM15011v1
+Histoplasma capsulatum H143 (GCA_000151035)	histoplasma_capsulatum_h143_gca_000151035	ASM15103v1
+Histoplasma capsulatum H88 (GCA_000151005)	histoplasma_capsulatum_h88_gca_000151005	ASM15100v2
+Histoplasma capsulatum NAm1 (GCA_000149585)	histoplasma_capsulatum_nam1_gca_000149585	ASM14958v1
+Hortaea werneckii EXF-2000 (GCA_002127715)	hortaea_werneckii_exf_2000_gca_002127715	HwerPB1
+Hydnomerulius pinastri MD-312 (GCA_000827185)	hydnomerulius_pinastri_md_312_gca_000827185	Hydpi2
+Hypholoma sublateritium FD-334 SS-4 (GCA_000827495)	hypholoma_sublateritium_fd_334_ss_4_gca_000827495	Hypsu1
+Hyphopichia burtonii NRRL Y-1933 (GCA_001661395)	hyphopichia_burtonii_nrrl_y_1933_gca_001661395	Hypbu1
+Hypoxylon sp. CI-4A (GCA_002120315)	hypoxylon_sp_ci_4a_gca_002120315	HypCI4A v1.0
+Hypoxylon sp. CO27-5 (GCA_002120305)	hypoxylon_sp_co27_5_gca_002120305	HypCO275 v1.0
+Hypoxylon sp. EC38 (GCA_002120335)	hypoxylon_sp_ec38_gca_002120335	HypEC38 v3.0
+Hypsizygus marmoreus str. 51987-8 (GCA_001605315)	hypsizygus_marmoreus_gca_001605315	ASM160531v1
+Jaapia argillacea MUCL 33604 (GCA_000697665)	jaapia_argillacea_mucl_33604_gca_000697665	Jaaar1
+Jaminaea rosea str. MCA 5214 (GCA_003144245)	jaminaea_rosea_gca_003144245	Jamsp1
+Kalmanozyma brasiliensis GHG001 (GCA_000497045)	kalmanozyma_brasiliensis_ghg001_gca_000497045	PSEUBRA1
+Kazachstania africana CBS 2517 (GCA_000304475)	kazachstania_africana_cbs_2517_gca_000304475	Ka_CBS2517
+Kazachstania naganishii CBS 8797 (GCA_000348985)	kazachstania_naganishii_cbs_8797_gca_000348985	ASM34898v1
+Kluyveromyces dobzhanskii CBS 2104 str. CBS2104 (GCA_000820885)	kluyveromyces_dobzhanskii_cbs_2104_gca_000820885	KLDO_01
+Kluyveromyces lactis str. NRRL Y-1140 (GCA_000002515)	kluyveromyces_lactis_gca_000002515	ASM251v1
+Kluyveromyces marxianus DMKU3-1042 (GCA_001417885)	kluyveromyces_marxianus_dmku3_1042_gca_001417885	Kmar_1.0
+Kluyveromyces marxianus str. NBRC 1777 (GCA_001417835)	kluyveromyces_marxianus_gca_001417835	KM1777_03
+Kockovaella imperatae str. NRRL Y-17943 (GCA_002102565)	kockovaella_imperatae_gca_002102565	Kocim1
+Komagataella pastoris	komagataella_pastoris	ASM2700v1
+Komagataella pastoris (GCA_001708105)	komagataella_pastoris_gca_001708105	ASM170810v1
+Komagataella phaffii CBS 7435 (GCA_000223565)	komagataella_phaffii_cbs_7435_gca_000223565	PicPas_Mar2011
+Komagataella phaffii CBS 7435 (GCA_900235035)	komagataella_phaffii_cbs_7435_gca_900235035	ASM90023503v1
+Komagataella phaffii str. WT (GCA_001708085)	komagataella_phaffii_gca_001708085	ASM170808v1
+Komagataella phaffii GS115 (GCA_001746955)	komagataella_phaffii_gs115_gca_001746955	ASM174695v1
+Kuraishia capsulata CBS 1993 (GCA_000576695)	kuraishia_capsulata_cbs_1993_gca_000576695	AUH_PRJEB4427_v1
+Kwoniella bestiolae CBS 10118 (GCA_000512585)	kwoniella_bestiolae_cbs_10118_gca_000512585	Cryp_best_CBS10118_V1
+Kwoniella dejecticola CBS 10117 (GCA_000512565)	kwoniella_dejecticola_cbs_10117_gca_000512565	Cryp_deje_CBS10117_V1
+Kwoniella heveanensis BCC8398 (GCA_000507405)	kwoniella_heveanensis_bcc8398_gca_000507405	Cryp_heve_BCC8398_V1
+Kwoniella heveanensis CBS 569 (GCA_000507425)	kwoniella_heveanensis_cbs_569_gca_000507425	Cryp_heve_CBS569_V2
+Kwoniella mangroviensis CBS 10435 (GCA_000507885)	kwoniella_mangroviensis_cbs_10435_gca_000507885	Kwon_mang_CBS10435_V2
+Kwoniella mangroviensis CBS 8507 (GCA_000507465)	kwoniella_mangroviensis_cbs_8507_gca_000507465	Kwon_mang_CBS8507_V2
+Kwoniella mangroviensis CBS 8886 (GCA_000507485)	kwoniella_mangroviensis_cbs_8886_gca_000507485	Kwon_mang_CBS8886_V1
+Kwoniella pini CBS 10737 (GCA_000512605)	kwoniella_pini_cbs_10737_gca_000512605	Cryp_pinu_CBS10737_V1
+Laccaria amethystina LaAM-08-1 (GCA_000827195)	laccaria_amethystina_laam_08_1_gca_000827195	Laccaria amethystina LaAM-08-1 v1.0
+Laccaria bicolor S238N-H82 (GCA_000143565)	laccaria_bicolor_s238n_h82_gca_000143565	V1.0
+Lachancea dasiensis CBS 10888 (GCA_900074725)	lachancea_dasiensis_cbs_10888_gca_900074725	LADA0
+Lachancea fermentati (GCA_900074765)	lachancea_fermentati_gca_900074765	LAFE0
+Lachancea lanzarotensis str. CBS 12615 (GCA_000938715)	lachancea_lanzarotensis_gca_000938715	LALA0
+Lachancea meyersii CBS 8951 (GCA_900074715)	lachancea_meyersii_cbs_8951_gca_900074715	LAME0
+Lachancea mirantina (GCA_900074745)	lachancea_mirantina_gca_900074745	LAMI0
+Lachancea nothofagi CBS 11611 (GCA_900074755)	lachancea_nothofagi_cbs_11611_gca_900074755	LANO0
+Lachancea quebecensis (GCA_002900925)	lachancea_quebecensis_gca_002900925	ASM290092v1
+Lachancea sp. CBS 6924 (GCA_900074735)	lachancea_sp_cbs_6924_gca_900074735	LAFA0
+Lachancea thermotolerans CBS 6340 (GCA_000142805)	lachancea_thermotolerans_cbs_6340_gca_000142805	ASM14280v1
+Laetiporus sulphureus 93-53 (GCA_001632365)	laetiporus_sulphureus_93_53_gca_001632365	Laesu1
+Lentinula edodes str. G408PP-4 (GCA_002003045)	lentinula_edodes_gca_002003045	Lened_assembly01
+Leptosphaeria maculans	leptosphaeria_maculans	ASM23037v1
+Leucoagaricus sp. SymC.cos (GCA_001563735)	leucoagaricus_sp_symc_cos_gca_001563735	ASM156373v1
+Leucosporidium creatinivorum str. 62-1032 (GCA_002105055)	leucosporidium_creatinivorum_gca_002105055	Leucr1
+Lichtheimia corymbifera JMRC:FSU:9682 (GCA_000723665)	lichtheimia_corymbifera_jmrc_fsu_9682_gca_000723665	454Minimus
+Lichtheimia ramosa str. JMRC:FSU:6197 (GCA_000945115)	lichtheimia_ramosa_gca_000945115	Lramosa_hybrid_454_Illumina
+Lipomyces starkeyi NRRL Y-11557 (GCA_001661325)	lipomyces_starkeyi_nrrl_y_11557_gca_001661325	Lipst1_1
+Lobosporangium transversale str. NRRL 3116	lobosporangium_transversale_gca_002105155	Lobtra1
+Lodderomyces elongisporus NRRL YB-4239 (GCA_000149685)	lodderomyces_elongisporus_nrrl_yb_4239_gca_000149685	ASM14968v1
+Lomentospora prolificans str. JHH-5317 (GCA_002276285)	lomentospora_prolificans_gca_002276285	Lprolificans_pilon
+Macrophomina phaseolina MS6 (GCA_000302655)	macrophomina_phaseolina_ms6_gca_000302655	MphMS6_1.0
+Madurella mycetomatis str. mm55 (GCA_001275765)	madurella_mycetomatis_gca_001275765	ASM127576v2
+Magnaporthe oryzae	magnaporthe_oryzae	MG8
+Magnaporthe poae	magnaporthe_poae	Mag_poae_ATCC_64411_V1
+Malassezia globosa CBS 7966 (GCA_000181695)	malassezia_globosa_cbs_7966_gca_000181695	ASM18169v1
+Malassezia pachydermatis (GCA_001278385)	malassezia_pachydermatis_gca_001278385	MalaPachy
+Malassezia sympodialis ATCC 42132 (GCA_000349305)	malassezia_sympodialis_atcc_42132_gca_000349305	ASM34930v2
+Malassezia sympodialis ATCC 42132 (GCA_900149145)	malassezia_sympodialis_atcc_42132_gca_900149145	Msy_ATCC_42132_Feb2016
+Malassezia vespertilionis str. NWHC:44797-103 (GCA_002818225)	malassezia_vespertilionis_gca_002818225	ASM281822v1
+Marssonina brunnea f. sp. 'multigermtubi' MB_m1 (GCA_000298775)	marssonina_brunnea_f_sp_multigermtubi_mb_m1_gca_000298775	ASM29877v1
+Meira miltonrushii str. MCA 3882 (GCA_003144205)	meira_miltonrushii_gca_003144205	Meimi1
+Melampsora larici-populina	melampsora_laricipopulina	v1.0
+Meliniomyces bicolor E (GCA_002865645)	meliniomyces_bicolor_e_gca_002865645	Melbi2
+Meliniomyces variabilis F (GCA_002865655)	meliniomyces_variabilis_f_gca_002865655	Melva1
+Metarhizium acridum CQMa 102 (GCA_000187405)	metarhizium_acridum_cqma_102_gca_000187405	MetAcr_May2010
+Metarhizium album ARSEF 1941 (GCA_000804445)	metarhizium_album_arsef_1941_gca_000804445	MAM 1.0 for version 1 of the Metarhizium album genome
+Metarhizium robertsii ARSEF 23 (GCA_000187425)	metarhizium_anisopliae_arsef_23_gca_000187425	MAA 2.0
+Metarhizium anisopliae ARSEF 549 (GCA_000814975)	metarhizium_anisopliae_arsef_549_gca_000814975	MAN_1.0
+Metarhizium anisopliae BRIP 53284 (GCA_000426985)	metarhizium_anisopliae_brip_53284_gca_000426985	ASM42698v1
+Metarhizium anisopliae BRIP 53293 (GCA_000426965)	metarhizium_anisopliae_brip_53293_gca_000426965	ASM42696v1
+Metarhizium anisopliae str. E6 (GCA_000739145)	metarhizium_anisopliae_gca_000739145	Metarhizium anisopliae
+Metarhizium brunneum ARSEF 3297 (GCA_000814965)	metarhizium_brunneum_arsef_3297_gca_000814965	MBR_1.0
+Metarhizium guizhouense ARSEF 977 (GCA_000814955)	metarhizium_guizhouense_arsef_977_gca_000814955	MGU_1.0
+Metarhizium majus ARSEF 297 (GCA_000814945)	metarhizium_majus_arsef_297_gca_000814945	MAJ_1.0
+Metarhizium rileyi RCEF 4871 (GCA_001636745)	metarhizium_rileyi_rcef_4871_gca_001636745	NOR 1.0
+Metarhizium robertsii (GCA_000591435)	metarhizium_robertsii_gca_000591435	MR2010_11_27
+Metschnikowia bicuspidata var. bicuspidata NRRL YB-4993 (GCA_001664035)	metschnikowia_bicuspidata_var_bicuspidata_nrrl_yb_4993_gca_001664035	Metbi1
+Meyerozyma guilliermondii ATCC 6260 (GCA_000149425)	meyerozyma_guilliermondii_atcc_6260_gca_000149425	ASM14942v1
+Microbotryum intermedium (GCA_900096595)	microbotryum_intermedium_gca_900096595	Microbotrium Intermedium Assembly
+Microbotryum violaceum	microbotryum_violaceum	M_violaceum_V1
+Microdochium bolleyi str. J235TASD1 (GCA_001566295)	microdochium_bolleyi_gca_001566295	Microdochium bolleyi v1.0
+Microsporum canis CBS 113480 (GCA_000151145)	microsporum_canis_cbs_113480_gca_000151145	ASM15114v1
+Millerozyma farinosa CBS 7064 (GCA_000315895)	millerozyma_farinosa_cbs_7064_gca_000315895	ASM31589v1
+Mitosporidium daphniae str. UGP3 (GCA_000760515)	mitosporidium_daphniae_gca_000760515	UGP1.0
+Mixia osmundae IAM 14324 (GCA_000241205)	mixia_osmundae_iam_14324_gca_000241205	Mosmundae_2.0
+Mixia osmundae IAM 14324 (GCA_000708205)	mixia_osmundae_iam_14324_gca_000708205	Mixia osmundae v1.0
+Moelleriella libera RCEF 2490 (GCA_001636675)	moelleriella_libera_rcef_2490_gca_001636675	AAL 1.0
+Moesziomyces antarcticus str. JCM 10317 (GCA_000747765)	moesziomyces_antarcticus_gca_000747765	ASM74776v1
+Moesziomyces antarcticus T-34 (GCA_000334475)	moesziomyces_antarcticus_t_34_gca_000334475	Pant_1.0
+Moesziomyces aphidis DSM 70725 (GCA_000517465)	moesziomyces_aphidis_dsm_70725_gca_000517465	PseuAph1.0
+Moniliophthora perniciosa FA553 (GCA_000183025)	moniliophthora_perniciosa_fa553_gca_000183025	ASM18302v1
+Moniliophthora roreri str. MCA 2952 (GCA_001466705)	moniliophthora_roreri_gca_001466705	ASM146670v1
+Moniliophthora roreri MCA 2997 (GCA_000488995)	moniliophthora_roreri_mca_2997_gca_000488995	M_roreri_MCA_2997_v1
+Mortierella elongata AG-77	mortierella_elongata_ag_77_gca_001651415	Mortierella elongata AG-77 v2.0
+Mortierella verticillata NRRL 6337 (GCA_000739165)	mortierella_verticillata_nrrl_6337_gca_000739165	Mort_vert_NRRL_6337_V1
+Mucor ambiguus str. NBRC 6742 (GCA_000950595)	mucor_ambiguus_gca_000950595	ASM95059v1
+Mucor circinelloides f. circinelloides 1006PhL (GCA_000401635)	mucor_circinelloides_f_circinelloides_1006phl_gca_000401635	Muco_sp_1006Ph_V1
+Mucor circinelloides f. lusitanicus CBS 277.49	mucor_circinelloides_f_lusitanicus_cbs_277_49_gca_001638945	Mucci2
+Mycosphaerella eumusae str. CBS 114824 (GCA_001578235)	mycosphaerella_eumusae_gca_001578235	ASM157823v1
+Nadsonia fulvescens var. elongata DSM 6958 (GCA_001661315)	nadsonia_fulvescens_var_elongata_dsm_6958_gca_001661315	Nadfu1
+Naematelia encephala str. 68-887.2 (GCA_002105065)	naematelia_encephala_gca_002105065	Treen1
+Nannizzia gypsea CBS 118893 (GCA_000150975)	nannizzia_gypsea_cbs_118893_gca_000150975	MS_CBS118893
+Naumovozyma castellii CBS 4309 (GCA_000237345)	naumovozyma_castellii_cbs_4309_gca_000237345	ASM23734v1
+Naumovozyma dairenensis CBS 421 (GCA_000227115)	naumovozyma_dairenensis_cbs_421_gca_000227115	ASM22711v2
+Nematocida displodere str. JUm2807 (GCA_001642395)	nematocida_displodere_gca_001642395	ASM164239v1
+Nematocida parisii ERTm1 (GCA_000250985)	nematocida_parisii_ertm1_gca_000250985	Nema_parisii_ERTm1_V3
+Nematocida parisii ERTm3 (GCA_000190615)	nematocida_parisii_ertm3_gca_000190615	Nema_parisii_ERTm3_V1
+Nematocida sp. 1 ERTm2 (GCA_000250695)	nematocida_sp_1_ertm2_gca_000250695	Nema_parisii_ERTm2_V1
+Nematocida sp. 1 ERTm6 (GCA_000738915)	nematocida_sp_1_ertm6_gca_000738915	Nema_sp_1_ERTm6_V2
+Nematocida sp. ERTm5 (GCA_001642415)	nematocida_sp_ertm5_gca_001642415	ASM164241v1
+Neocallimastix californiae str. G1 (GCA_002104975)	neocallimastix_californiae_gca_002104975	Neocallimastix sp. G1 v1.0
+Neofusicoccum parvum UCRNP2 (GCA_000385595)	neofusicoccum_parvum_ucrnp2_gca_000385595	UCRNP2V3
+Neolecta irregularis DAH-3 (GCA_001929475)	neolecta_irregularis_dah_3_gca_001929475	NeoIirr1.0
+Neolentinus lepideus HHB14362 ss-1 (GCA_001632425)	neolentinus_lepideus_hhb14362_ss_1_gca_001632425	Neole1
+Neonectria ditissima str. R09/05 (GCA_001306435)	neonectria_ditissima_gca_001306435	R0905_v2.0
+Aspergillus fischeri NRRL 181	neosartorya_fischeri	ASM14964v1
+Neurospora crassa	neurospora_crassa	NC12
+Neurospora crassa str. 73 (GCA_000786625)	neurospora_crassa_gca_000786625	Neucr_trp3_1
+Neurospora tetrasperma FGSC 2508 (GCA_000213175)	neurospora_tetrasperma_fgsc_2508_gca_000213175	v2.0
+Neurospora tetrasperma FGSC 2509 str. FGSC 2509 mat a (GCA_000213195)	neurospora_tetrasperma_fgsc_2509_gca_000213195	v1.0
+Nosema apis BRL 01 (GCA_000447185)	nosema_apis_brl_01_gca_000447185	NapisBRLv01
+Nosema bombycis CQ1 (GCA_000383075)	nosema_bombycis_cq1_gca_000383075	NosBomCQ1_v1.0
+Nosema ceranae BRL01 (GCA_000182985)	nosema_ceranae_brl01_gca_000182985	ASM18298v1
+Nosema ceranae (GCA_000988165)	nosema_ceranae_gca_000988165	ASM98816v1
+Ogataea parapolymorpha DL-1 (GCA_000187245)	ogataea_parapolymorpha_dl_1_gca_000187245	Hansenula_2
+Ogataea polymorpha str. NCYC 495 leu1.1 (GCA_001664045)	ogataea_polymorpha_gca_001664045	Hanpo2
+Oidiodendron maius Zn (GCA_000827325)	oidiodendron_maius_zn_gca_000827325	Oidiodendron maius Zn v1.0
+Ophiocordyceps australis (GCA_002591405)	ophiocordyceps_australis_gca_002591405	OphauG2
+Ophiocordyceps australis (GCA_002591415)	ophiocordyceps_australis_gca_002591415	OphauB2
+Ophiocordyceps camponoti-rufipedis (GCA_002591395)	ophiocordyceps_camponoti_rufipedis_gca_002591395	Ophun1
+Ophiocordyceps sinensis CO18 (GCA_000448365)	ophiocordyceps_sinensis_co18_gca_000448365	ASM44836v1
+Ophiocordyceps unilateralis str. SC16a (GCA_001272575)	ophiocordyceps_unilateralis_gca_001272575	ASM127257v2
+Ophiostoma piceae UAMH 11346 str. UAMH-11346 (GCA_000410735)	ophiostoma_piceae_uamh_11346_gca_000410735	Opiceae_UAMHv01
+Ordospora colligata OC4 (GCA_000803265)	ordospora_colligata_oc4_gca_000803265	ASM80326v1
+Pachysolen tannophilus NRRL Y-2460 (GCA_001661245)	pachysolen_tannophilus_nrrl_y_2460_gca_001661245	Pacta1_2
+Paracoccidioides brasiliensis str. Pb300 (GCA_001713645)	paracoccidioides_brasiliensis_gca_001713645	ASM171364v1
+Paracoccidioides brasiliensis str. CNH (GCA_001713695)	paracoccidioides_brasiliensis_gca_001713695	Paracocci_br_PbCNH
+Paracoccidioides brasiliensis Pb03 (GCA_000150475)	paracoccidioides_brasiliensis_pb03_gca_000150475	Paracocci_br_Pb03_V2
+Paracoccidioides brasiliensis Pb18 (GCA_000150735)	paracoccidioides_brasiliensis_pb18_gca_000150735	Paracocci_br_Pb18_V2
+Paracoccidioides lutzii Pb01 (GCA_000150705)	paracoccidioides_sp_lutzii_pb01_gca_000150705	Paracocci_br_Pb01_V2
+Paramicrosporidium saccamoebae str. KSL3 (GCA_002794465)	paramicrosporidium_saccamoebae_gca_002794465	KSL3_v6
+Paraphaeosphaeria sporulosa str. AP3s5-JAC2a (GCA_001642045)	paraphaeosphaeria_sporulosa_gca_001642045	Parsp1
+Paxillus involutus ATCC 200175 (GCA_000827475)	paxillus_involutus_atcc_200175_gca_000827475	Paxillus involutus ATCC 200175 v1.0
+Paxillus rubicundulus Ve08.2h10 (GCA_000827395)	paxillus_rubicundulus_ve08_2h10_gca_000827395	Paxillus rubicundulus Ve08.2h10 v1.0
+Penicilliopsis zonata CBS 506.65 (GCA_001890105)	penicilliopsis_zonata_cbs_506_65_gca_001890105	Aspzo1
+Penicillium antarcticum (GCA_002072345)	penicillium_antarcticum_gca_002072345	ASM207234v1
+Penicillium arizonense (GCA_001773325)	penicillium_arizonense_gca_001773325	ASM177332v1
+Penicillium brasilianum str. MG11 (GCA_001048715)	penicillium_brasilianum_gca_001048715	Pbras_Allpaths-LG
+Penicillium brasilianum str. LaBioMMi 136 (GCA_002016555)	penicillium_brasilianum_gca_002016555	ASM201655v1
+Penicillium camemberti FM 013 (GCA_000513335)	penicillium_camemberti_fm_013_gca_000513335	PCAMFM013_20131106
+Penicillium chrysogenum str. P2niaD18 (GCA_000710275)	penicillium_chrysogenum_gca_000710275	ASM71027v1
+Penicillium coprophilum (GCA_002072405)	penicillium_coprophilum_gca_002072405	ASM207240v1
+Penicillium decumbens (GCA_002072245)	penicillium_decumbens_gca_002072245	ASM207224v1
+Penicillium digitatum Pd1 (GCA_000315645)	penicillium_digitatum_pd1_gca_000315645	PdigPd1_v1
+Penicillium digitatum PHI26 (GCA_000315665)	penicillium_digitatum_phi26_gca_000315665	PdigPHI26_v1
+Penicillium expansum str. d1 (GCA_000769735)	penicillium_expansum_gca_000769735	ASM76973v1
+Penicillium expansum str. MD-8 (GCA_000769745)	penicillium_expansum_gca_000769745	ASM76974v1
+Penicillium expansum str. CMP-1 (GCA_000769755)	penicillium_expansum_gca_000769755	PEX1
+Penicillium flavigenum (GCA_002072365)	penicillium_flavigenum_gca_002072365	ASM207236v1
+Penicillium freii (GCA_001513925)	penicillium_freii_gca_001513925	ASM151392v1
+Penicillium griseofulvum str. PG3 (GCA_001561935)	penicillium_griseofulvum_gca_001561935	ASM156193v1
+Penicillium italicum str. PHI-1 (GCA_000769765)	penicillium_italicum_gca_000769765	ASM76976v1
+Penicillium nalgiovense (GCA_002072425)	penicillium_nalgiovense_gca_002072425	ASM207242v1
+Penicillium nordicum (GCA_001278595)	penicillium_nordicum_gca_001278595	ASM127859v1
+Penicillium occitanis str. CT1 (GCA_002382835)	penicillium_occitanis_gca_002382835	ASM238283v1
+Penicillium occitanis str. CL100 (GCA_002382855)	penicillium_occitanis_gca_002382855	ASM238285v1
+Penicillium oxalicum 114-2 (GCA_000346795)	penicillium_oxalicum_114_2_gca_000346795	pde_v1.0
+Penicillium polonicum (GCA_002072265)	penicillium_polonicum_gca_002072265	ASM207226v1
+Penicillium roqueforti FM164 (GCA_000513255)	penicillium_roqueforti_fm164_gca_000513255	PROQFM164_20130607
+Penicillium rubens Wisconsin 54-1255 (GCA_000226395)	penicillium_rubens_wisconsin_54_1255_gca_000226395	PenChr_Nov2007
+Penicillium solitum (GCA_002072235)	penicillium_solitum_gca_002072235	ASM207223v1
+Penicillium steckii (GCA_002072375)	penicillium_steckii_gca_002072375	ASM207237v1
+Penicillium subrubescens str. CBS 132785 (GCA_001908125)	penicillium_subrubescens_gca_001908125	ASM190812v1
+Penicillium vulpinum (GCA_002072255)	penicillium_vulpinum_gca_002072255	ASM207225v1
+Peniophora sp. CONT (GCA_001632445)	peniophora_sp_cont_gca_001632445	Ricme1
+Periconia macrospinosa str. DSE2036 (GCA_003073855)	periconia_macrospinosa_gca_003073855	Perma1
+Pestalotiopsis fici W106-1 (GCA_000516985)	pestalotiopsis_fici_w106_1_gca_000516985	PFICI
+Pezoloma ericae str. UAMH 7357 (GCA_002865625)	pezoloma_ericae_gca_002865625	Rhier1
+Phaeoacremonium minimum UCRPA7 (GCA_000392275)	phaeoacremonium_minimum_ucrpa7_gca_000392275	UCRPA7V03
+Phaeomoniella chlamydospora (GCA_001006345)	phaeomoniella_chlamydospora_gca_001006345	UCRPA7V1.0
+Phaeosphaeria nodorum	phaeosphaeria_nodorum	ASM14691v1
+Phanerochaete carnosa HHB-10118-sp (GCA_000300595)	phanerochaete_carnosa_hhb_10118_sp_gca_000300595	Phanerochaete carnosa HHB-10118-Sp v1.0
+Phellinus noxius (GCA_002287475)	phellinus_noxius_gca_002287475	ASM228747v1
+Phialocephala scopiformis str. CBS 120377 (GCA_001500285)	phialocephala_scopiformis_gca_001500285	Phisc1
+Phialocephala subalpina (GCA_900073065)	phialocephala_subalpina_gca_900073065	PAC_version_1
+Phialophora americana str. CBS 27337 (GCA_000835435)	phialophora_americana_gca_000835435	Capr_semi_CBS27337_V1
+Phialophora attae str. CBS 131958 (GCA_001299255)	phialophora_attae_gca_001299255	ASM129925v1
+Phlebia centrifuga str. FBCC195 (GCA_001913855)	phlebia_centrifuga_gca_001913855	ASM191385v2
+Phlebiopsis gigantea 11061_1 CR5-6 (GCA_000832265)	phlebiopsis_gigantea_11061_1_cr5_6_gca_000832265	Phlgi1
+Pichia kudriavzevii str. SD108 (GCA_000764455)	pichia_kudriavzevii_gca_000764455	ASM76445v1
+Pichia kudriavzevii str. 129 (GCA_001983325)	pichia_kudriavzevii_gca_001983325	ASM198332v1
+Pichia kudriavzevii str. Ckrusei653 (GCA_002166775)	pichia_kudriavzevii_gca_002166775	Cand_krus_Ckrusei653_V21
+Pichia kudriavzevii str. CBS573 (GCA_003054445)	pichia_kudriavzevii_gca_003054445	ASM305444v1
+Pichia membranifaciens str. KS47-1 (GCA_001950575)	pichia_membranifaciens_gca_001950575	P_membrenifaciens-1.0
+Pichia membranifaciens NRRL Y-2026 (GCA_001661235)	pichia_membranifaciens_nrrl_y_2026_gca_001661235	Picme2
+Piloderma croceum F 1598 (GCA_000827315)	piloderma_croceum_f_1598_gca_000827315	Piloderma croceum F 1598 v1.0
+Piromyces finnis (GCA_002104945)	piromyces_finnis_gca_002104945	Piromyces sp. finnis v3.0
+Piromyces sp. E2 (GCA_002157105)	piromyces_sp_e2_gca_002157105	PirspE2 v1.0
+Pisolithus microcarpus 441 (GCA_000827275)	pisolithus_microcarpus_441_gca_000827275	Pisolithus microcarpus 441 v1.0
+Pisolithus tinctorius Marx 270 (GCA_000827335)	pisolithus_tinctorius_marx_270_gca_000827335	Pisolithus tinctorius Marx 270 v1.0
+Pleurotus ostreatus PC15 (GCA_000697685)	pleurotus_ostreatus_pc15_gca_000697685	PleosPC15_2
+Plicaturopsis crispa FD-325 SS-3 (GCA_000827205)	plicaturopsis_crispa_fd_325_ss_3_gca_000827205	Plicr1
+Pneumocystis carinii B80 (GCA_001477545)	pneumocystis_carinii_b80_gca_001477545	Pneu_cari_B80_V3
+Pneumocystis jirovecii RU7 (GCA_001477535)	pneumocystis_jirovecii_ru7_gca_001477535	Pneu_jiro_RU7_V2
+Pneumocystis murina B123 (GCA_000349005)	pneumocystis_murina_b123_gca_000349005	Pneumo_murina_B123_V4
+Pochonia chlamydosporia 170 (GCA_001653235)	pochonia_chlamydosporia_170_gca_001653235	ASM165323v2
+Podospora anserina S mat+ (GCA_000226545)	podospora_anserina_s_mat__gca_000226545	ASM22654v1
+Polytolypa hystricis UAMH7299 (GCA_002573605)	polytolypa_hystricis_uamh7299_gca_002573605	Poly_hyst_7299_V1
+Postia placenta Mad-698-R (GCA_000006255)	postia_placenta_mad_698_r_gca_000006255	Postia placenta V1.0
+Postia placenta MAD-698-R-SB12 (GCA_002117355)	postia_placenta_mad_698_r_sb12_gca_002117355	PosplRSB12_1
+Protomyces lactucaedebilis str. 12-1054 (GCA_002105105)	protomyces_lactucaedebilis_gca_002105105	Prola1
+Pseudocercospora fijiensis CIRAD86 (GCA_000340215)	pseudocercospora_fijiensis_cirad86_gca_000340215	Mycfi2
+Pseudocercospora musae str. CBS 116634 (GCA_001578225)	pseudocercospora_musae_gca_001578225	ASM157822v1
+Pseudogymnoascus destructans 20631-21 (GCA_000184105)	pseudogymnoascus_destructans_20631_21_gca_000184105	Geom_destructans_V1
+Pseudogymnoascus destructans (GCA_001641265)	pseudogymnoascus_destructans_gca_001641265	ASM164126v1
+Pseudogymnoascus sp. 03VT05 (GCA_001662645)	pseudogymnoascus_sp_03vt05_gca_001662645	ASM166264v1
+Pseudogymnoascus sp. 05NY08 (GCA_001662605)	pseudogymnoascus_sp_05ny08_gca_001662605	ASM166260v1
+Pseudogymnoascus sp. 23342-1-I1 (GCA_001662575)	pseudogymnoascus_sp_23342_1_i1_gca_001662575	ASM166257v1
+Pseudogymnoascus sp. 24MN13 (GCA_001662595)	pseudogymnoascus_sp_24mn13_gca_001662595	ASM166259v1
+Pseudogymnoascus sp. VKM F-103 (GCA_000750895)	pseudogymnoascus_sp_vkm_f_103_gca_000750895	DG30
+Pseudogymnoascus sp. VKM F-3557 (GCA_000750665)	pseudogymnoascus_sp_vkm_f_3557_gca_000750665	DG3
+Pseudogymnoascus sp. VKM F-3775 (GCA_000750715)	pseudogymnoascus_sp_vkm_f_3775_gca_000750715	DG4
+Pseudogymnoascus sp. VKM F-3808 (GCA_000750675)	pseudogymnoascus_sp_vkm_f_3808_gca_000750675	DG1
+Pseudogymnoascus sp. VKM F-4246 (GCA_000750735)	pseudogymnoascus_sp_vkm_f_4246_gca_000750735	DG5
+Pseudogymnoascus sp. VKM F-4281 (FW-2241) (GCA_000750745)	pseudogymnoascus_sp_vkm_f_4281_fw_2241__gca_000750745	DG6
+Pseudogymnoascus sp. VKM F-4513 (FW-928) (GCA_000750755)	pseudogymnoascus_sp_vkm_f_4513_fw_928__gca_000750755	DG7
+Pseudogymnoascus sp. VKM F-4514 (FW-929) (GCA_000750795)	pseudogymnoascus_sp_vkm_f_4514_fw_929__gca_000750795	DG8
+Pseudogymnoascus sp. VKM F-4515 (FW-2607) (GCA_000750805)	pseudogymnoascus_sp_vkm_f_4515_fw_2607__gca_000750805	DG10
+Pseudogymnoascus sp. VKM F-4516 (FW-969) (GCA_000750815)	pseudogymnoascus_sp_vkm_f_4516_fw_969__gca_000750815	DG11
+Pseudogymnoascus sp. VKM F-4517 (FW-2822) (GCA_000750875)	pseudogymnoascus_sp_vkm_f_4517_fw_2822__gca_000750875	DG13
+Pseudogymnoascus sp. VKM F-4518 (FW-2643) (GCA_000750925)	pseudogymnoascus_sp_vkm_f_4518_fw_2643__gca_000750925	DG36
+Pseudogymnoascus sp. VKM F-4519 (FW-2642) (GCA_000750935)	pseudogymnoascus_sp_vkm_f_4519_fw_2642__gca_000750935	DG38
+Pseudogymnoascus sp. VKM F-4520 (FW-2644) (GCA_000750995)	pseudogymnoascus_sp_vkm_f_4520_fw_2644__gca_000750995	DG39
+Pseudogymnoascus sp. WSF 3629 (GCA_001662585)	pseudogymnoascus_sp_wsf_3629_gca_001662585	ASM166258v1
+Pseudogymnoascus verrucosus (GCA_001662655)	pseudogymnoascus_verrucosus_gca_001662655	ASM166265v1
+Pseudoloma neurophilia str. MK1 (GCA_001432165)	pseudoloma_neurophilia_gca_001432165	ASM143216v1
+Pseudomassariella vexata str. CBS 129021 (GCA_002105095)	pseudomassariella_vexata_gca_002105095	Pseve2
+Pseudomicrostroma glucosiphilum str. MCA 4718 (GCA_003144135)	pseudomicrostroma_glucosiphilum_gca_003144135	Rhodsp1
+Pseudozyma hubeiensis SY62 (GCA_000403515)	pseudozyma_hubeiensis_sy62_gca_000403515	ASM40351v1
+Puccinia coronata var. avenae f. sp. avenae (GCA_002873275)	puccinia_coronata_var_avenae_f_sp_avenae_gca_002873275	ASM287327v1
+Puccinia graminis	puccinia_graminis	ASM14992v1
+Puccinia graminis Ug99	puccinia_graminisug99	v1
+Puccinia sorghi str. RO10H11247 (GCA_001263375)	puccinia_sorghi_gca_001263375	ASM126337v1
+Puccinia striiformis f. sp. tritici PST-130 str. Race 130	puccinia_striiformis	PST-130_1.0
+Puccinia striiformis f. sp. tritici PST-78 (GCA_001191645)	puccinia_striiformis_f_sp_tritici_pst_78_gca_001191645	P_striiformis_V1
+Puccinia striiformis (GCA_002920065)	puccinia_striiformis_gca_002920065	ASM292006v1
+Puccinia triticina	puccinia_triticina	ASM15152v1
+Punctularia strigosozonata HHB-11173 SS5 (GCA_000264995)	punctularia_strigosozonata_hhb_11173_ss5_gca_000264995	Punctularia strigosozonata v1.0
+Purpureocillium lilacinum (GCA_001653205)	purpureocillium_lilacinum_gca_001653205	ASM165320v1
+Purpureocillium lilacinum (GCA_001653265)	purpureocillium_lilacinum_gca_001653265	ASM165326v1
+Purpureocillium lilacinum str. 36-1 (GCA_003144605)	purpureocillium_lilacinum_gca_003144605	ASM314460v1
+Pyrenochaeta sp. DS3sAY3a (GCA_001644535)	pyrenochaeta_sp_ds3say3a_gca_001644535	Pyrsp1
+Pyrenophora teres	pyrenophora_teres	PyrTer_1.0
+Pyrenophora tritici-repentis (GCA_003171545)	pyrenophora_tritici_repentis_gca_003171545	PtrARCrossB10
+Pyrenophora tritici-repentis (GCA_003231325)	pyrenophora_tritici_repentis_gca_003231325	Ptr134
+Pyrenophora tritici-repentis (GCA_003231365)	pyrenophora_tritici_repentis_gca_003231365	Ptr239
+Pyrenophora tritici-repentis (GCA_003231425)	pyrenophora_tritici_repentis_gca_003231425	Ptr86-124
+Pyrenophora tritici-repentis Pt-1C-BFP	pyrenophora_triticirepentis	ASM14998v1
+Rachicladosporium antarcticum (GCA_002077065)	rachicladosporium_antarcticum_gca_002077065	ASM207706v1
+Rachicladosporium sp. CCFEE 5018 (GCA_002077045)	rachicladosporium_sp_ccfee_5018_gca_002077045	ASM207704v2
+Ramularia collo-cygni (GCA_900074925)	ramularia_collo_cygni_gca_900074925	version 1
+Rasamsonia emersonii CBS 393.64 (GCA_000968595)	rasamsonia_emersonii_cbs_393_64_gca_000968595	ASM96859v1
+Rhinocladiella mackenziei CBS 650.93 (GCA_000835555)	rhinocladiella_mackenziei_cbs_650_93_gca_000835555	Rhin_mack_CBS_650_93_V1
+Rhizoclosmatium globosum str. JEL800 (GCA_002104985)	rhizoclosmatium_globosum_gca_002104985	Rhihy1
+Rhizoctonia solani 123E (GCA_000715385)	rhizoctonia_solani_123e_gca_000715385	Rhizoctonia solani 123E v1
+Rhizoctonia solani AG-1 IA str. AG1 IA (GCA_000334115)	rhizoctonia_solani_ag_1_ia_gca_000334115	Rhisol_AG1IA_1.0
+Rhizoctonia solani AG-1 IB (GCA_000350255)	rhizoctonia_solani_ag_1_ib_gca_000350255	ASM35025v1
+Rhizoctonia solani AG-3 Rhs1AP (GCA_000524645)	rhizoctonia_solani_ag_3_rhs1ap_gca_000524645	Rhizoctonia solani AG-3
+Rhizoctonia solani AG-8 WAC10335 (GCA_000695385)	rhizoctonia_solani_ag_8_wac10335_gca_000695385	RSAG8-1.V1
+Rhizoctonia solani (GCA_001286725)	rhizoctonia_solani_gca_001286725	AG22IIIB
+Rhizophagus clarus str. HR1	rhizophagus_clarus_gca_003203555	RclarusHR1_1.0
+Rhizophagus irregularis DAOM 181602=DAOM 197198	rhizophagus_irregularis_daom_181602_daom_197198_gca_002897155	Rir_HGAP_ii_V2
+Rhizophagus irregularis DAOM 181602=DAOM 197198 (GCA_000439145)	rhizophagus_irregularis_daom_181602_gca_000439145	ASM43914v3
+Rhizophagus irregularis DAOM 197198w str. DAOM197198w (GCA_000597685)	rhizophagus_irregularis_daom_197198w_gca_000597685	Rir
+Rhizophagus irregularis str. A1	rhizophagus_irregularis_gca_001593125	ASM159312v1
+Rhizophagus irregularis str. A4	rhizophagus_irregularis_gca_001593145	ASM159314v1
+Rhizophagus irregularis str. C2	rhizophagus_irregularis_gca_001593155	ASM159315v1
+Rhizophagus irregularis str. A5	rhizophagus_irregularis_gca_001593205	ASM159320v1
+Rhizopogon vesiculosus str. AM-OR11-056 (GCA_001882365)	rhizopogon_vesiculosus_gca_001882365	Rves_AM-OR11-056_1.0
+Rhizopogon vinicolor AM-OR11-026 (GCA_001658105)	rhizopogon_vinicolor_am_or11_026_gca_001658105	Rhivi1
+Rhizopus delemar RA 99-880 (GCA_000149305)	rhizopus_delemar_ra_99_880_gca_000149305	RO3
+Rhizopus microsporus ATCC 52813	rhizopus_microsporus_atcc_52813_gca_002708625	Rhimi1_1
+Rhizopus microsporus str. CBS-344.29 (GCA_000825725)	rhizopus_microsporus_gca_000825725	Rmicro_CBS_344.29_Allpaths-LG
+Rhizopus microsporus str. ATCC 11559	rhizopus_microsporus_gca_002083735	Rhimi_ATCC11559_1
+Rhizopus microsporus str. ATCC62417 (GCA_900000135)	rhizopus_microsporus_gca_900000135	RMATCC62417_Allpaths-LG
+Rhizopus microsporus var. microsporus str. ATCC 52814	rhizopus_microsporus_var_microsporus_gca_002083745	Rhimi_ATCC52814_1
+Rhodotorula graminis WP1 (GCA_001329695)	rhodotorula_graminis_wp1_gca_001329695	Rhoba1_1
+Rhodotorula sp. JG-1b (GCA_001541205)	rhodotorula_sp_jg_1b_gca_001541205	Rhosp1
+Rhodotorula taiwanensis str. MD1149 (GCA_002922495)	rhodotorula_taiwanensis_gca_002922495	ASM292249v1
+Rhodotorula toruloides ATCC 204091 (GCA_000222205)	rhodotorula_toruloides_atcc_204091_gca_000222205	R.glutinis2
+Rhodotorula toruloides (GCA_001255795)	rhodotorula_toruloides_gca_001255795	IFO0880_HGAP3_v1
+Rhodotorula toruloides NP11 (GCA_000320785)	rhodotorula_toruloides_np11_gca_000320785	RHOziaDV1.0
+Rhynchosporium agropyri (GCA_900074905)	rhynchosporium_agropyri_gca_900074905	version 1
+Rhynchosporium commune (GCA_900074885)	rhynchosporium_commune_gca_900074885	version 1
+Rhynchosporium secalis (GCA_900074895)	rhynchosporium_secalis_gca_900074895	version 1
+Rosellinia necatrix str. W97 (GCA_001445595)	rosellinia_necatrix_gca_001445595	Rnecatrix_2.0
+Rozella allomycis CSF55 (GCA_000442015)	rozella_allomycis_csf55_gca_000442015	Rozella_k41_t100
+Rutstroemia sp. NJR-2017a BBW (GCA_002946425)	rutstroemia_sp_njr_2017a_bbw_gca_002946425	ASM294642v1
+Rutstroemia sp. NJR-2017a BVV2 (GCA_002946415)	rutstroemia_sp_njr_2017a_bvv2_gca_002946415	ASM294641v1
+Rutstroemia sp. NJR-2017a WRK4 (GCA_002946385)	rutstroemia_sp_njr_2017a_wrk4_gca_002946385	ASM294638v1
+Saccharomyces arboricola H-6 (GCA_000292725)	saccharomyces_arboricola_h_6_gca_000292725	SacArb1.0
+Saccharomyces cerevisiae	saccharomyces_cerevisiae	R64-1-1
+Saccharomyces cerevisiae CEN.PK113-7D (GCA_000269885)	saccharomyces_cerevisiae_cen_pk113_7d_gca_000269885	ASM26988v1
+Saccharomyces cerevisiae EC1118 (GCA_000218975)	saccharomyces_cerevisiae_ec1118_gca_000218975	ASM21897v1
+Saccharomyces cerevisiae FostersB (GCA_000190255)	saccharomyces_cerevisiae_fostersb_gca_000190255	ScFostersB_v01
+Saccharomyces cerevisiae FostersO (GCA_000326005)	saccharomyces_cerevisiae_fosterso_gca_000326005	ScFostersO_v01
+Saccharomyces cerevisiae (GCA_001634645)	saccharomyces_cerevisiae_gca_001634645	GLBRCY22-3
+Saccharomyces cerevisiae str. 131 (GCA_001983315)	saccharomyces_cerevisiae_gca_001983315	ASM198331v1
+Saccharomyces cerevisiae (GCA_002804325)	saccharomyces_cerevisiae_gca_002804325	ASM280432v1
+Saccharomyces cerevisiae Kyokai no. 7 str. kyokai no. 7 (GCA_000260735)	saccharomyces_cerevisiae_kyokai_no_7_gca_000260735	K7_1.0
+Saccharomyces cerevisiae Lalvin QA23 (GCA_000325965)	saccharomyces_cerevisiae_lalvin_qa23_gca_000325965	ScQA23_v01
+Saccharomyces cerevisiae P283 (GCA_000568295)	saccharomyces_cerevisiae_p283_gca_000568295	P283
+Saccharomyces cerevisiae P301 (GCA_000568055)	saccharomyces_cerevisiae_p301_gca_000568055	p301
+Saccharomyces cerevisiae R103 (GCA_000568365)	saccharomyces_cerevisiae_r103_gca_000568365	R103
+Saccharomyces cerevisiae RM11-1a (GCA_000149365)	saccharomyces_cerevisiae_rm11_1a_gca_000149365	ASM14936v1
+Saccharomyces cerevisiae Vin13 (GCA_000190215)	saccharomyces_cerevisiae_vin13_gca_000190215	ScVIN13_v01
+Saccharomyces cerevisiae VL3 (GCA_000190235)	saccharomyces_cerevisiae_vl3_gca_000190235	ScVL3_v01
+Saccharomyces cerevisiae x Saccharomyces kudriavzevii VIN7 (GCA_000326105)	saccharomyces_cerevisiae_x_saccharomyces_kudriavzevii_vin7_gca_000326105	ASM32610v1
+Saccharomyces cerevisiae YJM1078 (GCA_000975645)	saccharomyces_cerevisiae_yjm1078_gca_000975645	Sc_YJM1078_v1
+Saccharomyces cerevisiae YJM1083 (GCA_000975675)	saccharomyces_cerevisiae_yjm1083_gca_000975675	Sc_YJM1083_v1
+Saccharomyces cerevisiae YJM1129 (GCA_000975705)	saccharomyces_cerevisiae_yjm1129_gca_000975705	Sc_YJM1129_v1
+Saccharomyces cerevisiae YJM1133 (GCA_000976695)	saccharomyces_cerevisiae_yjm1133_gca_000976695	Sc_YJM1133_v1
+Saccharomyces cerevisiae YJM1190 (GCA_000976725)	saccharomyces_cerevisiae_yjm1190_gca_000976725	Sc_YJM1190_v1
+Saccharomyces cerevisiae YJM1199 (GCA_000976755)	saccharomyces_cerevisiae_yjm1199_gca_000976755	Sc_YJM1199_v1
+Saccharomyces cerevisiae YJM1202 (GCA_000976785)	saccharomyces_cerevisiae_yjm1202_gca_000976785	Sc_YJM1202_v1
+Saccharomyces cerevisiae YJM1208 (GCA_000976815)	saccharomyces_cerevisiae_yjm1208_gca_000976815	Sc_YJM1208_v1
+Saccharomyces cerevisiae YJM1242 (GCA_000976845)	saccharomyces_cerevisiae_yjm1242_gca_000976845	Sc_YJM1242_v1
+Saccharomyces cerevisiae YJM1244 (GCA_000976875)	saccharomyces_cerevisiae_yjm1244_gca_000976875	Sc_YJM1244_v1
+Saccharomyces cerevisiae YJM1248 (GCA_000976905)	saccharomyces_cerevisiae_yjm1248_gca_000976905	Sc_YJM1248_v1
+Saccharomyces cerevisiae YJM1250 (GCA_000976935)	saccharomyces_cerevisiae_yjm1250_gca_000976935	Sc_YJM1250_v1
+Saccharomyces cerevisiae YJM1252 (GCA_000976965)	saccharomyces_cerevisiae_yjm1252_gca_000976965	Sc_YJM1252_v1
+Saccharomyces cerevisiae YJM1273 (GCA_000976995)	saccharomyces_cerevisiae_yjm1273_gca_000976995	Sc_YJM1273_v1
+Saccharomyces cerevisiae YJM1304 (GCA_000977025)	saccharomyces_cerevisiae_yjm1304_gca_000977025	Sc_YJM1304_v1
+Saccharomyces cerevisiae YJM1307 (GCA_000977055)	saccharomyces_cerevisiae_yjm1307_gca_000977055	Sc_YJM1307_v1
+Saccharomyces cerevisiae YJM1311 (GCA_000977085)	saccharomyces_cerevisiae_yjm1311_gca_000977085	Sc_YJM1311_v1
+Saccharomyces cerevisiae YJM1326 (GCA_000977115)	saccharomyces_cerevisiae_yjm1326_gca_000977115	Sc_YJM1326_v1
+Saccharomyces cerevisiae YJM1332 (GCA_000977145)	saccharomyces_cerevisiae_yjm1332_gca_000977145	Sc_YJM1332_v1
+Saccharomyces cerevisiae YJM1336 (GCA_000977175)	saccharomyces_cerevisiae_yjm1336_gca_000977175	Sc_YJM1336_v1
+Saccharomyces cerevisiae YJM1338 (GCA_000977205)	saccharomyces_cerevisiae_yjm1338_gca_000977205	Sc_YJM1338_v1
+Saccharomyces cerevisiae YJM1341 (GCA_000977235)	saccharomyces_cerevisiae_yjm1341_gca_000977235	Sc_YJM1341_v1
+Saccharomyces cerevisiae YJM1342 (GCA_000977265)	saccharomyces_cerevisiae_yjm1342_gca_000977265	Sc_YJM1342_v1
+Saccharomyces cerevisiae YJM1355 (GCA_000977295)	saccharomyces_cerevisiae_yjm1355_gca_000977295	Sc_YJM1355_v1
+Saccharomyces cerevisiae YJM1356 (GCA_000977325)	saccharomyces_cerevisiae_yjm1356_gca_000977325	Sc_YJM1356_v1
+Saccharomyces cerevisiae YJM1381 (GCA_000977355)	saccharomyces_cerevisiae_yjm1381_gca_000977355	Sc_YJM1381_v1
+Saccharomyces cerevisiae YJM1383 (GCA_000977385)	saccharomyces_cerevisiae_yjm1383_gca_000977385	Sc_YJM1383_v1
+Saccharomyces cerevisiae YJM1385 (GCA_000977415)	saccharomyces_cerevisiae_yjm1385_gca_000977415	Sc_YJM1385_v1
+Saccharomyces cerevisiae YJM1386 (GCA_000977445)	saccharomyces_cerevisiae_yjm1386_gca_000977445	Sc_YJM1386_v1
+Saccharomyces cerevisiae YJM1387 (GCA_000977475)	saccharomyces_cerevisiae_yjm1387_gca_000977475	Sc_YJM1387_v1
+Saccharomyces cerevisiae YJM1388 (GCA_000977505)	saccharomyces_cerevisiae_yjm1388_gca_000977505	Sc_YJM1388_v1
+Saccharomyces cerevisiae YJM1389 (GCA_000977535)	saccharomyces_cerevisiae_yjm1389_gca_000977535	Sc_YJM1389_v1
+Saccharomyces cerevisiae YJM1399 (GCA_000977565)	saccharomyces_cerevisiae_yjm1399_gca_000977565	Sc_YJM1399_v1
+Saccharomyces cerevisiae YJM1400 (GCA_000977595)	saccharomyces_cerevisiae_yjm1400_gca_000977595	Sc_YJM1400_v1
+Saccharomyces cerevisiae YJM1401 (GCA_000977625)	saccharomyces_cerevisiae_yjm1401_gca_000977625	Sc_YJM1401_v1
+Saccharomyces cerevisiae YJM1402 (GCA_000977655)	saccharomyces_cerevisiae_yjm1402_gca_000977655	Sc_YJM1402_v1
+Saccharomyces cerevisiae YJM1415 (GCA_000977685)	saccharomyces_cerevisiae_yjm1415_gca_000977685	Sc_YJM1415_v1
+Saccharomyces cerevisiae YJM1417 (GCA_000977715)	saccharomyces_cerevisiae_yjm1417_gca_000977715	Sc_YJM1417_v1
+Saccharomyces cerevisiae YJM1418 (GCA_000977745)	saccharomyces_cerevisiae_yjm1418_gca_000977745	Sc_YJM1418_v1
+Saccharomyces cerevisiae YJM1419 (GCA_000977775)	saccharomyces_cerevisiae_yjm1419_gca_000977775	Sc_YJM1419_v1
+Saccharomyces cerevisiae YJM1433 (GCA_000977805)	saccharomyces_cerevisiae_yjm1433_gca_000977805	Sc_YJM1433_v1
+Saccharomyces cerevisiae YJM1434 (GCA_000977835)	saccharomyces_cerevisiae_yjm1434_gca_000977835	Sc_YJM1434_v1
+Saccharomyces cerevisiae YJM1439 (GCA_000977865)	saccharomyces_cerevisiae_yjm1439_gca_000977865	Sc_YJM1439_v1
+Saccharomyces cerevisiae YJM1443 (GCA_000977895)	saccharomyces_cerevisiae_yjm1443_gca_000977895	Sc_YJM1443_v1
+Saccharomyces cerevisiae YJM1444 (GCA_000977925)	saccharomyces_cerevisiae_yjm1444_gca_000977925	Sc_YJM1444_v1
+Saccharomyces cerevisiae YJM1447 (GCA_000977955)	saccharomyces_cerevisiae_yjm1447_gca_000977955	Sc_YJM1447_v1
+Saccharomyces cerevisiae YJM1450 (GCA_000977985)	saccharomyces_cerevisiae_yjm1450_gca_000977985	Sc_YJM1450_v1
+Saccharomyces cerevisiae YJM1460 (GCA_000978015)	saccharomyces_cerevisiae_yjm1460_gca_000978015	Sc_YJM1460_v1
+Saccharomyces cerevisiae YJM1463 (GCA_000978045)	saccharomyces_cerevisiae_yjm1463_gca_000978045	Sc_YJM1463_v1
+Saccharomyces cerevisiae YJM1477 (GCA_000978075)	saccharomyces_cerevisiae_yjm1477_gca_000978075	Sc_YJM1477_v1
+Saccharomyces cerevisiae YJM1478 (GCA_000978105)	saccharomyces_cerevisiae_yjm1478_gca_000978105	Sc_YJM1478_v1
+Saccharomyces cerevisiae YJM1479 (GCA_000978135)	saccharomyces_cerevisiae_yjm1479_gca_000978135	Sc_YJM1479_v1
+Saccharomyces cerevisiae YJM1526 (GCA_000978165)	saccharomyces_cerevisiae_yjm1526_gca_000978165	Sc_YJM1526_v1
+Saccharomyces cerevisiae YJM1527 (GCA_000978195)	saccharomyces_cerevisiae_yjm1527_gca_000978195	Sc_YJM1527_v1
+Saccharomyces cerevisiae YJM1549 (GCA_000978225)	saccharomyces_cerevisiae_yjm1549_gca_000978225	Sc_YJM1549_v1
+Saccharomyces cerevisiae YJM1573 (GCA_000978255)	saccharomyces_cerevisiae_yjm1573_gca_000978255	Sc_YJM1573_v1
+Saccharomyces cerevisiae YJM1574 (GCA_000978285)	saccharomyces_cerevisiae_yjm1574_gca_000978285	Sc_YJM1574_v1
+Saccharomyces cerevisiae YJM1592 (GCA_000978315)	saccharomyces_cerevisiae_yjm1592_gca_000978315	Sc_YJM1592_v1
+Saccharomyces cerevisiae YJM1615 (GCA_000978345)	saccharomyces_cerevisiae_yjm1615_gca_000978345	Sc_YJM1615_v1
+Saccharomyces cerevisiae YJM189 (GCA_000975735)	saccharomyces_cerevisiae_yjm189_gca_000975735	Sc_YJM189_v1
+Saccharomyces cerevisiae YJM193 (GCA_000975765)	saccharomyces_cerevisiae_yjm193_gca_000975765	Sc_YJM193_v1
+Saccharomyces cerevisiae YJM195 (GCA_000975585)	saccharomyces_cerevisiae_yjm195_gca_000975585	Sc_YJM195_v1
+Saccharomyces cerevisiae YJM244 (GCA_000975615)	saccharomyces_cerevisiae_yjm244_gca_000975615	Sc_YJM244_v1
+Saccharomyces cerevisiae YJM248 (GCA_000975795)	saccharomyces_cerevisiae_yjm248_gca_000975795	Sc_YJM248_v1
+Saccharomyces cerevisiae YJM270 (GCA_000975825)	saccharomyces_cerevisiae_yjm270_gca_000975825	Sc_YJM270_v1
+Saccharomyces cerevisiae YJM271 (GCA_000975855)	saccharomyces_cerevisiae_yjm271_gca_000975855	Sc_YJM271_v1
+Saccharomyces cerevisiae YJM320 (GCA_000975885)	saccharomyces_cerevisiae_yjm320_gca_000975885	Sc_YJM320_v1
+Saccharomyces cerevisiae YJM326 (GCA_000975915)	saccharomyces_cerevisiae_yjm326_gca_000975915	Sc_YJM326_v1
+Saccharomyces cerevisiae YJM428 (GCA_000975945)	saccharomyces_cerevisiae_yjm428_gca_000975945	Sc_YJM428_v1
+Saccharomyces cerevisiae YJM450 (GCA_000975975)	saccharomyces_cerevisiae_yjm450_gca_000975975	Sc_YJM450_v1
+Saccharomyces cerevisiae YJM451 (GCA_000976005)	saccharomyces_cerevisiae_yjm451_gca_000976005	Sc_YJM451_v1
+Saccharomyces cerevisiae YJM453 (GCA_000976035)	saccharomyces_cerevisiae_yjm453_gca_000976035	Sc_YJM453_v1
+Saccharomyces cerevisiae YJM456 (GCA_000976065)	saccharomyces_cerevisiae_yjm456_gca_000976065	Sc_YJM456_v1
+Saccharomyces cerevisiae YJM470 (GCA_000976095)	saccharomyces_cerevisiae_yjm470_gca_000976095	Sc_YJM470_v1
+Saccharomyces cerevisiae YJM541 (GCA_000976125)	saccharomyces_cerevisiae_yjm541_gca_000976125	Sc_YJM541_v1
+Saccharomyces cerevisiae YJM554 (GCA_000976155)	saccharomyces_cerevisiae_yjm554_gca_000976155	Sc_YJM554_v1
+Saccharomyces cerevisiae YJM555 (GCA_000976185)	saccharomyces_cerevisiae_yjm555_gca_000976185	Sc_YJM555_v1
+Saccharomyces cerevisiae YJM627 (GCA_000976215)	saccharomyces_cerevisiae_yjm627_gca_000976215	Sc_YJM627_v1
+Saccharomyces cerevisiae YJM681 (GCA_000976245)	saccharomyces_cerevisiae_yjm681_gca_000976245	Sc_YJM681_v1
+Saccharomyces cerevisiae YJM682 (GCA_000976275)	saccharomyces_cerevisiae_yjm682_gca_000976275	Sc_YJM682_v1
+Saccharomyces cerevisiae YJM683 (GCA_000976305)	saccharomyces_cerevisiae_yjm683_gca_000976305	Sc_YJM683_v1
+Saccharomyces cerevisiae YJM689 (GCA_000976335)	saccharomyces_cerevisiae_yjm689_gca_000976335	Sc_YJM689_v1
+Saccharomyces cerevisiae YJM693 (GCA_000976365)	saccharomyces_cerevisiae_yjm693_gca_000976365	Sc_YJM693_v1
+Saccharomyces cerevisiae YJM789 (GCA_000181435)	saccharomyces_cerevisiae_yjm789_gca_000181435	ASM18143v1
+Saccharomyces cerevisiae YJM969 (GCA_000976395)	saccharomyces_cerevisiae_yjm969_gca_000976395	Sc_YJM969_v1
+Saccharomyces cerevisiae YJM972 (GCA_000976425)	saccharomyces_cerevisiae_yjm972_gca_000976425	Sc_YJM972_v1
+Saccharomyces cerevisiae YJM975 (GCA_000976455)	saccharomyces_cerevisiae_yjm975_gca_000976455	Sc_YJM975_v1
+Saccharomyces cerevisiae YJM978 (GCA_000976485)	saccharomyces_cerevisiae_yjm978_gca_000976485	Sc_YJM978_v1
+Saccharomyces cerevisiae YJM981 (GCA_000976515)	saccharomyces_cerevisiae_yjm981_gca_000976515	Sc_YJM981_v1
+Saccharomyces cerevisiae YJM984 (GCA_000976545)	saccharomyces_cerevisiae_yjm984_gca_000976545	Sc_YJM984_v1
+Saccharomyces cerevisiae YJM987 (GCA_000976575)	saccharomyces_cerevisiae_yjm987_gca_000976575	Sc_YJM987_v1
+Saccharomyces cerevisiae YJM990 (GCA_000976605)	saccharomyces_cerevisiae_yjm990_gca_000976605	Sc_YJM990_v1
+Saccharomyces cerevisiae YJM993 (GCA_000662435)	saccharomyces_cerevisiae_yjm993_gca_000662435	Sc_YJM993_v1
+Saccharomyces cerevisiae YJM996 (GCA_000976665)	saccharomyces_cerevisiae_yjm996_gca_000976665	Sc_YJM996_v1
+Saccharomyces eubayanus str. FM1318 (GCA_001298625)	saccharomyces_eubayanus_gca_001298625	SEUB3.0
+Saccharomyces kudriavzevii IFO 1802 (GCA_000167075)	saccharomyces_kudriavzevii_ifo_1802_gca_000167075	Saccharomyces_kudriavzevii_strain_IFO1802_v1.0
+Saccharomyces sp. 'boulardii' str. biocodex (GCA_001298375)	saccharomyces_sp_boulardii__gca_001298375	ASM129837v2
+Saccharomyces sp. 'boulardii' str. unique28 (GCA_001413975)	saccharomyces_sp_boulardii__gca_001413975	ASM141397v1
+Saccharomycetaceae sp. 'Ashbya aceri' (GCA_000412225)	saccharomycetaceae_sp_ashbya_aceri__gca_000412225	ASM41222v2
+Saitoella complicata NRRL Y-17804 (GCA_000227095)	saitoella_complicata_nrrl_y_17804_gca_000227095	Scomplicata_3.0
+Saitoella complicata NRRL Y-17804 (GCA_001661265)	saitoella_complicata_nrrl_y_17804_gca_001661265	Saico1
+Scedosporium apiospermum str. IHEM 14462 (GCA_000732125)	scedosporium_apiospermum_gca_000732125	ScApio1.0
+Scheffersomyces stipitis CBS 6054 (GCA_000209165)	scheffersomyces_stipitis_cbs_6054_gca_000209165	ASM20916v1
+Schizophyllum commune H4-8 (GCA_000143185)	schizophyllum_commune_h4_8_gca_000143185	v1.0
+Schizopora paradoxa str. KUC8140 (GCA_001020605)	schizopora_paradoxa_gca_001020605	Schpa1
+Schizosaccharomyces cryophilus	schizosaccharomyces_cryophilus	SCY4
+Schizosaccharomyces japonicus	schizosaccharomyces_japonicus	SJ5
+Schizosaccharomyces octosporus	schizosaccharomyces_octosporus	SO6
+Schizosaccharomyces pombe	schizosaccharomyces_pombe	ASM294v2
+Scleroderma citrinum Foug A (GCA_000827425)	scleroderma_citrinum_foug_a_gca_000827425	Scleroderma citrinum Foug A v1.0
+Sclerotinia borealis F-4128 (GCA_000503235)	sclerotinia_borealis_f_4128_gca_000503235	SBOR_1
+Sclerotinia sclerotiorum	sclerotinia_sclerotiorum	ASM14694v1
+Sclerotinia sclerotiorum 1980 UF-70 (GCA_001857865)	sclerotinia_sclerotiorum_1980_uf_70_gca_001857865	ASM185786v1
+Serendipita indica DSM 11827 (GCA_000313545)	serendipita_indica_dsm_11827_gca_000313545	ASM31354v1
+Serendipita vermifera MAFF 305830 (GCA_000827415)	serendipita_vermifera_maff_305830_gca_000827415	Sebacina vermifera MAFF 305830 v1.0
+Serpula lacrymans var. lacrymans S7.3 (GCA_000218725)	serpula_lacrymans_var_lacrymans_s7_3_gca_000218725	v1.0
+Serpula lacrymans var. lacrymans S7.9 (GCA_000218685)	serpula_lacrymans_var_lacrymans_s7_9_gca_000218685	v1.0
+Sistotremastrum niveocremeum HHB9708 (GCA_001630475)	sistotremastrum_niveocremeum_hhb9708_gca_001630475	Sisni1
+Sistotremastrum suecicum HHB10207 ss-3 (GCA_001632355)	sistotremastrum_suecicum_hhb10207_ss_3_gca_001632355	Sissu1
+Sordaria macrospora k-hell (GCA_000182805)	sordaria_macrospora_k_hell_gca_000182805	ASM18280v2
+Spathaspora passalidarum NRRL Y-27907 (GCA_000223485)	spathaspora_passalidarum_nrrl_y_27907_gca_000223485	Spathaspora passalidarum v2.0
+Sphaerobolus stellatus SS14 (GCA_000827215)	sphaerobolus_stellatus_ss14_gca_000827215	Sphst1
+Sphaerulina musiva SO2202 (GCA_000320565)	sphaerulina_musiva_so2202_gca_000320565	Septoria musiva SO2202 v1.0
+Spizellomyces punctatus DAOM BR117 (GCA_000182565)	spizellomyces_punctatus_daom_br117_gca_000182565	S_punctatus_V1
+Sporisorium reilianum	sporisorium_reilianum	ASM23024v1
+Sporisorium reilianum f. sp. reilianum (GCA_900162835)	sporisorium_reilianum_f_sp_reilianum_gca_900162835	version 2
+Sporothrix brasiliensis 5110 (GCA_000820605)	sporothrix_brasiliensis_5110_gca_000820605	S_brasiliensis_5110_v1
+Sporothrix insectorum RCEF 264 (GCA_001636815)	sporothrix_insectorum_rcef_264_gca_001636815	SPI 1.0
+Sporothrix schenckii 1099-18 (GCA_000961545)	sporothrix_schenckii_1099_18_gca_000961545	S_schenckii_v1
+Sporothrix schenckii ATCC 58251 (GCA_000474925)	sporothrix_schenckii_atcc_58251_gca_000474925	Spor_sche_ATCC58251_V1
+Spraguea lophii 42_110 (GCA_000430065)	spraguea_lophii_42_110_gca_000430065	Sprlop1.0
+Stachybotrys chartarum IBT 40288 (GCA_000732765)	stachybotrys_chartarum_ibt_40288_gca_000732765	S40288v1
+Stachybotrys chartarum IBT 40293 (GCA_000732565)	stachybotrys_chartarum_ibt_40293_gca_000732565	S40293v1
+Stachybotrys chartarum IBT 7711 (GCA_000730325)	stachybotrys_chartarum_ibt_7711_gca_000730325	S7711v1
+Stachybotrys chlorohalonata IBT 40285 (GCA_000732775)	stachybotrys_chlorohalonata_ibt_40285_gca_000732775	S40285v1
+Stagonospora sp. SRC1lsM3a (GCA_001644525)	stagonospora_sp_src1lsm3a_gca_001644525	Stasp1
+Stemphylium lycopersici str. CIDEFI 216 (GCA_001191545)	stemphylium_lycopersici_gca_001191545	ASM119154v1
+Stereum hirsutum FP-91666 SS1 (GCA_000264905)	stereum_hirsutum_fp_91666_ss1_gca_000264905	Stehi1
+Sugiyamaella lignohabitans str. CBS 10342 (GCA_001640025)	sugiyamaella_lignohabitans_gca_001640025	ASM164002v2
+Suhomyces tanzawaensis NRRL Y-17324 (GCA_001661415)	suhomyces_tanzawaensis_nrrl_y_17324_gca_001661415	Canta1
+Suillus luteus UH-Slu-Lm8-n1 (GCA_000827255)	suillus_luteus_uh_slu_lm8_n1_gca_000827255	Suilu1
+Syncephalastrum racemosum str. NRRL 2496	syncephalastrum_racemosum_gca_002105135	Synrac1
+Talaromyces atroroseus str. IBT 11181 (GCA_001907595)	talaromyces_atroroseus_gca_001907595	ASM190759v1
+Talaromyces cellulolyticus str. Y-94 (GCA_000829775)	talaromyces_cellulolyticus_gca_000829775	TcelY94_1.0
+Talaromyces islandicus (GCA_000985935)	talaromyces_islandicus_gca_000985935	PIS
+Talaromyces marneffei ATCC 18224 (GCA_000001985)	talaromyces_marneffei_atcc_18224_gca_000001985	JCVI-PMFA1-2.0
+Talaromyces marneffei PM1 (GCA_000750115)	talaromyces_marneffei_pm1_gca_000750115	ASM75011v1
+Talaromyces stipitatus ATCC 10500 (GCA_000003125)	talaromyces_stipitatus_atcc_10500_gca_000003125	JCVI-TSTA1-3.0
+Termitomyces sp. J132 (GCA_001263195)	termitomyces_sp_j132_gca_001263195	TerJ1321.0
+Testicularia cyperi str. MCA 3645 (GCA_003144125)	testicularia_cyperi_gca_003144125	Tescy1
+Tetrapisispora blattae CBS 6284 (GCA_000315915)	tetrapisispora_blattae_cbs_6284_gca_000315915	ASM31591v1
+Tetrapisispora phaffii CBS 4417 (GCA_000236905)	tetrapisispora_phaffii_cbs_4417_gca_000236905	ASM23690v1
+Thermothelomyces thermophila ATCC 42464 (GCA_000226095)	thermothelomyces_thermophila_atcc_42464_gca_000226095	ASM22609v1
+Thielavia terrestris NRRL 8126 (GCA_000226115)	thielavia_terrestris_nrrl_8126_gca_000226115	ASM22611v1
+Thielaviopsis punctulata (GCA_000968615)	thielaviopsis_punctulata_gca_000968615	ASM96861v1
+Tilletia caries str. DAOM 238032 (GCA_001645005)	tilletia_caries_gca_001645005	ASM164500v1
+Tilletia controversa str. DAOM 236426 (GCA_001645045)	tilletia_controversa_gca_001645045	ASM164504v1
+Tilletia indica str. DAOM 236416 (GCA_001645015)	tilletia_indica_gca_001645015	ASM164501v1
+Tilletia walkeri str. DAOM 236422 (GCA_001645055)	tilletia_walkeri_gca_001645055	ASM164505v1
+Tilletiaria anomala UBC 951 (GCA_000711695)	tilletiaria_anomala_ubc_951_gca_000711695	Tilletiaria anomala UBC 951 v1.0
+Tilletiopsis washingtonensis str. MCA 4186 (GCA_003144115)	tilletiopsis_washingtonensis_gca_003144115	Tilwa1
+Tolypocladium capitatum str. CBS 113982 (GCA_002901185)	tolypocladium_capitatum_gca_002901185	ASM290118v1
+Tolypocladium ophioglossoides CBS 100239 (GCA_001189435)	tolypocladium_ophioglossoides_cbs_100239_gca_001189435	Tophv1.0
+Tolypocladium paradoxum str. NRBC 100945 (GCA_002916505)	tolypocladium_paradoxum_gca_002916505	ASM291650v1
+Torrubiella hemipterigena str. BCC 1449 (GCA_000825705)	torrubiella_hemipterigena_gca_000825705	Allpaths-LG
+Tortispora caseinolytica NRRL Y-17796 (GCA_001661475)	tortispora_caseinolytica_nrrl_y_17796_gca_001661475	Canca1
+Torulaspora delbrueckii str. CBS 1146 (GCA_000243375)	torulaspora_delbrueckii_gca_000243375	ASM24337v1
+Trachipleistophora hominis (GCA_000316135)	trachipleistophora_hominis_gca_000316135	ASM31613v1
+Trametes cinnabarina str. BRFM137 (GCA_000765035)	trametes_cinnabarina_gca_000765035	BN946
+Trametes coccinea BRFM310 (GCA_002092935)	trametes_coccinea_brfm310_gca_002092935	Pycco1
+Trametes pubescens str. FBCC735 (GCA_001895945)	trametes_pubescens_gca_001895945	ASM189594v1
+Trametes versicolor FP-101664 SS1 (GCA_000271585)	trametes_versicolor_fp_101664_ss1_gca_000271585	Trametes versicolor v1.0
+Tremella mesenterica DSM 1558 (GCA_000271645)	tremella_mesenterica_dsm_1558_gca_000271645	Treme1
+Trichoderma asperellum CBS 433.97 (GCA_003025105)	trichoderma_asperellum_cbs_433_97_gca_003025105	Trias v. 1.0
+Trichoderma atroviride IMI 206040 (GCA_000171015)	trichoderma_atroviride_imi_206040_gca_000171015	TRIAT v2.0
+Trichoderma citrinoviride str. TUCIM 6016 (GCA_003025115)	trichoderma_citrinoviride_gca_003025115	Trici v4.0
+Trichoderma gamsii str. T6085 (GCA_001481775)	trichoderma_gamsii_gca_001481775	TGAM01v2
+Trichoderma guizhouense str. NJAU 4742 (GCA_002022785)	trichoderma_guizhouense_gca_002022785	ASM202278v1
+Trichoderma harzianum CBS 226.95 (GCA_003025095)	trichoderma_harzianum_cbs_226_95_gca_003025095	Allpaths-LG v. 01/03/12
+Trichoderma harzianum str. T6776 (GCA_000988865)	trichoderma_harzianum_gca_000988865	ASM98886v1
+Trichoderma harzianum str. TR274 (GCA_002838845)	trichoderma_harzianum_gca_002838845	ASM283884v1
+Trichoderma harzianum str. Tr1 (GCA_002894145)	trichoderma_harzianum_gca_002894145	Tr1
+Trichoderma longibrachiatum ATCC 18648 (GCA_003025155)	trichoderma_longibrachiatum_atcc_18648_gca_003025155	Trilo3
+Trichoderma parareesei (GCA_001050175)	trichoderma_parareesei_gca_001050175	Tpara_v1.0
+Trichoderma reesei	trichoderma_reesei	v2.0
+Trichoderma reesei RUT C-30 (GCA_000513815)	trichoderma_reesei_rut_c_30_gca_000513815	TrireRUTC30_1
+Trichoderma virens	trichoderma_virens	ASM17099v1
+Trichophyton benhamiae CBS 112371 (GCA_000151125)	trichophyton_benhamiae_cbs_112371_gca_000151125	ASM15112v2
+Trichophyton equinum CBS 127.97 (GCA_000151175)	trichophyton_equinum_cbs_127_97_gca_000151175	ASM15117v1
+Trichophyton interdigitale H6 (GCA_000616785)	trichophyton_interdigitale_h6_gca_000616785	Tric_rubr_H6_V2
+Trichophyton interdigitale MR816 (GCA_000622975)	trichophyton_interdigitale_mr816_gca_000622975	Tric_inte_MR816_V1
+Trichophyton mentagrophytes str. TIMM 2789 (GCA_003118255)	trichophyton_mentagrophytes_gca_003118255	ABySS_70bp_45k_152cov_v1
+Trichophyton rubrum CBS 100081 (GCA_000616805)	trichophyton_rubrum_cbs_100081_gca_000616805	Tric_fish_CBS_100081_V1
+Trichophyton rubrum CBS 118892 (GCA_000151425)	trichophyton_rubrum_cbs_118892_gca_000151425	ASM15142v1
+Trichophyton rubrum CBS 202.88 (GCA_000616985)	trichophyton_rubrum_cbs_202_88_gca_000616985	Tric_raub_CBS_202_88_V2
+Trichophyton rubrum CBS 288.86 (GCA_000616825)	trichophyton_rubrum_cbs_288_86_gca_000616825	Tric_fish_CBS_288_86_V1
+Trichophyton rubrum CBS 289.86 (GCA_000616845)	trichophyton_rubrum_cbs_289_86_gca_000616845	Tric_kane_CBS_289_86_V1
+Trichophyton rubrum CBS 735.88 (GCA_000616965)	trichophyton_rubrum_cbs_735_88_gca_000616965	Tric_megn_CBS_735_88_V1
+Trichophyton rubrum D6 (GCA_000622995)	trichophyton_rubrum_d6_gca_000622995	Tric_rubr_D6_V1
+Trichophyton rubrum str. CMCC(F)T1i (GCA_001651445)	trichophyton_rubrum_gca_001651445	CMCC(F)T1i
+Trichophyton rubrum MR1448 (GCA_000616905)	trichophyton_rubrum_mr1448_gca_000616905	Tric_rubr_M1448_V1
+Trichophyton rubrum MR1459 (GCA_000616945)	trichophyton_rubrum_mr1459_gca_000616945	Tric_rubr_MR1459_V1
+Trichophyton rubrum MR850 (GCA_000616765)	trichophyton_rubrum_mr850_gca_000616765	Tric_rubr_MR-850_V1
+Trichophyton soudanense CBS 452.61 (GCA_000616865)	trichophyton_soudanense_cbs_452_61_gca_000616865	Tric_soud_CBS_452_61_V1
+Trichophyton tonsurans CBS 112818 (GCA_000151455)	trichophyton_tonsurans_cbs_112818_gca_000151455	ASM15145v1
+Trichophyton verrucosum HKI 0517 (GCA_000151505)	trichophyton_verrucosum_hki_0517_gca_000151505	ASM15150v1
+Trichophyton violaceum str. CMCC(F)T3l (GCA_001651435)	trichophyton_violaceum_gca_001651435	CMCC(F)T3l
+Trichosporon asahii var. asahii CBS 2479 (GCA_000293215)	trichosporon_asahii_var_asahii_cbs_2479_gca_000293215	Trichosporon asahii 1
+Trichosporon asahii var. asahii CBS 8904 (GCA_000299215)	trichosporon_asahii_var_asahii_cbs_8904_gca_000299215	ASM29921v2
+Tsuchiyaea wingfieldii CBS 7118 (GCA_001720155)	tsuchiyaea_wingfieldii_cbs_7118_gca_001720155	Tsuc_wing_CBS7118_V1
+Tuber borchii str. Tbo3840 (GCA_003070745)	tuber_borchii_gca_003070745	Tubbor1
+Tuber magnatum (GCA_003182015)	tuber_magnatum_gca_003182015	ASM318201v1
+Tuber melanosporum	tuber_melanosporum	ASM15164v1
+Tulasnella calospora MUT 4182 (GCA_000827465)	tulasnella_calospora_mut_4182_gca_000827465	Tulasnella calospora AL13/4D v1.0
+Umbilicaria pustulata (GCA_900169345)	umbilicaria_pustulata_gca_900169345	Lasallia pustulata v1
+Uncinocarpus reesii 1704 str. UAMH 1704 (GCA_000003515)	uncinocarpus_reesii_1704_gca_000003515	ASM351v2
+Ustilaginoidea virens str. UV-8b (GCA_000687475)	ustilaginoidea_virens_gca_000687475	Assembly for version 1 of the Villosiclava virens genome
+Ustilaginoidea virens (GCA_000965225)	ustilaginoidea_virens_gca_000965225	ASM96522v2
+Ustilaginomycotina sp. SA 807 (GCA_003144235)	ustilaginomycotina_sp_sa_807_gca_003144235	Ustsp1
+Ustilago bromivora str. UB2112 (GCA_900080155)	ustilago_bromivora_gca_900080155	UBRO_v3
+Ustilago hordei str. Uh4857-4 (GCA_000286035)	ustilago_hordei_gca_000286035	ASM28603v1
+Ustilago maydis	ustilago_maydis	Umaydis521_2.0
+Valsa mali str. 03-8 (GCA_000818155)	valsa_mali_gca_000818155	ASM81815v1
+Valsa mali var. pyri str. SXYL134 (GCA_000813385)	valsa_mali_var_pyri_gca_000813385	ASM81338v1
+Vanderwaltozyma polyspora DSM 70294 (GCA_000150035)	vanderwaltozyma_polyspora_dsm_70294_gca_000150035	ASM15003v1
+Vavraia culicis subsp. floridensis (GCA_000192795)	vavraia_culicis_subsp_floridensis_gca_000192795	Vavr_culi_floridensis_V1
+Verruconis gallopava str. CBS 43764 (GCA_000836295)	verruconis_gallopava_gca_000836295	O_gall_CBS43764
+Verticillium alfalfae VaMs.102 (GCA_000150825)	verticillium_alfalfae_vams_102_gca_000150825	ASM15082v1
+Verticillium dahliae	verticillium_dahliae	ASM15067v2
+Verticillium dahliae str. 12008 (GCA_002892985)	verticillium_dahliae_gca_002892985	ASM289298v1
+Verticillium dahliae (GCA_002892995)	verticillium_dahliae_gca_002892995	ASM289299v1
+Verticillium dahliae (GCA_002893025)	verticillium_dahliae_gca_002893025	ASM289302v1
+Verticillium dahliae (GCA_002893035)	verticillium_dahliae_gca_002893035	ASM289303v1
+Verticillium dahliae (GCA_002893045)	verticillium_dahliae_gca_002893045	ASM289304v1
+Verticillium dahliae JR2	verticillium_dahliaejr2	VDAG_JR2v.4.0
+Verticillium longisporum (GCA_001268145)	verticillium_longisporum_gca_001268145	vl1.denovo.v1
+Verticillium longisporum (GCA_001268165)	verticillium_longisporum_gca_001268165	vl2.denovo.v1
+Vittaforma corneae ATCC 50505 (GCA_000231115)	vittaforma_corneae_atcc_50505_gca_000231115	Vitt_corn_V1
+Wallemia ichthyophaga EXF-994 (GCA_000400465)	wallemia_ichthyophaga_exf_994_gca_000400465	Wallemia ichthyophaga version 1.0
+Wallemia mellicola CBS 633.66 (GCA_000263375)	wallemia_mellicola_cbs_633_66_gca_000263375	Wallemia sebi v1.0
+Wickerhamiella sorbophila str. DS02 (GCA_002251995)	wickerhamiella_sorbophila_gca_002251995	ASM225199v2
+Wickerhamomyces anomalus NRRL Y-366-8 (GCA_001661255)	wickerhamomyces_anomalus_nrrl_y_366_8_gca_001661255	Wican1
+Wickerhamomyces ciferrii str. NRRL Y-1031 (GCA_000313485)	wickerhamomyces_ciferrii_gca_000313485	ASM31348v1
+Wolfiporia cocos MD-104 SS10 (GCA_000344635)	wolfiporia_cocos_md_104_ss10_gca_000344635	Wolco1
+Xanthophyllomyces dendrorhous (GCA_001007165)	xanthophyllomyces_dendrorhous_gca_001007165	Xden1
+Xylona heveae TC161 (GCA_001619985)	xylona_heveae_tc161_gca_001619985	Xylona heveae TC161 v1.0
+Yarrowia lipolytica	yarrowia_lipolytica	ASM252v1
+Yarrowia lipolytica str. CLIB89 (W29) (GCA_001761485)	yarrowia_lipolytica_gca_001761485	ASM176148v1
+Yarrowia lipolytica (GCA_900087985)	yarrowia_lipolytica_gca_900087985	YALIA101
+Zygosaccharomyces bailii CLIB 213 (GCA_000442885)	zygosaccharomyces_bailii_clib_213_gca_000442885	ZYBA0
+Zygosaccharomyces bailii (GCA_900162805)	zygosaccharomyces_bailii_gca_900162805	version 1
+Zygosaccharomyces bailii ISA1307 (GCA_000530735)	zygosaccharomyces_bailii_isa1307_gca_000530735	Z_bailii_ISA1307_version_3
+Zygosaccharomyces parabailii str. ATCC 60483 (GCA_001984395)	zygosaccharomyces_parabailii_gca_001984395	ASM198439v2
+Zygosaccharomyces rouxii str. CBS 732 (GCA_000026365)	zygosaccharomyces_rouxii_gca_000026365	ASM2636v1
+Zygosaccharomyces rouxii str. NBRC110957 (GCA_001972345)	zygosaccharomyces_rouxii_gca_001972345	ZYGR_assembly01
+Zymoseptoria brevis str. Zb18110 (GCA_000966595)	zymoseptoria_brevis_gca_000966595	ASM96659v1
+Zymoseptoria tritici	zymoseptoria_tritici	MG2
+Zymoseptoria tritici ST99CH_1A5 (GCA_900099495)	zymoseptoria_tritici_st99ch_1a5_gca_900099495	ZT1A5 complete assembly
+Zymoseptoria tritici ST99CH_1E4 (GCA_900184115)	zymoseptoria_tritici_st99ch_1e4_gca_900184115	ST99CH_1E4
+Zymoseptoria tritici ST99CH_3D1 (GCA_900184105)	zymoseptoria_tritici_st99ch_3d1_gca_900184105	ST99CH_3D1
+Zymoseptoria tritici ST99CH_3D7 (GCA_900091695)	zymoseptoria_tritici_st99ch_3d7_gca_900091695	Zt_ST99CH_3D7

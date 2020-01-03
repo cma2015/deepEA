@@ -1,0 +1,123 @@
+<tool id="Obtain_Genome_or_Transcriptome_Sequences_and_Annotation" name="Obtain Genome Sequences and Annotation"  version='18.09'>
+<description></description>
+	<command>
+		Rscript ${__tool_directory__}/02_Obtain_Genome_Sequences_and_Annotation.R $specie_list.data_type $specie_list.database $datatype $output;
+	</command>
+<inputs>
+
+	<conditional name="specie_list">
+		<param name="data_type" type="select" label="Select an Ensembl database" display="radio">
+			<option value="plants" selected="True">Ensembl Plants (release 44)</option>
+			<option value="vertebrates">Ensembl Vertebrates (release 97)</option>
+			<option value="metazoa">Ensembl Metazoa (release 44)</option>
+		</param>
+
+		<when value="plants">
+            <param name="database" type="select" value="Choose" label="Select a species"
+                help="">
+                    <options from_data_table="EnsemblPlants" >
+                        <filter type="sort_by" column="0"/>
+                        <validator type="no_options" message="No indexes are available for the selected input dataset"/>
+                    </options>
+            </param>
+        </when>
+		<when value="vertebrates">
+			<param name="database" type="select" value="Choose" label="Select a species"
+                help="">
+                    <options from_data_table="EnsemblVertebrates" >
+                        <filter type="sort_by" column="0"/>
+                        <validator type="no_options" message="No indexes are available for the selected input dataset"/>
+                    </options>
+            </param>
+		</when>
+		<when value="fungi">
+			<param name="database" type="select" value="Choose" label="Select a species"
+                help="">
+                    <options from_data_table="EnsemblFungi" >
+                        <filter type="sort_by" column="0"/>
+                        <validator type="no_options" message="No indexes are available for the selected input dataset"/>
+                    </options>
+            </param>
+		</when>
+
+		<when value="metazoa">
+			<param name="database" type="select" value="Choose" label="Select a species"
+                help="">
+                    <options from_data_table="EnsemblMetazoa" >
+                        <filter type="sort_by" column="0"/>
+                        <validator type="no_options" message="No indexes are available for the selected input dataset"/>
+                    </options>
+            </param>
+		</when>
+
+		<when value="protists">
+			<param name="database" type="select" value="Choose" label="Select a species"
+                help="">
+                    <options from_data_table="EnsemblProtists" >
+                        <filter type="sort_by" column="0"/>
+                        <validator type="no_options" message="No indexes are available for the selected input dataset"/>
+                    </options>
+            </param>
+		</when>
+
+	</conditional>
+
+	<param name="datatype" type="select" label="Data type" multiple="false" display="radio">
+    	<option value="Genome" selected="true">Genome Sequences (FASTA)</option>
+    	<option value="cDNA">cDNA (FASTA)</option>
+ 		<option value="CDS">CDS (FASTA)</option>
+   		<option value="Protein">Protein Sequences (FASTA)</option>
+		<option value="GTF">GTF</option>
+		<option value="GFF3">GFF3</option>
+	</param>
+</inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+	<outputs>
+
+	<data name="output" format="data" label="${specie_list.database} ${datatype}.txt">
+                <change_format>
+                    <when input="datatype" value="Genome" format="fasta" />
+                    <when input="datatype" value="cDNA" format="fasta" />
+                    <when input="datatype" value="CDS" format="fasta" />
+                    <when input="datatype" value="Protein" format="fasta" />
+					<when input="datatype" value="GTF" format="gtf" />
+					<when input="datatype" value="Protein" format="gff3" />
+                </change_format>
+	</data>
+
+	</outputs>
+
+	<help>
+.. class:: infomark
+
+**What it does**
+
+This function is designed to download sequences (Genome sequences, cDNA, CDS, proteins) and genome annotation (GTF/GFF3) automatically from Ensembl database (ftp://ftp.ensemblgenomes.org/pub).
+
+-------------
+
+.. class:: infomark
+
+**Inputs**
+
+- **Select an Ensembl database**: Ensembl Plants, Ensembl Vertebrates, Ensembl Fungi, Ensembl Metazoa and Ensembl Protists.
+
+- **Select a species**: the latin species name.
+
+- **Data type:** select data type, supported format:  Genome (FASTA),Transcriptome (FASTA), Gene Anonotation (GTF) and Gene Anonotation (GFF3).
+
+
+-------------
+
+
+.. class:: infomark
+
+**Outputs**
+
+- FASTA format sequences or GTF annotation (depends on users' selection).
+
+  </help>
+
+</tool>

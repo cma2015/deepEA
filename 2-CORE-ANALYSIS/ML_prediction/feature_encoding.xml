@@ -1,0 +1,294 @@
+<tool id="feature_encoding" name="Feature Encoding" version="18.09">
+    <description></description>
+    <command><![CDATA[
+    ln -sf ${genomeSequence} ${genomeSequence}".fasta";
+    #if $cmrType.type == "peak":
+        #if $method.type == "sequence_level":
+            Rscript ${__tool_directory__}/01_featureEncoding.R -cmrType peaks -cmr ${CMR} -type sequence -motif $cmrType.motif -genome ${genomeSequence}.fasta -seqFeatures $method.kmer.kmer,$method.autocorrelation.autocorrelation,$method.Pseudo_nucleotide_composition.Pseudo_nucleotide_composition,$method.binary.binary -out ${output} -flank $flank;
+        #elif $method.type == "genomic":
+	    ln -sf $method.GTF $method.GTF".gtf";
+            Rscript ${__tool_directory__}/01_featureEncoding.R -cmrType peaks -cmr ${CMR} -type genomic -motif $cmrType.motif -genome ${genomeSequence}.fasta -genomicFeatures $method.overlap_with_features.overlap_with_features,$method.relative_position.relative_position,$method.region_length.region_length,$method.nucleotide_distances.nucleotide_distances,$method.attributes.attributes -out ${output} -flank $flank -gtf $method.GTF".gtf";
+        #else:
+	    ln -sf $method.GTF $method.GTF".gtf";
+	    Rscript ${__tool_directory__}/01_featureEncoding.R -cmrType peaks -cmr ${CMR} -type genomic -motif $cmrType.motif -genome ${genomeSequence}.fasta -seqFeatures $method.kmer.kmer,$method.autocorrelation.autocorrelation,$method.Pseudo_nucleotide_composition.Pseudo_nucleotide_composition,$method.binary.binary -genomicFeatures $method.overlap_with_features.overlap_with_features,$method.relative_position.relative_position,$method.region_length.region_length,$method.nucleotide_distances.nucleotide_distances,$method.attributes.attributes -out ${output} -flank $flank -gtf $method.GTF".gtf";
+        #end if
+    #else:
+        #if $method.type == "sequence_level":
+            Rscript ${__tool_directory__}/01_featureEncoding.R -cmrType sites -cmr ${CMR} -type sequence -motif $cmrType.motif -genome ${genomeSequence}.fasta -seqFeatures $method.kmer.kmer,$method.autocorrelation.autocorrelation,$method.Pseudo_nucleotide_composition.Pseudo_nucleotide_composition,$method.binary.binary -out ${output} -flank $flank;
+        #elif $method.type == "genomic":
+	    ln -sf $method.GTF $method.GTF".gtf";
+            Rscript ${__tool_directory__}/01_featureEncoding.R -cmrType sites -cmr ${CMR} -type genomic -motif $cmrType.motif -genome ${genomeSequence}.fasta -genomicFeatures $method.overlap_with_features.overlap_with_features,$method.relative_position.relative_position,$method.region_length.region_length,$method.nucleotide_distances.nucleotide_distances,$method.attributes.attributes -out ${output} -flank $flank -gtf $method.GTF".gtf";
+	#else:
+	    ln -sf $method.GTF $method.GTF".gtf";
+            Rscript ${__tool_directory__}/01_featureEncoding.R -cmrType sites -cmr ${CMR} -type genomic -motif $cmrType.motif -genome ${genomeSequence}.fasta -seqFeatures $method.seqFeature -genomicFeatures $method.overlap_with_features.overlap_with_features,$method.relative_position.relative_position,$method.region_length.region_length,$method.nucleotide_distances.nucleotide_distances,$method.attributes.attributes -out ${output} -flank $flank -gtf $method.GTF".gtf";
+        #end if
+    #end if
+
+    ]]></command>
+
+    <inputs>
+	    <param name="CMR" type="data" format="bed" label="CMR regions in BED format"/>
+        <param name="genomeSequence" type="data" format="fasta" label="Reference genome sequence"/>
+        <param name="flank" type="integer" value="50" label="The length of flank regions" help="The sequence length of upstream and downstream centered on CMR. By default:101"/>
+        <conditional name="cmrType">
+            <param name="type" type="select" label="Select input type" display="radio">
+                <option value="peak" selected="True">Peak regions</option>
+                <option value="sites">Single nucleotide resolution sites</option>
+            </param>
+            <when value="peak">
+                <param name="motif" type="text" value="RRACH" label="Input the motif of CMR" help="The motif information is used to extract flank sequences centered on CMRs"/>
+                <param name="pos" type="integer" value="3" label="Relative position of CMR on motif"/>
+            </when>
+	    </conditional>
+        <conditional name="method">
+            <param name="type" type="select" label="Feature encoding methods">
+                <option value="sequence_level" selected="true">Sequence-derived features</option>
+                <option value="genomic">Genomic-derived features</option>
+                <option value="both">Both sequence and genomic features</option>
+            </param>
+
+            <when value="sequence_level">
+                <section name="kmer" title="Nucleic acid composition related features">
+                    <param name="kmer" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="1mer">1-mer (The frequency of mono-nucleotide)</option>
+                        <option value="2mer">2-mer (The frequency of di-nucleotides)</option>
+                        <option value="3mer">3-mer (The frequency of tri-nucleotides)</option>
+                        <option value="4mer">4-mer (The frequency of tetra-nucleotides)</option>
+                        <option value="Mismatch">Mismatch (The occurrences of kmers, allowing at most m mismatches)</option>
+                        <option value="Subsequence">Subsequence (The occurrences of kmers, allowing non-contiguous matches)</option>
+                    </param>
+                </section>
+
+                <section name="autocorrelation" title="Autocorerlation-based features">
+                    <param name="autocorrelation" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="DAC">DAC (Dinucleotide-based auto covariance)</option>
+                        <option value="DCC">DCC (Dinucleotide-based cross covariance)</option>
+                        <option value="DACC">DACC (Dinucleotide-based covariance)</option>
+                        <option value="MAC">MAC (Morna autocorrelation)</option>
+                        <option value="GAC">GAC (Geary autocorrelation)</option>
+                        <option value="NMBAC">NMBAC (Normalized autocorrelation)</option>
+                    </param>
+                </section>
+
+                <section name="Pseudo_nucleotide_composition" title="Pseudo nucleotide composition">
+                    <param name="Pseudo_nucleotide_composition" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="PC-PseDNC-General">PC-PseDNC-General</option>
+                        <option value="SC-PseDNC-General">SC-PseDNC-General</option>
+                    </param>
+                </section>
+
+                <section name="binary" title="Binary encoding">
+                    <param name="binary" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="one_hot">Binary encoding</option>
+                        <option value="one_hot_SCP">Binary encoding based on structural chemical properties</option>
+                    </param>
+                </section>
+            </when>
+            <when value="genomic">
+                <param name="GTF" type="data" format="gtf,gff,gff3" label="Reference genome annotation in GTF/GFF3 format"/>
+                <section name="overlap_with_features" title="Dummy variables indicating whether the site is overlapped to the topological region on the major RNA transcript">
+                    <param name="overlap_with_features" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="UTR5" selected="true">Five prime UTR</option>
+                        <option value="UTR3">Three prime UTR</option>
+                        <option value="Stop_codons">Stop codons</option>
+                        <option value="Start_codons">Start codons</option>
+                        <option value="TSS">Downstream 100bp of TSS</option>
+                        <!-- <option value="TSS_CMR">Downstream 100bp of TSS on CMR</option> -->
+                        <option value="exon_stop">Exons containing stop codons</option>
+                        <option value="alternative_exon">Alternative exons</option>
+                        <option value="constitutive_exon">Constitutive exons</option>
+                        <option value="internal_exon">Internal exons</option>
+                        <option value="long_exon">Long exons (exon lengt >= 400bp)</option>
+                        <option value="last_exon_400bp">five prime 500bp of the last exon</option>
+                        <option value="last_exon_sc400">five prime 500bp of the last exon containing stop codons</option>
+                    </param>
+                </section>
+
+                <section name="relative_position" title="Relative position on the region">
+                    <param name="relative_position" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="pos_UTR5">Relative position on five prime UTR</option>
+                        <option value="pos_UTR3">Relative position on three prime UTR</option>
+                        <option value="pos_exons">Relative position on exon</option>
+                    </param>
+                </section>
+
+                <section name="region_length" title="The region length in bp">
+                    <param name="region_length" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="length_UTR5">The length of five prime UTR</option>
+                        <option value="length_UTR3">The length of three prime UTR</option>
+                        <option value="length_gene_ex">Mature transcript length</option>
+                    </param>
+                </section>
+
+                <section name="nucleotide_distances" title="Nucleotide distances toward the splicing junctions or the nearest neighboring sites">
+                    <param name="nucleotide_distances" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="dist_sj_5_p2000">Distance to the five prime splicing junction</option>
+                        <option value="dist_sj_3_p2000">Distance to the three prime splicing junction</option>
+                        <option value="dist_nearest_p200">Distance to the closest neighbor truncated at 200bp</option>
+                    </param>
+                </section>
+
+                <section name="attributes" title="Attributes of the genes of transcripts">
+                    <param name="attributes" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="sncRNA">sncRNA</option>
+                        <option value="lncRNA">lncRNA</option>
+                        <option value="HK_genes">House keeping genes</option>
+                        <option value="miR_targeted_genes">miRNA targeted genes</option>
+                    </param>
+                </section>
+
+            </when>
+
+            <when value="both">
+            <param name="GTF" type="data" format="gtf,gff,gff3" label="Reference genome annotation in GTF/GFF3 format"/>
+                <section name="kmer" title="Nucleic acid composition related features">
+                    <param name="kmer" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="1mer">1-mer (The frequency of mono-nucleotide)</option>
+                        <option value="2mer">2-mer (The frequency of di-nucleotides)</option>
+                        <option value="3mer">3-mer (The frequency of tri-nucleotides)</option>
+                        <option value="4mer">4-mer (The frequency of tetra-nucleotides)</option>
+                        <option value="Mismatch">Mismatch (The occurrences of kmers, allowing at most m mismatches)</option>
+                        <option value="Subsequence">Subsequence (The occurrences of kmers, allowing non-contiguous matches)</option>
+                    </param>
+                </section>
+
+                <section name="autocorrelation" title="Autocorerlation-based features">
+                    <param name="autocorrelation" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="DAC">DAC (Dinucleotide-based auto covariance)</option>
+                        <option value="DCC">DCC (Dinucleotide-based cross covariance)</option>
+                        <option value="DACC">DACC (Dinucleotide-based covariance)</option>
+                        <option value="MAC">MAC (Morna autocorrelation)</option>
+                        <option value="GAC">GAC (Geary autocorrelation)</option>
+                        <option value="NMBAC">NMBAC (Normalized autocorrelation)</option>
+                    </param>
+                </section>
+
+                <section name="Pseudo_nucleotide_composition" title="Pseudo nucleotide composition">
+                    <param name="Pseudo_nucleotide_composition" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="PC-PseDNC-General">PC-PseDNC-General</option>
+                        <option value="SC-PseDNC-General">SC-PseDNC-General</option>
+                    </param>
+                </section>
+
+                <section name="binary" title="Binary encoding">
+                    <param name="binary" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="one_hot">Binary encoding</option>
+                        <option value="one_hot_SCP">Binary encoding based on structural chemical properties</option>
+                    </param>
+                </section>
+
+                 <section name="overlap_with_features" title="Dummy variables indicating whether the site is overlapped to the topological region on the major RNA transcript">
+                    <param name="overlap_with_features" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="UTR5" selected="true">Five prime UTR</option>
+                        <option value="UTR3">Three prime UTR</option>
+                        <option value="Stop_codons">Stop codons</option>
+                        <option value="Start_codons">Start codons</option>
+                        <option value="TSS">Downstream 100bp of TSS</option>
+                        <!-- <option value="TSS_CMR">Downstream 100bp of TSS on CMR</option> -->
+                        <option value="exon_stop">Exons containing stop codons</option>
+                        <option value="alternative_exon">Alternative exons</option>
+                        <option value="constitutive_exon">Constitutive exons</option>
+                        <option value="internal_exon">Internal exons</option>
+                        <option value="long_exon">Long exons (exon lengt >= 400bp)</option>
+                        <option value="last_exon_400bp">five prime 500bp of the last exon</option>
+                        <option value="last_exon_sc400">five prime 500bp of the last exon containing stop codons</option>
+                    </param>
+                </section>
+
+                <section name="relative_position" title="Relative position on the region">
+                    <param name="relative_position" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="pos_UTR5">Relative position on five prime UTR</option>
+                        <option value="pos_UTR3">Relative position on three prime UTR</option>
+                        <option value="pos_exons">Relative position on exon</option>
+                    </param>
+                </section>
+
+                <section name="region_length" title="The region length in bp">
+                    <param name="region_length" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="length_UTR5">The length of five prime UTR</option>
+                        <option value="length_UTR3">The length of three prime UTR</option>
+                        <option value="length_gene_ex">Mature transcript length</option>
+                    </param>
+                </section>
+
+                <section name="region_length" title="The region length in bp">
+                    <param name="region_length" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="length_UTR5">The length of five prime UTR</option>
+                        <option value="length_UTR3">The length of three prime UTR</option>
+                        <option value="length_gene_ex">Mature transcript length</option>
+                    </param>
+                </section>
+
+                <section name="nucleotide_distances" title="Nucleotide distances toward the splicing junctions or the nearest neighboring sites">
+                    <param name="nucleotide_distances" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="dist_sj_5_p2000">Distance to the five prime splicing junction</option>
+                        <option value="dist_sj_3_p2000">Distance to the three prime splicing junction</option>
+                        <option value="dist_nearest_p200">Distance to the closest neighbor truncated at 200bp</option>
+                    </param>
+                </section>
+
+                <section name="attributes" title="Attributes of the genes of transcripts">
+                    <param name="attributes" type="select" label=" " multiple="true" display="checkboxes">
+                        <option value="sncRNA">sncRNA</option>
+                        <option value="lncRNA">lncRNA</option>
+                        <option value="HK_genes">House keeping genes</option>
+                        <option value="miR_targeted_genes">miRNA targeted genes</option>
+                    </param>
+                </section>
+
+            </when>
+        </conditional>
+
+
+
+    </inputs>
+
+    <outputs>
+    	<data name="output" format="txt" label="featureMatrix.txt">
+	    </data>
+    </outputs>
+    <help>
+    .. class:: infomark
+
+    **What it does**
+
+    This function can be used to encode CMR flanking sequences into a feature matrix. To be specific, **Sequence-derived features** integrated several commonly used feature encoding strategies including **Nucleic acid composition related features**, **Autocorerlation-based features**, **Pseudo nucleotide composition** and **Binary encoding**; For **Genomic-derived features**, we adopted feature encoding strategy used in WHISTLE_ (Chen *et al*., 2019, *Nucleic Acids Research*) project, more details are listed in `DeepEA tutorial`_.
+
+    .. _WHISTLE: https://academic.oup.com/nar/article/47/7/e41/5319125
+    .. _`DeepEA tutorial`: https://cma2015.github.io/DeepEA/#feature-encoding
+
+    .. class:: infomark
+
+    **Inputs**
+
+    - **CMR regions in BED format**
+    - **Reference genome sequences in FASTA format**
+    - **Genome annotation in GTF/GFF3 format (only required for Genomic-derived features)** are required.
+
+    .. class:: infomark
+
+    **Parameters**
+
+    - **the length of flank regions**, default is 50bp
+    - **CMR motif**, default is RRACH (not necessary for single-nucleotide CMRs, e.g. m5C)
+    - **Relative position of CMR on motif**, for example, A is the third base for RRACH
+
+    .. class:: infomark
+
+    **Outputs**
+
+    - A feature matrix used for downstream **Feature Selection** and **Machine Learning-based Classification**
+
+    </help>
+    <citations>
+        <citation type="doi">10.1093/bib/bbx165</citation>
+        <citation type="doi">10.1093/bioinformatics/btp500</citation>
+        <citation type="doi">10.1093/nar/gkn159</citation>
+        <citation type="doi">10.1093/bioinformatics/btu602</citation>
+        <citation type="doi">10.1002/bip.360270308</citation>
+        <citation type="doi">10.1002/ajpa.20250</citation>
+        <citation type="doi">10.1093/bioinformatics/bty421</citation>
+        <citation type="doi">10.3389/fpls.2018.00519</citation>
+        <citation type="doi">10.1093/nar/gkz074</citation>
+    </citations>
+</tool>

@@ -1,0 +1,146 @@
+<tool id="bowtie2" name="Bowtie2" version="18.09">
+  <description></description>
+  <command><![CDATA[
+	bash ${__tool_directory__}/01_bowtie2-index.sh '$genomeSequence';
+
+	## Bowtie2 alignment
+	bowtie2
+	-p ${thread}
+	#if  $algorithm_options.algorithm_options_selector == "advanced":
+		#if $algorithm_options.pre_sets.local_or_end_to_end == "end_to_end":
+			#if $algorithm_options.pre_sets.modes == "sensitive":
+				--sensitive
+			#elif $algorithm_options.pre_sets.modes == "very_fast":
+				--very-fast
+			#elif $algorithm_options.pre_sets.modes == "fast":
+				--fast
+			#else:
+				--very-sensitive
+			#end if
+		#elif $algorithm_options.pre_sets.local_or_end_to_end == "local":
+			#if $algorithm_options.pre_sets.modes == "sensitive_local":
+				--sensitive-local
+			#elif $algorithm_options.pre_sets.modes == "very_fast_local":
+				--very-fast-local
+			#elif $algorithm_options.pre_sets.modes == "fast_local":
+				--fast-local
+			#else:
+				--very-sensitive-local
+			#end if
+		#else:
+			-D $algorithm_options.pre_sets.give_up
+			-R $algorithm_options.pre_sets.repetitive
+			-N $algorithm_options.pre_sets.max_mismatches
+			-L $algorithm_options.pre_sets.seed_length
+			-i $algorithm_options.pre_sets.interval
+			--n-ceil $algorithm_options.pre_sets.func
+			--dpad $algorithm_options.pre_sets.extra_ref_chars
+			--gbar $algorithm_options.pre_sets.disallow_gaps
+		#end if
+	#end if
+	-x '$genomeSequence'
+	#if $fqType.single_or_paired == "single":
+		-U '$readSE'
+	#elif $fqType.single_or_paired == "paired":
+		-1 '$readR1'
+		-2 '$readR2'
+	#end if
+	-S '$alignmentOutput' 2>$alignmentSummary;
+  ]]></command>
+  <inputs>
+	<param name="genomeSequence" type="data" format="fasta" label="Reference genome sequence"/>
+	<conditional name="fqType">
+		<param name="single_or_paired" type="select" label="Single-end or paired-end" display="radio">
+			<option value="single">Single-end</option>
+			<option value="paired">Paired-end</option>
+		</param>
+		<when value="single">
+			<param name="readSE" type="data" format="fastqsanger,fastqsanger.gz,fastq,fq" label="Read file (SE)"/>
+		</when>
+		<when value="paired">
+			<param name="readR1" type="data" format="fastqsanger,fastqsanger.gz,fastq,fq" label="Read file (R1)"/>
+			<param name="readR2" type="data" format="fastqsanger,fastqsanger.gz,fastq,fq" label="Read file (R2)"/>
+		</when>
+	</conditional>
+	<param name="thread" type="integer" value="3" min="1" max="3" label="Threads"/>
+
+	<conditional name="algorithm_options">
+        <param name="algorithm_options_selector" type="select" label="Algorithm options" display="radio">
+            <option value="basic" selected="true">Basic</option>
+            <option value="advanced">Advanced</option>
+        </param>
+        <when value="basic" />
+        <when value="advanced">
+			<conditional name="pre_sets">
+				<param name="local_or_end_to_end" type="select" label="Pre-settings" display="radio">
+					<option value="end_to_end" selected="true">bowtie2 pre-defined end to end</option>
+					<option value="local">bowtie2 pre-defined local</option>
+					<option value="custom">custom options</option>
+				</param>
+				<when value="end_to_end">
+					<param name="modes" type="select" label="Select pre-defined modes">
+						<option value="sensitive" selected="true">sensitive (-D 15 -R 2 -N 0 -L 22 -i S,1,1.15)</option>
+						<option value="very_fast">very fast (-D 5 -R 1 -N 0 -L 22 -i S,0,2.50)</option>
+						<option value="fast">fast (-D 10 -R 2 -N 0 -L 22 -i S,0,2.50)</option>
+						<option value="very_sensitive">very sensitive (-D 20 -R 3 -N 0 -L 20 -i S,1,0.50)</option>
+					</param>
+				</when>
+				<when value="local">
+					<param name="modes" type="select" label="Select pre-defined modes">
+						<option value="sensitive_local" selected="true">sensitive local (-D 15 -R 2 -N 0 -L 20 -i S,1,0.75)</option>
+						<option value="very_fast_local">very fast local (-D 5 -R 1 -N 0 -L 25 -i S,1,2.00)</option>
+						<option value="fast_local">fast local (-D 10 -R 2 -N 0 -L 22 -i S,1,1.75)</option>
+						<option value="very_sensitive_local">very sensitive local (-D 20 -R 3 -N 0 -L 20 -i S,1,0.50)</option>
+					</param>
+				</when>
+				<when value="custom">
+					<param name="give_up" type="integer" value="15" label="give up extending after # failed extends in a row" argument="-D" help=""/>
+					<param name="repetitive" type="integer" value="2" label="for reads w/ repetitive seeds, try # sets of seeds" argument="-R" help=""/>
+					<param name="max_mismatches" type="integer" value="0" min="0" max="1" label="Max # mismatches in seed alignment" argument="-N" help="can be 0 or 1"/>
+					<param name="seed_length" type="integer" value="22" min="3" max="32" label="Length of seed substrings" argument="-L" help=""/>
+					<param name="interval" type="text" value="S,1,1.15" label="Interval between seed substrings w/r/t read len" argument="-i" help=""/>
+					<param name="func" type="text" value="L,0,0.15" label="Func for max # non-A/C/G/Ts permitted in aln" argument="--n-ceil" help=""/>
+					<param name="extra_ref_chars" type="integer" value="15" label="include # extra ref chars on sides of DP table" argument="--dpad" help=""/>
+					<param name="disallow_gaps" type="integer" value="4" label="disallow gaps within # nucs of read extremes" argument="--gbar" help=""/>
+				</when>
+			</conditional>
+        </when>
+    </conditional>
+  </inputs>
+  	<stdio>
+	</stdio>
+  <outputs>
+	<data name="alignmentOutput" format="sam" label="bowtie2_alignment.sam"/>
+	<data name="alignmentSummary" format="txt" label="bowtie2_alignment_summary.txt"/>
+  </outputs>
+<help>
+.. class:: infomark
+
+**What it does**
+
+Bowtie2_ is an ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences. It is particularly good at aligning reads of about 50 up to 100s or 1,000s of characters to relatively long (e.g. mammalian) genomes. Bowtie 2 supports gapped, local, and paired-end alignment modes. Galaxy wrapper for Bowtie 2 outputs alignments in `BAM format`_, enabling interoperation with a large number of other tools available at this site. Majority of information in this page is derived from an excellent `Bowtie2 manual`_ written by Ben Langmead.
+
+.. _Bowtie2: http://bowtie-bio.sourceforge.net/bowtie2/
+.. _`Bowtie2 manual`: http://bowtie-bio.sourceforge.net/bowtie2/manual.shtml
+.. _`BAM format`: http://samtools.github.io/hts-specs/SAMv1.pdf
+
+
+.. class:: infomark
+
+**Inputs**
+
+- **FASTQ format sequencing files**
+- **Reference genome in FASTA format**
+
+.. class:: infomark
+
+**Outputs**
+
+- Alignments in BAM format
+- Alignment summary generated by bowtie2
+
+</help>
+    <citations>
+        <citation type="doi">10.1038/nmeth.1923</citation>
+    </citations>
+</tool>

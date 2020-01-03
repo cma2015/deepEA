@@ -1,0 +1,65 @@
+<tool id="Multi-omics-integration" name="Correlate CMR with other Omics Signal" version='18.09'>
+  <description></description>
+  <command><![CDATA[
+	ln -sf '${gff}' '${gff}.gtf';
+	#if $feature_type.genome_feature == "GCContent":
+		ln -sf '${feature_type.genomeSequence}' '${feature_type.genomeSequence}.fasta';
+		Rscript ${__tool_directory__}/multi-omics.R ${CMR_gene} ${gff}.gtf ${feature_type.genomeSequence}.fasta $threshold $feature_type.genome_feature;
+		cp ${__tool_directory__}/CMR_multi-omics_genomic_feature.html $CMR_genome_feature_html;
+	#else:
+		Rscript ${__tool_directory__}/multi-omics.R ${CMR_gene} ${gff}.gtf "NA" $threshold $feature_type.genome_feature;
+		cp ${__tool_directory__}/CMR_multi-omics_genomic_feature.html $CMR_genome_feature_html;
+	#end if
+	rm ${__tool_directory__}/CMR_multi-omics_genomic_feature.html;
+  ]]></command>
+
+  <inputs>
+	<param name="CMR_gene" type="data" format="tsv,txt" multiple="false" label="CMR related gene ID with additional omics data"/>
+	<param name="gff" type="data" format="gff,gtf,gff3" label="Genome annotation in GTF/GFF3 format"/>
+	<param name="threshold" type="float" value="100" label="Specify a threshold to split CMR genes into two parts" help=""/>
+	<conditional name="feature_type">
+		<param name="genome_feature" type="select" label="Genome feature type" display="radio">
+			<option value="geneLength" type="select">Gene length analysis</option>
+			<option value="exonLength">Exon length analysis</option>
+			<option value="intronLength">Intron length analysis</option>
+			<option value="exonNumber">Exon number analysis</option>
+			<option value="GCContent">GC Content analysis</option>
+		</param>
+		<when value="GCContent">
+			<param name="genomeSequence" type="data" format="fasta" label="Reference genome sequence"/>
+		</when>
+	</conditional>
+  </inputs>
+
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs>
+	<data name="CMR_genome_feature_html" format="html" label= "CMR_multi-omics_genome_feature.html">
+	</data>
+  </outputs>
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+This function is designed to correlate CMRs with other Omics Signal.
+
+.. class:: infomark
+
+**Inputs**
+
+- CMR related gene ID with additional omics data
+- Genome annotation in GTF/GFF3 format
+
+.. class:: infomark
+
+**Outputs**
+
+- An HTML document recording the correlation between CMR and other other Omics Signal
+
+
+</help>
+</tool>
+

@@ -1,0 +1,259 @@
+<tool id="Assess_Reads_Quality" name="Assess Reads Quality" version='18.09'>
+
+  <command><![CDATA[
+
+##############################
+#if $type.tools_type == "fastp":
+
+#set ext = '.fastq' ;
+
+#if $type.single_paired.in1.is_of_type('fastq.gz'):
+    #set ext = '.fastq.gz' ;
+#end if
+#set $in1 = $type.single_paired.in1 ;
+#set $in1_name = $type.single_paired.in1.name + $ext
+ln -s '$in1' '$in1_name' ;
+
+#if $type.single_paired.single_paired_selector == "paired":
+	#set $in2 = $type.single_paired.in2 ;
+     #set $in2_name = $type.single_paired.in2.name + $ext  ;
+     ln -s '$in2' '$in2_name' ;
+#end if
+
+
+## Run fastp
+/home/miniconda2/bin/fastp
+
+--thread \${GALAXY_SLOTS:-1}
+--report_title 'fastp report for $type.single_paired.in1.name'
+
+#if $type.single_paired.in1.is_of_type('fastqillumina', 'fastqsolexa', 'fastqillumina.gz', 'fastqsolexa.gz'):
+    --phred64
+#end if
+
+
+#if $type.adapter_sequence.adapter_sequence_input == "single":
+	-a '$type.adapter_sequence.adapter1'
+#end if
+
+#if $type.adapter_sequence.adapter_sequence_input == "paired":
+	-a '$type.adapter_sequence.adapter1'
+	-A '$type.adapter_sequence.adapter2'
+
+#end if
+
+
+#if $type.single_paired.single_paired_selector == "single":
+	-i '$in1_name'
+	-o 'first${ext}' ;
+#end if
+
+#if $type.single_paired.single_paired_selector == "paired":
+	-i '$in1_name'
+	-o 'first${ext}'
+    -I '$in2_name'
+    -O 'second${ext}' ;
+#end if
+
+	mv first${ext} '${out1}' ;
+#if $type.single_paired.single_paired_selector == "paired":
+    mv second${ext} '${out2}' ;
+#end if
+
+
+#end if
+
+#################
+#if $type.tools_type == "fastqc":
+
+       #set input_name = $type.input_file.name
+
+        #if $type.input_file.ext.endswith('.gz'):
+            #set input_file_sl = $input_name + '.gz'
+        #elif $type.input_file.ext.endswith('.bz2'):
+            #set input_file_sl = $input_name + '.bz2'
+        #else
+            #set input_file_sl = $input_name
+        #end if
+
+        #if 'bam' in $type.input_file.ext:
+            #set format = 'bam'
+        #elif 'sam' in $type.input_file.ext:
+            #set format = 'sam'
+        #else
+            #set format = 'fastq'
+        #end if
+
+
+ ln -s '${type.input_file}' '${input_file_sl}' &&
+        mkdir -p '${html_file.files_path}' &&
+        /home/miniconda2/bin/fastqc
+            --outdir '${html_file.files_path}'
+
+            #if $type.adapters.dataset and str($type.adapters) > ''
+                --adapters '${type.adapters}'
+            #end if
+
+            --quiet
+            --extract
+
+            #if $type.min_length:
+                --min_length $type.min_length
+            #end if
+            --kmers $type.kmers
+            -f '${format}'
+            '${input_file_sl}'
+
+        && cp '${html_file.files_path}'/*/fastqc_data.txt output.txt
+        && cp '${html_file.files_path}'/*\.html output.html
+
+#end if
+  ]]></command>
+  <inputs>
+
+	<conditional name="type">
+		<param name="tools_type" type="select" label="Select a tool for reads quality check">
+			<option value="fastp">fastp (an ultra-fast all-in-one FASTQ preprocessor) </option>
+			<option value="fastqc"  selected="true">FastQC (a quality control analysis tool for high throughput sequencing data) </option>
+		</param>
+	<when value="fastp">
+ 		<conditional name="single_paired">
+            <param name="single_paired_selector" type="select" label="Single-end or paired-end reads?">
+                <option value="single" selected="true">Single-end</option>
+                <option value="paired">Paired-end</option>
+            </param>
+            <when value="single">
+				<param name="in1" argument="-i" type="data" format="fastq,fastq.gz" label="Input FASTQ file" help="Input FASTQ file" />
+            </when>
+            <when value="paired">
+				<param name="in1" argument="-i" type="data" format="fastq,fastq.gz" label="Input FASTQ file (R1 of pair)" help="Input FASTQ file" />
+				<param name="in2" argument="-I" type="data" format="fastq,fastq.gz" label="Input FASTQ file (R2 of pair)" help="Input FASTQ file" />
+            </when>
+	    </conditional>
+
+
+		<conditional name="adapter_sequence">
+            <param name="adapter_sequence_input" type="select" label="Adapter sequences">
+                <option value="Auto_detect" selected="true">Auto detect</option>
+                <option value="single">Adapter sequences for single-end reads</option>
+                <option value="paired">Adapter sequences for paired-end reads</option>
+            </param>
+			<when value="single">
+				<param name="adapter1" argument="-a" type="text"  label="Input adapter sequences"  />
+            </when>
+            <when value="paired">
+				<param name="adapter1" argument="-a" type="text"  label="Input adapter sequences 1"  />
+				<param name="adapter2" argument="-A" type="text"  label="Input adapter sequences 2"  />
+            </when>
+		</conditional>
+	</when>
+	<when value="fastqc">
+        <param format="fastq,fastq.gz,fastqsanger,fastq.bz2,bam,sam" name="input_file" type="data"
+               label="Raw sequencing reads" help="Support for fastq, bz2, bam, sam format."/>
+        <param argument="--adapters" type="data" format="tabular" optional="true" label="Adapter sequences"
+               help="list of adapters adapter sequences which will be explicity searched against the library. tab delimited file with 2 columns: name and sequences." />
+       <param argument="--min_length" type="integer" value="" optional="true"
+               label="Minimum sequence length"
+               help="If you set this parameter to a value, then reads with length less than your setting will be discarded and not shown in the report."/>
+        <param argument="--kmers" type="integer" value="7" min="2" max="10"
+               label="The length of Kmer" help="Specifies the length of Kmer to look for in the Kmer content
+                    module. Specified Kmer length must be between 2 and 10. Default
+                    length is 7 if not specified."/>
+
+	</when>
+
+	</conditional>
+
+
+  </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+   <outputs>
+        <data name="out1" format="fastq" label="${tool.name} on ${on_string}: Read 1 Output">
+            <filter>type['single_paired']['single_paired_selector'] in ["single", "paired"]</filter>
+			<filter>type['tools_type'] == "fastp"</filter>
+        </data>
+        <data name="out2" format="fastq" label="${tool.name} on ${on_string}: Read 2 Output">
+            <filter>type['single_paired']['single_paired_selector'] == "paired"</filter>
+			<filter>type['tools_type'] == "fastp"</filter>
+        </data>
+        <data name="report_html" format="html" from_work_dir="fastp.html" label="${tool.name} on ${on_string}: HTML Report">
+			<filter>type['tools_type'] == "fastp"</filter>
+        </data>
+        <data name="report_json" format="json" from_work_dir="fastp.json" label="${tool.name} on ${on_string}: JSON Report">
+			<filter>type['tools_type'] == "fastp"</filter>
+        </data>
+
+        <data format="html" name="html_file" from_work_dir="output.html" label="${tool.name} on ${on_string}: Webpage" >
+			<filter>type['tools_type'] == "fastqc"</filter>
+		</data>
+        <data format="txt" name="text_file"  from_work_dir="output.txt" label="${tool.name} on ${on_string}: RawData" >
+			<filter>type['tools_type'] == "fastqc"</filter>
+		</data>
+
+    </outputs>
+<help><![CDATA[
+.. class:: infomark
+
+**What it does**
+
+In this function, two existing NGS tools FastQC (Andrews *et al*., 2010) and fastp (Chen *et al*., 2018) are integrated to check sequencing reads quality and obtain high-quality reads, respectively.
+
+
+-----
+
+.. class:: infomark
+
+**Inputs**
+
+- For **FastQC:**
+    - **Raw sequencing reads:** raw sequencing reads in FASTQ format.
+    - **Adapter sequences:** optional, a tab delimited matrix with 2 columns: name and sequences.
+- For **fastp:**
+    - **Input FASTQ file:** single-end or paired-end raw epitranscriptome sequence reads in FASTQ format.
+    - **Adapter sequences:** optional, adapter sequences in FASTA format.
+
+-----
+
+.. class:: infomark
+
+**Parameters**
+
+- For **FastQC:**
+    - **Minimum sequence length:** an integer which specified the minimum read length. If you set this parameter to a value, then reads with length less than your setting will be discarded and not shown in the report.
+    - **The length of Kmer:** an integer to specify the length of Kmer to look for in the Kmer content module. Specified Kmer length must be between 2 and 10. Default length is 7 if not specified.
+
+- For **fastp:**
+
+
+-----
+
+.. class:: infomark
+
+**Outputs**
+
+- For **FastQC:**
+    This function produces a basic text and a HTML output file that contain all of the results, including the following:
+
+    - Basic Statistics
+    - Per base sequence quality
+    - Per sequence quality scores
+    - Per base sequence content
+    - Per sequence GC content
+    - Per base N content
+    - Sequence Length Distribution
+    - Sequence Duplication Levels
+    - Overrepresented sequences
+    - Adapter Content
+
+- For **fastp:**
+    - High-quality reads in FASTQ format.
+
+
+]]></help>
+    <citations>
+        <citation type="doi">10.1093/bioinformatics/bty560</citation>
+    </citations>
+</tool>
+

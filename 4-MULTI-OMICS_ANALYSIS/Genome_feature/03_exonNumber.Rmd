@@ -1,0 +1,178 @@
+---
+title: Genomic Feature Analysis of CMR
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    social: menu
+    source_code: embed
+    theme: cosmo
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(rtracklayer)
+library(plotly)
+library(ggplot2)
+library(seqinr)
+library(GenomicFeatures)
+library(knitr)
+library(kableExtra)
+options(scipen = 20)
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE)
+```
+
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+CMRGene <- read.table(file = CMRGeneDir, sep = "\t", header = F, quote = '',
+                      stringsAsFactors = F)
+CMRGene <- CMRGene$V1
+GTF <- import(con = GTFDir)
+GTF <- subset(GTF, GTF$gene_biotype == "protein_coding")
+txdb <- makeTxDbFromGFF(file = GTFDir)
+
+seqNames <- na.omit(as.numeric(as.character(unique(seqnames(GTF)@values))))
+
+GTFdf <- data.frame(GTF)
+
+resFreq <- NULL
+resExonNumber <- NULL
+
+for(i in 1:length(seqNames)){
+  curGTF <- subset(GTFdf, GTFdf$seqnames == i)
+  exonNumber <- by(data = curGTF, INDICES = curGTF[, "gene_id"],
+                   function(x) length(na.omit(unique(x[,"exon_number"]))))
+  curGeneGTF <- subset(curGTF, curGTF$type == "gene")
+  curGeneGTF <- curGeneGTF[order(curGeneGTF$start), ]
+  rownames(curGeneGTF) <- curGeneGTF$gene_id
+  orderGene <- rownames(curGeneGTF)
+  exonNumber <- exonNumber[orderGene]
+  curLength <- length(exonNumber)
+  curStart <- seq(1, curLength - seqLength + stepSize, stepSize)
+  curEnd <- c(curStart[1:(length(curStart)-1)] + seqLength - 1, curLength)
+  curMat <- cbind(curStart, curEnd)
+  meanExonNumber <- apply(curMat, 1,
+                          function(x) mean(exonNumber[x[1]:x[2]]))
+  CMRFreq <- apply(curMat, 1,
+                   function(x) length(intersect(names(exonNumber)[x[1]:x[2]],
+                                                CMRGene))/seqLength)
+  resFreq <- c(resFreq, CMRFreq)
+  resExonNumber <- c(resExonNumber, meanExonNumber)
+}
+```
+
+
+### Introduction
+- The function provides the correlation analysis of CMR genes with multiple gene features including **Mean gene length**, **Mean exon number**, **Mean GC content** and **Mean distance to adjacent gene**. To be specific, we split the maize genome in a sliding window of 100 adjacent genes with step size of 10, and calculate the frequency of CMR genes in each window (100 adjacent genes).
+
+
+Row {data-height=250}
+---------------------------------------------------------------
+
+### Correlation of CMR genes with mean exon number
+
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+df <- data.frame(freq = resFreq*100, 
+                 exonNumber = resExonNumber)
+p1 <- ggplot(df, aes(x = freq, y = exonNumber)) + 
+      geom_point(colour = "grey") + 
+      geom_smooth(method = "lm", se = FALSE, colour = "red") + 
+      labs(x = "Frequency of CMR genes (%)", y = "Mean exon number")
+ggplotly(p1)
+```
+
+
+### Statistics of linear regression of CMR genes with mean exon number
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+group <- gl(n = 2, k = nrow(df), labels = c("freq", "intronLength"))
+values <- c(df$freq, df$exonNumber)
+lmRes <- lm(values ~ group)
+res.summary <- summary(lmRes)
+res.table <- data.frame(Stats = c("r.squared",
+                                  "adj.r.squared",
+                                  "fstatistic",
+                                  "sigma",
+                                  "df"),
+                        values = c(res.summary$r.squared,
+                                   res.summary$adj.r.squared,
+                                   paste(res.summary$fstatistic, collapse = " "),
+                                   res.summary$sigma,
+                                   paste(res.summary$df, collapse = " ")))
+knitr::kable(x = res.table, align = 'c') %>%  
+  kableExtra::kable_styling(position = 'center', full_width = FALSE, 
+                            stripe_color = 'black', latex_options = "bordered")
+```
+
+
+### Anova analysis of CMR genes with mean exon number
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+knitr::kable(x = t(anova(lmRes)), align = "c") %>%
+  kableExtra::kable_styling(position = "center", full_width = FALSE,
+                            stripe_color = "black", latex_options = "bordered")
+```
+
+
+
+
+Row {data-height=250}
+---------------------------------------------------------------
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+nonCMRGene <- setdiff(unique(GTFdf$gene_id), CMRGene)
+nonCMRGene <- sample(nonCMRGene, size = ratio*length(CMRGene))
+```
+
+### Exon number difference between CMR genes and non-CMR genes
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+cmr.gtf <- GTFdf[which(!is.na(match(GTFdf$gene_id, CMRGene))), ]
+cmr.exonNumber <- as.numeric(unlist(by(data = cmr.gtf, INDICES = cmr.gtf[, "gene_id"],
+                                       function(x) length(na.omit(unique(x[,"exon_number"]))))))
+noncmr.gtf <- GTFdf[which(!is.na(match(GTFdf$gene_id, nonCMRGene))), ]
+noncmr.exonNumber <- as.numeric(unlist(by(data = noncmr.gtf, INDICES = noncmr.gtf[, "gene_id"],
+                                          function(x) length(na.omit(unique(x[,"exon_number"]))))))
+
+cmrStat <- boxplot.stats(cmr.exonNumber)$stats
+tmpCMR <- cmr.exonNumber[which(cmr.exonNumber <= cmrStat[5])]
+
+noncmrStat <- boxplot.stats(noncmr.exonNumber)$stats
+tmpNonCMR <- noncmr.exonNumber[which(noncmr.exonNumber <= noncmrStat[5])]
+
+df <- data.frame(type = factor(rep(c("CMRGene", "nonCMRGene"),
+                                   c(length(tmpCMR), length(tmpNonCMR)))),
+                 value = c(tmpCMR, tmpNonCMR))
+
+p <- ggplot(df, aes(x=type, y=value, fill=type)) + 
+  geom_violin(trim = FALSE) +
+  theme(axis.title.x = element_blank(),
+        #axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        legend.title = element_blank(),
+        legend.position = "none")
+ggplotly(p)
+```
+
+### The statistics of exon number difference between CMR genes and non-CMR genes
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+res <- data.frame(Stats = c("Min", "First quantile", "Median", "Third quantile", "Max"),
+                  CMR = cmrStat, nonCMR = noncmrStat)
+knitr::kable(x = res, align = 'c') %>%  
+  kableExtra::kable_styling(position = 'center', full_width = FALSE, 
+                            stripe_color = 'black', latex_options = "bordered")
+```
+
+
+
+### Exon number density difference between CMR genes and non-CMR genes
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+p <- ggplot(df, aes(x=value, fill=type)) + 
+  geom_density(alpha = 0.5) +
+  theme(axis.title.x = element_blank(),
+        #axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        legend.title = element_blank(),
+        legend.position = "none")
+ggplotly(p)
+```

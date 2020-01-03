@@ -1,0 +1,89 @@
+<tool id="Functional_enrichment_analysis" name="Functional Enrichment Analysis" version='18.09'>
+  <description></description>
+  <command><![CDATA[
+	#if $enrichmentType.type == "GO":
+		Rscript ${__tool_directory__}/04_Functional_enrichment_analysis.R '$species_name' '$gene_list' "remote" $enrichmentType.type $enrichmentType.pvalue $enrichmentType.qvalue $enrichmentType.nodesNumber $enrichmentType.ont;
+		mv ${__tool_directory__}/GO.pdf $Figure;
+		mv ${__tool_directory__}/GO_enrichment.txt $Table;
+	#else:
+		Rscript ${__tool_directory__}/04_Functional_enrichment_analysis.R '$species_name' '$gene_list' "remote" $enrichmentType.type $enrichmentType.pvalue $enrichmentType.qvalue $enrichmentType.nodesNumber "";
+		mv ${__tool_directory__}/KEGG.pdf $Figure;
+		mv ${__tool_directory__}/KEGG_enrichment.txt $Table;
+	#end if
+
+  ]]></command>
+  <inputs>
+	<param name="species_name" type="text" value="Zea mays" label="The species name" help="Latin species name" />
+	<param name="gene_list" type="data" format="tsv,txt" label="The CMR gene list" help="The gene ID must be ENSEMBL gene id"/>
+
+	<conditional name="enrichmentType">
+		<param name="type" type="select" label="Enrichment type" display="radio">
+			<option value="GO" selected="true">Gene Ontology (GO) Enrichment Analysis</option>
+			<option value="KEGG">KEGG Enrichment Analysis</option>
+		</param>
+		<when value="GO">
+				<param name="ont" type="select" label="Ontology category" display="radio">
+					<option value="BP" selected="true">BP (Biological Process)</option>
+					<option value="MF">MF (Molecular Function)</option>
+					<option value="CC">CC (Cellular Component)</option>
+				</param>
+				<param name="pvalue" type="float" value="0.05" label="The p value cutoff"/>
+				<param name="qvalue" type="float" value="0.05" label="The q value cutoff"/>
+				<param name="nodesNumber" type="integer" value="10" label="The number of nodes to be shown in figure"/>
+
+		</when>
+		<when value="KEGG">
+			<param name="pvalue" type="float" value="0.05" label="The p value cutoff"/>
+			<param name="qvalue" type="float" value="0.05" label="The q value cutoff"/>
+			<param name="nodesNumber" type="integer" value="10" label="The number of nodes to be shown in figure"/>
+		</when>
+	</conditional>
+
+
+  </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs>
+		<data name="Table" format="tsv" label="${enrichmentType.type}_enrichment.txt">
+		</data>
+		<data name="Figure" format="pdf" label="${enrichmentType.type}_enrichment.pdf">
+		</data>
+  </outputs>
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+This function is designed to perform GO or KEGG enrichment analysis for any species through R package "clusterProfile".
+
+.. class:: infomark
+
+**Inputs**
+
+- Species name (Latin species name)
+- CMR gene list
+
+.. class:: infomark
+
+**Parameters**
+
+- p value cutoff
+- q value cutoff
+- The number enriched GO/KEGG terms to be shown in figure
+
+.. class:: infomark
+
+**Outputs**
+
+- The enriched GO/KEGG terms
+- A PDF focument of top enriched GO/KEGG terms
+
+
+</help>
+    <citations>
+        <citation type="doi">10.1089/omi.2011.0118</citation>
+	    </citations>
+</tool>
+

@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<toolbox monitor="true">
+
+<label id="Pre-analysis" text="Pre-analysis"/>
+    <section id="Data_Preparation" name="Data Preparation">
+		<tool id="Obtain_Genome_or_Transcriptome_Sequences_and_Annotation" file="1-PRE-ANALYSIS/Data_Preparation/02_Obtain_Genome_Sequences_and_Annotation.xml"/>
+        <tool id="Obtain_Epitranscriptome_Sequencing_Reads" file="1-PRE-ANALYSIS/Data_Preparation/00_Obtain_Epitranscriptome_Sequencing_Reads.xml"/>
+        <tool id="Convert_Format" file="1-PRE-ANALYSIS/Data_Preparation/01_Convert_Format.xml"/>
+    </section>
+
+    <section id="Quality_Control" name="Quality Control">
+        <tool id="Reads_Quality_Check" file="1-PRE-ANALYSIS/Quality_Assessment/00_Assess_Reads_Quality.xml"/>
+        <tool id="Assess_Alignment_Quality" file="1-PRE-ANALYSIS/Quality_Assessment/01_Assess_Alignment_Quality.xml"/>
+		<tool id="Assess_CMR_Regions_Quality" file="1-PRE-ANALYSIS/Quality_Assessment/02_Assess_CMR_Regions_Quality.xml"/>
+    </section>
+     
+
+<label id="Core_analysis" text="Core Analysis"/>
+	<section id="Align" name="Align Reads to Genome">
+  		<tool id="tophat2" file="2-CORE-ANALYSIS/Align_reads_to_genome/00_tophat2.xml"/> 
+    	<tool id="bowtie2" file="2-CORE-ANALYSIS/Align_reads_to_genome/01_bowtie2.xml"/>
+		<tool id="star" file="2-CORE-ANALYSIS/Align_reads_to_genome/02_star.xml"/>
+		<tool id="hisat2" file="2-CORE-ANALYSIS/Align_reads_to_genome/03_hisat2.xml"/> 
+		<tool id="bwa-mem" file="2-CORE-ANALYSIS/Align_reads_to_genome/04_bwa-mem.xml"/>
+	</section>
+
+    <section id="CMR_Calling" name="CMR Calling">
+        <tool id="Calling_peaks" file="2-CORE-ANALYSIS/CMR_Calling/00_PeakCalling.xml"/>
+        <tool id="peakcalling_m5C" file="2-CORE-ANALYSIS/CMR_Calling/01_m5C_calling.xml"/>
+        <!-- <tool id="miCLIP_calling" file="2-CORE-ANALYSIS/CMR_Calling/02_miCLIP_calling.xml"/> -->
+        <tool id="Calling_pseudoU" file="2-CORE-ANALYSIS/CMR_Calling/03_pseudouridylation.xml"/>
+    </section>
+ 
+    <section id="Machine_learning_based_CMR_Prediction " name="Machine Learning-based CMR Prediction">
+    	<tool id="feature_encoding" file="2-CORE-ANALYSIS/ML_prediction/feature_encoding.xml"/>
+		<tool id="feature_engineering" file="2-CORE-ANALYSIS/ML_prediction/feature_engineering.xml"/>
+		<tool id="ML_prediction" file="2-CORE-ANALYSIS/ML_prediction/ML_classification.xml"/>
+    </section>
+ 
+
+
+<label id="Advanced_analysis" text="Advanced Analysis"/>
+	<section id="CMR_annotation" name="CMR Annotation and Visualization">
+		<tool id="CMR_distribution" file="2-CORE-ANALYSIS/CMR_Annotation_and_Visualization/00_CMR_distribution.xml"/> 
+		<tool id="De_novo_motif_discovery" file="2-CORE-ANALYSIS/CMR_Annotation_and_Visualization/01_De_novo_motif_discovery.xml"/>
+		<tool id="Motif_enrichment" file="2-CORE-ANALYSIS/CMR_Annotation_and_Visualization/02_motif_enrichment.xml" />
+    	<tool id="Sequence_logo_visualization" file="2-CORE-ANALYSIS/CMR_Annotation_and_Visualization/03_Sequence_logo_visualization.xml" />
+        <tool id="Functional_enrichment_analysis" file="2-CORE-ANALYSIS/CMR_Annotation_and_Visualization/04_Functional_enrichment_analysis.xml" /> 
+    </section>
+
+    <section id="Multi_omics_analysis" name="Multi-omics Integration Analysis">
+    	<tool id="CMR_Genomic_Feature" file="4-MULTI-OMICS_ANALYSIS/Genome_feature/CMR_Genomic_Feature.xml"/>
+    	<tool id="Multi-omics-integration" file="4-MULTI-OMICS_ANALYSIS/multi-omics-integration/multi-omics-integration.xml"/>
+    </section>>
+
+
+ 
+
+<label id="Useful_tools" text="Useful Tools"/>
+  <section id="Convert_sequence" name="Convert Sequence">
+    <tool file="tools/sequence.xml" />
+  </section>
+  <section id="convert" name="Convert Formats">
+    <tool file="filters/bed2gff.xml" />
+    <tool file="filters/gff2bed.xml" />
+    <tool file="maf/maf_to_bed.xml" />
+    <tool file="maf/maf_to_interval.xml" />
+    <tool file="maf/maf_to_fasta.xml" />
+    <tool file="filters/sff_extractor.xml" />
+    <tool file="filters/wig_to_bigwig.xml" />
+    <tool file="filters/bed_to_bigbed.xml" />
+  </section>
+
+  <section id="filter" name="Filter and Sort">
+    <tool file="stats/filtering.xml" />
+    <tool file="filters/sorter.xml" />
+    <tool file="filters/grep.xml" />
+    <label id="gff" text="GFF" />
+    <tool file="filters/gff/extract_GFF_Features.xml" />
+    <tool file="filters/gff/gff_filter_by_attribute.xml" />
+    <tool file="filters/gff/gff_filter_by_feature_count.xml" />
+    <tool file="filters/gff/gtf_filter_by_attribute_values_list.xml" />
+  </section>
+  
+  <section id="getext" name="Get Data">
+    <tool file="data_source/upload.xml" />
+    <tool file="data_source/ucsc_tablebrowser.xml" />
+  </section>
+</toolbox>

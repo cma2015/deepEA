@@ -1,0 +1,69 @@
+<tool id="Sequence_logo_visualization" name="Sequence Logo Visualization"  version='18.09'>
+  <description></description>
+  <command><![CDATA[
+	#if $method.type == "one_sample":
+		Rscript ${__tool_directory__}/03_Sequence_logo_visualization.R -pos '$posseq' -s $start -o ${__tool_directory__}/single_sample_motif_logo.pdf -twosample FALSE
+		#if $end:
+			-e $end
+		#end if
+		&& mv ${__tool_directory__}/single_sample_motif_logo.pdf $Figure_logo;
+	#else:
+		Rscript ${__tool_directory__}/03_Sequence_logo_visualization.R -pos '$posseq' -neg '$method.negseq' -s $start -o ${__tool_directory__}/two_samples_motif_logo.pdf -twosample TRUE
+		#if $end:
+			-e $end
+		#end if
+		&& mv ${__tool_directory__}/two_samples_motif_logo.pdf $Figure_logo;
+	#end if
+  ]]></command>
+  <inputs>
+	<param name="posseq" type="data" format="fasta" label="The plot sequence"  help="Need to be aligned and equal length"/>
+	<param name="start" type="integer" value="1" label="The start position"  help=""/>
+	<param name="end" type="integer" optional="True" label="The end position"  help=""/>
+	
+	<conditional name="method">
+		<param name="type" type="select" label="Analysis method" >
+			<option value="one_sample" selected="true">Single sample logo</option>
+			<option value="two_samples" >Two samples logo</option>
+		</param>
+		<when value="two_samples">
+				<param name="negseq" type="data" format="fasta" value="NULL" label="The background sequence" />
+		</when>
+	</conditional>
+  </inputs>
+  <stdio>
+	  <exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs> 
+	<data name="Figure_logo" format="pdf" label="${method.type}_motif_logo.pdf">
+	</data>
+  </outputs>
+  <help><![CDATA[
+.. class:: infomark
+
+**What it does**
+
+This function is designed to visualize motifs existed in sequences.
+
+.. class:: infomark
+
+**Inputs**
+
+- Sequences file in FASTA format
+
+.. class:: infomark
+
+**Parameters**
+
+- **The start position** used for visualizing motifs
+- **The end position** used for visualizing motifs
+
+.. class:: infomark
+
+**Outputs**
+
+- Sequence logo in PDF format
+
+]]></help>
+</tool>
+
+

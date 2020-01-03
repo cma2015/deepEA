@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<tool id="Assess_CMR_Regions_Quality" name="Assess CMR Regions Quality" version="18.01">
+    <description></description>
+
+    <command><![CDATA[
+        ln -sf $bedFile $bedFile'.bed';
+        #import json
+        #import os
+
+        #set $ipBamFile = list()
+        #set $inputBamFile = list()
+        #for $fileone in $bamFiles:
+            ln -sf $fileone.BAMIP $fileone.BAMIP'.bam';
+            ln -sf $fileone.BAMinput $fileone.BAMinput'.bam';
+            $ipBamFile.append(str($fileone.BAMIP)+'.bam')
+            $inputBamFile.append(str($fileone.BAMinput)+'.bam')
+        #end for
+        #set ipBamFile=",".join(ipBamFile)
+        #set inputBamFile=",".join(inputBamFile)
+        Rscript ${__tool_directory__}/02_Assess_CMR_Regions_Quality.R $bedFile".bed" #echo json.dumps(ipBamFile)# #echo json.dumps(inputBamFile)# $output $minOverlap $type;
+    
+    ]]></command>
+
+    <inputs>
+        <param name="bedFile" type="data" format="bed" label="Input CMR regions in BED format"/>
+        <repeat name="bamFiles" title="BAM file" min="1">
+            <param name="BAMIP" type="data" format="bam"  multiple="false" label="Input the IP BAM file" help=""/>
+            <param name="BAMinput" type="data" format="bam"  multiple="false" label="Input the input BAM file" help=""/>
+        </repeat>
+        <param name="type" type="select" label="Select a measure?">
+            <option value="DBA_SCORE_READS">raw read count for interval using only reads from IP</option>
+            <option value="DBA_SCORE_READS_FOLD">raw read count for interval from IP divided by read count for interval from control</option>
+            <option value="DBA_SCORE_READS_MINUS">raw read count for interval from IP minus read count for interval from control</option>
+            <option value="DBA_SCORE_RPKM">RPKM for interval using only reads from IP</option>
+            <option value="DBA_SCORE_RPKM_FOLD">RPKM for interval from IP divided by RPKM for interval from control</option>
+            <option value="DBA_SCORE_TMM_READS_FULL">TMM normalized (using edgeR), using IP read counts and Full Library size</option>
+            <option value="DBA_SCORE_TMM_READS_EFFECTIVE">TMM normalized (using edgeR), using IP read counts and Effective Library size</option>
+            <option value="DBA_SCORE_TMM_MINUS_FULL">TMM normalized (using edgeR), using IP read counts minus Control read counts and Full Library size</option>
+            <option value="DBA_SCORE_TMM_MINUS_EFFECTIVE">TMM normalized (using edgeR), using IP read counts minus Control read counts and Effective Library size</option>
+            <option value="DBA_SCORE_TMM_READS_FULL_CPM">same as DBA_SCORE_TMM_READS_FULL, but reported in counts-per-million.</option>
+            <option value="DBA_SCORE_TMM_READS_EFFECTIVE_CPM">same as DBA_SCORE_TMM_READS_EFFECTIVE, but reported in counts-per-million</option>
+            <option value="DBA_SCORE_TMM_MINUS_FULL_CPM">same as DBA_SCORE_TMM_MINUS_FULL, but reported in counts-per-million</option>
+            <option value="DBA_SCORE_TMM_MINUS_EFFECTIVE_CPM">same as DBA_SCORE_TMM_MINUS_EFFECTIVE, but reported in counts-per-million</option>
+            <option value="DBA_SCORE_SUMMIT">summit height (maximum read pileup value)</option>
+            <option value="DBA_SCORE_SUMMIT_ADJ">summit height (maximum read pileup value), normalized to relative library size</option>
+            <option value="DBA_SCORE_SUMMIT_POS">summit position (location of maximum read pileup)</option>
+        </param>
+        <param name="minOverlap" type="integer" value="1" label="Only include peaks in at least this many peaksets when generating consensus peakset"/>
+    </inputs>
+
+    <stdio><exit_code range="1:" level="fatal" description="Error when running trumpet"/></stdio>
+
+    <outputs>
+        <data format="txt" name="output" label="CMR_regions_quality.txt"/>
+    </outputs>
+
+    <help><![CDATA[
+.. class:: infomark
+
+**What it does**
+
+This tool aims to quantify CMR signal strength by counting reads and calculating RPKM in binding site intervals using an R package Diffbind (Wu *et al*., 2016, *Frontiers in Genetics*)
+
+.. class:: infomark
+
+**Inputs**
+
+- **CMR regions in BED format**
+- **IP alignments in BAM format**
+- **input alignments in BAM format**
+
+.. class:: infomark
+
+**Parameters**
+
+- **select a measure:** select a method for quantify CMR regions.
+- If biological replications exist, users can specify **only include peaks in at least *N* peaksets when generating consensus peakset**, the defaults is 1.
+
+.. class:: infomark
+
+**Outputs**
+
+- A tab seperated matrix recording the quantification for each CMR region.
+
+
+    ]]></help>
+<citations>
+    <citation type="doi">10.3389/fgene.2015.00169</citation>
+</citations>
+</tool>

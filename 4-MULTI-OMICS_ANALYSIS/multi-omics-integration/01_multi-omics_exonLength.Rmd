@@ -1,0 +1,118 @@
+---
+title: Genomic Feature Analysis of CMR
+output:
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    social: menu
+    source_code: embed
+    theme: cosmo
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(rtracklayer)
+library(plotly)
+library(ggplot2)
+library(seqinr)
+library(GenomicFeatures)
+library(knitr)
+library(kableExtra)
+options(scipen = 20, sstringsAsFactors = F)
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE)
+```
+
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+library(flexdashboard)
+# calculate exon, intron and gene length from txdb according to geneID
+exonLength <- function(geneID, txdb){
+  exonTxdb <- exonsBy(txdb, "gene")
+  tmp <- exonTxdb[geneID]
+  exonLen <- unlist(lapply(tmp,
+                           function(x) sum(width(reduce(x)))))
+  geneGR <- genes(txdb)
+  geneLength <- width(geneGR)
+  names(geneLength) <- geneGR$gene_id
+  geneLength <- geneLength[geneID]
+  resMat <- data.frame(geneID = geneID,
+                       geneLength = geneLength,
+                       exonLength = exonLen)
+  resMat$intronLength <- resMat$geneLength - resMat$exonLength
+  resMat
+}
+
+CMRGene <- read.table(file = CMRGeneDir, sep = "\t", header = F, quote = '',
+                      stringsAsFactors = F)
+
+GTF <- import(con = GTFDir)
+GTF <- subset(GTF, GTF$gene_biotype == "protein_coding") # only protein coding gene are used for downstream analysis
+txdb <- makeTxDbFromGFF(file = GTFDir) # from R package GenomicFeatures
+
+seqNames <- na.omit(as.numeric(as.character(unique(seqnames(GTF)@values))))
+GTFdf <- data.frame(GTF)
+
+type1Gene <- subset(CMRGene, CMRGene[,2] >= threshold)$V1
+type2Gene <- subset(CMRGene, CMRGene[,2] < threshold)$V1
+
+type1Feature <- exonLength(geneID = type1Gene, txdb = txdb)
+type2Feature <- exonLength(geneID = type2Gene, txdb = txdb)
+```
+
+### Introduction
+The function provides the correlation analysis of CMR genes with multiple gene features including **Mean gene length**, **Mean exon number**, **Mean GC content** and **Mean distance to adjacent gene**. To be specific, we split the maize genome in a sliding window of 100 adjacent genes with step size of 10, and calculate the frequency of CMR genes in each window (100 adjacent genes).
+
+Row {data-width=100}
+---------------------------------------------------------------
+
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+type1Stat <- boxplot.stats(type1Feature$exonLength)$stats
+tmpType1 <- type1Feature$exonLength[which(type1Feature$exonLength <= type1Stat[5])]
+
+type2Stat <- boxplot.stats(type2Feature$exonLength)$stats
+tmpType2 <- type2Feature$exonLength[which(type2Feature$exonLength <= type2Stat[5])]
+```
+
+### The statistics of exon length difference between type 1 and type2 genes
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+res <- data.frame(Stats = c("Min", "First quantile", "Median", "Third quantile", "Max"),
+                  CMR = type1Stat, nonCMR = type2Stat)
+knitr::kable(x = res, align = 'c') %>%
+  kableExtra::kable_styling(position = 'center', full_width = FALSE,
+                            stripe_color = 'black', latex_options = "bordered")
+```
+
+
+
+Row {data-width=200}
+---------------------------------------------------------------
+
+### Exon length difference between type 1 and type 2 genes
+```{r echo = FALSE, warning=FALSE, message=FALSE}
+df <- data.frame(type = factor(rep(c("Type1", "Type2"),
+                                   c(length(tmpType1), length(tmpType2)))),
+                 value = c(tmpType1/1000, tmpType2/1000))
+
+p <- ggplot(df, aes(x=type, y=value, fill=type)) +
+  geom_violin(trim = FALSE) +
+  theme(axis.title.x = element_blank(),
+        #axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        legend.title = element_blank(),
+        legend.position = "none")
+ggplotly(p)
+```
+
+
+### Density difference between type 1 and type 2 genes
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+p <- ggplot(df, aes(x=value, fill=type)) +
+  geom_density(alpha = 0.5) +
+  theme(axis.title.x = element_blank(),
+        #axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        legend.title = element_blank(),
+        legend.position = "none")
+ggplotly(p)
+```

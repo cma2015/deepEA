@@ -1,0 +1,74 @@
+<tool id="Convert_Format" name="Convert Format"  version='18.09'>
+  <description></description>
+  <command><![CDATA[
+
+	#if $paired.is_paired == "single":
+		${__tool_directory__}/01_Convert_Format.sh $SRA_data $minReadLen $SRA_data.name $fastq0;			
+	#else
+		${__tool_directory__}/01_Convert_Format.sh $SRA_data $minReadLen $SRA_data.name $fastq1 $fastq2;
+	#end if
+
+  ]]></command>
+  <inputs>
+	<param name="SRA_data" type="data" format="sra" label="Input sra file" />
+	<param name="minReadLen" type="text" value="20" label="Minimum reads length" help="Filter by sequence length"/>
+	<conditional name="paired">
+		<param name="is_paired" type="select" label="Single-end or paired-end reads?">
+			<option value="single" selected="true"> single-end</option>
+			<option value="paired">paired-end</option>
+		</param>
+	</conditional>
+  </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs> 
+	<data name="fastq0" format="fastqsanger" label="${SRA_data.name}.fq">
+		<filter>paired['is_paired'] == "single"</filter>
+	</data>
+	<data name="fastq1" format="fastqsanger" label="${SRA_data.name}_1.fq">
+		<filter>paired['is_paired'] == "paired"</filter>
+	</data>
+	<data name="fastq2" format="fastqsanger" label="${SRA_data.name}_2.fq">
+		<filter>paired['is_paired'] == "paired"</filter>
+	</data>
+  </outputs>
+  <help>
+
+.. class:: infomark	
+
+**What it does**
+
+This function wrapped **fastq-dump** function implemented in **SRA Toolkit**. See http://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software for details.
+
+-------------
+
+.. class:: infomark
+
+**Input**
+
+- **Input sra file:** The sequenceing reads in SRA format. Users can upload their local SRA file or download SRA by function **Obtain sequencing reads** in **sequence Data Preparation** sub-module.
+
+-------------
+
+.. class:: infomark
+
+**Parameters**
+
+- **Minimum reads length:** an integer specifying the minimum reads length to be retained.
+
+- **Single-end or paired-end reads:** select the SRA file is single-end or paired-end.
+
+-------------
+
+.. class:: infomark
+
+**Output**
+
+- Sequencing dataset in Fastq format.
+
+
+  </help>
+</tool>
+
+

@@ -1,0 +1,110 @@
+<tool id="peakcalling_m5C" name="Calling m5C"  version='18.09'>
+  <description> from the RNA-BSseq data</description>
+  <command><![CDATA[
+	#if $readtype.single_or_paired == "SE":
+		bash ${__tool_directory__}/01_run_meRanTK.sh $m5CMethod.Refgenome $GTF $thread $readtype.single_end $m5CMethod.calling_method $md $cr $mBQ $mcov "SE"
+	#else
+		bash ${__tool_directory__}/01_run_meRanTK.sh $m5CMethod.Refgenome $GTF $thread $readtype.fastq_r1_in $m5CMethod.calling_method $md $cr $mBQ $mcov "PE" $readtype.fastq_r2_in
+	#end if
+
+	&& mv ${__tool_directory__}/$$/${m5CMethod.calling_method}_meRanCall_m5Cs.txt $m5C_out_peaks
+	&& rm -r ${__tool_directory__}/$$;
+  ]]></command>
+  <inputs>
+
+	<conditional name="readtype">
+		<param name="single_or_paired" type="select" label="Single-end or paired-end reads?" display="radio">
+			<option value="SE" selected="true">Single-end reads</option>
+			<option value="PE">Paired-end reads</option>
+		</param>
+		<when value="SE">
+			<param name="single_end" type="data" format="fastq,fq,fastqsanger,fastqsanger.gz" label="Input FASTQ file"/>
+		</when>
+		<when value="PE">
+			<param name="fastq_r1_in" type="data" format="fastq,fq,fastqsanger,fastqsanger.gz" label="Input FASTQ file (R1/first of pair)" />
+			<param name="fastq_r2_in" type="data" format="fastq,fq,fastqsanger,fastqsanger,fastqsanger.gz" label="Input FASTQ file (R2/second of pair)" />
+		</when>
+	</conditional>
+
+	<param name="GTF" type="data" format="gtf,gff" label="Reference annotation file (GTF)" />
+	<conditional name="m5CMethod">
+		<param name="calling_method" type="select" format="bam,BAM" label="Alignment method" display="radio">
+			<option value="meRanGs" selected="true">meRanGs (Align RNA-BSseq reads to a reference genome using STAR)</option>
+			<option value="meRanGh">meRanGh (Align RNA-BSseq reads to a reference genome using HISAT)</option>
+			<option value="meRanT">meRanT (Align RNA-BSseq reads to a set of reference transcripts)</option>
+		</param>
+
+		<when value="meRanGs">
+			<param name="Refgenome" type="data" format="fa,fasta,fas" label="Reference genome" />
+		</when>
+		<when value="meRanGh">
+			<param name="Refgenome" type="data" format="fa,fasta,fas" label="Reference genome" />
+		</when>
+		<when value="meRanT">
+			<param name="Refgenome" type="data" format="fa,fasta,fas" label="Reference transcripts" />
+		</when>
+	</conditional>
+
+
+	<param name="md" type="integer" value="50" label="Maximum number of read duplicates covering a given
+                             position" help="Read duplicates have the same start positon
+                             on the reference and map to the same sequence."/>
+	<param name="mBQ" type="integer" value="30" label="Minimum read base quality (phred score) to condsider
+                             for methylation calling"/>
+	<param name="cr" type="float" value="0.99" label="C to T conversion rate"/>
+	<param name="mcov" type="integer" value="10" label="Minimum coverage at a given reference position above
+                             which methylation calling will be performed"/>
+	<param name="thread" type="integer" value="2" max='6' min='1' label="Thread"/>
+
+  </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs>
+	<data name="m5C_out_peaks" format="txt" label="${m5CMethod.calling_method}_meRanCall_CMRs.txt">
+	</data>
+  </outputs>
+<help>
+
+.. class:: infomark
+
+**What it does**
+
+This function integrated meRanTK (Rieder *et al*., 2016, *Bioinformatics*) to perform RNA bisulfite sequencing (BS-Seq) read mapping, comprehensive methylation calling.
+
+.. class:: infomark
+
+**Inputs**
+
+- **FASTQ file:** The FASTQ format sequencing file.
+
+.. class:: infomark
+
+**Parameters**
+
+- **Alignment method:** Select a method used for read mapping.
+
+- **Reference genome:** The reference genome sequences in FASTA format.
+
+- **Reference annotation file (GTF):** The reference annotation file in GTF format.
+
+- **Thread:** The number of threads used parallel computing.
+
+- **FDR:** The FDR cutoff used for filter CMR.
+
+- **Single-end or Paired-end reads?:** Select if the input fastq is single-end or paried-end.
+
+.. class:: infomark
+
+**Outputs**
+
+- **m5C_out_peaks:** The detected m5C sites.
+
+
+
+</help>
+    <citations>
+        <citation type="doi">10.1093/bioinformatics/btv647</citation>
+    </citations>
+</tool>
+
