@@ -4,7 +4,7 @@
 	bash ${__tool_directory__}/03_hisat2-index.sh '$genomeSequence';
 
 	## HISAT2 alignment
-	hisat2
+	/home/miniconda2/bin/hisat2
 	-p $thread
 	#if $algorithm_options.algorithm_options_selector == "advanced":
 		--n-ceil $algorithm_options.Alignment_options.func

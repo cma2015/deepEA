@@ -5,7 +5,7 @@
 	bash ${__tool_directory__}/04_bwa-index.sh '$genomeSequence';
 
 	## BWA alignment
-	bwa mem
+	/home/miniconda2/bin/bwa mem
 	-t $thread
 	#if  $algorithm_options.algorithm_options_selector == "advanced":
 		-k $algorithm_options.minimum_seed_length

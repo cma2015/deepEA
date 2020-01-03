@@ -2,7 +2,7 @@
   <description></description>
   <command><![CDATA[
     #if $analysis_method.method == "ame":
-        ame
+        /home/miniconda2/bin/ame
         --oc ${__tool_directory__}/ame_out
         #if $analysis_method.control:
             --control '$analysis_method.control'
@@ -22,7 +22,7 @@
         && mv ${__tool_directory__}/ame_out/ame.html $motif_enrichment;
         rm -r ${__tool_directory__}/ame_out;
     #else:
-        centrimo
+        /home/miniconda2/bin/centrimo
         --oc ${__tool_directory__}/centrimo_out
         #if $analysis_method.bfile:
             --bfile '$analysis_method.bfile'

@@ -1,7 +1,7 @@
 <tool id="tophat2" name="TopHat2" version="18.09">
     <description></description>
     <command><![CDATA[
-        bash ${__tool_directory__}/01_bowtie2-index.sh '$genomeSequence' 2>>index.txt;
+    bash ${__tool_directory__}/01_bowtie2-index.sh '$genomeSequence' 2>>index.txt;
 	rm index.txt;
 	## TopHat2 alignment
 	/home/DeepEA/galaxy/tools/DeepEA_software/tophat-2.1.1.Linux_x86_64/tophat2

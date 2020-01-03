@@ -6,7 +6,7 @@
 	bash ${__tool_directory__}/02_star-index.sh '$genomeSequence';
 	mkdir -p ${__tool_directory__}/$$;
 
-    STAR
+    /home/miniconda2/bin/STAR
 		--outFileNamePrefix ${__tool_directory__}/$$/output
         --runThreadN $thread
         --genomeLoad NoSharedMemory

@@ -2,7 +2,7 @@
   <description></description>
   <command><![CDATA[
     #if $analysis_method.method == "dreme":
-    dreme
+    /home/miniconda2/bin/dreme
         -o ${__tool_directory__}/dreme_out
         -p '$pos_fasta_file'
         $analysis_method.norc
@@ -28,7 +28,7 @@
         rm -r ${__tool_directory__}/dreme_out;
 
     #elif $analysis_method.method == "meme_chip":
-        meme-chip '$pos_fasta_file'
+        /home/miniconda2/bin/meme-chip '$pos_fasta_file'
         -noecho
         #if $analysis_method.control:
             -neg '$analysis_method.control'
@@ -81,7 +81,7 @@
 	&& mv ${__tool_directory__}/meme_chip/meme_out/meme.html $motif;
         rm -r ${__tool_directory__}/meme_chip;
     #else:
-        /home/miniconda2/envs/meme/bin/findMotifs.pl '$pos_fasta_file' fasta ${__tool_directory__}/homer_output -fasta $analysis_method.control -norevopp
+        /home/miniconda2/bin/findMotifs.pl '$pos_fasta_file' fasta ${__tool_directory__}/homer_output -fasta $analysis_method.control -norevopp
         #if str( $analysis_method.options_type_homer.options_type_homer_selector ) == 'advanced':
             -len $analysis_method.options_type_homer.motif_len
             -S $analysis_method.options_type_homer.motif_number

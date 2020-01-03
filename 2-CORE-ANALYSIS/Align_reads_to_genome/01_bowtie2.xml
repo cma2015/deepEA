@@ -4,7 +4,7 @@
 	bash ${__tool_directory__}/01_bowtie2-index.sh '$genomeSequence';
 
 	## Bowtie2 alignment
-	bowtie2
+	/home/miniconda2/bin/bowtie2
 	-p ${thread}
 	#if  $algorithm_options.algorithm_options_selector == "advanced":
 		#if $algorithm_options.pre_sets.local_or_end_to_end == "end_to_end":

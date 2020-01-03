@@ -63,6 +63,7 @@ RUN apt-get install wget -y && \
     /home/miniconda2/bin/conda install -c bioconda hisat2 -y && \
     /home/miniconda2/bin/conda install -c bioconda bwa -y && \
     /home/miniconda2/bin/conda install -c bioconda meme -y && \
+    /home/miniconda2/bin/conda install -c bioconda macs2 -y && \
     /home/miniconda2/bin/pip install biopython pysam numpy matplotlib scikit-learn scipy xgboost
 
 
