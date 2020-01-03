@@ -1,9 +1,9 @@
-## DeepEA
-DeepEA: A web-based platform for exploring epitranscriptome sequencing data.
+## [DeepEA](https://cma2015.github.io/DeepEA)
+DeepEA: deep analysis of epitranscriptome sequencing data for non-specialists
 
 ## Introduction
-- DeepEA is a Galaxy-based framework for exploring epitranscriptome sequencing data. In the current version, DeepEA provides a variety of functions required for **Data Preparation**, **Quality Control**, **CMR (chemical modifications of RNA) profiling and analysis**, **CMR annotation**, **CMR prediction** and related **visualization**. 
-* The DeePEA project is hosted on https://github.com/cma2015/DeepEA. 
+- DeepEA is a Galaxy-based framework for deep analysis of epitranscriptome sequencing data for non-specialists. In the current version, DeepEA provides a variety of functions required for **Data Preparation**, **Quality Control**, **CMR (chemical modifications of RNA) profiling and analysis**, **CMR annotation**, **CMR prediction** and related **visualization**.
+* The DeepEA project is hosted on https://github.com/cma2015/DeepEA.
 * The DeepEA web server can be accessed via https://deepea.nwafu.edu.cn.
 * The DeepEA Docker image can be obtained from https://hub.docker.com/r/malab/deepea.
 
