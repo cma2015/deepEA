@@ -238,6 +238,7 @@
     <ul>
         <li><a href="#docker-installation">Docker installation</a></li>
         <li><a href="#deepea-quick-start">DeepEA quick start</a></li>
+        <li><a href="#how-to-become-admin-use">DeepEA quick start</a></li>
         <li><a href="#how-to-upload-data">How to upload data</a></li>
         <li><a href="#browser-compatibility">Browser compatibility</a></li>
     </ul>
@@ -342,7 +343,7 @@ curl <span class="nt">-fsSL</span> https://download.docker.com/linux/ubuntu/gpg 
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># pull DeepEA from docker hub</span>
 docker pull malab/deepea
-docker run <span class="nt">-it -p 8080:80</span> malab/deepea /bin/zsh
+docker run <span class="nt">-it -p 8080:8080</span> malab/deepea /bin/bash
 bash /home/DeepEA/galaxy/run.sh
 </code></pre></div></div>
 
@@ -354,7 +355,10 @@ bash /home/DeepEA/galaxy/run.sh
     </a>   
 </div>
 
+<h2 id="how-to-become-user">How to become admin user</h2>
 
+<p>First, register with email <code class="language-plaintext highlighter-rouge">admin@eample.org</code>, set the password arbitrary.</p>
+<p>Then, login with <code class="language-plaintext highlighter-rouge">admin@eample.org</code></p>
 
 <h2 id="how-to-upload-data">How to upload data</h2>
 

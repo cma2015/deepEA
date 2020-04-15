@@ -15,3 +15,10 @@ DeepEA: deep analysis of epitranscriptome sequencing data for non-specialists
 * If users encounter any bugs or issues, feel free to leave a message at Github [issues](<https://github.com/cma2015/DeepEA/issues>). We will try our best to deal with all issues as soon as possible.
 * In addition, if any suggestions are available, feel free to contact: __Jingjing Zhai__ <zhaijingjing603@gmail.com> or __Chuang Ma__ <chuangma2006@gmail.com>
 
+## Change log
+- 2020.04 fixed admin user bug
+- 2019.11 we updated DeepEA
+- 2019.01 DeepEA web server online
+- 2018.05 we launched DeepEA project
+
+

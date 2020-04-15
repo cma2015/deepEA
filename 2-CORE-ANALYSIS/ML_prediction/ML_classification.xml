@@ -3,45 +3,45 @@
     <command><![CDATA[
     #if $ifCV.cv == "true":
         #if $method.algorithm == "randomForest":
-            python ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "randomForest" -estimators $method.ntree -t $method.cpus -out ${__tool_directory__}/  -k $ifCV.kfold;
+            /home/miniconda2/bin/ ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "randomForest" -estimators $method.ntree -t $method.cpus -out ${__tool_directory__}/  -k $ifCV.kfold;
         #elif $method.algorithm == "svm":
             #if $method.kernel.method == "polynomial":
-                python ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "SVM" -kernel "poly" -degree $method.kernel.degree -coef0 $method.kernel.coef0 -gamma $method.kernel.gamma -out ${__tool_directory__}/  -k $ifCV.kfold;
+                /home/miniconda2/bin/ ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "SVM" -kernel "poly" -degree $method.kernel.degree -coef0 $method.kernel.coef0 -gamma $method.kernel.gamma -out ${__tool_directory__}/  -k $ifCV.kfold;
             #elif $method.kernel.method == "radial_basis":
-                python ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "SVM" -kernel "rbf" -gamma $method.kernel.gamma -out ${__tool_directory__}/  -k $ifCV.kfold;
+                /home/miniconda2/bin/ ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "SVM" -kernel "rbf" -gamma $method.kernel.gamma -out ${__tool_directory__}/  -k $ifCV.kfold;
             #elif $method.kernel.method == "sigmoid":
-                python ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "SVM" -kernel "sigmoid" -gamma $method.kernel.gamma -out ${__tool_directory__}/  -k $ifCV.kfold;
+                /home/miniconda2/bin/ ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "SVM" -kernel "sigmoid" -gamma $method.kernel.gamma -out ${__tool_directory__}/  -k $ifCV.kfold;
             #else:
-                python ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "SVM" -kernel "linear" -out ${__tool_directory__}/  -k $ifCV.kfold;
+                /home/miniconda2/bin/ ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "SVM" -kernel "linear" -out ${__tool_directory__}/  -k $ifCV.kfold;
             #end if
         #elif $method.algorithm == "decisionTree":
-            python ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "decisionTree" -out ${__tool_directory__}/ -k $ifCV.kfold;
+            /home/miniconda2/bin/ ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "decisionTree" -out ${__tool_directory__}/ -k $ifCV.kfold;
         #elif $method.algorithm == "XGBoost":
-            python ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "XGBoost" -lr $method.lr -estimators $method.ntree -t $method.cpus -out ${__tool_directory__}/ -k $ifCV.kfold;
+            /home/miniconda2/bin/ ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "XGBoost" -lr $method.lr -estimators $method.ntree -t $method.cpus -out ${__tool_directory__}/ -k $ifCV.kfold;
         #else:
-            python ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "LogisticRegression" -solver $method.solver -t $method.cpus -out ${__tool_directory__}/ -k $ifCV.kfold;
+            /home/miniconda2/bin/ ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "LogisticRegression" -solver $method.solver -t $method.cpus -out ${__tool_directory__}/ -k $ifCV.kfold;
         #end if
         mv ${__tool_directory__}/model.pkl ${model};
         mv ${__tool_directory__}/CV_evaluation.pdf ${figure};
     #else:
         #if $method.algorithm == "randomForest":
-            python ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "randomForest" -estimators $method.ntree -t $method.cpus -out ${__tool_directory__}/ -k 0;
+            /home/miniconda2/bin/ ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "randomForest" -estimators $method.ntree -t $method.cpus -out ${__tool_directory__}/ -k 0;
         #elif $method.algorithm == "svm":
             #if $method.kernel.method == "polynomial":
-                python ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "SVM" -kernel "poly" -degree $method.kernel.degree -coef0 $method.kernel.coef0 -gamma $method.kernel.gamma -out ${__tool_directory__}/  -k 0;
+                /home/miniconda2/bin/ ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "SVM" -kernel "poly" -degree $method.kernel.degree -coef0 $method.kernel.coef0 -gamma $method.kernel.gamma -out ${__tool_directory__}/  -k 0;
             #elif $method.kernel.method == "radial_basis":
-                python ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "SVM" -kernel "rbf" -gamma $method.kernel.gamma -out ${__tool_directory__}/  -k 0;
+                /home/miniconda2/bin/ ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "SVM" -kernel "rbf" -gamma $method.kernel.gamma -out ${__tool_directory__}/  -k 0;
             #elif $method.kernel.method == "sigmoid":
-                python ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "SVM" -kernel "sigmoid" -gamma $method.kernel.gamma -out ${__tool_directory__}/  -k 0;
+                /home/miniconda2/bin/ ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "SVM" -kernel "sigmoid" -gamma $method.kernel.gamma -out ${__tool_directory__}/  -k 0;
             #else:
-                python ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "SVM" -kernel "linear" -out ${__tool_directory__}/  -k 0;
+                /home/miniconda2/bin/ ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "SVM" -kernel "linear" -out ${__tool_directory__}/  -k 0;
             #end if
         #elif $method.algorithm == "decisionTree":
-            python ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "decisionTree" -out ${__tool_directory__}/ -k 0;
+            /home/miniconda2/bin/ ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "decisionTree" -out ${__tool_directory__}/ -k 0;
         #elif $method.algorithm == "XGBoost":
-            python ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "XGBoost" -estimators $method.ntree -t $method.cpus -lr $method.lr -out ${__tool_directory__}/ -k 0;
+            /home/miniconda2/bin/ ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "XGBoost" -estimators $method.ntree -t $method.cpus -lr $method.lr -out ${__tool_directory__}/ -k 0;
         #else:
-            python ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "LogisticRegression" -solver $method.solver -t $method.cpus -out ${__tool_directory__}/ -k 0;
+            /home/miniconda2/bin/ ${__tool_directory__}/03_mlClassification.py -positive ${posMat} -negative ${negMat} -m "LogisticRegression" -solver $method.solver -t $method.cpus -out ${__tool_directory__}/ -k 0;
         #end if
         mv ${__tool_directory__}/model.pkl ${model};
     #end if

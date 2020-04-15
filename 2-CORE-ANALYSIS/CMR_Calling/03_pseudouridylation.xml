@@ -5,7 +5,7 @@
     samtools index $pulldown".bam";
     mv $input $input".bam";
     samtools index $input".bam";
-    python ${__tool_directory__}/03_pseudouridylation.py -p $pulldown".bam" -i $input".bam" -c $cDNA -out ${__tool_directory__}/ -s $stopNumber -r $stopRate -d $difference;
+    /home/miniconda2/bin/ ${__tool_directory__}/03_pseudouridylation.py -p $pulldown".bam" -i $input".bam" -c $cDNA -out ${__tool_directory__}/ -s $stopNumber -r $stopRate -d $difference;
     mv ${__tool_directory__}/stop_ratio.txt $CMR;
     mv $pulldown".bam" $pulldown;
     mv $input".bam" $input;
