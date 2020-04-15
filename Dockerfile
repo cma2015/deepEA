@@ -10,6 +10,7 @@ RUN apt-get install wget -y && \
     apt-get install curl -y && \
     apt-get update && \
     apt-get install libxml2 libxml2-dev -y && \
+    apt-get update && \
     apt-get install libcurl4-openssl-dev libxml2-dev -y && \
     apt-get install libssl-dev -y && \
     apt install zlib1g -y && \
@@ -36,16 +37,16 @@ RUN apt-get install wget -y && \
     R -e "install.packages(c('BiocManager','remotes'), repos='https://mirrors.tuna.tsinghua.edu.cn/CRAN/')" && \
     R -e "BiocManager::install(c('Rsamtools','rtracklayer','GenomicFeatures'))" && \
     wget http://bioconductor.statistik.tu-dortmund.de/packages/3.8/bioc/src/contrib/Guitar_1.20.1.tar.gz && \
-    wget https://bioconductor.riken.jp/packages/3.0/bioc/src/contrib/exomePeak_1.6.0.tar.gz && \
+    wget http://bioconductor.statistik.tu-dortmund.de/packages/3.0/bioc/src/contrib/exomePeak_1.6.0.tar.gz && \
     R -e "remotes::install_local(c('Guitar_1.20.1.tar.gz','exomePeak_1.6.0.tar.gz'))" && \
     rm Guitar_1.20.1.tar.gz exomePeak_1.6.0.tar.gz && \
-    R -e "BiocManager::install(c('Rhtslib', 'GenomicAlignments', 'knitr', 'rmarkdown','highr', 'markdown', 'xfun', 'base64enc', 'tinytex', 'Biostrings','SummarizedExperiment'))" && \
+    R -e "BiocManager::install(c('knitr', 'rmarkdown','highr', 'markdown', 'xfun', 'base64enc', 'tinytex'))" && \
     R -e "remotes::install_github(c('skgrange/threadr','skyhorsetomoon/Trumpet'))" && \
     git clone https://github.com/compgenomics/MeTPeak.git && \
     R CMD build MeTPeak && \
     R -e "install.packages('MeTPeak_1.0.0.tar.gz')" && \
     rm -r MeTPeak && rm MeTPeak_1.0.0.tar.gz && \
-    R -e "BiocManager::install(c('DiffBind','plotly','RCAS','GenomicRanges','scales','GenomeInfoDb','Guitar','ggplot2','gridExtra','diffloop','knitr','kableExtra','seqLogo','DiffLogo','seqinr','argparse','snowfall','data.table','BayesPeak','magrittr','dplyr','BSgenome','GenomicScores', 'pipeR','caret','randomForest','DALEX','pheatmap','flexdashboard'))" && \
+    R -e "BiocManager::install(c('DiffBind','plotly','RCAS','scales','gridExtra','diffloop','knitr','kableExtra','seqLogo','DiffLogo','seqinr','argparse','snowfall','data.table','BayesPeak','magrittr','BSgenome','GenomicScores', 'pipeR','caret','randomForest','DALEX','pheatmap','flexdashboard'))" && \
     mkdir -p /home/DeepEA/galaxy/tools/DeepEA_software && \
     cd /home/DeepEA/galaxy/tools/DeepEA_software && \
     wget https://ccb.jhu.edu/software/tophat/downloads/tophat-2.1.1.Linux_x86_64.tar.gz && \
