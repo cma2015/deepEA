@@ -7,8 +7,8 @@
 		bash ${__tool_directory__}/01_run_meRanTK.sh $m5CMethod.Refgenome $GTF $thread $readtype.fastq_r1_in $m5CMethod.calling_method $md $cr $mBQ $mcov "PE" $readtype.fastq_r2_in
 	#end if
 
-	&& mv ${__tool_directory__}/$$/${m5CMethod.calling_method}_meRanCall_m5Cs.txt $m5C_out_peaks
-	&& rm -r ${__tool_directory__}/$$;
+	&& mv ${__tool_directory__}/m5C/${m5CMethod.calling_method}_meRanCall_m5Cs.txt $m5C_out_peaks
+	&& rm -r ${__tool_directory__}/m5C;
   ]]></command>
   <inputs>
 

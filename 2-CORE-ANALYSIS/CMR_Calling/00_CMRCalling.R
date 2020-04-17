@@ -153,7 +153,7 @@ extractCov <- function(BAM, refGenome, method = c("bedtools", "Rsamtools")){
   }
 
   if(method == "bedtools"){
-    command <- paste0("/home/DeepEA/galaxy/tools/DeepEA_software/bedtools2/bin/genomeCoverageBed -split -dz -ibam ", BAM, " -g ",
+    command <- paste0("/home/miniconda2/bin/genomeCoverageBed -split -dz -ibam ", BAM, " -g ",
                       refGenome, " > ", paste0(BAM, ".dz"))
     system(command = command)
   }else{

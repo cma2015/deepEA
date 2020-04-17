@@ -117,8 +117,8 @@
 
         #end if
 		&& mv ${__tool_directory__}/$$/outputAligned.sortedByCoord.out.bam $bam
-		&& mv ${__tool_directory__}/$$/outputLog.final.out $summary;
-		&& rm -f ${__tool_directory__}/$$;
+		&& mv ${__tool_directory__}/$$/outputLog.final.out $summary
+		&& rm -rf ${__tool_directory__}/$$;
   ]]></command>
   <inputs>
 	<conditional name="singlePaired">
