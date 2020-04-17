@@ -21,6 +21,7 @@ RUN apt-get install wget -y && \
     apt-get install -y liblzma-dev && \
     apt-get install libpng-dev -y && \
     apt-get install libjpeg-dev -y && \
+    apt-get install axel -y && \
     wget https://cdn.rstudio.com/r/${OS_IDENTIFIER}/pkgs/r-${R_VERSION}_1_amd64.deb && \
     apt-get update -qq && \
     DEBIAN_FRONTEND=noninteractive apt-get install -f -y ./r-${R_VERSION}_1_amd64.deb && \
@@ -66,6 +67,7 @@ RUN apt-get install wget -y && \
     /home/miniconda2/bin/conda install -c bioconda meme -y && \
     /home/miniconda2/bin/conda install -c bioconda macs2 -y && \
     /home/miniconda2/bin/conda install -c bioconda samtools -y && \
+    /home/miniconda2/bin/conda install -c conda-forge pandoc -y && \
     /home/miniconda2/bin/pip install biopython pysam numpy matplotlib scikit-learn scipy xgboost
 
 

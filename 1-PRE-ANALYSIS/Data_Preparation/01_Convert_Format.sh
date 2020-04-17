@@ -7,7 +7,7 @@ echo "minReadLen:$2";
 
 dirpath=/home/DeepEA/galaxy/tools/1-PRE-ANALYSIS/Data_Preparation/$3/
 
-/home/miniconda2/bin/fasterq-dump -A $1 -M $2 --split-3 -O $dirpath ;
+/home/miniconda2/bin/fasterq-dump $1 -M $2 --split-3 -O $dirpath ;
 
 
 count=$(ll ${dirpath} | wc -l)
