@@ -1,4 +1,4 @@
-## [](https://cma2015.github.io/deepEA)
+## [deepEA](https://cma2015.github.io/deepEA)
 deepEA: deep analysis of epitranscriptome sequencing data for non-specialists
 
 ## Introduction
