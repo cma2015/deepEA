@@ -487,19 +487,19 @@ sequence_features <- function (query_gr, bsgnm)
 runBioSeq <- function(method, inputSeq, out){
   BioSeqDic <- "/home/DeepEA/galaxy/tools/DeepEA_software/BioSeq-Analysis2.0-Seq/"
   if(method == "1mer"){
-	  cmd <- paste0("/home/miniconda2/envs/BioSeq/bin/python ", BioSeqDic, "feature.py ",
+	  cmd <- paste0("cd ", BioSeqDic, " && /home/miniconda2/bin/python ", BioSeqDic, "feature.py ",
 	                inputSeq, " RNA -method Kmer -k 1 -out ", out)
   }else if(method == "2mer"){
-	  cmd <- paste0("/home/miniconda2/envs/BioSeq/bin/python ", BioSeqDic, "feature.py ",
+	  cmd <- paste0("cd ", BioSeqDic, " && /home/miniconda2/bin/python ", BioSeqDic, "feature.py ",
 	                inputSeq, " RNA -method Kmer -k 2 -out ", out)
   }else if(method == "3mer"){
-	  cmd <- paste0("/home/miniconda2/envs/BioSeq/bin/python ", BioSeqDic, "feature.py ",
+	  cmd <- paste0("cd ", BioSeqDic, " && /home/miniconda2/bin/python ", BioSeqDic, "feature.py ",
 	                inputSeq, " RNA -method Kmer -k 3 -out ", out)
   }else if(method == "4mer"){
-	  cmd <- paste0("/home/miniconda2/envs/BioSeq/bin/python ", BioSeqDic, "feature.py ",
+	  cmd <- paste0("cd ", BioSeqDic, " && /home/miniconda2/bin/python ", BioSeqDic, "feature.py ",
 	                inputSeq, " RNA -method Kmer -k 4 -out ", out)
   }else{
-	  cmd <- paste0("/home/miniconda2/envs/BioSeq/bin/python ", BioSeqDic, "feature.py ",
+	  cmd <- paste0("cd ", BioSeqDic, " && /home/miniconda2/bin/python ", BioSeqDic, "feature.py ",
 	                inputSeq, " RNA -method ", method, " -out ", out)
   }
   system(cmd)

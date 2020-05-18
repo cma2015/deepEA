@@ -10,7 +10,7 @@
             Rscript ${__tool_directory__}/01_featureEncoding.R -cmrType peaks -cmr ${CMR} -type genomic -motif $cmrType.motif -genome ${genomeSequence}.fasta -genomicFeatures $method.overlap_with_features.overlap_with_features,$method.relative_position.relative_position,$method.region_length.region_length,$method.nucleotide_distances.nucleotide_distances,$method.attributes.attributes -out ${output} -flank $flank -gtf $method.GTF".gtf";
         #else:
 	    ln -sf $method.GTF $method.GTF".gtf";
-	    Rscript ${__tool_directory__}/01_featureEncoding.R -cmrType peaks -cmr ${CMR} -type genomic -motif $cmrType.motif -genome ${genomeSequence}.fasta -seqFeatures $method.kmer.kmer,$method.autocorrelation.autocorrelation,$method.Pseudo_nucleotide_composition.Pseudo_nucleotide_composition,$method.binary.binary -genomicFeatures $method.overlap_with_features.overlap_with_features,$method.relative_position.relative_position,$method.region_length.region_length,$method.nucleotide_distances.nucleotide_distances,$method.attributes.attributes -out ${output} -flank $flank -gtf $method.GTF".gtf";
+	    Rscript ${__tool_directory__}/01_featureEncoding.R -cmrType peaks -cmr ${CMR} -type both -motif $cmrType.motif -genome ${genomeSequence}.fasta -seqFeatures $method.kmer.kmer,$method.autocorrelation.autocorrelation,$method.Pseudo_nucleotide_composition.Pseudo_nucleotide_composition,$method.binary.binary -genomicFeatures $method.overlap_with_features.overlap_with_features,$method.relative_position.relative_position,$method.region_length.region_length,$method.nucleotide_distances.nucleotide_distances,$method.attributes.attributes -out ${output} -flank $flank -gtf $method.GTF".gtf";
         #end if
     #else:
         #if $method.type == "sequence_level":
@@ -20,7 +20,7 @@
             Rscript ${__tool_directory__}/01_featureEncoding.R -cmrType sites -cmr ${CMR} -type genomic -motif $cmrType.motif -genome ${genomeSequence}.fasta -genomicFeatures $method.overlap_with_features.overlap_with_features,$method.relative_position.relative_position,$method.region_length.region_length,$method.nucleotide_distances.nucleotide_distances,$method.attributes.attributes -out ${output} -flank $flank -gtf $method.GTF".gtf";
 	#else:
 	    ln -sf $method.GTF $method.GTF".gtf";
-            Rscript ${__tool_directory__}/01_featureEncoding.R -cmrType sites -cmr ${CMR} -type genomic -motif $cmrType.motif -genome ${genomeSequence}.fasta -seqFeatures $method.seqFeature -genomicFeatures $method.overlap_with_features.overlap_with_features,$method.relative_position.relative_position,$method.region_length.region_length,$method.nucleotide_distances.nucleotide_distances,$method.attributes.attributes -out ${output} -flank $flank -gtf $method.GTF".gtf";
+            Rscript ${__tool_directory__}/01_featureEncoding.R -cmrType sites -cmr ${CMR} -type both -motif $cmrType.motif -genome ${genomeSequence}.fasta -seqFeatures $method.seqFeature -genomicFeatures $method.overlap_with_features.overlap_with_features,$method.relative_position.relative_position,$method.region_length.region_length,$method.nucleotide_distances.nucleotide_distances,$method.attributes.attributes -out ${output} -flank $flank -gtf $method.GTF".gtf";
         #end if
     #end if
 
@@ -132,8 +132,6 @@
                     <param name="attributes" type="select" label=" " multiple="true" display="checkboxes">
                         <option value="sncRNA">sncRNA</option>
                         <option value="lncRNA">lncRNA</option>
-                        <option value="HK_genes">House keeping genes</option>
-                        <option value="miR_targeted_genes">miRNA targeted genes</option>
                     </param>
                 </section>
 
@@ -231,8 +229,6 @@
                     <param name="attributes" type="select" label=" " multiple="true" display="checkboxes">
                         <option value="sncRNA">sncRNA</option>
                         <option value="lncRNA">lncRNA</option>
-                        <option value="HK_genes">House keeping genes</option>
-                        <option value="miR_targeted_genes">miRNA targeted genes</option>
                     </param>
                 </section>
 

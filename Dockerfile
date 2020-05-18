@@ -52,8 +52,11 @@ RUN apt-get install wget -y && \
     cd /home/DeepEA/galaxy/tools/DeepEA_software && \
     wget https://ccb.jhu.edu/software/tophat/downloads/tophat-2.1.1.Linux_x86_64.tar.gz && \
     wget https://icbi.i-med.ac.at/software/meRanTK/downloads/1.2.0/meRanTK-1.2.0.zip && \
+    wget http://bliulab.net/BioSeq-Analysis2.0/static/download/BioSeq-Analysis2.0.rar && \
     tar -xzvf tophat-2.1.1.Linux_x86_64.tar.gz && rm tophat-2.1.1.Linux_x86_64.tar.gz && \
     unzip meRanTK-1.2.0.zip && rm -r meRanTK-1.2.0/testdata && \
+    rar x BioSeq-Analysis2.0.rar BioSeq-Analysis2.0 && \
+    rm BioSeq-Analysis2.0.rar && \
     git clone https://github.com/ZW-xjtlu/m6ALogisticModel.git && \
     R -e "remotes::install_local('/home/DeepEA/galaxy/tools/DeepEA_software/m6ALogisticModel')" && \
     rm -r /home/DeepEA/galaxy/tools/DeepEA_software/m6ALogisticModel && \
@@ -69,7 +72,7 @@ RUN apt-get install wget -y && \
     /home/miniconda2/bin/conda install -c bioconda samtools -y && \
     /home/miniconda2/bin/conda install -c bioconda bedtools -y && \
     /home/miniconda2/bin/conda install -c conda-forge pandoc -y && \
-    /home/miniconda2/bin/pip install biopython pysam numpy matplotlib scikit-learn scipy xgboost
+    /home/miniconda2/bin/pip install biopython pysam numpy matplotlib scikit-learn scipy xgboost imbalanced-learn==0.3.1
 
 
 # Copy xml
