@@ -119,7 +119,9 @@
             </when>
         </conditional>
     </inputs>
-
+    <stdio>
+	    <exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+    </stdio>
     <outputs>
         <data format="pdf" name="figure" label="${method.algorithm}_CV_evaluation.pdf">
             <filter>ifCV['cv'] == "true"</filter>
