@@ -4,7 +4,6 @@ deepEA: deep analysis of epitranscriptome sequencing data for non-specialists
 ## Introduction
 - deepEA is a Galaxy-based framework for deep analysis of epitranscriptome sequencing data for non-specialists. In the current version, deepEA provides a variety of functions required for **Data Preparation**, **Quality Control**, **CMR (chemical modifications of RNA) profiling and analysis**, **CMR annotation**, **CMR prediction** and related **visualization**.
 * The deepEA project is hosted on https://github.com/cma2015/deepEA.
-* The deepEA web server can be accessed via https://deepea.nwafu.edu.cn, **limit access from 8 PM to 9 AM [Beijing Time] during the Wuhan coronavirus outbreak**
 * The deepEA Docker image can be obtained from https://hub.docker.com/r/malab/deepea.
 
 ## How to use deepEA
@@ -20,5 +19,4 @@ deepEA: deep analysis of epitranscriptome sequencing data for non-specialists
 - 2019.11 we updated deepEA
 - 2019.01 deepEA web server online
 - 2018.05 we launched deepEA project
-
 
