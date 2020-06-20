@@ -10,7 +10,17 @@ library(argparse)
 mainDic <- "/home/DeepEA/galaxy/tools/2-CORE-ANALYSIS/ML_prediction/"
 source(paste0(mainDic, '00_feature_depend.R'))
 source(paste0(mainDic, '00_extract_motif.R'))
-
+MHmakeRandomString <- function(n=1, lenght=12)
+{
+  randomString <- c(1:n)                  # initialize vector
+  for (i in 1:n)
+  {
+    randomString[i] <- paste(sample(c(0:9, letters, LETTERS),
+                                    lenght, replace=TRUE),
+                             collapse="")
+  }
+  return(randomString)
+}
 parser <- ArgumentParser()
 parser$add_argument("-cmrType", default = NULL, dest = "cmrType", help = "The CMR type: peaks or sites.")
 parser$add_argument("-cmr", default = NULL, dest = "peak", help = "The directory of CMR regions.")
@@ -27,16 +37,21 @@ parser$add_argument("-scale", default = "F", dest = "scale", help = "Logical, se
 
 args <- parser$parse_args()
 genomePath <- args$genome
-dna <- readDNAStringSet(genomePath)
-dna <- replaceAmbiguities(dna, new = "N")
-export(dna, paste0(genomePath, ".2bit"))
-rm(dna)
-genome <- TwoBitFile(paste0(genomePath, ".2bit"))
+if(file.exists(paste0(genomePath, ".2bit"))){
+    genome <- TwoBitFile(paste0(genomePath, ".2bit"))
+}else{
+    dna <- readDNAStringSet(genomePath)
+    dna <- replaceAmbiguities(dna, new = "N")
+    export(dna, paste0(genomePath, ".2bit"))
+    rm(dna)
+    genome <- TwoBitFile(paste0(genomePath, ".2bit"))
+}
+
 # read CMR
-peaks <- read.table(file = args$peak, sep = "\t", header = F, quote = "", stringsAsFactors = F)
-colnames(peaks)[1:3] <- c("chr", "start", "end" )
-peaks <- GRanges(peaks)
-strand(peaks)[which(strand(peaks) == "*")] <- "+"
+rawPeak <- read.table(file = args$peak, sep = "\t", header = F, quote = "", stringsAsFactors = F)
+colnames(rawPeak)[1:3] <- c("chr", "start", "end" )
+peaks <- GRanges(rawPeak[,1:3])
+strand(peaks) <- rawPeak$V6
 flank <- as.numeric(args$flank)
 if(args$cmrType == "peaks"){
         motif <- args$motif
@@ -91,7 +106,8 @@ if(args$featureType == "genomic" | args$featureType == "both"){
         }
 
         for(i in 1:length(seqFeatureName)){
-            curFeatures <- runBioSeq(method = seqFeatureName[i], inputSeq = paste0(mainDic, "seq.fasta"), out = paste0(mainDic, "tmp.txt"))
+            out = MHmakeRandomString()
+            curFeatures <- runBioSeq(method = seqFeatureName[i], inputSeq = paste0(mainDic, "seq.fasta"), out = paste0(mainDic, out, ".txt"))
             seqFeatures <- cbind(seqFeatures, curFeatures)
         }
         resFeatures <- cbind(genomicFeatures, seqFeatures)

@@ -11,6 +11,7 @@ knitr::opts_chunk$set(echo = TRUE,
                       warning = FALSE,
                       message = FALSE)
 ```
+
 ### 1. Introduction
 - This function is designed to provide insights into spatial and functional associations of **CMRs (Chemical Modifications of RNAs)**. This function takes the CMRs in [BED](https://genome.ucsc.edu/FAQ/FAQformat.html) format and genome annotation in [GTF](https://genome.ucsc.edu/FAQ/FAQformat.html#format4) (Gene Transfer Format) format as input, then the manner of distribution of CMRs in the genome and transcriptome is statistically analyzed and visualized, including the number of peaks in genomic feature (e.g. promoter, exon, intron, etc), the regions of enrichment of CMRs within transcripts, the enrichment of CMRs in transcriptional start/stop site and the enrichment of CMRs in splicing sites.
 
