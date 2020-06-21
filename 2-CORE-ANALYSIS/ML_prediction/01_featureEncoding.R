@@ -92,51 +92,56 @@ if(args$featureType == "genomic" | args$featureType == "both"){
         names(Seq) <- paste0("seq_", 1:length(Seq))
         idx <- setdiff(1:length(Seq), grep("N", Seq))
         Seq <- Seq[idx]
-        writeXStringSet(Seq, filepath = paste0(mainDic, "seq.fasta"))
-        cmd <- paste0("sed -i 's/T/U/g' ", mainDic, "seq.fasta")
+        outSeq = MHmakeRandomString()
+        writeXStringSet(Seq, filepath = paste0(mainDic, outSeq, ".fasta"))
+        cmd <- paste0("sed -i 's/T/U/g' ", mainDic, outSeq, ".fasta")
         system(cmd)
         seqFeatureName <- unlist(strsplit(args$seqFeatures, ","))
         seqFeatureName <-seqFeatureName[which(seqFeatureName != "None")]
         positive_sites <- positive_sites[idx]
-        if(is.element("structural_chemical_properties", seqFeatureName)){
+        if(is.element("one_hot_SCP", seqFeatureName)){
             seqFeatures <- sequence_features(positive_sites + flank, genome)
-            seqFeatureName <- seqFeatureName[which(seqFeatureName != "structural_chemical_properties")]
+            seqFeatureName <- seqFeatureName[which(seqFeatureName != "one_hot_SCP")]
         }else{
             seqFeatures <- NULL
         }
-
-        for(i in 1:length(seqFeatureName)){
-            out = MHmakeRandomString()
-            curFeatures <- runBioSeq(method = seqFeatureName[i], inputSeq = paste0(mainDic, "seq.fasta"), out = paste0(mainDic, out, ".txt"))
-            seqFeatures <- cbind(seqFeatures, curFeatures)
+        if(length(seqFeatures)!=0){
+            for(i in 1:length(seqFeatureName)){
+                out = MHmakeRandomString()
+                curFeatures <- runBioSeq(method = seqFeatureName[i], inputSeq = paste0(mainDic, outSeq, ".fasta"), out = paste0(mainDic, out, ".txt"))
+                seqFeatures <- cbind(seqFeatures, curFeatures)
+            }
         }
         resFeatures <- cbind(genomicFeatures, seqFeatures)
     }else{
         resFeatures <- genomicFeatures
     }
 }else{
-
     Seq <- Biostrings::getSeq(genome, positive_sites + flank)
     names(Seq) <- paste0("seq_", 1:length(Seq))
     idx <- setdiff(1:length(Seq), grep("N", Seq))
-    Seq <- Seq[idx]
-    writeXStringSet(Seq, filepath = paste0(mainDic, "seq.fasta"))
-    cmd <- paste0("sed -i 's/T/U/g' ", mainDic, "seq.fasta")
+    Seq <- Seq[idx]outSeq = MHmakeRandomString()
+    writeXStringSet(Seq, filepath = paste0(mainDic, outSeq, ".fasta"))
+    cmd <- paste0("sed -i 's/T/U/g' ", mainDic, outSeq, ".fasta")
     system(cmd)
     seqFeatureName <- unlist(strsplit(args$seqFeatures, ","))
     seqFeatureName <- seqFeatureName[which(seqFeatureName != "None")]
     positive_sites <- positive_sites[idx]
-    if(is.element("structural_chemical_properties", seqFeatureName)){
+    if(is.element("one_hot_SCP", seqFeatureName)){
         seqFeatures <- sequence_features(positive_sites + flank, genome)
-        seqFeatureName <- seqFeatureName[which(seqFeatureName != "structural_chemical_properties")]
+        seqFeatureName <- seqFeatureName[which(seqFeatureName != "one_hot_SCP")]
     }else{
         seqFeatures <- NULL
     }
 
-    for(i in 1:length(seqFeatureName)){
-        curFeatures <- runBioSeq(method = seqFeatureName[i], inputSeq = paste0(mainDic, "seq.fasta"), out = paste0(mainDic, "tmp.txt"))
-        seqFeatures <- cbind(seqFeatures, curFeatures)
+    if(length(seqFeatureName) != 0){
+        for(i in 1:length(seqFeatureName)){
+            out = MHmakeRandomString()
+            curFeatures <- runBioSeq(method = seqFeatureName[i], inputSeq = paste0(mainDic, outSeq, ".fasta"), out = paste0(mainDic, out, ".txt"))
+            seqFeatures <- cbind(seqFeatures, curFeatures)
+        }
     }
+    
     resFeatures <- seqFeatures
 }
 

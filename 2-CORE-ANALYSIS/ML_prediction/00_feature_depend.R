@@ -509,5 +509,7 @@ runBioSeq <- function(method, inputSeq, out){
   rownames(featureMat) <- names(sequences)
   colnames(featureMat) <- paste0(method, "_", 1:ncol(featureMat))
   featureMat <- as.matrix(featureMat)
+  # rm generated feature matrix
+  system(paste0("rm ", out))
   return(featureMat)
 }
