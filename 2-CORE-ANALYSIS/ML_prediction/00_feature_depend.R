@@ -498,6 +498,9 @@ runBioSeq <- function(method, inputSeq, out){
   }else if(method == "4mer"){
 	  cmd <- paste0("cd ", BioSeqDic, " && /home/miniconda2/bin/python ", BioSeqDic, "feature.py ",
 	                inputSeq, " RNA -method Kmer -k 4 -out ", out)
+  }else if(method == "5mer"){
+    cmd <- paste0("cd ", BioSeqDic, " && /home/miniconda2/bin/python ", BioSeqDic, "feature.py ",
+	                inputSeq, " RNA -method Kmer -k 5 -out ", out)
   }else{
 	  cmd <- paste0("cd ", BioSeqDic, " && /home/miniconda2/bin/python ", BioSeqDic, "feature.py ",
 	                inputSeq, " RNA -method ", method, " -out ", out)

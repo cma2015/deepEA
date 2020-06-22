@@ -15,6 +15,8 @@ deepEA: deep analysis of epitranscriptome sequencing data for non-specialists
 * In addition, if any suggestions are available, feel free to contact: __Jingjing Zhai__ <zhaijingjing603@gmail.com> or __Chuang Ma__ <chuangma2006@gmail.com>
 
 ## Change log
+- 2020.06 Update multi-omics integration
+- 2020.06 Optimize feature encoding to perform parallel analysis
 - 2020.04 fixed admin user bug
 - 2019.11 we updated deepEA
 - 2019.01 deepEA web server online

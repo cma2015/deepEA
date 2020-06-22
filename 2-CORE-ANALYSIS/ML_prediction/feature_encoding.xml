@@ -248,10 +248,10 @@
 
     **What it does**
 
-    This function can be used to encode CMR flanking sequences into a feature matrix. To be specific, **Sequence-derived features** integrated several commonly used feature encoding strategies including **Nucleic acid composition related features**, **Autocorerlation-based features**, **Pseudo nucleotide composition** and **Binary encoding**; For **Genomic-derived features**, we adopted feature encoding strategy used in WHISTLE_ (Chen *et al*., 2019, *Nucleic Acids Research*) project, more details are listed in `DeepEA tutorial`_.
+    This function can be used to encode CMR flanking sequences into a feature matrix. To be specific, **Sequence-derived features** integrated several commonly used feature encoding strategies including **Nucleic acid composition related features**, **Autocorerlation-based features**, **Pseudo nucleotide composition** and **Binary encoding**; For **Genomic-derived features**, we adopted feature encoding strategy used in WHISTLE_ (Chen *et al*., 2019, *Nucleic Acids Research*) project, more details are listed in `deepEA tutorial`_.
 
     .. _WHISTLE: https://academic.oup.com/nar/article/47/7/e41/5319125
-    .. _`DeepEA tutorial`: https://cma2015.github.io/DeepEA/#feature-encoding
+    .. _`deepEA tutorial`: https://cma2015.github.io/deepEA/#feature-encoding
 
     .. class:: infomark
 
