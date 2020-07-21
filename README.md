@@ -1,4 +1,5 @@
 ## [deepEA](https://cma2015.github.io/deepEA)
+[![docker](https://img.shields.io/badge/docker-ready-red.svg)](https://hub.docker.com/r/malab/deepea/) ![docker pull](https://img.shields.io/docker/pulls/malab/deepea.svg) ![webserver](https://img.shields.io/badge/Web_server-ready-blue.svg)
 deepEA: deep analysis of epitranscriptome sequencing data for non-specialists
 
 ## Introduction

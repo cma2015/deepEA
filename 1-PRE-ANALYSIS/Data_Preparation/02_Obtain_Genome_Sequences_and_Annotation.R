@@ -1,8 +1,11 @@
 args <- commandArgs(T)
-Type <- args[1] #"Ensembl Plants"
+release_version <- args[1]
+# Type <- args[1] #"Ensembl Plants"
+Type <- "plants"
 Species <- args[2] #"Zea mays"
 DataType <- args[3]  #"Genome" #cDNA, CDS, Protein, GTF, GFF3
 out <- args[4]
+releaseVersion <- args[]
 library(threadr)
 mainDic <- "/home/DeepEA/galaxy/tools/1-PRE-ANALYSIS/Data_Preparation/"
 
@@ -21,7 +24,7 @@ MHmakeRandomString <- function(n=1, lenght=12)
 
 generateURL <- function(Type, DataType, Species){
   if(Type == "plants"){
-    ftp <- "ftp://ftp.ensemblgenomes.org/pub/release-44/plants/"
+    ftp <- paste0("ftp://ftp.ensemblgenomes.org/pub/release-", release_version, "/plants/")
     species_df <- read.delim(file = paste0(mainDic, "species_EnsemblPlants.txt"),
                              sep = '\t', header = FALSE)
   }else if(Type == "fungi"){

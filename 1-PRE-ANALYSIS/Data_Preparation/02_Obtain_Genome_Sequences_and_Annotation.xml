@@ -1,66 +1,25 @@
 <tool id="Obtain_Genome_or_Transcriptome_Sequences_and_Annotation" name="Obtain Genome Sequences and Annotation"  version='18.09'>
 <description></description>
 	<command>
-		Rscript ${__tool_directory__}/02_Obtain_Genome_Sequences_and_Annotation.R $specie_list.data_type $specie_list.database $datatype $output;
+		Rscript ${__tool_directory__}/02_Obtain_Genome_Sequences_and_Annotation.R $version $species $datatype $output;
 	</command>
 <inputs>
 
-	<conditional name="specie_list">
-		<param name="data_type" type="select" label="Select an Ensembl database" display="radio">
-			<option value="plants" selected="True">Ensembl Plants (release 44)</option>
-			<option value="vertebrates">Ensembl Vertebrates (release 97)</option>
-			<option value="metazoa">Ensembl Metazoa (release 44)</option>
-		</param>
+    <param name="species" type="select" value="Choose" label="Select a species"
+    help="">
+        <options from_data_table="EnsemblPlants" >
+            <filter type="sort_by" column="0"/>
+            <validator type="no_options" message="No indexes are available for the selected input dataset"/>
+        </options>
+    </param>
 
-		<when value="plants">
-            <param name="database" type="select" value="Choose" label="Select a species"
-                help="">
-                    <options from_data_table="EnsemblPlants" >
-                        <filter type="sort_by" column="0"/>
-                        <validator type="no_options" message="No indexes are available for the selected input dataset"/>
-                    </options>
-            </param>
-        </when>
-		<when value="vertebrates">
-			<param name="database" type="select" value="Choose" label="Select a species"
-                help="">
-                    <options from_data_table="EnsemblVertebrates" >
-                        <filter type="sort_by" column="0"/>
-                        <validator type="no_options" message="No indexes are available for the selected input dataset"/>
-                    </options>
-            </param>
-		</when>
-		<when value="fungi">
-			<param name="database" type="select" value="Choose" label="Select a species"
-                help="">
-                    <options from_data_table="EnsemblFungi" >
-                        <filter type="sort_by" column="0"/>
-                        <validator type="no_options" message="No indexes are available for the selected input dataset"/>
-                    </options>
-            </param>
-		</when>
+      <param name="version" type="select" label="Database version"
+          help="">
+          <options from_data_table="ensembl_plant_version">
+              <validator type="no_options" message="No indexes are available for the selected input dataset"/>
+          </options>
+      </param>
 
-		<when value="metazoa">
-			<param name="database" type="select" value="Choose" label="Select a species"
-                help="">
-                    <options from_data_table="EnsemblMetazoa" >
-                        <filter type="sort_by" column="0"/>
-                        <validator type="no_options" message="No indexes are available for the selected input dataset"/>
-                    </options>
-            </param>
-		</when>
-
-		<when value="protists">
-			<param name="database" type="select" value="Choose" label="Select a species"
-                help="">
-                    <options from_data_table="EnsemblProtists" >
-                        <filter type="sort_by" column="0"/>
-                        <validator type="no_options" message="No indexes are available for the selected input dataset"/>
-                    </options>
-            </param>
-		</when>
-
-	</conditional>
 
 	<param name="datatype" type="select" label="Data type" multiple="false" display="radio">
     	<option value="Genome" selected="true">Genome Sequences (FASTA)</option>
@@ -76,7 +35,7 @@
   </stdio>
 	<outputs>
 
-	<data name="output" format="data" label="${specie_list.database} ${datatype}.txt">
+	<data name="output" format="data" label="${species}_${version}_${datatype}.txt">
                 <change_format>
                     <when input="datatype" value="Genome" format="fasta" />
                     <when input="datatype" value="cDNA" format="fasta" />
