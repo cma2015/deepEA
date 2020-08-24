@@ -49,7 +49,7 @@
 # pull latest deepEA Docker image from docker hub
 $ docker pull malab/deepea
 ```
-- **Step 3**: Launch iwa-miRNA local server
+- **Step 3**: Launch deepEA local server
 ```bash
 $ docker run -it -p 8080:8080 malab/deepea bash
 $ bash /home/galaxy/run.sh
