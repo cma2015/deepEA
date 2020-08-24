@@ -1,0 +1,86 @@
+---
+title: "Integrative Analysis of Two Omics Data Sets"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(plotly)
+library(DT)
+```
+
+## Introduction
+This function is designed to perform integrative analysis of two omics data sets (e.g., m<sup>6</sup>A and RNA-Seq). Taking a quantification matrix as input, deepEA firstly normalize raw quantification based on user-specific normalization method (currently, three normalization methods including **cumulative distribution, Z-score normalization and min-max normalization** are available), then using kmeans clustering method to cluster genes into four groups and visualize genes by an interactive scatter plot.
+
+
+## A scatter plot showing the differences between two omics data sets
+The following scatter plot shows each gene's quantification level in two omics data sets, the colors represents the clusters identified by kmeans algorithm.
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+cmrMat <- read.table(file = cmrDir,
+                     sep = '\t', header = T, quote = "", stringsAsFactors = F)
+cmrMat <- na.omit(cmrMat)
+cmrMat <- cmrMat[, 1:3]
+colnames(cmrMat) <- c("geneID", "cmrLevel", "omics1")
+cmrGene <- cmrMat$geneID
+method <- "ecdf"
+# transform to relative abundance
+if(method == "ecdf"){
+  cmrMat$cmrLevel.transform <- ecdf(cmrMat$cmrLevel)(cmrMat$cmrLevel)
+  cmrMat$omics1.transform <- ecdf(cmrMat$omics1)(cmrMat$omics1)
+}else if(method == "z-score"){
+  cmrMat$cmrLevel.transform <- (cmrMat$cmrLevel - mean(cmrMat$cmrLevel, na.rm = T))/sd(cmrMat$cmrLevel, na.rm = T)
+  cmrMat$omics1.transform <- (cmrMat$omics1 - mean(cmrMat$omics1, na.rm = T))/sd(cmrMat$omics1, na.rm = T)
+}else{
+  cmrMat$cmrLevel.transform <- (cmrMat$cmrLevel - min(cmrMat$cmrLevel))/(max(cmrMat$cmrLevel) - min(cmrMat$cmrLevel))
+  cmrMat$omics1.transform <- (cmrMat$omics1 - min(cmrMat$omics1))/(max(cmrMat$omics1) - min(cmrMat$omics1))
+}
+
+kmeans.res <- kmeans(cmrMat[,4:5], as.numeric(k))
+cmrMat$cluster <- factor(kmeans.res$cluster, levels = c(1,2,3,4))
+if(log == "true"){
+	cmrMat$cmrLevel <- log2(cmrMat$cmrLevel + 0.01)
+	cmrMat$omics1 <- log2(cmrMat$omics1 + 0.01)
+}
+
+library(plotly)
+fig <- plot_ly(data = cmrMat, 
+               x = ~cmrLevel,
+               y = ~omics1,
+               color = ~cluster) %>% 
+  layout(showlegend = FALSE)
+fig
+
+```
+
+## Detailed tabular information
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+table_options <- function() {
+  list(dom = 'Bfrtip',
+    pageLength = 8,
+    buttons = list(c('copy', 'csv', 'excel', 'pdf')),
+    searchHighlight = TRUE,
+    colReorder = TRUE,
+    scrollX = TRUE,
+    fixedColumns = TRUE,
+    extensions = 'Responsive',
+    deferRender = TRUE,
+    scroller = TRUE,
+    lengthChange = FALSE
+    )
+}
+colnames(cmrMat) <- c("geneID", "RNA modification level", "Omics 1", "Transformed RNA modification level", "Transformed omics 1", "Cluster")
+datatable(
+  cmrMat,
+  rownames = FALSE,
+  editable = TRUE,
+  elementId = "linktable",
+  class = 'cell-border',
+  escape = FALSE,
+  options = table_options(),
+  extensions = c('Buttons', 'Select')) %>%
+  formatStyle(columns = colnames(cmrMat), fontSize = '80%')
+```

@@ -1,0 +1,108 @@
+---
+title: Integrative Analysis of Three Omics Data Sets
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      message = FALSE)
+library(plotly)
+library(DT)
+library(dplyr)
+library(rmarkdown)
+```
+
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+source("/home/galaxy/tools/3-ADVANCED-ANALYSIS/Multi-omics_Integrative_Analysis/functions.R")
+cmrMat <- read.table(cmrDir, sep = "\t", header = T, quote = "", stringsAsFactors = F)
+cmrMat <- na.omit(cmrMat)
+colnames(cmrMat) <- c("geneID", "cmrLevel", "omics1", "omics2")
+cmrGene <- cmrMat$geneID
+# transform to relative abundance
+if(method == "ecdf"){
+  cmrMat$cmrLevel <- ecdf(cmrMat$cmrLevel)(cmrMat$cmrLevel)
+  cmrMat$omics1 <- ecdf(cmrMat$omics1)(cmrMat$omics1)
+  cmrMat$omics2 <- ecdf(cmrMat$omics2)(cmrMat$omics2)
+}else if(method == "z-score"){
+  cmrMat$cmrLevel <- (cmrMat$cmrLevel - mean(cmrMat$cmrLevel, na.rm = T))/sd(cmrMat$cmrLevel, na.rm = T)
+  cmrMat$omics1 <- (cmrMat$omics1 - mean(cmrMat$omics1, na.rm = T))/sd(cmrMat$omics1, na.rm = T)
+  cmrMat$omics2 <- (cmrMat$omics2 - mean(cmrMat$omics2, na.rm = T))/sd(cmrMat$omics2, na.rm = T)
+}else{
+  cmrMat$cmrLevel <- (cmrMat$cmrLevel - min(cmrMat$cmrLevel))/(max(cmrMat$cmrLevel) - min(cmrMat$cmrLevel))
+  cmrMat$omics1 <- (cmrMat$omics1 - min(cmrMat$omics1))/(max(cmrMat$omics1) - min(cmrMat$omics1))
+  cmrMat$omics2 <- (cmrMat$omics2 - min(cmrMat$omics2))/(max(cmrMat$omics2) - min(cmrMat$omics2))
+}
+```
+
+### Introduction
+This function is designed to perform multi-omics integrative analysis. According RNA modifications-related genes' relative abundace in multi-omics, deepEA grouped genes into seven categories. For example, if users would like to integrate m6A with gene expression and translation, the following categories will be illustrated in a ternary plot:
+
+- Balanced
+- m<sup>6</sup>A dominant
+- m<sup>6</sup>A suppressed
+- Expression dominant
+- Expression suppressed
+- Translation dominant
+- Translation suppressed
+
+### Ternary plot showing the differences of each gene in three omics data sets
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+tt <- as.matrix(cmrMat[,2:4])
+res <- apply(tt, 1, defineMod)
+cmrMat$mod <- res
+cmrMat$mod <- factor(cmrMat$mod, levels = c("balanced", "m6A dominant", "m6A suppressed", "Expression dominant", "Expression suppressed", "Translation dominant", "Translation suppressed"))
+p <- plot_ly(
+  cmrMat, 
+  a = ~cmrLevel, 
+  b = ~omics1, 
+  c = ~omics2, 
+  color = ~mod, 
+  type = "scatterternary",
+  text = ~geneID
+) %>% 
+layout(
+  ternary = list(
+    aaxis = axis("CMR"), 
+    baxis = axis("Omics1"), 
+    caxis = axis("Omics2")
+  )
+)
+p
+```
+
+### Detailed tabular information
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+table_options <- function() {
+  list(dom = 'Bfrtip',
+    pageLength = 8,
+    buttons = list(c('copy', 'csv', 'excel', 'pdf')),
+    searchHighlight = TRUE,
+    colReorder = TRUE,
+    scrollX = TRUE,
+    fixedColumns = TRUE,
+    extensions = 'Responsive',
+    deferRender = TRUE,
+    scroller = TRUE,
+    lengthChange = FALSE
+    )
+}
+colnames(cmrMat) <- c("geneID", "RNA modification level", "Omics 1", "Omics 2", "Category")
+datatable(
+  cmrMat,
+  rownames = FALSE,
+  editable = TRUE,
+  elementId = "linktable",
+  class = 'cell-border',
+  escape = FALSE,
+  options = table_options(),
+  extensions = c('Buttons', 'Select')) %>% 
+  formatStyle(columns = colnames(cmrMat), fontSize = '80%')
+```
+
+

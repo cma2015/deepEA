@@ -1,11 +1,9 @@
-<tool id="Assess_Reads_Quality" name="Assess Reads Quality" version='18.09'>
+<tool id="Assess_Reads_Quality" name="Assess Reads Quality" version='17.09'>
 
   <command><![CDATA[
 	mkdir -p ${__tool_directory__}/$$/ &&
 	#if $type.single_paired_selector == "single":
-		cat '$readSE' | /home/miniconda2/bin/fastqc -t ${thread} -o ${__tool_directory__}/$$/ stdin:single
-		&& mv ${__tool_directory__}/$$/single_fastqc.html $rawFastQC 
-		&& /home/miniconda2/bin/fastp -w ${thread}
+		/home/miniconda2/bin/fastp -w ${thread}
 		-q ${qualified_quality_phred} 
 		-l ${length_required}
 		#if $adapter_sequence.adapter_sequence_input == "single":
@@ -15,15 +13,10 @@
 		-o ${cleanReads}
 		-h ${__tool_directory__}/$$/fastp.html
 		-j ${__tool_directory__}/$$/fastp.json
-		&& cat '$cleanReads' | /home/miniconda2/bin/fastqc -t ${thread} -o ${__tool_directory__}/$$/ stdin:clean_single 
-		&& mv ${__tool_directory__}/$$/clean_single_fastqc.html $cleanFastQC
+		&& mv ${__tool_directory__}/$$/fastp.html $reads_quality_se
 		&& rm -rf ${__tool_directory__}/$$/
 	#else:
-		cat '$readR1' | /home/miniconda2/bin/fastqc -t ${thread} -o ${__tool_directory__}/$$/ stdin:R1 
-		&& cat '$readR2' | /home/miniconda2/bin/fastqc -t ${thread} -o ${__tool_directory__}/$$/ stdin:R2
-		&& mv ${__tool_directory__}/$$/R1_fastqc.html $rawFastQC_1 
-		&& mv ${__tool_directory__}/$$/R2_fastqc.html $rawFastQC_2 
-		&& /home/miniconda2/bin/fastp -w ${thread} -q ${qualified_quality_phred} -l ${length_required}
+		/home/miniconda2/bin/fastp -w ${thread} -q ${qualified_quality_phred} -l ${length_required}
 		#if $adapter_sequence.adapter_sequence_input == "paired":
 			-a '${adapter1}'
 			-A '${adapter2}'
@@ -36,10 +29,7 @@
 		-O ${cleanReads_2}
 		-h ${__tool_directory__}/$$/fastp.html
 		-j ${__tool_directory__}/$$/fastp.json
-		&& cat '$cleanReads_1' | /home/miniconda2/bin/fastqc -t ${thread} -o ${__tool_directory__}/$$/ stdin:clean_R1
-		&& cat '$cleanReads_2' | /home/miniconda2/bin/fastqc -t ${thread} -o ${__tool_directory__}/$$/ stdin:clean_R2
-		&& mv ${__tool_directory__}/$$/clean_R1_fastqc.html $cleanFastQC_1
-		&& mv ${__tool_directory__}/$$/clean_R2_fastqc.html $cleanFastQC_2
+		&& mv ${__tool_directory__}/$$/fastp.html $reads_quality_pe
 		&& rm -rf ${__tool_directory__}/$$/
 	#end if
   ]]></command>
@@ -74,38 +64,26 @@
 			<param name="adapter2" argument="-A" type="text"  label="Input adapter sequences 2"  />
 		</when>
 	</conditional>
-	<param name="thread" type="integer" value="3" min="1" max="6" label="Threads" help="The number of threads used for parallel computation."/>
+	<param name="thread" type="integer" value="1" min="1" max="4" label="Threads" help="The number of threads used for parallel computation."/>
 
   </inputs>
   <stdio>
 	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
   </stdio>
    <outputs>
-        <data name="rawFastQC" format="html" label="Raw_reads_fastqc.html">
+	   <data name="reads_quality_se" format="html" label="${type.readSE.name}_reads_quality_report.html">
+		   <filter>type['single_paired_selector'] == "single"</filter>
+	   </data>
+	   <data name="reads_quality_pe" format="html" label="${type.readR1.name}_reads_quality_report.html">
+                   <filter>type['single_paired_selector'] == "paired"</filter>
+           </data>
+		<data name="cleanReads" format="fastq" label="${type.readSE.name}_clean_reads.fastq">
 			<filter>type['single_paired_selector'] == "single"</filter>
 		</data>
-		<data name="cleanFastQC" format="html" label="Clean_reads_fastqc.html">
-			<filter>type['single_paired_selector'] == "single"</filter>
-		</data>
-		<data name="rawFastQC_1" format="html" label="Raw_reads_R1_fastqc.html">
+		<data name="cleanReads_1" format="fastq" label="${type.readR1.name}_clean_reads_R1.fastq">
 			<filter>type['single_paired_selector'] == "paired"</filter>
 		</data>
-		<data name="rawFastQC_2" format="html" label="Raw_reads_R2_fastqc.html">
-			<filter>type['single_paired_selector'] == "paired"</filter>
-		</data>
-		<data name="cleanFastQC_1" format="html" label="Clean_reads_R1_fastqc.html">
-			<filter>type['single_paired_selector'] == "paired"</filter>
-		</data>
-		<data name="cleanFastQC_2" format="html" label="Clean_reads_R2_fastqc.html">
-			<filter>type['single_paired_selector'] == "paired"</filter>
-		</data>
-		<data name="cleanReads" format="fastq" label="Cean_reads.fastq">
-			<filter>type['single_paired_selector'] == "single"</filter>
-		</data>
-		<data name="cleanReads_1" format="fastq" label="Cean_reads_R1.fastq">
-			<filter>type['single_paired_selector'] == "paired"</filter>
-		</data>
-		<data name="cleanReads_2" format="fastq" label="Cean_reads_R2.fastq">
+		<data name="cleanReads_2" format="fastq" label="${type.readR2.name}_clean_reads_R2.fastq">
 			<filter>type['single_paired_selector'] == "paired"</filter>
 		</data>
     </outputs>
@@ -123,8 +101,8 @@ In this function, two existing NGS tools FastQC (Andrews *et al*., 2010) and fas
 
 **Inputs**
 
-- **Input FASTQ file:** single-end or paired-end raw epitranscriptome sequence reads in FASTQ format.
-- **Adapter sequences:** optional, adapter sequences in FASTA format.
+- **Input FASTQ file:** single-end or paired-end raw epitranscriptome sequence reads in FASTQ format
+- **Adapter sequences:** optional, adapter sequences in FASTA format
 
 -----
 
@@ -132,7 +110,7 @@ In this function, two existing NGS tools FastQC (Andrews *et al*., 2010) and fas
 
 **Parameters**
 
-- **Minimum read length:** reads shorter than this value will be discarded, default is 15. (-l)
+- **Minimum read length:** reads shorter than this value will be discarded, default is 15 (-l)
 - **The quality value that a base is qualified**
 
 -----

@@ -1,0 +1,303 @@
+---
+title: RNA modifications distribution
+output:
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE)
+```
+### 1. Introduction
+- This function is designed to provide insights into spatial and functional associations of **RNA modifications (Chemical Modifications of RNAs)**. This function takes the RNA modifications in [BED](https://genome.ucsc.edu/FAQ/FAQformat.html) format and genome annotation in [GTF](https://genome.ucsc.edu/FAQ/FAQformat.html#format4) (Gene Transfer Format) format as input, then the manner of distribution of RNA modifications in the genome and transcriptome is statistically analyzed and visualized, including the number of peaks in genomic feature (e.g. promoter, exon, intron, etc), the regions of enrichment of RNA modifications within transcripts, the enrichment of RNA modifications in transcriptional start/stop site and the enrichment of RNA modifications in splicing sites.
+
+### 2. The number of peaks in each genomic feature
+- The following figure displays the number of input peaks overlaped with each genomic feature including **Transcript, Exon, 3'UTR, CDS, Intron, Promoter, 5'UTR and Intergenic**.
+
+```{r  echo = FALSE, warning=FALSE, message=FALSE}
+library(plotly)
+library(RCAS)
+library(GenomicRanges)
+library(scales)
+library(rtracklayer)
+library(GenomeInfoDb)
+library(GenomicFeatures)
+library(Guitar)
+library(ggplot2)
+library(plotly)
+library(gridExtra)
+library(grid)
+library(diffloop)
+
+# peaks <- c("./0-B73_DS.bed", "./0-B73_WW.bed")
+# gff <- "./Zea_mays.AGPv4.38.gtf"
+# name <- c("Drought", "Control")
+
+
+
+gff_region <- importGtf(gff) # from RCAS package
+txdbFeatures <- getTxdbFeaturesFromGRanges(gffData = gff_region)
+
+peakGRangeList <- vector(mode = 'list', length = length(peaks))
+names(peakGRangeList) <- name
+for(i in 1:length(peaks)){
+  peakMat <- fread(file = peaks[i], sep = '\t', header = F, quote = '', stringsAsFactors = F)
+  peakMat <- data.frame(peakMat[,1:3])
+  colnames(peakMat) <- c("chr", "start", "end" )
+  peakGRange <- GenomicRanges::GRanges(peakMat)
+  
+  if(length(grep('chr', as.character(seqnames(peakGRange)))) == 0){
+    peakGRange <- diffloop::addchr(peakGRange)
+  }
+  seqlevels(peakGRange) <- unique(as.character((seqnames(peakGRange))))
+  peakGRangeList[[i]] <- peakGRange
+}
+dfList <- vector('list', length(peaks))
+for(i in 1:length(peaks)){
+  peakGRange <- peakGRangeList[[i]]
+  summary <- summarizeQueryRegions(queryRegions = peakGRange,
+                                   txdbFeatures = txdbFeatures)
+  df <- data.frame(summary)
+  df$percent <- round((df$count / length(peakGRange)), 3) * 100
+  df$feature <- rownames(df)
+  df <- df[order(df$count, decreasing = T), ]
+  df$sample <- name[i]
+  dfList[[i]] <- df
+}
+df <- do.call(rbind, dfList)
+df$feature[which(df$feature == "transcripts")] <- "Transcripts"
+df$feature[which(df$feature == "exons")] <- "Exons"
+df$feature[which(df$feature == "threeUTRs")] <- "Three prime UTRs"
+df$feature[which(df$feature == "fiveUTRs")] <- "Five prime UTRs"
+df$feature[which(df$feature == "cds")] <- "CDS"
+df$feature[which(df$feature == "introns")] <- "Introns"
+df$feature[which(df$feature == "NoFeatures")] <- "Intergenic"
+df$feature[which(df$feature == "promoters")] <- "Promoters"
+p <- ggplot(df, aes(fill = sample, y = count, x = feature)) + 
+     geom_bar(position = "dodge", stat = "identity") + 
+  ylab("") + xlab("") + theme(axis.text.x = element_text(angle = 45,
+                                                         vjust = 1,
+                                                         hjust = 1),
+                              panel.grid.major = element_blank(),
+                              panel.grid.minor = element_blank())
+print(p)
+```
+
+
+### 3. The number of peaks in each type of RNA
+- The following table shows the number of peaks overlapped (at least 1nt) with each type of RNA.
+
+```{r echo=FALSE, message=FALSE, fig.align='center'}
+
+gene_type <- unique(gff_region$gene_biotype)
+dfList <- vector('list', length = length(peaks))
+for(j in 1:length(peaks)){
+  df <- data.frame(gene_type = gene_type, count = NA)
+  peakGRange <- peakGRangeList[[j]]
+  for(i in 1:length(gene_type)){
+    curType <- gene_type[i]
+    curGTF <- subset(gff_region, gff_region$gene_biotype == curType)
+    res <- findOverlaps(query = peakGRange, curGTF)
+    df$count[i] <- length(unique(queryHits(res)))
+  }
+  
+  rownames(df) <- NULL
+  colnames(df) <- c("Gene type", "Count")
+  df$Sample <- name[j]
+  dfList[[j]] <- df
+}
+df <- do.call(cbind, dfList)
+idx <- seq(2, ncol(df), 3)
+df <- df[,c(1, idx)]
+colnames(df) <- c("Gene type", paste0("Count in ", name))
+# knitr::kable(x = df, align = 'c') %>%  
+#   kableExtra::kable_styling(position = 'center', full_width = FALSE, 
+#                             stripe_color = 'black', latex_options = "bordered")
+df
+```
+
+
+### 4. The regions of enrichment of RNA modifications within transcripts
+- The following figure displays the enrichment of RNA modifications on meta-RNA, to be specific, each transcript are splited into bins of 30 nt, then the relative position of each bin for each feature (5'UTR, CDS and 3'UTR) is calculated. The RNA modifications enrichment can be obtained by overlap input peaks with each 30nt bin.
+```{r echo=FALSE, message=FALSE, fig.align='center'}
+
+txdb <- GenomicFeatures::makeTxDbFromGFF(gff)
+txdb_guitar_coords <- Guitar::makeGuitarCoordsFromTxDb(txdb, noBins = noBins, 
+                                                       maximalAmbiguity = maximalAmbiguity, 
+                                                       minimalComponentLength = minimalComponentLength,
+                                                       minimalNcRNALength = minimalNcRNALength)
+utr5 <- GenomicFeatures::fiveUTRsByTranscript(txdb, use.names = TRUE)
+utr3 <- GenomicFeatures::threeUTRsByTranscript(txdb, use.names = TRUE)
+cds <- GenomicFeatures::cdsBy(txdb, use.names = TRUE)
+
+# calculate 5'UTR, CDS and 3'UTR length respectively
+
+if(length(utr5) > 1000){
+	utr5_length <- unlist(lapply(utr5[sample(1:length(utr5), 1000)], function(x) sum(width(x))))
+}else{
+	utr5_length <- unlist(lapply(utr5, function(x) sum(width(x))))
+}
+
+if(length(utr3) > 1000){
+	utr3_length <- unlist(lapply(utr3[sample(1:length(utr3), 1000)], function(x) sum(width(x))))
+}else{
+	utr3_length <- unlist(lapply(utr3, function(x) sum(width(x))))
+}
+
+if(length(cds) > 1000){
+	cds_length <- unlist(lapply(cds[sample(1:length(cds), 1000)], function(x) sum(width(x))))
+}else{
+	cds_length <- unlist(lapply(cds, function(x) sum(width(x))))
+}
+
+utr5.SF <- round((median(utr5_length)/median(cds_length)), 2)
+utr3.SF <- round((median(utr3_length)/median(cds_length)), 2)
+
+dfList <- vector('list', length = length(peaks))
+for(i in 1:length(peaks)){
+  
+  peak_region <- peakGRangeList[[i]]
+if(length(grep("chr", seqlevels(txdb)))==0){
+        seqlevels(peak_region) <- gsub(pattern="chr", replacement="", x= seqlevels(peak_region))
+}
+  overlaps <- findOverlaps(query = peak_region, subject = txdb_guitar_coords)
+  overlaps_guitar_coords <- txdb_guitar_coords[subjectHits(overlaps)]
+  utr5_pos <- subset(overlaps_guitar_coords, overlaps_guitar_coords$comp == "UTR5")$pos
+  cds_pos <- subset(overlaps_guitar_coords, overlaps_guitar_coords$comp == "CDS")$pos + 1
+  utr3_pos <- subset(overlaps_guitar_coords, overlaps_guitar_coords$comp == "UTR3")$pos + 2
+  
+  rescale_utr5 <- rescale(utr5_pos, to = c(1 - utr5.SF, 1), from = c(0, 1))
+  rescale_utr3 <- rescale(utr3_pos, to = c(2, 2 + utr3.SF), from = c(2, 3))
+ 
+  df <- data.frame(value = c(rescale_utr5, cds_pos, rescale_utr3))
+  df$Sample <- name[i]
+  dfList[[i]] <- df
+}
+
+df <- do.call(rbind, dfList)
+df$Sample <- factor(df$Sample)
+p1 <- ggplot(df, aes(x = value, fill = Sample)) +
+  geom_density(alpha = 0.5) +
+  theme(axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        legend.title = element_blank(),
+          legend.position = "none") +
+  annotate("rect", xmin = min(rescale_utr5), xmax = max(rescale_utr5),
+           ymin = -0.1, ymax = -0.05, alpha = 1,
+           fill = 'lightgreen', colour = "lightgreen") +
+  annotate("rect", xmin = min(cds_pos), xmax = max(cds_pos),
+           ymin = -0.1, ymax = -0.05, alpha = 1,
+           fill = 'cadetblue3', colour = "cadetblue3") +
+  annotate("rect", xmin = min(rescale_utr3), xmax = max(rescale_utr3),
+           ymin = -0.1, ymax = -0.05, alpha = 0.5,
+           fill = 'red', colour = "red") +
+  annotate("text", x = sum(range(rescale_utr5))/2, y = -0.2, label = "5'UTR", size = 3) + 
+  annotate("text", x = sum(range(cds_pos))/2, y = -0.2, label = "CDS", size = 3) + 
+  annotate("text", x = sum(range(rescale_utr3))/2, y = -0.2, label = "3'UTR", size = 3)
+print(p1)
+```
+
+
+
+### 5. The enrichment of RNA modifications in transcriptional start/stop site
+- The figures below display the enrichment of RNA modifications in transcription start and end site, respectively. To be specific, the x axis represents the relative position of transcription start/end site, 0 indicates the meta-transcription start/end site, negative number and positive number represent the upstream and downstream of transcription start/end site, respectively.
+
+```{r echo=FALSE, warning=FALSE, fig.align='center'}
+
+dfList <- list('list', length(peaks))
+for(i in 1:length(peaks)){
+  peakGRange <- peakGRangeList[[i]]
+  cvgF <- getFeatureBoundaryCoverage(queryRegions = peakGRange, 
+                                     featureCoords = txdbFeatures$transcripts, 
+                                     flankSize = 1000, 
+                                     boundaryType = 'fiveprime', 
+                                     sampleN = 10000)
+  cvgT <- getFeatureBoundaryCoverage(queryRegions = peakGRange, 
+                                     featureCoords = txdbFeatures$transcripts, 
+                                     flankSize = 1000, 
+                                     boundaryType = 'threeprime', 
+                                     sampleN = 10000)
+  cvgF$boundary <- "Transcription start site"
+  cvgT$boundary <- "Transcription end site"
+  df <- rbind(cvgF, cvgT)  
+  df$sample <- name[i]
+  dfList[[i]] <- df
+}
+
+df <- do.call(rbind, dfList)
+df$sample <- factor(df$sample)
+p <- ggplot2::ggplot(df, aes(x = bases, y = meanCoverage)) + 
+  geom_ribbon(aes(fill = sample, ymin = meanCoverage - standardError * 1.96, 
+                  ymax = meanCoverage + standardError * 1.96), alpha = 0.3) + 
+  geom_line(aes(x = bases, y = meanCoverage,color = sample)) + 
+  facet_grid(~ boundary) + theme_bw(base_size = 14) + 
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45,
+                                   vjust = 1,
+                                   hjust = 1)) + 
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        strip.background = element_blank(),
+        legend.title = element_blank(),
+        legend.position = "none",
+        panel.border = element_rect(colour = "black")) +
+  xlab("") +
+  ylab("")
+print(p)
+```
+
+
+
+### 6. The enrichment of RNA modifications in splicing sites
+- The figures below display the enrichment of RNA modifications in 3’ and 5' end of exons, respectively. To be specific, the x axis represents the relative position of 3' and 5' end of exons, 0 indicates the 3' and 5' end of exons, negative number and positive number represent the upstream and downstream of 3' and 5' end of exons, respectively.
+
+```{r echo=FALSE, warning=FALSE, fig.align='center'}
+
+dfList <- list('list', length(peaks))
+for(i in 1:length(peaks)){
+  peakGRange <- peakGRangeList[[i]]
+  
+  
+  cvgF <- getFeatureBoundaryCoverage(queryRegions = peakGRange, 
+                                     featureCoords = txdbFeatures$exons, 
+                                     flankSize = 100, 
+                                     boundaryType = 'fiveprime', 
+                                     sampleN = 10000)
+  cvgT <- getFeatureBoundaryCoverage(queryRegions = peakGRange, 
+                                     featureCoords = txdbFeatures$exons, 
+                                     flankSize = 100, 
+                                     boundaryType = 'threeprime', 
+                                     sampleN = 10000)
+  cvgF$boundary <- "The 5' end of exons"
+  cvgT$boundary <- "The 3' end of exons"
+  df <- rbind(cvgF, cvgT)  
+  df$sample <- name[i]
+  dfList[[i]] <- df
+}
+df <- do.call(rbind, dfList)
+df$sample <- factor(df$sample)
+
+p <- ggplot2::ggplot(df, aes(x = bases, y = meanCoverage)) + 
+  geom_ribbon(aes(fill = sample, ymin = meanCoverage - standardError * 1.96, 
+                  ymax = meanCoverage + standardError * 1.96), alpha = 0.3) + 
+  geom_line(aes(x = bases, y = meanCoverage,color = sample)) + 
+  facet_grid(~ boundary) + theme_bw(base_size = 14) + 
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_text(angle = 45,
+                                   vjust = 1,
+                                   hjust = 1)) +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        strip.background = element_blank(),
+        legend.title = element_blank(),
+        legend.position = "none",
+        panel.border = element_rect(colour = "black")
+        ) +
+  xlab("") +
+  ylab("")
+print(p)
+```
+

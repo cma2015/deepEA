@@ -47,7 +47,7 @@ RUN apt-get install wget -y && \
     R CMD build MeTPeak && \
     R -e "install.packages('MeTPeak_1.0.0.tar.gz')" && \
     rm -r MeTPeak && rm MeTPeak_1.0.0.tar.gz && \
-    R -e "BiocManager::install(c('DiffBind','plotly','RCAS','scales','gridExtra','diffloop','knitr','kableExtra','seqLogo','DiffLogo','seqinr','argparse','snowfall','data.table','BayesPeak','magrittr','BSgenome','GenomicScores', 'pipeR','caret','randomForest','DALEX','pheatmap','flexdashboard'))" && \
+    R -e "BiocManager::install(c('DiffBind','plotly','RCAS','scales','gridExtra','diffloop','knitr','kableExtra','seqLogo','DiffLogo','seqinr','argparse','snowfall','data.table','BayesPeak','magrittr','BSgenome','GenomicScores', 'pipeR','caret','randomForest','DALEX','pheatmap','flexdashboard', 'enrichplot', 'clusterProfiler'))" && \
     mkdir -p /home/DeepEA/galaxy/tools/DeepEA_software && \
     cd /home/DeepEA/galaxy/tools/DeepEA_software && \
     wget https://ccb.jhu.edu/software/tophat/downloads/tophat-2.1.1.Linux_x86_64.tar.gz && \

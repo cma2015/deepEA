@@ -1,4 +1,4 @@
-<tool id="bwa-mem" name="bwa-mem" version="18.09">
+<tool id="bwa-mem" name="bwa-mem" version="17.09">
   <description></description>
   <command><![CDATA[
 	## Build BWA genome index
@@ -22,11 +22,10 @@
 	#end if
 	'$genomeSequence'
 	#if $fqType.single_or_paired == "single":
-		$fqType.readSE
+		$fqType.readSE > $output
 	#elif $fqType.single_or_paired == "paired":
-		$fqType.readR1 $fqType.readR2
+		$fqType.readR1 $fqType.readR2 > $output_PE
 	#end if
-	> $output
   ]]></command>
   <inputs>
 	<param name="genomeSequence" type="data" format="fasta" label="Reference genome sequence"/>
@@ -43,7 +42,7 @@
 			<param name="readR2" type="data" format="fastqsanger,fastqsanger.gz,fastq,fq" label="Read file (R2)"/>
 		</when>
 	</conditional>
-	<param name="thread" type="integer" value="3" min="1" max="6" label="Thread"/>
+	<param name="thread" type="integer" value="1" min="1" max="4" label="Thread"/>
 	<conditional name="algorithm_options">
         <param name="algorithm_options_selector" type="select" label="Algorithm options" display="radio">
             <option value="basic" selected="true">Basic</option>
@@ -74,8 +73,12 @@
 	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
   </stdio>
   <outputs>
-	<data name="output" format="sam" label="bwa_alignment.sam">
-	</data>
+	  <data name="output" format="sam" label="bwa_alignment.sam (on ${fqType.readSE.name})">
+		  <filter>fqType['single_or_paired'] == "single"</filter>
+	  </data>
+	  <data name="output_PE" format="sam" label="bwa_alignment.sam (on ${fqType.readR1.name} and ${fqType.readR2.name})">
+                  <filter>fqType['single_or_paired'] == "paired"</filter>
+          </data>
   </outputs>
   <help>
 .. class:: infomark
@@ -89,7 +92,7 @@ BWA-MEM is an alignment algorithm for aligning sequence reads or long query sequ
 
 **Inputs**
 
-- **FASTQ** format  sequencing files are required.
+- **Epitranscriptome sequencing reads in FASTQ format**
 - **Reference genome in FASTA format**
 
 .. class:: infomark

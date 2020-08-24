@@ -1,4 +1,4 @@
-<tool id="star" name="STAR" version="18.09">
+<tool id="star" name="STAR" version="17.09">
   <description></description>
   <command><![CDATA[
 
@@ -115,10 +115,15 @@
             --limitOutSJcollapsed "$params.limits.limitOutSJcollapsed"
             --limitSjdbInsertNsj "$params.limits.limitSjdbInsertNsj"
 
-        #end if
-		&& mv ${__tool_directory__}/$$/outputAligned.sortedByCoord.out.bam $bam
+	    #end if
+	    #if str($singlePaired.sPaired) == "paired":
+		&& mv ${__tool_directory__}/$$/outputAligned.sortedByCoord.out.bam $alignments_PE
+		&& mv ${__tool_directory__}/$$/outputLog.final.out $summary_PE
+	    #else:
+	    	&& mv ${__tool_directory__}/$$/outputAligned.sortedByCoord.out.bam $alignments
 		&& mv ${__tool_directory__}/$$/outputLog.final.out $summary
-		&& rm -rf ${__tool_directory__}/$$;
+	    #end if
+	    && rm -rf ${__tool_directory__}/$$;
   ]]></command>
   <inputs>
 	<conditional name="singlePaired">
@@ -136,7 +141,7 @@
     </conditional>
 
     <param name="genomeSequence" type="data" format="fasta" label="Reference genome sequence"/>
-	<param name="thread" type="integer" value="3" min="1" max="6" label="Threads"/>
+	<param name="thread" type="integer" value="1" min="1" max="4" label="Threads"/>
 
     <!-- Output parameter settings. -->
     <conditional name="output_params">
@@ -270,8 +275,18 @@
 
 	</stdio>
   <outputs>
-        <data format="txt" name="summary" label="star_alignment_summary.txt"/>
-        <data format="bam" name="bam" label="star_alignment.bam"/>
+	  <data format="txt" name="summary" label="star_alignment_summary.txt (on ${singlePaired.input1.name})">
+		  <filter>singlePaired['sPaired'] == "single"</filter>
+          </data>
+	  <data format="bam" name="alignments" label="star_alignment.bam (on ${singlePaired.input1.name})">
+		<filter>singlePaired['sPaired'] == "single"</filter>
+	</data>
+	        <data format="txt" name="summary_PE" label="star_alignment_summary.txt (on ${singlePaired.input1.name} and ${singlePaired.input2.name})">
+                  <filter>singlePaired['sPaired'] == "paired"</filter>
+          </data>
+          <data format="bam" name="alignments_PE" label="star_alignment.bam (on ${singlePaired.input1.name} and ${singlePaired.input2.name})">
+                <filter>singlePaired['sPaired'] == "paired"</filter>
+        </data>
   </outputs>
 <help>
 .. class:: infomark
@@ -285,7 +300,7 @@ STAR is an ultrafast universal RNA-seq aligner.
 
 **Inputs**
 
-- **FASTQ format sequencing files**
+- **Epitranscriptome sequencing reads in FASTQ format**
 - **Reference genome in FASTA format**
 
 .. class:: infomark

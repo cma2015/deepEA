@@ -1,4 +1,4 @@
-<tool id="peakcalling_m5C" name="Calling m5C"  version='18.09'>
+<tool id="peakcalling_m5C" name="Calling m5C"  version='17.09'>
   <description> from the RNA-BSseq data</description>
   <command><![CDATA[
 	#if $readtype.single_or_paired == "SE":
@@ -54,14 +54,14 @@
 	<param name="cr" type="float" value="0.99" label="C to T conversion rate"/>
 	<param name="mcov" type="integer" value="10" label="Minimum coverage at a given reference position above
                              which methylation calling will be performed"/>
-	<param name="thread" type="integer" value="2" max='6' min='1' label="Thread"/>
+	<param name="thread" type="integer" value="2" max='4' min='1' label="Thread"/>
 
   </inputs>
   <stdio>
 	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
   </stdio>
   <outputs>
-	<data name="m5C_out_peaks" format="txt" label="${m5CMethod.calling_method}_meRanCall_CMRs.txt">
+	<data name="m5C_out_peaks" format="txt" label="${m5CMethod.calling_method}_meRanCall_m5C.txt">
 	</data>
   </outputs>
 <help>
@@ -76,29 +76,29 @@ This function integrated meRanTK (Rieder *et al*., 2016, *Bioinformatics*) to pe
 
 **Inputs**
 
-- **FASTQ file:** The FASTQ format sequencing file.
+- **FASTQ file:** The FASTQ format sequencing file
 
 .. class:: infomark
 
 **Parameters**
 
-- **Alignment method:** Select a method used for read mapping.
+- **Alignment method:** Select a method used for read mapping
 
-- **Reference genome:** The reference genome sequences in FASTA format.
+- **Reference genome:** The reference genome sequences in FASTA format
 
-- **Reference annotation file (GTF):** The reference annotation file in GTF format.
+- **Reference annotation file (GTF):** The reference annotation file in GTF format
 
-- **Thread:** The number of threads used parallel computing.
+- **Thread:** The number of threads used parallel computing
 
-- **FDR:** The FDR cutoff used for filter CMR.
+- **FDR:** The FDR cutoff used for filter m5C modifications
 
-- **Single-end or Paired-end reads?:** Select if the input fastq is single-end or paried-end.
+- **Single-end or Paired-end reads:** Select if the input fastq is single-end or paried-end
 
 .. class:: infomark
 
 **Outputs**
 
-- **m5C_out_peaks:** The detected m5C sites.
+- **m5C_out_peaks:** The detected m5C sites
 
 
 

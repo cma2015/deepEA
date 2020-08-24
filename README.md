@@ -1,14 +1,15 @@
 ## [deepEA](https://cma2015.github.io/deepEA)
-[![docker](https://img.shields.io/badge/docker-ready-red.svg)](https://hub.docker.com/r/malab/deepea/) ![docker pull](https://img.shields.io/docker/pulls/malab/deepea.svg) ![webserver](https://img.shields.io/badge/Web_server-ready-blue.svg)
-deepEA: deep analysis of epitranscriptome sequencing data for non-specialists
+
+<a href="http://deepea.nwafu.edu.cn" target="_blank"><img src="https://img.shields.io/badge/Web_server-ready-red.svg"></a><a href="https://hub.docker.com/r/malab/deepea" target="_blank"><img src="https://img.shields.io/badge/Docker_image-ready-red.svg"></a><a href="https://hub.docker.com/r/malab/deepea" target="_blank"><img src="https://img.shields.io/docker/pulls/malab/deepea"></a><a href="https://github.com/cma2015/deepEA" target="_blank"><img src="https://img.shields.io/badge/Source_code-support-blue.svg"></a><a href="https://deepea.nwafu.edu.cn/static/test_data.zip" target="_blank"><img src="https://img.shields.io/badge/Test_data-support-blue.svg"></a>
+deepEA: a containerized web server for interactive analysis of epitranscriptome sequencing data
+
 
 ## Introduction
-- deepEA is a Galaxy-based framework for deep analysis of epitranscriptome sequencing data for non-specialists. In the current version, deepEA provides a variety of functions required for **Data Preparation**, **Quality Control**, **CMR (chemical modifications of RNA) profiling and analysis**, **CMR annotation**, **CMR prediction** and related **visualization**.
+- deepEA is a containerized web server for interactive analysis of epitranscriptome sequencing data. In the current version, deepEA provides a variety of functions required for **Data Preparation**, **Quality Control**, **CMR (chemical modifications of RNA) profiling and analysis**, **CMR annotation**, **CMR prediction** and related **visualization**.
 * The deepEA project is hosted on https://github.com/cma2015/deepEA.
 * The deepEA Docker image can be obtained from https://hub.docker.com/r/malab/deepea.
 
 ## How to use deepEA
-
 - Test data and tutorial of deepEA are presented at https://cma2015.github.io/deepEA
 
 ## How to access help
@@ -16,6 +17,7 @@ deepEA: deep analysis of epitranscriptome sequencing data for non-specialists
 * In addition, if any suggestions are available, feel free to contact: __Jingjing Zhai__ <zhaijingjing603@gmail.com> or __Chuang Ma__ <chuangma2006@gmail.com>
 
 ## Change log
+- 2020.08 Release deepEA v1.0
 - 2020.06 Update multi-omics integration
 - 2020.06 Optimize feature encoding to perform parallel analysis
 - 2020.04 fixed admin user bug

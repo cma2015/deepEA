@@ -1,0 +1,80 @@
+<tool id="Calling_pseudoU" name="Calling Ψ"  version='17.09'>
+  <description>from CeU-Seq data</description>
+  <command><![CDATA[
+    mv $pulldown $pulldown".bam";
+    samtools index $pulldown".bam";
+    mv $input $input".bam";
+    samtools index $input".bam";
+    /home/miniconda2/bin/python ${__tool_directory__}/02_pseudouridylation.py -p $pulldown".bam" -i $input".bam" -c $cDNA -out ${__tool_directory__}/ -s $stopNumber -r $stopRate -d $difference;
+    mv ${__tool_directory__}/stop_ratio.txt $CMR;
+    mv $pulldown".bam" $pulldown;
+    mv $input".bam" $input;
+    rm $pulldown".bam.bai";
+    rm $input".bam.bai";
+  ]]></command>
+  <inputs>
+    <param name="pulldown" type="data" format="bam" multiple="false" label="Pulldown sample in BAM format" help=""/>
+    <param name="input" type="data" format="bam" multiple="false" label="Input sample in BAM format" help=""/>
+    <param name="cDNA" type="data" format="fasta,fa" multiple="false" label="Input transcriptome in FASTA format" help=""/>
+    <param name="stopNumber" type="integer" value="5" label="The least number of reads in the N3-CMC(+) sample" help=""/>
+    <param name="stopRate" type="float" value="0.1" label="The maximum number of reads in the N3-CMC(-) sample" help=""/>
+    <param name="difference" type="float" value="0.3" label="The difference of stop rate between N3-CMC(+) and N3-CMC(-) sample" help=""/>
+	
+  </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs> 
+	<data name="CMR" format="txt" label="pseudoU.txt">
+	</data>
+  </outputs>
+<help><![CDATA[
+.. class:: infomark
+
+**What it does**
+
+This  function is used to identify pseudouridylation from CeU-Seq (Li *et al*., 2015). To be specific, for any given position on a reference transcript, the stop rate of position *i* was calculated using the equation N_i_stop/(N_i_stop + N_i_readthrough), where N_i_stop (stop reads) is the number of reads with the mapping position starting at base i+1 (one nucleotide 3′ to position i), and N_i_readthrough (readthrough reads) is the number of reads reading through position i; Then a position i is identified to be Ψ only when all of the following criteria were met: 
+
+- (i) the stop reads of position i (N_i_stop) must be no less than 5 in the N3-CMC(+) sample; 
+- (ii) the stop rate in N3-CMC(−) samples must be less than 0.10; 
+- (iii) the difference of stop rate for position i between the N3-CMC(+) samples and the matched N3-CMC(−) samples must be at least 0.30.
+
+-----
+
+.. class:: infomark
+
+**Inputs**
+
+- **Pulldown sample in BAM format:** The pulldown sample in BAM format
+
+- **Input sample in BAM format:** The input sample in BAM format
+
+- **Input transcriptome in FASTA format:** The transcriptome in FASTA format
+
+-----
+
+.. class:: infomark
+
+**Parameters**
+
+- **The least number of reads in the N3-CMC(+) sample:** select parameters indicating the input is single-end or paired-end
+
+- **The maximum number of reads in the N3-CMC(-) sample:**: p-value cutoff for peak detection
+
+- **The difference of stop rate between N3-CMC(+) and N3-CMC(-) sample**: the number of cpus to be used for parallel computing
+
+
+.. class:: infomark
+
+**Outputs**
+
+- A matrix containing the candidate pseudouridine sites
+
+
+]]></help>
+    <citations>
+        <citation type="doi">10.1038/nchembio.1836</citation>
+    </citations>
+</tool>
+
+

@@ -10,8 +10,8 @@ echo "mcov: ${9}"
 echo "single-end or paired-end: ${10}"
 echo "reversed fastq: ${11}"
 
-toolDir="/home/DeepEA/galaxy/tools/DeepEA_software/meRanTK-1.2.0/"
-outDir="/home/DeepEA/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/m5C/"
+toolDir="/home/galaxy/tools/DeepEA_software/meRanTK-1.2.0/"
+outDir="/home/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/m5C/"
 mkdir $outDir
 
 if [ "${10}" == "SE" ];then

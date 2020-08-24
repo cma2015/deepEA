@@ -136,7 +136,7 @@
     <table name="gff" comment_char="#" allow_duplicate_entries="False">
         <columns>name, value, url</columns>
         <file path="tools/1-PRE-ANALYSIS/Obtain_Genome_Sequences_Annotation/GFF.txt"/>
-    </table>
+</table>
     <table name="ensembl_plant_version" comment_char="#" allow_duplicate_entries="False">
         <columns>value, name</columns>
         <file path="tools/1-PRE-ANALYSIS/Data_Preparation/species_version.txt" />

@@ -1,0 +1,144 @@
+<tool id="ML_prediction" name="Prediction System Construction" version="17.09">
+    <description></description>
+    <command><![CDATA[
+    #if $analysis_type.train_or_predict == "train":
+        #if $analysis_type.ifCV.cv == "true":
+	Rscript ${__tool_directory__}/03_mlClassification.R -type "train" -method $analysis_type.algorithm -posMat $analysis_type.posMat -negMat $analysis_type.negMat -k $analysis_type.ifCV.kfold -perc $analysis_type.perc -outModel $model -outCV $CV_evaluation -outTest $test_evaluation;
+	mv ${test_evaluation}".pdf" ${test_evaluation};
+        #else:
+	Rscript ${__tool_directory__}/03_mlClassification.R -type "train" -method $analysis_type.algorithm -posMat $analysis_type.posMat -negMat $analysis_type.negMat -k 0 -perc $analysis_type.perc -outModel $model -outTest $test_evaluation;
+	mv ${test_evaluation}".pdf" ${test_evaluation};
+        #end if
+    #elif $analysis_type.train_or_predict == "predict_built_in":
+        Rscript ${__tool_directory__}/03_mlClassification.R -type "bulit_in" -candidate $analysis_type.featureMat -outScore $outScore;
+    #else:
+        Rscript ${__tool_directory__}/03_mlClassification.R -type "predict" -candidate $analysis_type.featureMat -outScore $outScore -clf $analysis_type.upload_model -method $analysis_type.algorithm;
+    #end if
+            
+    ]]></command>
+
+    <inputs>
+        <conditional name="analysis_type">
+            <param name="train_or_predict" type="select" label="Train a CMR predictor or predict" display="radio">
+                <option value="train">Train a CMR predictor</option>
+                <option value="predict_your_own">Predicting using model stored in history</option>
+            </param>
+
+            <when value="train">
+                <param name="posMat" type="data" format="txt" label="Feature matrix of positive samples"/>
+                <param name="negMat" type="data" format="txt" label="Feature matrix of negative samples"/>
+                <param name="perc" type="float" value="0.2" label="The percentage of hold-out test samples"/>
+                <param name="cpus" type="integer" value="1" label="The number of threads used for parallel computing"/>
+
+                <param name="algorithm" type="select" label="Select a machine learning algorithm"  display="radio">
+                    <option value="randomForest" selected="True">Random Forest</option>
+                    <option value="svm">Support Vector Machine</option>
+                    <option value="decision_tree">Decision tree</option>
+                    <option value="XGBoost">XGBoost</option>
+                    <option value="Logistic_regression">Logistic Regression</option>
+                </param>
+                    
+                <conditional name="ifCV">
+                    <param name="cv" type="select" label="Whether to perform k-fold cross-validation?" display="radio">
+                        <option value="true" selected="True">Yes</option>
+                        <option value="false">No</option>
+                    </param>
+                    <when value="true">
+                        <param name="kfold" type="integer" value="5" label="k-fold cross validation"/>
+                    </when>
+                </conditional>
+            </when>
+
+            <when value="predict_built_in">
+                <param name="featureMat" type="data" format="txt" label="Feature matrix of candidate samples."/>
+            </when>
+
+            <when value="predict_your_own">
+                <param name="featureMat" type="data" format="txt" label="Feature matrix of candidate samples."/>
+                <param name="upload_model" type="data" label="Trained model uploaded by users"/>
+                <param name="algorithm" type="select" label="Select a machine learning algorithm"  display="radio">
+                    <option value="randomForest" selected="True">Random Forest</option>
+                    <option value="svm">Support Vector Machine</option>
+                    <option value="decision_tree">Decision tree</option>
+                    <option value="XGBoost">XGBoost</option>
+                    <option value="Logistic_regression">Logistic Regression</option>
+                </param>
+            </when>
+        </conditional>
+        
+
+    </inputs>
+    <stdio>
+	    <exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+    </stdio>
+    <outputs>
+        <data name="model" label="${analysis_type.algorithm}_model.RData">
+            <filter>analysis_type['train_or_predict'] == "train"</filter>
+        </data>
+        <data format="pdf" name="CV_evaluation" label="${analysis_type.algorithm}_CV_evaluation.pdf">
+            <filter>analysis_type['train_or_predict'] == "train"</filter>
+        </data>
+        <data format="pdf" name="test_evaluation" label="${analysis_type.algorithm}_hold-out_test_evaluation.pdf">
+            <filter>analysis_type['train_or_predict'] == "train"</filter>
+        </data>
+        <data format="txt" name="outScore" label="predictions.txt">
+            <filter>analysis_type['train_or_predict'] == "predict_your_own"</filter>
+        </data>
+    </outputs>
+    <help>
+        .. class:: infomark
+
+        **What it does**
+
+        In this module, several commonly-used machine learning classification algorithms are implemented to construct a CMR predictor. In the current version of DeepEA, the following five classical algorithms are inlcuded:
+
+        - Random Forest
+        - Support Vector Machine
+        - Decision Tree
+        - XGBoost
+        - Logistic Regression
+
+        .. class:: infomark
+
+        **Inputs**
+
+        - **Feature matrix of positive samples**
+        - **Feature matrix of negative samples**
+
+        .. class:: infomark
+
+        **Parameters**
+
+        - For **Random Forest**
+            - The number of trees
+            - The number of threads used for parallel computation
+        - For **Support Vector Machine**
+            - Select a kernel method
+        - For **XGBoost**
+            - Learning rate
+            - The number of trees
+            - The number of threads used for parallel computation
+        - For **Logistic Regression**
+            - The optimization algorithm
+            - The number of threads used for parallel computation
+
+        .. class:: infomark
+
+        **Outputs**
+
+        - A CMR predictor in binary format
+        - Cross validation evaluation results in PDF format
+    </help>
+    <citations>
+        <citation type="bibtex">@article{pedregosa2011scikit,
+                                title={Scikit-learn: Machine learning in Python},
+                                author={Pedregosa, Fabian and Varoquaux, Ga{\"e}l and Gramfort, Alexandre and Michel, Vincent and Thirion, Bertrand and Grisel, Olivier and Blondel, Mathieu and Prettenhofer, Peter and Weiss, Ron and Dubourg, Vincent and others},
+                                journal={Journal of machine learning research},
+                                volume={12},
+                                number={Oct},
+                                pages={2825--2830},
+                                year={2011}
+                                }
+        </citation>
+    </citations>
+</tool>

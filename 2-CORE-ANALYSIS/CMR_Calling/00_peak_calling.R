@@ -21,7 +21,7 @@ parser$add_argument("-paired" , default = F, dest = "paired")
 parser$add_argument("-out" , default = NULL, dest = "outbed")
 
 args <- parser$parse_args()
-source('/home/DeepEA/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/00_CMRCalling.R')
+source('/home/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/00_CMRCalling.R')
 
 if(args$method=="SlidingWindow"){
   mappedInput <- system(paste0("samtools flagstat ", args$inputBAM,"  | grep 'mapped (' | cut -f 1,2,3 -d ' '"), intern = TRUE)
@@ -44,12 +44,14 @@ if(args$method=="SlidingWindow"){
                      inputBAM = args$inputBAM,
                      GTF = args$gtf, method = "exomePeak",
                      PEAK_CUTOFF_FDR = as.numeric(args$fdr))
+  res$peaks <- res$peaks[,1:6]
 }else if(args$method == "MetPeak"){
   cat("!!!", args$fdr, '\n')
   res <- peakCalling(IPBAM = args$IPBAM,
                      inputBAM = args$inputBAM,
                      GTF = args$gtf, method = "MetPeak",
                      PEAK_CUTOFF_FDR = as.numeric(args$fdr))
+  res$peaks <- res$peaks[,1:6]
 }else if(args$method == "BayesPeak"){
   res <- peakCalling(IPBAM = args$IPBAM,
                      inputBAM = args$inputBAM,
@@ -59,5 +61,5 @@ if(args$method=="SlidingWindow"){
 }
 
 write.table(res$peaks, file = args$outbed, sep = '\t',
-            quote = F, row.names = F, col.names = T)
+            quote = F, row.names = F, col.names = F)
 

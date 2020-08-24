@@ -1,4 +1,4 @@
-<tool id="Calling_peaks" name="Peak Calling" version='18.09'>
+<tool id="Calling_peaks" name="Peak Calling" version='17.09'>
   <description> from the MeRIP-Seq data</description>
   <command><![CDATA[
 	#if $Method.peakcalling_Method == "SlidingWindow":
@@ -20,8 +20,8 @@
 
   ]]></command>
   <inputs>
-	<param name="input_BAM" type="data" format="bam,BAM" label="Input sample" />
-	<param name="IP_BAM" type="data" format="bam,BAM" label="RIP sample" />
+	<param name="IP_BAM" type="data" format="bam,BAM" label="Input the BAM file in IP sample" />
+	<param name="input_BAM" type="data" format="bam,BAM" label="Input the BAM file in input sample" />
 
 	<conditional name="Method">
 		<param name="peakcalling_Method" type="select" format="bam,BAM" label="Peak calling methods"  display="radio">
@@ -120,13 +120,13 @@
 
 **Inputs**
 
-- **Input sample:** The input control experiment in BAM format.
+- **IP sample:** The IP experiment in BAM format
 
-- **RIP sample:** The RIP experiment in BAM format.
+- **Input sample:** The input control experiment in BAM format
 
-- **Reference genome:** The Reference genome sequences with FASTA format.
+- **Reference genome:** The Reference genome sequences with FASTA format
 
-- **Reference annotation file:** The Reference genome annotation file with GTF/GFF3 format.
+- **Reference annotation file:** The Reference genome annotation file with GTF/GFF3 format
 
 -----
 
@@ -142,14 +142,53 @@
 
 - **Significance level**: p-value cutoff for peak detection
 
-- **Ratio (log2)**: the ratio between the normalized mapped reads number in input and IP samples, respectively.
+- **Ratio (log2)**: the ratio between the normalized mapped reads number in input and IP samples, respectively
 
 .. class:: infomark
 
 **Output**
 
-- The enriched peak region matrix in BED format.
+- The enriched peak region matrix in BED format
+	- For **SlidingWindow** method:
+		+------------+----------------+-------+------------+----------+---------+-------------+------------+-----------+---------------+
+		| Chromosome | Start(1-based) | End   | Bin number | Mean FDR | Max FDR | Minimum FDR | Mean Ratio | Max Ratio | Minimum Ratio |
+		+------------+----------------+-------+------------+----------+---------+-------------+------------+-----------+---------------+
+		|    1	     | 67476          | 67575 | 4          | 0.0136   | 0.0328  | 0.0001      |	-1.0012    | -0.6334   | -1.581        |
+		+------------+----------------+-------+------------+----------+---------+-------------+------------+-----------+---------------+
+		|    1	     | 330776         | 330875| 4          | 0.0215   | 0.0381  | 0.0007      |	-1.576     | -1.4077   | -1.788        |
+		+------------+----------------+-------+------------+----------+---------+-------------+------------+-----------+---------------+
+		|    1	     | 389201         | 389300| 4          | 0.0024   | 0.0070  | 0.0002      |	-1.115     | -1.0598   | -1.190        |
+		+------------+----------------+-------+------------+----------+---------+-------------+------------+-----------+---------------+
 
+	- For **exomePeak** metod:
+		+------------+----------------+-------+------------+----------+---------+
+		| Chromosome | Start (0-based)| End   |  Gene ID   |   P.value|  Strand |
+		+------------+----------------+-------+------------+----------+---------+
+		| 1	     |30663           | 30723 |AT1G01040   |0.0026    |	   \+   |
+		+------------+----------------+-------+------------+----------+---------+
+		|	1    |	73831         |	74096 | AT1G01160  |2.5e-30   |	   \+   |
+		+------------+----------------+-------+------------+----------+---------+
+		|1           |	117530        |	117710|	AT1G01300  |2.4e-07   |	   \+   |
+		+------------+----------------+-------+------------+----------+---------+
+
+	- For **MetPeak** method: it's the same as **exomePeak**
+	- For **BayesPeak** method: 
+		+------+-------+-----+----------+---------------+
+		| chr  | start | end |	PP	|   job         |
+		+------+-------+-----+----------+---------------+
+		| 1    |3748   | 3848|0.0231    |	2       |
+		+------+-------+-----+----------+---------------+
+		| 1    |6848   | 6948|0.0178	|       2       |
+		+------+-------+-----+----------+---------------+
+		| 1    |6898   |6998 |0.9960    |	1       |
+		+------+-------+-----+----------+---------------+
+
+	- For **macs2** method: please see macs2_
+
+.. _macs2: https://github.com/macs3-project/MACS
+
+		
+		
 
 
 ]]></help>

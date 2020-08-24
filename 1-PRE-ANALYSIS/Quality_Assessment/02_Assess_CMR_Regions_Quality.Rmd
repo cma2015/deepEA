@@ -1,0 +1,106 @@
+---
+title: Assess RNA modifications quality
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE)
+library(DiffBind)
+library(dplyr)
+library(rtracklayer)
+library(plotly)
+library(DT)
+```
+
+### 1. Introduction
+This function is designed to assess RNA modifications quality by using an R package [DiffBind](http://dx.doi.org/10.3389/fgene.2015.00169). Taking RNA modifications in [BED format](https://genome.ucsc.edu/FAQ/FAQformat.html), read-genome alignments in [BAM/SAM format](https://en.wikipedia.org/wiki/SAM_(file_format)) as input, then an interacitve HTML document containing RNA modifications quantification (RPKM, Fold Change) in each biological replicates, histograme distribution of RPKM and Fold Change will be returned.
+
+
+### 2. RNA modifications quantification
+This table shows the RNA modifications quantification, each row indicates a region, the first three columns are chromosome, start position and end position, respectively. From 4th column on, every five columns represents the five values (RPKM value in IP sample, Reads count in IP sample, RPKM value in input sample, Reads count in input sample and fold change) in a biological replicate. You can click the buttons (**Copy**, **CSV**, **Excel**, and **PDF**) to download this table to your local desktop. 
+
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+genePeak <- rtracklayer::import(peaks)
+sampleSheet <- data.frame(SampleID = paste0("sample_", 1:length(IP)),
+                          Tissue = "Any",
+                          Factor = "m6A",
+                          Condition = "Normal",
+                          Replicate = 1:length(IP),
+                          bamReads = IP,
+                          ControlID = paste0("control_", 1:length(IP)),
+                          bamControl = input,
+                          Peaks = peaks,
+                          PeakCaller = "bed",
+                          stringsAsFactors = FALSE)
+tamoxifen <- dba(sampleSheet = sampleSheet, minOverlap = minOverlap)
+tamoxifen_count <- dba.count(tamoxifen, score = method, peaks = genePeak,
+                             minOverlap = minOverlap, bParallel = FALSE)
+
+resDF <- tamoxifen_count$peaks[[1]][,c(1:3,5:8)]
+colnames(resDF)[4:7] <- paste0(colnames(resDF)[4:7], "_rep1")
+resDF$FC_rep1 <- log2(resDF$RPKM_rep1/resDF$cRPKM_rep1)
+
+for (i in 2:nrow(sampleSheet)) {
+  curDF <- tamoxifen_count$peaks[[i]][5:8]
+  curDF$FC <- log2(curDF$RPKM/curDF$cRPKM)
+  colnames(curDF) <- paste0(colnames(curDF), "_rep", i)
+  resDF <- cbind(resDF, curDF)
+}
+table_options <- function() {
+  list(dom = 'Bfrtip',
+    pageLength = 8,
+    buttons = list(c('copy', 'csv', 'excel', 'pdf')),
+    searchHighlight = TRUE,
+    colReorder = TRUE,
+    scrollX = TRUE,
+    fixedColumns = TRUE,
+    extensions = 'Responsive',
+    deferRender = TRUE,
+    scroller = TRUE,
+    lengthChange = FALSE
+    )
+}
+datatable(
+  resDF,
+  rownames = FALSE,
+  editable = TRUE,
+  elementId = "linktable",
+  class = 'cell-border',
+  escape = FALSE,
+  options = table_options(),
+  extensions = c('Buttons', 'Select')) %>% 
+  formatStyle(columns = colnames(resDF), fontSize = '80%')
+```
+
+### 3. Histograms showing distribution of average RPKM in IP and input, respectively
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+meanRPKM.IP <- resDF %>% select(starts_with("RPKM")) %>% rowMeans() %>% log2()
+meanRPKM.input <- resDF %>% select(starts_with("cRPKM")) %>% rowMeans() %>% log2()
+fig <- plot_ly(alpha = 0.6)
+fig <- fig %>% add_histogram(x = meanRPKM.IP, name = "IP") %>% 
+  add_histogram(meanRPKM.input, name = "input") %>% 
+  layout(xaxis = list(family = "Times New Roman",
+                      size = 18,
+                      color = "black",
+                      title = "log2(RPKM)"))
+fig
+```
+
+### 4. Histogram showing distribution of the average fold change
+```{r echo = FALSE, message = FALSE, warning = FALSE}
+meanFC <- resDF %>% select(starts_with("FC")) %>% rowMeans()
+fig <- plot_ly(alpha = 0.6)
+fig <- fig %>% add_histogram(x = meanFC) %>% 
+  layout(xaxis = list(family = "Times New Roman",
+                      size = 18,
+                      color = "black",
+                      title = "log2(FC)"))
+fig
+```
+
+

@@ -1,0 +1,65 @@
+<tool id="Gene_Labeling_Analysis" name="Integrative Analysis of Two Omics Data Sets" version='17.09'>
+  <description></description>
+  <command><![CDATA[
+	  Rscript ${__tool_directory__}/01_integrate_two_data_sets.R -cmrDir $CMR_gene -method $method -out $output -k $k -log $log;
+  ]]></command>
+  <inputs>
+	  <param name="CMR_gene" type="data" format="tsv,txt" multiple="false" label="Multi omics quantication data" help = "A tab seperated matrix with three columns, e.g., gene ID, m6A level, gene expression level"/>
+        <param name="method" type="select" label="Please select a normalization method" display="radio" multiple="false">
+                <option value="ecdf" selected="true">Cumulative distribution</option>
+                <option value="z-score">Z-score based normalization</option>
+                <option value="minMax">Min-max based normalization</option>
+	</param>
+	<param name="k" type="integer" value="4" label="The number of clusters in kmeans algorithm" help = ""/>
+	<param name="log" type="select" label="Logarithm transformation?" display="radio" multiple="false">
+		 <option value="true" selected="true">Yes</option>
+		 <option value="no">No</option>
+	</param>
+  </inputs>
+
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs>
+	<data name="output" format="html" label= "Integraive_analysis_of_two_omics_data_sets.html">
+	</data>
+  </outputs>
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+This function is designed to perform integrative analysis of two omics data sets (e.g., m6A and RNA-Seq). Taking a quantification matrix as input, deepEA firstly normalize raw quantification based on user-specific normalization method (currently, three normalization methods including **cumulative distribution, Z-score normalization and min-max normalization** are available), then using kmeans clustering method to cluster genes into four groups and visualize genes by an interactive scatter plot.
+
+
+.. class:: infomark
+
+**Inputs**
+
+- **Two omics quantication data**: a matrix with three columns, seperated by TAB, see following table for details
+
+        +---------------------+--------------------------+-----------------------+
+	|  **geneID**         | **m6A level**            | **Expression level**  |
+        +---------------------+--------------------------+-----------------------+
+        |  Zm00001d001784     |    4.153                 |   22.09               |
+        +---------------------+--------------------------+-----------------------+
+        |  Zm00001d001790     |    4.629                 |   4.667               |
+        +---------------------+--------------------------+-----------------------+
+        |  ...                |    ...                   |   ...                 |
+        +---------------------+--------------------------+-----------------------+
+        |  Zm00001d001798     |    7.069                 |   6.491               |
+        +---------------------+--------------------------+-----------------------+
+        |  Zm00001d001898     |    4.153                 |   11.62               |
+        +---------------------+--------------------------+-----------------------+
+	
+.. class:: infomark
+
+**Outputs**
+
+- An HTML document for integrative analysis of two omics data sets
+
+
+</help>
+</tool>
+

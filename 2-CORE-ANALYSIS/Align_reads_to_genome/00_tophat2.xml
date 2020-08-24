@@ -1,10 +1,10 @@
-<tool id="tophat2" name="TopHat2" version="18.09">
+<tool id="tophat2" name="TopHat2" version="17.09">
     <description></description>
     <command><![CDATA[
     bash ${__tool_directory__}/01_bowtie2-index.sh '$genomeSequence' 2>>index.txt;
 	rm index.txt;
 	## TopHat2 alignment
-	/home/DeepEA/galaxy/tools/DeepEA_software/tophat-2.1.1.Linux_x86_64/tophat2
+	/home/galaxy/tools/DeepEA_software/tophat-2.1.1.Linux_x86_64/tophat2
 	-p ${thread}
 	-o ${__tool_directory__}/$$
 	#if $algorithm_options.algorithm_options_selector == "advanced":
@@ -28,11 +28,15 @@
 		${readR1}
 		${readR2}
 	#end if
-	2>>${__tool_directory__}/tophat_log.txt;
-	mv ${__tool_directory__}/$$/accepted_hits.bam $accepted_hits;
-	mv ${__tool_directory__}/$$/align_summary.txt $align_summary;
+	&& 
+	#if $fqType.single_or_paired == "single":
+		mv ${__tool_directory__}/$$/accepted_hits.bam $accepted_hits &&
+		mv ${__tool_directory__}/$$/align_summary.txt $align_summary &&
+	#elif $fqType.single_or_paired == "paired":
+		mv ${__tool_directory__}/$$/accepted_hits.bam $accepted_hits_PE &&
+		mv ${__tool_directory__}/$$/align_summary.txt $align_summary_PE &&
+	#end if
 	rm -r ${__tool_directory__}/$$;
-        rm ${__tool_directory__}/tophat_log.txt;
     ]]></command>
 
     <inputs>
@@ -50,7 +54,7 @@
 			<param name="readR2" type="data" format="fastqsanger,fastqsanger.gz,fastq,fq" label="Read file (R2)"/>
 		</when>
 	</conditional>
-	<param name="thread" type="integer" value="3" min="1" max="6" label="Threads"/>
+	<param name="thread" type="integer" value="1" min="1" max="4" label="Threads"/>
 	<conditional name="algorithm_options">
 		<param name="algorithm_options_selector" type="select" label="Algorithm options" display="radio">
             <option value="basic" selected="true">Basic</option>
@@ -73,11 +77,23 @@
         </when>
 	</conditional>
     </inputs>
-
+<stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
     <outputs>
-        <data format="txt" name="align_summary" label="tophat2_alignment_summary.txt"/>
-        <data format="bam" name="accepted_hits" label="tophat2_alignment.bam">
-		</data>
+    <data format="txt" name="align_summary" label="tophat2_alignment_summary.txt (on ${fqType.readSE.name})">
+            <filter>fqType['single_or_paired'] == "single"</filter>
+    </data>
+    <data format="bam" name="accepted_hits" label="tophat2_alignment.bam (on ${fqType.readSE.name})">
+            <filter>fqType['single_or_paired'] == "single"</filter>
+    </data>
+<data format="txt" name="align_summary_PE" label="tophat2_alignment_summary.txt (on ${fqType.readR1.name} and ${fqType.readR2.name})">
+            <filter>fqType['single_or_paired'] == "paired"</filter>
+    </data>
+    <data format="bam" name="accepted_hits_PE" label="tophat2_alignment.bam (on ${fqType.readR1.name} and ${fqType.readR2.name})">
+            <filter>fqType['single_or_paired'] == "paired"</filter>
+    </data>
+
     </outputs>
 <help><![CDATA[
 .. class:: infomark
@@ -90,7 +106,7 @@ TopHat is a popular spliced aligner for RNA-sequence (RNA-seq) experiments. TopH
 
 **Inputs**
 
-- **FASTQ format sequencing files**
+- **Epitranscriptome sequencing reads in FASTQ format**
 - **Reference genome in FASTA format**
 
 .. class:: infomark

@@ -1,0 +1,59 @@
+<tool id="samples_generation" name="Sample Generation" version="17.09">
+    <description></description>
+    <command><![CDATA[
+	    ln -sf ${genomeSequence} ${genomeSequence}".fasta";
+	    ln -sf ${GTF} ${GTF}".gtf";
+	    Rscript ${__tool_directory__}/01_samples_generation.R -genome ${genomeSequence}".fasta" -gtf ${GTF}".gtf" -cmr ${CMR} -motif $motif -pos $pos -posOut ${posout} -negOut ${negout} -ratio $ratio;
+
+    ]]></command>
+
+    <inputs>
+	    <param name="CMR" type="data" format="bed,txt" label="RNA modifications in BED format"/>
+        <param name="genomeSequence" type="data" format="fasta" label="Reference genome sequences in FASTA format"/>
+		<param name="GTF" type="data" format="gtf,gff,gff3" label="Reference genome annotation in GTF/GFF3 format"/>
+        <param name="motif" type="text" value="RRACH" label="Input the motif of RNA modifications" help="The motif information is used to extract flank sequences centered on RNA modifications"/>
+        <param name="pos" type="integer" value="3" label="Relative position of RNA modifications on motif"/>
+		<param name="ratio" type="integer" value="1" label="Ratio between positive and negative samples"/>
+    </inputs>
+      <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+
+    <outputs>
+    	<data name="posout" format="txt" label="positive_samples.bed">
+	</data>
+
+    	<data name="negout" format="txt" label="negative_samples.bed">
+	</data>
+    </outputs>
+    <help>
+    .. class:: infomark
+
+    **What it does**
+
+    This function was designed to generate positive and negative samples based RNA modification regions. To be specific, this function takes RNA modifications in BED format, genomic sequences in FASTA format and annotaiton in GTF format as input,  then searches consensus motif (e.g. RRACH) in the RNA modifications and treat them as positive samples, the remaining consensus motif in the same transcript of positive samples are randomly selected (user can specify the ratio between positive and negative samples) as negative samples.
+
+    .. class:: infomark
+
+    **Inputs**
+
+    - **RNA modifications in BED format**
+    - **Reference genome sequences in FASTA format**
+    - **Genome annotation in GTF/GFF3 format are required**
+
+    .. class:: infomark
+
+    **Parameters**
+
+    - **RNA modification motif**, default is RRACH
+    - **Relative position of RNA modification on motif**, for example, A is the third base for RRACH
+
+    .. class:: infomark
+
+    **Outputs**
+
+    - **positive_samples.bed**: positive samples in BED format with 6 columns	
+    - **negative_samples.bed**: negative samples in BED format with 6 columns
+
+    </help>
+</tool>

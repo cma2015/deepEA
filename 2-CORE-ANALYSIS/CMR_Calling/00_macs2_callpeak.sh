@@ -22,22 +22,19 @@ measure="-p ${7} "
 else
 measure="-p ${7} "
 fi
-mkdir -p /home/DeepEA/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/out/
+mkdir -p /home/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/out/
 exp="macs2"
 if [ "${5}" == "create_model" ];then
 mfold="-m ${8} ${9} "
 bw="--bw ${10} "
-cmd="/home/miniconda2/bin/macs2 callpeak -t ${1} -c ${2} -g ${4} -f $bam $measure $mfold $bw --outdir /home/DeepEA/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/out/ -n $exp"
+cmd="/home/miniconda2/bin/macs2 callpeak -t ${1} -c ${2} -g ${4} -f $bam $measure $mfold $bw --outdir /home/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/out/ -n $exp"
 else
 extsize="--extsize ${11} "
 shift="--shift ${12} "
-cmd="/home/miniconda2/bin/macs2 callpeak -t ${1} -c ${2} -g ${4} -f $bam $measure $extsize $shift --outdir /home/DeepEA/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/out/ --nomodel -n $exp"
+cmd="/home/miniconda2/bin/macs2 callpeak -t ${1} -c ${2} -g ${4} -f $bam $measure $extsize $shift --outdir /home/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/out/ --nomodel -n $exp"
 fi
 
-echo $cmd > /home/DeepEA/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/$$.sh
-&& chmod u+x /home/DeepEA/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/$$.sh
-&& bash /home/DeepEA/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/$$.sh
-&& rm /home/DeepEA/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/$$.sh
+echo $cmd > /home/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/$$.sh && chmod u+x /home/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/$$.sh && bash /home/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/$$.sh && rm /home/galaxy/tools/2-CORE-ANALYSIS/CMR_Calling/$$.sh
 
 
 

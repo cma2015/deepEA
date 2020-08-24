@@ -1,0 +1,96 @@
+<tool id="Obtain_Epitranscriptome_Sequencing_Reads" name="Obtain Epitranscriptome Sequencing Reads" version='17.09'>
+  <description></description>
+  <command>
+	#if $seltype.type == "prefetch":
+		mv ${__tool_directory__}/${seltype.SRA_ID}.sra $SRA_data;
+	#elif  $seltype.type == "wget":
+		wget $seltype.ftp -O $ftp;
+    #end if
+  </command>
+  <inputs>
+	  <conditional name="seltype">
+		<param name="type" type="select" label="Select download tool">
+			<option value="prefetch" selected="true">Download sequencing data from Short Read Archive</option>
+			<option value="wget" >Download sequencing data from an HTTP/FTP link</option>
+		</param>
+		<when value="prefetch">
+			<param name="SRA_ID" type="text" label="Accession" help="Start with SRR, DRR or ERR, e.g. SRR1508371"/>
+		</when>
+		<when value="wget">
+			<param name="ftp" type="text" label="An HTTP/FTP link" />
+			<param name="format" type="text" label="Data format" help="Supported format: txt, gff, gtf, tsv, gz, tar, vcf, fasta, html and pdf"/>
+			<param name="dataname" type="text" label="Prefix" help="Specify the prefix of the file to be downloaded" />
+		</when>
+	</conditional>
+  </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs>
+	<data name="SRA_data" format="sra" label="${seltype.SRA_ID}.sra">
+		<filter>seltype['type'] == "prefetch"</filter>
+	</data>
+
+	<data name="ftp" format="data" label="${seltype.dataname}.${seltype.format}">
+			<filter>seltype['type'] == "wget" </filter>
+                <change_format>
+                    <when input="seltype.format" value="txt" format="txt" />
+                    <when input="seltype.format" value="gff" format="gff" />
+                    <when input="seltype.format" value="gff3" format="gff" />
+                    <when input="seltype.format" value="gtf" format="gtf" />
+                    <when input="seltype.format" value="vcf" format="vcf" />
+                    <when input="seltype.format" value="tsv" format="tsv" />
+                    <when input="seltype.format" value="gz" format="gz" />
+                    <when input="seltype.format" value="zip" format="gz" />
+                    <when input="seltype.format" value="tar" format="tar" />
+                    <when input="seltype.format" value="fasta" format="fasta" />
+                    <when input="seltype.format" value="fa" format="fasta" />
+                    <when input="seltype.format" value="html" format="html" />
+                    <when input="seltype.format" value="pdf" format="pdf" />
+                </change_format>
+	</data>
+
+  </outputs>
+ <help>
+.. class:: infomark
+
+**What it does**
+
+This function is designed to download sequencing data from NCBI SRA (Short Read Archive) database or from an user-specified HTTP/FTP link automatically. For the former, the **prefetch** function implemented in SRA Toolkit is wrapped to enable users to download sequencing data from NCBI SRA database; For the latter, **wget** command line is used to download the file according to an user-specified HTTP/FTP link.
+
+-------------
+
+.. class:: infomark
+
+**Inputs**
+
+- For **Download sequencing data from Short Read Archive**:
+
+	- **Accession:**  An SRA accession ID (start with SRR, DRR or ERR, e.g. SRR1508371)
+
+- For **Download sequencing data from an HTTP/FTP link**:
+
+	- **An HTTP/FTP link:** An HTTP/FTP link specifying the path of the file to be downloaded, e.g. ftp://download.big.ac.cn/gwh/Genome/Plants/Arabidopsis_thaliana/Athaliana_167_TAIR10/TAIR10_genomic.fna.gz
+
+	- **Data format:** Specify the data format, in the current version, the supported format include: txt, gff, gtf, tsv, gz, tar, vcf, fasta, html and pdf
+
+	- **Prefix:** A string specifying the prefix of the file to be downloaded
+
+-------------
+
+
+.. class:: infomark
+
+**Outputs**
+
+- For **Download sequencing data from Short Read Archive**:
+
+	- The compressed sequencing data in SRA format
+
+- For **Download sequencing data from an HTTP/FTP link**:
+
+	- The downloaded file according to the provided HTTP/FTP link
+
+  </help>
+
+</tool>

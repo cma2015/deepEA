@@ -1,0 +1,306 @@
+<tool id="De_novo_motif_discovery" name="Motif Analysis"  version='17.09'>
+  <description></description>
+  <command><![CDATA[
+    ln -sf ${reference_genome} ${reference_genome}.fasta &&
+    /home/miniconda2/bin/samtools faidx ${reference_genome}.fasta &&
+    /home/miniconda2/bin/bedtools getfasta -fi ${reference_genome}.fasta -bed ${peak} -fo ${peak}.fasta &&
+    #if $analysis_method.method == "dreme":
+    /home/miniconda2/bin/dreme
+        -o ${__tool_directory__}/dreme_out
+        -p '${peak}.fasta'
+        $analysis_method.norc
+        $analysis_method.alphabet_type
+        #if str( $analysis_method.neg_set_type.neg_set_type_selector ) == 'shuffle_negs':
+            -s '${$analysis_method.neg_set_type.pos_shuffle_seed}'
+        #elif str( $analysis_method.neg_set_type.neg_set_type_selector ) == 'supply_negs':
+            -n '${$analysis_method.neg_set_type.neg_fasta_file}'
+        #end if
+        #if str( $analysis_method.options_type.options_type_selector ) == 'advanced':
+            -e $analysis_method.options_type.e_value_thr
+            #if $analysis_method.options_type.stop_m_motifs
+                -m $analysis_method.options_type.stop_m_motifs
+            #end if
+            #if $analysis_method.options_type.stop_t_seconds
+                -t $analysis_method.options_type.stop_t_seconds
+            #end if
+            -g $analysis_method.options_type.nr_res_generalize
+            -mink $analysis_method.options_type.motif_min_k
+            -maxk $analysis_method.options_type.motif_max_k
+        #end if
+        && mv ${__tool_directory__}/dreme_out/dreme.html $motif;
+        rm -r ${__tool_directory__}/dreme_out;
+
+    #elif $analysis_method.method == "meme_chip":
+        /home/miniconda2/bin/meme-chip '${peak}.fasta'
+        -noecho
+        #if $analysis_method.control:
+            -neg '$analysis_method.control'
+        #end if
+        $analysis_method.sequence_alphabet
+        -o ${__tool_directory__}/meme_chip/
+        #if str($analysis_method.options_type_cond.options_type)=='advanced':
+            $analysis_method.options_type_cond.search_given_strand
+            -order $analysis_method.options_type_cond.background_model_order
+            #if str($analysis_method.options_type_cond.subsampling_cond.subsampling) == "no":
+                -norand
+                #if $analysis_method.options_type_cond.subsampling_cond.subsampling.seed:
+                    -seed $analysis_method.options_type_cond.subsampling_cond.subsampling.seed
+                #end if
+            #end if
+            #if $analysis_method.options_type_cond.nmeme:
+                -nmeme $analysis_method.options_type_cond.nmeme
+            #end if
+            #if $analysis_method.options_type_cond.ccut:
+                -ccut $analysis_method.options_type_cond.ccut
+            #end if
+            -group-thresh $analysis_method.options_type_cond.group_threash
+            #if str($analysis_method.options_type_cond.group_weak):
+                -group-weak $analysis_method.options_type_cond.group_weak
+            #end if
+            -filter-thresh $analysis_method.options_type_cond.filter_thresh
+            $analysis_method.options_type_cond.old_clustering
+            -meme-mod $analysis_method.options_type_cond.meme_mod
+            #if $analysis_method.options_type_cond.meme_minw:
+                -meme-minw $analysis_method.options_type_cond.meme_minw
+            #end if
+            #if $analysis_method.options_type_cond.meme_maxw:
+                -meme-maxw $analysis_method.options_type_cond.meme_maxw
+            #end if
+            #if $analysis_method.options_type_cond.meme_nmotifs:
+                -meme-nmotifs $analysis_method.options_type_cond.meme_nmotifs
+            #end if
+            #if $analysis_method.options_type_cond.meme_minsites:
+                -meme-minsites $analysis_method.options_type_cond.meme_minsites
+            #end if
+            #if $analysis_method.options_type_cond.meme_maxsites:
+                -meme-maxsites $analysis_method.options_type_cond.meme_maxsites
+            #end if
+            $analysis_method.options_type_cond.meme_pal
+            -dreme-e $analysis_method.options_type_cond.dreme_e
+            -dreme-m $analysis_method.options_type_cond.dreme_m
+            -spamo-skip
+            -fimo-skip
+        #end if
+	&& mv ${__tool_directory__}/meme_chip/meme_out/meme.html $motif;
+        rm -r ${__tool_directory__}/meme_chip;
+    #else:
+        /home/miniconda2/bin/findMotifs.pl '${peak}.fasta' fasta ${__tool_directory__}/homer_output -fasta $analysis_method.control -norevopp
+        #if str( $analysis_method.options_type_homer.options_type_homer_selector ) == 'advanced':
+            -len $analysis_method.options_type_homer.motif_len
+            -S $analysis_method.options_type_homer.motif_number
+            $analysis_method.options_type_homer.b
+            $analysis_method.options_type_homer.nogo
+            $analysis_method.options_type_homer.noweight
+            -min $analysis_method.options_type_homer.min
+            -max $analysis_method.options_type_homer.max
+        #end if
+        && mv ${__tool_directory__}/homer_output/homerResults.html $motif;
+        rm -r ${__tool_directory__}/homer_output;
+    #end if
+  ]]></command>
+  <inputs>
+        <param name="peak" type="data" format="tsv,encodepeak,bed,txt"  multiple="false" label="RNA modifications (peak regions or single nucleotide resolution) in BED format" help=""/>
+        <param name="reference_genome" type="data" format="fasta" label="Reference genome sequences in FASTA format"
+               help=""/>
+        <conditional name="analysis_method">
+            <param name="method" type="select" label="Select a method" display="radio">
+                <option value="meme_chip">MEME-ChIP: motif discovery, enrichment analysis and clustering on large nucleotide datasets</option>
+                <option value="dreme">DREME: Discriminative Regular Expression Motif Elicitation</option>
+                <option value="homer">HOMER: Hypergeometric Optimization of Motif EnRichment</option>
+            </param>
+            <when value="dreme">
+                <param name="alphabet_type" type="select" label="Type of sequence alphabet">
+                    <option value="-dna" selected="true">DNA (default)</option>
+                    <option value="-rna">RNA</option>
+                    <option value="-protein">Protein</option>
+                </param>
+                <param argument="-norc" label="Check reverse complement" type="boolean"
+                    truevalue="" falsevalue="-norc" checked="False"
+                    help="Search for motifs also on reverse complement strand"/>
+                <conditional name="neg_set_type">
+                    <param name="neg_set_type_selector" type="select" label="Negative set definition">
+                        <option value="shuffle_negs" selected="true">Shuffle positive sequences</option>
+                        <option value="supply_negs">Supply negative sequences</option>
+                    </param>
+                    <when value="shuffle_negs">
+                        <param name="pos_shuffle_seed" type="integer" value="1"
+                            label="Seed for shuffling positive sequences" argument="-s"
+                            help="(default: 1)"/>
+                    </when>
+                    <when value="supply_negs">
+                        <param name="neg_fasta_file" type="data" format="fasta"
+                            label="Negative FASTA sequence file" argument="-n"
+                            help="negative (control) sequence file (default: positive sequences are shuffled to create the negative set)"/>
+                    </when>
+                </conditional>
+
+                <conditional name="options_type">
+                    <param name="options_type_selector" type="select" label="Options Configuration" display="radio">
+                        <option value="basic">Basic</option>
+                        <option value="advanced">Advanced</option>
+                    </param>
+                    <when value="basic" />
+                    <when value="advanced">
+                        <param name="e_value_thr" type="float" value="0.05"
+                            label="stop if motif E-value > e" argument="-e"
+                            help="stop if motif E-value > given threshold (default: 0.05)">
+                            <validator type="expression" message="Set e-value must be > 0.">value is not None and value > 0</validator>
+                        </param>
+                        <param name="motif_min_k" type="integer" value="3" min="1"
+                            label="Minimum width of core motif" argument="-mink"
+                            help="minimum width of core motif (default: 3)"/>
+                        <param name="motif_max_k" type="integer" value="8" min="1"
+                            label="Maximum width of core motif" argument="-maxk"
+                            help="maximum width of core motif (default: 8)"/>
+                        <param name="stop_m_motifs" type="integer" optional="True" min="1"
+                            label="Stop if m motifs have been output" argument="-m"
+                            help="stop if m motifs have been output (default: only stop at E-value threshold)"/>
+                        <param name="stop_t_seconds" type="integer" optional="True" min="1"
+                            label="Stop if the specified time has elapsed" argument="-t"
+                            help="stop if the specified time has elapsed (default: only stop at E-value threshold)"/>
+                        <param name="nr_res_generalize" type="integer" value="100" min="1"
+                            label="Number of REs to generalize" argument="-g"
+                            help="number of REs to generalize (default: 100) (Hint: Increasing n will make the motif search more thoroughly at some cost in speed)"/>
+                    </when>
+                </conditional>
+                <param name="non_commercial_use" label="I certify that I am not using this tool for commercial purposes." type="boolean" truevalue="NON_COMMERCIAL_USE" falsevalue="COMMERCIAL_USE" checked="False">
+                    <validator type="expression" message="This tool is only available for non-commercial use.">value == True</validator>
+                </param>
+		    </when>
+
+            <when value="meme_chip">
+               <param name="control" type="data" format="fasta" optional="true" label="Control sequences" help="If no selection, positive sequences in the input are shuffled to create the negative set"/>
+                <param name="sequence_alphabet" type="select" label="Sequence alphabet">
+                    <option value="-dna" selected="true">DNA</option>
+                    <option value="-rna">RNA</option>
+                </param>
+
+                <conditional name="options_type_cond">
+                    <param name="options_type" type="select" label="Options Configuration">
+                        <option value="basic" selected="true">Basic</option>
+                        <option value="advanced">Advanced</option>
+                    </param>
+                    <when value="basic"/>
+                    <when value="advanced">
+                        <param name="background_model_order" type="select" label="Select the order of the Markov background model">
+                            <option value="0">0-order model of sequences</option>
+                            <option value="1" selected="True">1st order model of sequences</option>
+                            <option value="2">2nd order model of sequences</option>
+                            <option value="3">3rd order model of sequences</option>
+                            <option value="4">4th order model of sequences</option>
+                        </param>
+                        <param name="nmeme" type="integer" optional="true" value="" min="1" label="Limit of sequences to pass to MEME"/>
+                        <conditional name="subsampling_cond">
+                            <param name="subsampling" type="select" label="Should subsampling be random?" help="Select 'No' if your input sequences are sorted in order of confidence (best to worst)">
+                                <option value="yes" selected="true">Yes</option>
+                                <option value="no">No</option>
+                            </param>
+                            <when value="yes">
+                                <param name="seed" type="integer" optional="true" value="" min="1" label="Seed for the randomized selection of sequences"/>
+                            </when>
+                            <when value="no"/>
+                        </conditional>
+                        <param name="ccut" type="integer" optional="true" value="100" min="0" label="maximum size of a sequence before it is cut down to a centered section" help="Zero value indicates the sequences should not be cut down"/>
+                        <param name="group_threash" type="float" value="0.05" min="0" label="Primary threshold for clustering motifs" />
+                        <param name="group_weak" type="float" optional="true" value="0" min="0" label="Secondary threshold for clustering motifs" help="Zero value results in 2*primary threshold"/>
+                        <param name="filter_thresh" type="float" value="0.05" min="0" label="E-value threshold for including motifs"/>
+                        <param name="search_given_strand" type="boolean" truevalue="-norc" falsevalue="" checked="False" label="Search given strand only"/>
+                        <param argument="-old_clustering" type="boolean" truevalue="-old_clustering" falsevalue="" checked="False" label="Pick cluster seed motifs based only on significance"/>
+                        <param name="meme_mod" type="select" label="What is the expected motif site distribution?">
+                            <option value="oops" selected="True">One occurance per sequence</option>
+                            <option value="zoops">Zero or one occurances per sequence</option>
+                            <option value="anr">Any number of repititions</option>
+                        </param>
+                        <param name="meme_minw" type="integer" optional="true" value="0" min="0" label="Minimum motif width"/>
+                        <param name="meme_maxw" type="integer" optional="true" value="0" min="0" label="Maximum motif width"/>
+                        <param name="meme_nmotifs" type="integer" optional="true" value="0" min="0" label="Maximum number of motifs to find"/>
+                        <param name="meme_minsites" type="integer" optional="true" value="0" min="0" label="Minimum number of sites per motif"/>
+                        <param name="meme_maxsites" type="integer" optional="true" value="0" label="Maximum number of sites per motif"/>
+                        <param argument="-meme_pal" type="boolean" truevalue="-meme-pal" falsevalue="" checked="False" label="Look for palindromes only"/>
+                        <param name="dreme_e" type="float" value="0.05" min="0" label="Stop DREME searching after reaching this E-value threshold"/>
+                        <param name="dreme_m" type="integer" value="10" min="1" label="Stop DREME searching after finding this many motifs" />
+                    </when>
+                </conditional>
+
+                <param name="non_commercial_use" label="I certify that I am not using this tool for commercial purposes." type="boolean" truevalue="NON_COMMERCIAL_USE" falsevalue="COMMERCIAL_USE" checked="False">
+                    <validator type="expression" message="This tool is only available for non-commercial use.">value == True</validator>
+                </param>
+            </when>
+
+            <when value="homer">
+                <param name="control" type="data" format="fasta" optional="true" label="Control sequences" help="If no selection, positive sequences in the input are shuffled to create the negative set"/>
+                <conditional name="options_type_homer">
+                    <param name="options_type_homer_selector" type="select" label="Options Configuration">
+                        <option value="basic" selected="true">Basic</option>
+                        <option value="advanced">Advanced</option>
+                    </param>
+
+                    <when value="basic" />
+                    <when value="advanced">
+                        <param name="motif_len" type="text" value="8,10,12"
+                            label="motif length" argument="-len" help="NOTE: values greater 12 may cause the program to run out of memmory - in these cases decrease the number of sequences analyzed">
+                        </param>
+                        <param name="motif_number" type="integer" value="25"
+                            label="Number of motifs to optimize" argument="-S" help="">
+                        </param>
+
+                        <param argument="-b" label="Use binomial distribution to calculate p-values" type="boolean"
+                                truevalue="-b" falsevalue="" checked="False"
+                                help=""/>
+
+                        <param argument="-nogo" label="Don't search for gene ontology enrichment" type="boolean"
+                                truevalue="-nogo" falsevalue="" checked="False"
+                                help=""/>
+                        <param argument="-noweight" label="no CG correction" type="boolean"
+                                truevalue="-noweight" falsevalue="" checked="False"
+                                help=""/>
+                        <param name="min" type="integer" value="0"
+                            label="Remove sequences shorter than #" help="">
+                        </param>
+                        <param name="max" type="integer" value="1000000"
+                            label="Remove sequences larger than #" help="">
+                        </param>
+                    </when>
+                </conditional>
+            </when>
+        </conditional>
+  </inputs>
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs>
+	<data name="motif" format="html" label="${analysis_method.method}_motifs.html">
+	</data>
+  </outputs>
+ <help>
+
+.. class:: infomark
+
+**What it does**
+
+This function integrates MEME-ChIP and DREME to perform *de-novo* motif discovery.
+
+-------------
+
+.. class:: infomark
+
+**Inputs**
+
+- **Peaks sequences / RNA modifications related sequence** - Use peaks sequences or RNA modifications flanking sequences (**fasta** format)
+
+
+.. class:: infomark
+
+**Outputs**
+
+- An HTML report generated by DREME or MEME-ChIP
+
+</help>
+
+<citations>
+    <citation type="doi">10.1093/bioinformatics/btr261</citation>
+    <citation type="doi">10.1093/bioinformatics/btr189</citation>
+</citations>
+
+</tool>
+

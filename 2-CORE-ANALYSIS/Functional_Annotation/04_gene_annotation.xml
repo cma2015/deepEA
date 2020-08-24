@@ -1,0 +1,69 @@
+<tool id="Gene_annotation" name="Link RNA Modifications to Genes"  version='17.09'>
+  <description></description>
+  <command><![CDATA[
+	ln -sf '${gff}' '${gff}.gtf';
+	Rscript ${__tool_directory__}/04_gene_annotation.R -cmr ${peak} -gtf ${gff}".gtf" -overlap ${minOverlap} -outGene ${outGene} -outBED ${outBED};
+
+  ]]></command>
+
+  <inputs>
+	  <param name="peak" type="data" format="tsv,encodepeak,bed,txt"  multiple="false" label="RNA modifications (peak regions or single nucleotide resolution) in BED format" help=""/>
+	  <param name="gff" type="data" format="gff,gtf,gff3" label="Genome annotation in GTF/GFF3 format"/>
+	  <param name="minOverlap" type="integer" value="50" label="The minimum overlapping position" help="Only ranges with a minimum of overlapping positions are retained"/>
+	  </inputs>
+
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs> 
+	<data name="outGene" format="txt" label= "RNA_modifications_genes.txt">
+	</data>
+	<data name="outBED" format="bed" label= "RNA_modifications_with_strand.bed">
+	</data>
+  </outputs>
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+This function is designed to link RNA modifications to nearest genes based on genomic coordinate.
+
+
+.. class:: infomark
+
+**Input**
+
+- **RNA modifications:** RNA modifications in BED format which can be obtained by any function in **Identify RNA Modifications**
+
+
+- **Genome annotation in GTF/GFF3 format:** The genome annotation in GTF/GFF3 format
+
+
+.. class:: infomark
+
+**Parameters**
+
+- The minimum overlapping positions with genes, only RNA modifications with minimum overlapping positions are retained
+
+.. class:: infomark
+
+**Outputs**
+
+- **RNA_modifications_with_strand.bed**: BED6 format, the fourth and sixth columns represent gene ID and strand, respectively.
+
+        +-------+--------+--------------+----------------+------+----+
+        |   1   | 49625  | 49751        | Zm00001d027230 | .    | \+ |
+        +-------+--------+--------------+----------------+------+----+
+        |   1   | 50925  | 51026        | Zm00001d027231 | .    | \- |
+        +-------+--------+--------------+----------------+------+----+
+        |   1   | 92303  | 92526        | Zm00001d027232 | .    | \- |
+	+-------+--------+--------------+----------------+------+----+
+
+- **RNA_modifications_gene.txt**: RNA modifications-related genes (with only one column), which can be directly recognized by function **Functional Enrichment Analysis**
+
+
+</help>
+</tool>
+
+

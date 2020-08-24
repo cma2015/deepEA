@@ -1,0 +1,486 @@
+---
+title: "Multi-omics integration analysis"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      message = FALSE)
+library(plotly)
+library(knitr)
+library(kableExtra)
+library(DT)
+library(formattable)
+library(dplyr)
+library(rtracklayer)
+library(ggplot2)
+library(rmarkdown)
+library(seqinr)
+```
+
+
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+source("/home/galaxy/tools/3-ADVANCED-ANALYSIS/Multi-omics_Integrative_Analysis/functions.R")
+cmrMat <- read.table(cmrDir, sep = "\t", header = T, quote = "", stringsAsFactors = F)
+cmrMat <- na.omit(cmrMat)
+colnames(cmrMat) <- c("geneID", "cmrLevel", "omics1", "omics2")
+cmrGene <- cmrMat$geneID
+# transform to relative abundance
+if(method == "ecdf"){
+  cmrMat$cmrLevel <- ecdf(cmrMat$cmrLevel)(cmrMat$cmrLevel)
+  cmrMat$omics1 <- ecdf(cmrMat$omics1)(cmrMat$omics1)
+  cmrMat$omics2 <- ecdf(cmrMat$omics2)(cmrMat$omics2)
+}else if(method == "z-score"){
+  cmrMat$cmrLevel <- (cmrMat$cmrLevel - mean(cmrMat$cmrLevel, na.rm = T))/sd(cmrMat$cmrLevel, na.rm = T)
+  cmrMat$omics1 <- (cmrMat$omics1 - mean(cmrMat$omics1, na.rm = T))/sd(cmrMat$omics1, na.rm = T)
+  cmrMat$omics2 <- (cmrMat$omics2 - mean(cmrMat$omics2, na.rm = T))/sd(cmrMat$omics2, na.rm = T)
+}else{
+  cmrMat$cmrLevel <- (cmrMat$cmrLevel - min(cmrMat$cmrLevel))/(max(cmrMat$cmrLevel) - min(cmrMat$cmrLevel))
+  cmrMat$omics1 <- (cmrMat$omics1 - min(cmrMat$omics1))/(max(cmrMat$omics1) - min(cmrMat$omics1))
+  cmrMat$omics2 <- (cmrMat$omics2 - min(cmrMat$omics2))/(max(cmrMat$omics2) - min(cmrMat$omics2))
+}
+
+# subgenome information
+subgenome <- read.table(file = subgenomeDir, sep = '\t', header = T, quote = '',
+                        stringsAsFactors = F)
+# for duplicated pairs
+duplicated_pairs <- read.table(file = dupDir, sep = "\t", header = T, quote = "", stringsAsFactors = F)
+
+# Type 1: genes in Maize1 are CMR genes but in Maize2 are not CMR genes
+type1Pairs <- duplicated_pairs %>% 
+  mutate(if1 = Subgenome1.homeolog %in% cmrGene,
+         if2= Subgenome2.homeolog %in% cmrGene) %>% 
+  filter(if1 == TRUE & if2 == FALSE)
+
+# Type 2: genes in Maize1 are not CMR genes but in Maize2 are CMR genes
+type2Pairs <- duplicated_pairs %>% 
+  mutate(if1 = Subgenome1.homeolog %in% cmrGene,
+         if2= Subgenome2.homeolog %in% cmrGene) %>% 
+  filter(if1 == FALSE & if2 == TRUE)
+
+# Type 3: both genes in Maize1 and Maize2 are CMR genes
+type3Pairs <- duplicated_pairs %>% 
+  mutate(if1 = Subgenome1.homeolog %in% cmrGene,
+         if2= Subgenome2.homeolog %in% cmrGene) %>% 
+  filter(if1 == TRUE & if2 == TRUE)
+
+# Type 4: both genes in maize1 and Maize2 are not CMR genes
+type4Pairs <- duplicated_pairs %>% 
+  mutate(if1 = Subgenome1.homeolog %in% cmrGene,
+         if2= Subgenome2.homeolog %in% cmrGene) %>% 
+  filter(if1 == FALSE & if2 == FALSE)
+
+singletons <- subgenome$geneID[which(subgenome$duplicate.status == "Singletons")]
+interRes <- intersect(cmrMat$geneID, singletons)
+type <- rep("Others", nrow(cmrMat))
+names(type) <- cmrMat$geneID
+type[intersect(c(type1Pairs$Subgenome1.homeolog, type1Pairs$Subgenome2.homeolog), cmrMat$geneID)] <- "DM1"
+type[intersect(c(type2Pairs$Subgenome1.homeolog, type2Pairs$Subgenome2.homeolog), cmrMat$geneID)] <- "DM2"
+type[intersect(c(type3Pairs$Subgenome1.homeolog, type3Pairs$Subgenome2.homeolog), cmrMat$geneID)] <- "IM"
+type[interRes] <- "Singletons"
+cmrMat$group <- type
+```
+
+Row 
+-------------------------------------------------------------------------------------------------------------------------------
+
+### Ternary plot
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+tmp <- as.matrix(cmrMat[,2:4])
+mod <- apply(tmp, 1, defineMod)
+cmrMat$Category <- mod
+p <- plot_ly(
+  cmrMat, 
+  a = ~cmrLevel, 
+  b = ~omics1, 
+  c = ~omics2, 
+  color = ~Category, 
+  type = "scatterternary",
+  text = ~geneID
+) %>% 
+layout(
+  ternary = list(
+    aaxis = axis("CMR"), 
+    baxis = axis("Omics1"), 
+    caxis = axis("Omics2")
+  )
+)
+p
+```
+
+### Bar plot
+```{r echo = FALSE, warn = FALSE, message = FALSE}
+df <- cmrMat %>% group_by(group, Category) %>% summarise(a = n()) %>% 
+  group_by(group) %>% mutate(total = sum(a), perc = a/total)
+
+df$Category <- factor(df$Category, levels = rev(unique(df$Category)))
+df$group <- factor(df$group, levels = rev(unique(df$group)))
+
+p <- ggplot(df, aes(x = group, y = perc))+
+  geom_col(aes(fill = Category), width = 0.7) + coord_flip() + theme_classic() +
+  scale_fill_manual(values=rev(c("#50A683", "#E06B53", "#697C9F", "#BC6597", "#81BD54", "#E8BD42", "#C8A478"))) + ylab("Percentage") + xlab("")
+ggplotly(p)
+```
+
+Row 
+-------------------------------------------------------------------------------------------------------------------------------
+
+### Detailed tabular
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+table_options <- function() {
+  list(dom = 'Bfrtip',
+    pageLength = 8,
+    buttons = list(c('copy', 'csv', 'excel', 'pdf')),
+    searchHighlight = TRUE,
+    colReorder = TRUE,
+    scrollX = TRUE,
+    fixedColumns = TRUE,
+    extensions = 'Responsive',
+    deferRender = TRUE,
+    scroller = TRUE,
+    lengthChange = FALSE
+    )
+}
+datatable(
+  cmrMat,
+  rownames = FALSE,
+  editable = TRUE,
+  elementId = "linktable",
+  class = 'cell-border',
+  escape = FALSE,
+  options = table_options(),
+  extensions = c('Buttons', 'Select')) %>% 
+  formatStyle(columns = colnames(cmrMat), fontSize = '80%')
+```
+
+
+Row 
+-------------------------------------------------------------------------------------------------------------------------------
+
+### Ternary plot for singletons
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+df <- cmrMat %>% filter(group == "Singletons")
+plot_ly(
+  df, 
+  a = ~cmrLevel, 
+  b = ~omics1, 
+  c = ~omics2, 
+  color = ~Category, 
+  type = "scatterternary",
+  text = ~geneID
+) %>% 
+  layout(
+  ternary = list(
+    aaxis = axis("CMR"), 
+    baxis = axis("Omics1"), 
+    caxis = axis("Omics2")
+  ))
+```
+
+### Barplot for singletons
+```{r echo = FALSE, waring = FALSE, message = FALSE}
+df <- cmrMat %>% filter(group == "Singletons") %>%
+  group_by(Category) %>% summarise(a = n())
+
+df$Category <- factor(df$Category, levels = df$Category[order(df$a, decreasing = T)])
+fig <- plot_ly(df, x = ~Category, y = ~a, type = 'bar') %>% 
+  layout(xaxis = list(title = ""),
+         yaxis = list(title = ""), showlegend = FALSE)
+fig
+```
+
+Row 
+-------------------------------------------------------------------------------------------------------------------------------
+
+### Ternary plot for DM1 (diverged methylation for subgenome 1)
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+df <- cmrMat %>% filter(group == "DM1")
+plot_ly(
+  df, 
+  a = ~cmrLevel, 
+  b = ~omics1, 
+  c = ~omics2, 
+  color = ~Category, 
+  type = "scatterternary",
+  text = ~geneID
+) %>% 
+  layout(
+  ternary = list(
+    aaxis = axis("CMR"), 
+    baxis = axis("Omics1"), 
+    caxis = axis("Omics2")
+  ))
+```
+
+### Barplot for  DM1 (diverged methylation for subgenome 1)
+```{r echo = FALSE, waring = FALSE, message = FALSE}
+df <- cmrMat %>% filter(group == "DM1") %>%
+  group_by(Category) %>% summarise(a = n())
+
+df$Category <- factor(df$Category, levels = df$Category[order(df$a, decreasing = T)])
+fig <- plot_ly(df, x = ~Category, y = ~a, type = 'bar') %>% 
+  layout(xaxis = list(title = ""),
+         yaxis = list(title = ""), showlegend = FALSE)
+fig
+```
+
+
+
+Row 
+-------------------------------------------------------------------------------------------------------------------------------
+
+### Ternary plot for DM2 (diverged methylation for subgenome 2)
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+df <- cmrMat %>% filter(group == "DM2")
+plot_ly(
+  df, 
+  a = ~cmrLevel, 
+  b = ~omics1, 
+  c = ~omics2, 
+  color = ~Category, 
+  type = "scatterternary",
+  text = ~geneID
+) %>% 
+  layout(
+  ternary = list(
+    aaxis = axis("CMR"), 
+    baxis = axis("Omics1"), 
+    caxis = axis("Omics2")
+  ))
+```
+
+### Barplot for  DM2 (diverged methylation for subgenome 2)
+```{r echo = FALSE, waring = FALSE, message = FALSE}
+df <- cmrMat %>% filter(group == "DM2") %>%
+  group_by(Category) %>% summarise(a = n())
+
+df$Category <- factor(df$Category, levels = df$Category[order(df$a, decreasing = T)])
+fig <- plot_ly(df, x = ~Category, y = ~a, type = 'bar') %>% 
+  layout(xaxis = list(title = ""),
+         yaxis = list(title = ""), showlegend = FALSE)
+fig
+```
+
+
+Row 
+-------------------------------------------------------------------------------------------------------------------------------
+
+### Ternary plot for IM (identical methylation)
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+df <- cmrMat %>% filter(group == "IM")
+plot_ly(
+  df, 
+  a = ~cmrLevel, 
+  b = ~omics1, 
+  c = ~omics2, 
+  color = ~Category, 
+  type = "scatterternary",
+  text = ~geneID
+) %>% 
+  layout(
+  ternary = list(
+    aaxis = axis("CMR"), 
+    baxis = axis("Omics1"), 
+    caxis = axis("Omics2")
+  ))
+```
+
+### Barplot for  IM (Identical methylation)
+```{r echo = FALSE, waring = FALSE, message = FALSE}
+df <- cmrMat %>% filter(group == "IM") %>%
+  group_by(Category) %>% summarise(a = n())
+
+df$Category <- factor(df$Category, levels = df$Category[order(df$a, decreasing = T)])
+fig <- plot_ly(df, x = ~Category, y = ~a, type = 'bar') %>% 
+  layout(xaxis = list(title = ""),
+         yaxis = list(title = ""), showlegend = FALSE)
+fig
+```
+
+
+Row 
+-------------------------------------------------------------------------------------------------------------------------------
+
+### Ternary plot for others
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+df <- cmrMat %>% filter(group == "Others")
+plot_ly(
+  df, 
+  a = ~cmrLevel, 
+  b = ~omics1, 
+  c = ~omics2, 
+  color = ~Category, 
+  type = "scatterternary",
+  text = ~geneID
+) %>% 
+  layout(
+  ternary = list(
+    aaxis = axis("CMR"), 
+    baxis = axis("Omics1"), 
+    caxis = axis("Omics2")
+  ))
+```
+
+### Barplot for  others
+```{r echo = FALSE, waring = FALSE, message = FALSE}
+df <- cmrMat %>% filter(group == "Others") %>%
+  group_by(Category) %>% summarise(a = n())
+
+df$Category <- factor(df$Category, levels = df$Category[order(df$a, decreasing = T)])
+fig <- plot_ly(df, x = ~Category, y = ~a, type = 'bar') %>% 
+  layout(xaxis = list(title = ""),
+         yaxis = list(title = ""), showlegend = FALSE)
+fig
+```
+
+
+Row 
+-------------------------------------------------------------------------------------------------------------------------------
+
+### Ka/Ks ratio
+```{r echo = FALSE, warning = FALSE, subgenome = FALSE}
+MHmakeRandomString <- function(n=1, lenght=12)
+{
+  randomString <- c(1:n)                  # initialize vector
+  for (i in 1:n)
+  {
+    randomString[i] <- paste(sample(c(0:9, letters, LETTERS),
+                                    lenght, replace=TRUE),
+                             collapse="")
+  }
+  return(randomString)
+}
+
+CDS <- read.fasta(file = CDSDir, as.string = T)
+
+AASeq <- lapply(CDS, function(x) toupper(c2s(translate(s2c(x)))))
+AAName <- MHmakeRandomString()
+write.fasta(sequences = AASeq, names = names(AASeq), file.out = paste0(mainDic, AAName, ".fasta"))
+cmd <- paste0("sed -i 's/*//g' ", paste0(mainDic, AAName, ".fasta"))
+system(cmd)
+homoName <- MHmakeRandomString()
+write.table(duplicated_pairs, file = paste0(mainDic, homoName, ".txt"), sep = "\t", quote = F,
+            row.names = F, col.names = F)
+outDir <- MHmakeRandomString()
+cmd <- paste0("perl /home/galaxy/tools/DeepEA_software/ParaAT2.0/ParaAT.pl -h ",
+              paste0(mainDic, homoName, ".txt"), " -a ", paste0(mainDic, AAName, ".fasta"),
+              " -n ", CDSDir, " -msa muscle  -f axt -o ",
+              paste0(mainDic, outDir),
+              " -p /home/galaxy/tools/DeepEA_software/ParaAT2.0/proc ")
+system(cmd)
+cmd <- paste0("cat ",paste0(mainDic, outDir), '/*axt > ', mainDic, outDir, ".axt")
+system(cmd)
+cmd <- paste0("/home/galaxy/tools/DeepEA_software/KaKs_Calculator -i ", paste0(mainDic, outDir, ".axt"), " -m YN -o ", paste0(mainDic, outDir, ".kaks"))
+system(cmd)
+kaks <- read.table(file = paste0(mainDic, outDir, ".kaks"), sep = "\t", header = T, quote = "", stringsAsFactors = F)
+type1Pairs <- paste0(type1Pairs$Subgenome1.homeolog, "-", type1Pairs$Subgenome2.homeolog)
+type2Pairs <- paste0(type2Pairs$Subgenome1.homeolog, "-", type2Pairs$Subgenome2.homeolog)
+type3Pairs <- paste0(type3Pairs$Subgenome1.homeolog, "-", type3Pairs$Subgenome2.homeolog)
+type4Pairs <- paste0(type4Pairs$Subgenome1.homeolog, "-", type4Pairs$Subgenome2.homeolog)
+
+kaks <- kaks %>% 
+  mutate(DM1 = Sequence %in% type1Pairs,
+         DM2 = Sequence %in% type2Pairs,
+         IM = Sequence %in% type3Pairs,
+         Unknown = Sequence %in% type4Pairs)
+kaks <- kaks %>% filter(!(DM1 == FALSE &
+                            DM2 == FALSE &
+                            IM == FALSE &
+                            Unknown == FALSE))
+kaks$type <- unlist(apply(kaks[,23:26], 1,function(data)
+  names(which(data == T))))
+kaks <- kaks[,c(1:23,27)]
+df <- kaks %>% select(Sequence,Ka,Ks,Ka.Ks,type)
+df$Ka.Ks <- log2(df$Ka.Ks)
+remove_outliers <- function(x, na.rm = TRUE, ...) {
+  qnt <- quantile(x, probs=c(.25, .75), na.rm = na.rm, ...)
+  H <- 1.5 * IQR(x, na.rm = na.rm)
+  y <- x
+  y[x < (qnt[1] - H)] <- NA
+  y[x > (qnt[2] + H)] <- NA
+  y
+}
+ylim <- range(remove_outliers(df$Ka.Ks, na.rm = TRUE), na.rm = T)
+
+p <- ggplot(df, aes(type, Ka.Ks, fill = type)) + 
+  geom_boxplot(outlier.shape = NA) + 
+  ggtitle("") + ylim(c(ylim[1]-0.5,ylim[2]+0.5)) + theme_classic() + xlab("")
+
+ggplotly(p)
+```
+
+### For homoeologs with IM (identical m6A) pattern
+```{r echo = FALSE, warning = FALSE, subgenome = FALSE}
+type3.kaks <- df %>% filter(type == "IM")
+type3.kaks$subgenome1 <- do.call(rbind, strsplit(type3.kaks$Sequence, "-"))[,1]
+type3.kaks$subgenome2 <- do.call(rbind, strsplit(type3.kaks$Sequence, "-"))[,2]
+
+type3.kaks$Category1 <- cmrMat$Category[match(type3.kaks$subgenome1, cmrMat$geneID)]
+type3.kaks$Category2 <- cmrMat$Category[match(type3.kaks$subgenome2, cmrMat$geneID)]
+Type <- ifelse(type3.kaks$Category1 == type3.kaks$Category2, "Mode 1", "Mode 2")
+type3.kaks$Type <- Type
+ylim <- range(remove_outliers(type3.kaks$Ka.Ks, na.rm = TRUE), na.rm = T)
+
+p <- ggplot(type3.kaks, aes(Type, Ka.Ks, fill = Type)) + 
+  geom_boxplot(outlier.shape = NA) + 
+  ggtitle("") + ylim(c(ylim[1]-0.5,ylim[2]+0.5)) + theme_classic() + xlab("")
+
+ggplotly(p)
+```
+
+Row 
+-------------------------------------------------------------------------------------------------------------------------------
+
+### Functional gene sets enrichment analysis
+```{r echo = FALSE, warning = FALSE, message = FALSE}
+statMat <- cmrMat %>% group_by(Category) %>% summarize(Count = n())
+fileNames <- strsplit(geneList, ",")[[1]]
+geneList <- lapply(fileNames, read.table, sep = "\t", header = T, quote = "", stringsAsFactors = F)
+bgGene <- read.table(file = bgGeneDir, sep = "\t", header = F, quote = "", stringsAsFactors = F)
+bgGene <- bgGene$V1
+geneNumber <- length(bgGene)
+resMat <- NULL
+for(i in 1:nrow(statMat)){
+  curType <- statMat$Category[i]
+  curGene <- cmrMat %>% filter(Category == curType) %>% pull(geneID)
+  curNumber <- statMat$Count[i]
+  interGene <- lapply(geneList, function(x) intersect(x[,1], curGene))
+  if(enrichMethod == "fisher"){
+    interLength <- unlist(lapply(interGene, length))
+    resVec <- NULL
+    for (j in 1:length(interLength)) {
+      p <- fisher.test(matrix(c(length(bgGene), nrow(geneList[[j]]), 
+                                       curNumber, interLength[j]), nrow = 2, ncol = 2, byrow = T))$p.value
+      resVec <- c(resVec, interLength[j], round(p,3))
+    }
+    resMat <- rbind(resMat, resVec)
+  }
+}
+colNames <- unlist(lapply(geneList, function(x) colnames(x)))
+colnames(resMat) <- c(colNames, paste0(colNames, ".pvalue"))[c(seq(1, length(colNames)*2, 2),
+                                                               seq(2, length(colNames)*2, 2))]
+statMat <- cbind(statMat, resMat)
+func <- function(df, colName){
+  res <- df %>% mutate(a = cell_spec(df[,colName], "html",
+                                           color = "white",
+                                           background = ifelse(df[,colName] < 0.05, "#D7261E", "#1f77b4"),
+                                           bold = TRUE))
+  res[,colName] <- res[,"a"]
+  res <- res %>% select(-a)
+  res
+}
+
+for(i in colNames){
+  statMat <- func(statMat, paste0(i, ".pvalue"))
+}
+
+statMat %>% knitr::kable(format = "html", escape = FALSE) %>%  
+kableExtra::kable_styling(bootstrap_options = "striped",full_width = FALSE, 
+								stripe_color = 'black', latex_options = "bordered")
+```

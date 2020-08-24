@@ -104,12 +104,12 @@ h6 {
     border-top: 3px solid #e7e7e7;
 }
 
-.banner {
+/* .banner {
     padding: 100px 0;
     color: #f8f8f8;
     background: url(../img/banner-bg.jpg) no-repeat center center;
     background-size: cover;
-}
+} 
 
 .banner h2 {
     margin: 0;
@@ -119,7 +119,7 @@ h6 {
 
 .banner ul {
     margin-bottom: 0;
-}
+} */
 
 .banner-social-buttons {
     float: right;

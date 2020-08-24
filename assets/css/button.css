@@ -46,8 +46,8 @@ body .panel .button-effect a:last-child {
   position: relative;
   text-decoration: none;
   color: #fff;
-  text-transform: capitalize;
-  /* background-color: - add your own background-color */
+/*  text-transform: capitalize;
+*/  /* background-color: - add your own background-color */
   font-family: 'Roboto', sans-serif;
   /* put your font-family */
   font-size: 18px;
