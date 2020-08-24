@@ -6,9 +6,10 @@ deepEA: a containerized web server for interactive analysis of epitranscriptome 
 
 
 ## Introduction
-- deepEA is a convenient, freely available, web-based platform that is capable to support deep analysis of epitranscriptome sequencing data with several general and specific functionalities. Currently, deepEA consists of six modules: **Data Preparation, Quality Control, Identification of RNA Modifications, Functional Annotation, Multi-omics Integrative Analysis and Prediction Analysis Based on Machine Learning**. deepEA project is hosted on https://github.com/cma2015/deepEA. The deepEA demo server can be accessed via https://deepea.nwafu.edu.cn.
-* The deepEA project is hosted on https://github.com/cma2015/deepEA.
-* The deepEA Docker image can be obtained from https://hub.docker.com/r/malab/deepea.
+- deepEA is a convenient, freely available, web-based platform that is capable to support deep analysis of epitranscriptome sequencing data with several general and specific functionalities. Currently, deepEA consists of six modules: **Data Preparation, Quality Control, Identification of RNA Modifications, Functional Annotation, Multi-omics Integrative Analysis and Prediction Analysis Based on Machine Learning**. 
+- The deepEA demo server can be accessed via https://deepea.nwafu.edu.cn.
+- The deepEA project is hosted on https://github.com/cma2015/deepEA.
+- The deepEA Docker image can be obtained from https://hub.docker.com/r/malab/deepea.
 
 ## How to use deepEA
 - Test data and tutorial of deepEA are presented at https://cma2015.github.io/deepEA
