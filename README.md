@@ -1,6 +1,7 @@
 ## [deepEA](https://cma2015.github.io/deepEA)
 
 <a href="http://deepea.nwafu.edu.cn" target="_blank"><img src="https://img.shields.io/badge/Web_server-ready-red.svg"></a><a href="https://hub.docker.com/r/malab/deepea" target="_blank"><img src="https://img.shields.io/badge/Docker_image-ready-red.svg"></a><a href="https://hub.docker.com/r/malab/deepea" target="_blank"><img src="https://img.shields.io/docker/pulls/malab/deepea"></a><a href="https://github.com/cma2015/deepEA" target="_blank"><img src="https://img.shields.io/badge/Source_code-support-blue.svg"></a><a href="https://deepea.nwafu.edu.cn/static/test_data.zip" target="_blank"><img src="https://img.shields.io/badge/Test_data-support-blue.svg"></a>
+
 deepEA: a containerized web server for interactive analysis of epitranscriptome sequencing data
 
 
