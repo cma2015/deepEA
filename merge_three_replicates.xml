@@ -1,0 +1,47 @@
+<tool id="merge_three_replicates" name="Merge three biological replicates"  version='17.09'>
+  <description></description>
+  <command><![CDATA[
+    /home/miniconda2/bin/bedtools sort -i ${peak1} > ${peak1}_sort.bed &&
+    /home/miniconda2/bin/bedtools sort -i ${peak2} > ${peak2}_sort.bed &&
+	/home/miniconda2/bin/bedtools sort -i ${peak2} > ${peak2}_sort.bed &&
+	/home/miniconda2/bin/bedtools intersect -a ${peak1}_sort.bed -b ${peak2}_sort.bed | cut -f1-3 | sort | uniq > ${peak1}_${peak2}.bed &&
+	/home/miniconda2/bin/bedtools intersect -a {peak1}_${peak2}.bed -b ${peak3}_sort.bed | cut -f1-3 | sort | uniq > ${outBed}
+  ]]></command>
+
+  <inputs>
+  	<param name="peak1" type="data" format="tsv,encodepeak,bed,txt"  multiple="false" label="Peak regions for biological replicate 1" help=""/>
+    <param name="peak2" type="data" format="tsv,encodepeak,bed,txt"  multiple="false" label="Peak regions for biological replicate 2" help=""/>
+	<param name="peak3" type="data" format="tsv,encodepeak,bed,txt"  multiple="false" label="Peak regions for biological replicate 3" help=""/>
+  </inputs>
+
+  <stdio>
+	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
+  </stdio>
+  <outputs> 
+	<data name="outBed" format="txt" label= "intersect.bed">
+	</data>
+  </outputs>
+  <help>
+
+.. class:: infomark
+
+**What it does**
+
+This function is designed to obtain consistent RNA modifications among three biological replicates by using bedtools.
+
+.. class:: infomark
+
+**Inputs**
+
+- **Peak regions for biological replicate 1**
+- **Peak regions for biological replicate 2**
+- **Peak regions for biological replicate 3**
+
+**Outputs**
+
+- **Consistent peak regions among three biological replicates**
+
+</help>
+</tool>
+
+

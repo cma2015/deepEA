@@ -11,6 +11,9 @@
 		#if $algorithm_options.Alignment_options.ignore_quals == "yes":
 			--ignore-quals
 		#end if
+		#if $algorithm_options.Spliced_alignment.dta == "yes":
+			--dta
+		#end if
 		$algorithm_options.Alignment_options.nofw
 		$algorithm_options.Alignment_options.norc
 		--pen-cansplice $algorithm_options.Spliced_alignment.pen_cansplice
@@ -32,10 +35,26 @@
 	-x '$genomeSequence'
 	#if $fqType.single_or_paired == "single":
 		-U ${readSE} -S $alignmentOutput 2>$alignmentStat;
+		#if $unique_map == "yes":
+			/home/miniconda2/bin/samtools view -bhS $alignmentOutput | /home/miniconda2/bin/samtools sort -o $alignmentOutput"_sorted.bam" -T sorted - &&
+			/home/miniconda2/bin/samtools view $alignmentOutput"_sorted.bam" | grep -w 'NH:i:1' > $alignmentOutput"_unique.sam" &&
+			/home/miniconda2/bin/samtools view -Sb -T $genomeSequence  $alignmentOutput"_unique.sam" | /home/miniconda2/bin/samtools sort -o $alignmentOutput -T sorted -
+		#else:
+             /home/miniconda2/bin/samtools view -bhS $alignmentOutput | /home/miniconda2/bin/samtools sort -o $alignmentOutput"_sorted.bam" -T sorted - &&
+             mv $alignmentOutput"_sorted.bam" $alignmentOutput
+		#end if
 	#elif $fqType.single_or_paired == "paired":
 		-1 ${readR1}
 		-2 ${readR2}
 		-S $alignmentOutput_PE 2>$alignmentStat_PE;
+		#if $unique_map == "yes":
+			/home/miniconda2/bin/samtools view -bhS $alignmentOutput_PE | /home/miniconda2/bin/samtools sort -o $alignmentOutput_PE"_sorted.bam" -T sorted - &&
+			/home/miniconda2/bin/samtools view $alignmentOutput_PE"_sorted.bam" | grep -w 'NH:i:1' > $alignmentOutput_PE"_unique.sam" &&
+			/home/miniconda2/bin/samtools view -Sb -T $genomeSequence  $alignmentOutput_PE"_unique.sam" | /home/miniconda2/bin/samtools sort -o $alignmentOutput_PE -T sorted -
+		#else:
+            /home/miniconda2/bin/samtools view -bhS $alignmentOutput_PE | /home/miniconda2/bin/samtools sort -o $alignmentOutput_PE"_sorted.bam" -T sorted - &&
+            mv $alignmentOutput_PE"_sorted.bam" $alignmentOutput_PE
+		#end if
 	#end if
 
 
@@ -65,7 +84,7 @@
         <when value="advanced">
 			<section name="Alignment_options" title="Alignment options" expanded="False">
                 <param name="func" type="text" value="L,0,0.15" label="Func for max # non-A/C/G/Ts permitted in aln" argument="--n-ceil" help=""/>
-				<param name="ignore_quals" type="select" label="Treat all quality values as 30 on Phred?">
+				<param name="ignore_quals" type="select" label="Treat all quality values as 30 on Phred?" display="radio">
 					<option value="no" selected="true">No</option>
 					<option value="yes">Yes</option>
         		</param>
@@ -77,7 +96,10 @@
 				<param name="pen_noncansplice" type="integer" value="12" label="Penalty for a non-canonical splice site" argument="--pen-noncansplice" help=""/>
 				<param name="pen_canintronlen" type="text" value="G,-8,1" label="Penalty for long introns (G,-8,1) with canonical splice sites" argument="--pen-canintronlen" help=""/>
 				<param name="pen_noncanintronlen" type="text" value="G,-8,1" label="Penalty for long introns (G,-8,1) with noncanonical splice sites" argument="--pen-noncanintronlen" help=""/>
-
+				<param name="dta" type="select" label="Treat all quality values as 30 on Phred?" display="radio">
+					<option value="no" selected="true">No</option>
+					<option value="yes">Yes</option>
+        		</param>
 				<param name="min_intronlen" type="integer" value="20" label="Minimum intron length" argument="--min-intronlen" help=""/>
 				<param name="max_intronlen" type="integer" value="500000" label="Maximum intron length" argument="--max-intronlen" help=""/>
 			</section>
@@ -95,21 +117,25 @@
 			</section>
         </when>
     </conditional>
+	<param name="unique_map" type="select" label="Extract uniquely mapped reads?" display="radio">
+        <option value="yes" selected="true">Yes</option>
+        <option value="no">No</option>
+    </param>
   </inputs>
   <stdio>
-
+  	<exit_code range="1:"  level="fatal" description="Error Running combine collection to a file" />
   </stdio>
   <outputs>
 	  <data name="alignmentStat" format="txt" label="hisat2_alignment_summary.txt (on ${fqType.readSE.name})">
 		<filter>fqType['single_or_paired'] == "single"</filter>
         </data>
-	<data name="alignmentOutput" format="sam" label="hisat2_alignment.sam (on ${fqType.readSE.name})">
+	<data name="alignmentOutput" format="bam" label="hisat2_alignment.bam (on ${fqType.readSE.name})">
 		<filter>fqType['single_or_paired'] == "single"</filter>
 	</data>
 	<data name="alignmentStat_PE" format="txt" label="hisat2_alignment_summary.txt (on ${fqType.readR1.name} and ${fqType.readR2.name})">
                 <filter>fqType['single_or_paired'] == "paired"</filter>
         </data>
-        <data name="alignmentOutput_PE" format="sam" label="hisat2_alignment.sam (on on ${fqType.readR1.name} and ${fqType.readR2.name})">
+        <data name="alignmentOutput_PE" format="bam" label="hisat2_alignment.bam (on on ${fqType.readR1.name} and ${fqType.readR2.name})">
                 <filter>fqType['single_or_paired'] == "paired"</filter>
         </data>
   </outputs>

@@ -3,10 +3,10 @@
   <command><![CDATA[
     ln -sf ${reference_genome} ${reference_genome}.fasta &&
     /home/miniconda2/bin/samtools faidx ${reference_genome}.fasta &&
-    /home/miniconda2/bin/bedtools getfasta -fi ${reference_genome}.fasta -bed ${peak} -fo ${peak}.fasta &&
+    /home/miniconda2/bin/bedtools getfasta -s -fi ${reference_genome}.fasta -bed ${peak} -fo ${peak}.fasta &&
     #if $analysis_method.method == "dreme":
     /home/miniconda2/bin/dreme
-        -o ${__tool_directory__}/dreme_out
+        -o ${__tool_directory__}/$$
         -p '${peak}.fasta'
         $analysis_method.norc
         $analysis_method.alphabet_type
@@ -27,8 +27,8 @@
             -mink $analysis_method.options_type.motif_min_k
             -maxk $analysis_method.options_type.motif_max_k
         #end if
-        && mv ${__tool_directory__}/dreme_out/dreme.html $motif;
-        rm -r ${__tool_directory__}/dreme_out;
+        && mv ${__tool_directory__}/$$/dreme.html $motif
+        && rm -r ${__tool_directory__}/$$;
 
     #elif $analysis_method.method == "meme_chip":
         /home/miniconda2/bin/meme-chip '${peak}.fasta'
@@ -37,7 +37,7 @@
             -neg '$analysis_method.control'
         #end if
         $analysis_method.sequence_alphabet
-        -o ${__tool_directory__}/meme_chip/
+        -o ${__tool_directory__}/$$/
         #if str($analysis_method.options_type_cond.options_type)=='advanced':
             $analysis_method.options_type_cond.search_given_strand
             -order $analysis_method.options_type_cond.background_model_order
@@ -81,10 +81,11 @@
             -spamo-skip
             -fimo-skip
         #end if
-	&& mv ${__tool_directory__}/meme_chip/meme_out/meme.html $motif;
-        rm -r ${__tool_directory__}/meme_chip;
+	&& mv ${__tool_directory__}/$$/meme_out/meme.html $motif
+    && rm -r ${__tool_directory__}/$$;
     #else:
-        /home/miniconda2/bin/findMotifs.pl '${peak}.fasta' fasta ${__tool_directory__}/homer_output -fasta $analysis_method.control -norevopp
+        /home/miniconda2/bin/findMotifs.pl '${peak}.fasta' fasta ${__tool_directory__}/$$ 
+        -norevopp
         #if str( $analysis_method.options_type_homer.options_type_homer_selector ) == 'advanced':
             -len $analysis_method.options_type_homer.motif_len
             -S $analysis_method.options_type_homer.motif_number
@@ -94,8 +95,8 @@
             -min $analysis_method.options_type_homer.min
             -max $analysis_method.options_type_homer.max
         #end if
-        && mv ${__tool_directory__}/homer_output/homerResults.html $motif;
-        rm -r ${__tool_directory__}/homer_output;
+        && mv ${__tool_directory__}/$$/homerResults.html $motif
+        && rm -r ${__tool_directory__}/$$;
     #end if
   ]]></command>
   <inputs>
@@ -104,9 +105,9 @@
                help=""/>
         <conditional name="analysis_method">
             <param name="method" type="select" label="Select a method" display="radio">
+                <option value="homer">HOMER: Hypergeometric Optimization of Motif EnRichment</option>
                 <option value="meme_chip">MEME-ChIP: motif discovery, enrichment analysis and clustering on large nucleotide datasets</option>
                 <option value="dreme">DREME: Discriminative Regular Expression Motif Elicitation</option>
-                <option value="homer">HOMER: Hypergeometric Optimization of Motif EnRichment</option>
             </param>
             <when value="dreme">
                 <param name="alphabet_type" type="select" label="Type of sequence alphabet">
@@ -228,7 +229,6 @@
             </when>
 
             <when value="homer">
-                <param name="control" type="data" format="fasta" optional="true" label="Control sequences" help="If no selection, positive sequences in the input are shuffled to create the negative set"/>
                 <conditional name="options_type_homer">
                     <param name="options_type_homer_selector" type="select" label="Options Configuration">
                         <option value="basic" selected="true">Basic</option>
@@ -278,7 +278,7 @@
 
 **What it does**
 
-This function integrates MEME-ChIP and DREME to perform *de-novo* motif discovery.
+This function integratesHOMER, MEME-ChIP and DREME to perform *de-novo* motif discovery.
 
 -------------
 

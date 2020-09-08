@@ -58,13 +58,9 @@ This function wrapped **fastq-dump** function implemented in SRA Toolkit. See ht
 
 #### Input
 - **Input sra file:** The sequenceing reads in SRA format. Users can upload their local SRA file or download SRA by function **Obtain Epitranscriptome Sequencing Reads** in **Data Preparation** module
-
 #### Output
 - Sequencing dataset in FASTQ format
-
 #### How to use this function
-
 - The following screenshot shows us how to use this function to convert sequencing reads in SRA format to FASTQ format
-
   ![1-3](../assets/img/1-3.png)
 

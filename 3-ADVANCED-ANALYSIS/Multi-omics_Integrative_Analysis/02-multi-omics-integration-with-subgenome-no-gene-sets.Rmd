@@ -68,7 +68,7 @@ p <- plot_ly(
 ) %>% 
 layout(
   ternary = list(
-    aaxis = axis("CMR"), 
+    aaxis = axis("m6A"), 
     baxis = axis("Omics1"), 
     caxis = axis("Omics2")
   )
@@ -106,7 +106,7 @@ datatable(
 ```
 
 ### Category differences between duplicated gene pairs
-```{r echo = fALSE, warning = FALSE, message = FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE}
 df <- read.table(file = dup_dir,
                  sep = '\t', header = F, quote = '', stringsAsFactors = F)
 df$category_m1 <- cmrMat$Category[match(df$V1, cmrMat$geneID)]
@@ -134,7 +134,7 @@ p
 ```
 
 ### Category information in duplicated gene pairs
-```{r echo = fALSE, warning = FALSE, message = FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE}
 table_options <- function() {
   list(dom = 'Bfrtip',
     pageLength = 8,

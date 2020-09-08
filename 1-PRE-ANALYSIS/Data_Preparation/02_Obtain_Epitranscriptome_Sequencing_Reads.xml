@@ -2,6 +2,7 @@
   <description></description>
   <command>
 	#if $seltype.type == "prefetch":
+		/home/miniconda2/bin/prefetch.2.9.1 ${seltype.SRA_ID} -O ${__tool_directory__}/;
 		mv ${__tool_directory__}/${seltype.SRA_ID}.sra $SRA_data;
 	#elif  $seltype.type == "wget":
 		wget $seltype.ftp -O $ftp;

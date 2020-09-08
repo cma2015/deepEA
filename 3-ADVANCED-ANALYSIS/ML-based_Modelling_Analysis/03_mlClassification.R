@@ -6,6 +6,7 @@ library(ggplot2)
 library(e1071)
 library(rpart)
 library(xgboost)
+library(snowfall)
 parser <- ArgumentParser()
 parser$add_argument("-type", default = "train", dest = "type", help = "Analysis type")
 parser$add_argument("-method", default = "randomForest", dest = "method", help = "Machine learning algorithms for building CMR predictor")
@@ -26,7 +27,7 @@ type <- args$type
 method <- args$method
 posDir <- args$posMat
 negDir <- args$negMat
-perc <- args$perc
+perc <- as.numeric(args$perc)
 k <- as.numeric(args$k)
 cpus <- args$cpus
 
@@ -36,8 +37,11 @@ source(paste0(mainDic, '03_cross_validation.R'))
 if(type == "train"){
     posMat <- read.table(file = posDir, sep = '\t', header = T, quote = "", stringsAsFactors = F)
     negMat <- read.table(file = negDir, sep = '\t', header = T, quote = "", stringsAsFactors = F)
-    posTrain <- sample(rownames(posMat), nrow(posMat)*0.8)
-    negTrain <- sample(rownames(negMat), nrow(negMat)*0.8)
+    rownames(posMat) <- paste0("pos_", 1:nrow(posMat))
+    rownames(negMat) <- paste0("neg_", 1:nrow(negMat))
+
+    posTrain <- sample(rownames(posMat), nrow(posMat)*(1-perc))
+    negTrain <- sample(rownames(negMat), nrow(negMat)*(1-perc))
     posTest <- setdiff(rownames(posMat), posTrain)
     negTest <- setdiff(rownames(negMat), negTrain)
 

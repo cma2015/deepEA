@@ -36,7 +36,7 @@ for (i in 1:length(interRes)) {
   curPeak <- as.data.frame(peakGRange[queryHits(interRes)[i]])
   curGene <- geneGTF[subjectHits(interRes)[i]]$gene_id
   curStrand <- as.character(strand(geneGTF[subjectHits(interRes)[i]]))
-  res <- c(curPeak$seqnames, curPeak$start, curPeak$end, curGene, ".", curStrand)
+  res <- c(as.character(curPeak$seqnames), curPeak$start, curPeak$end, curGene, ".", curStrand)
   resDF <- rbind(resDF, res)
 }
 

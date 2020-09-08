@@ -55,9 +55,11 @@
  
 
 <label id="Useful_tools" text="Useful Tools"/>
-  <section id="Convert_sequence" name="Convert Sequence">
-    <tool file="tools/sequence.xml" />
+  <section id="merge_rep" name="Merge biological replicates">
+    <tool file="merge_two_replicates.xml" />
+    <tool file="merge_three_replicates.xml" />
   </section>
+
   <section id="convert" name="Convert Formats">
     <tool file="filters/bed2gff.xml" />
     <tool file="filters/gff2bed.xml" />

@@ -50,6 +50,8 @@ exonGTF <- subset(GTF, GTF$type == "exon" & GTF$gene_biotype == "protein_coding"
 
 # read CMR
 rawPeak <- read.table(file = args$peak, sep = "\t", header = F, quote = "", stringsAsFactors = F)
+rawPeak$V1 <- as.numeric(rawPeak$V1)
+rawPeak <- na.omit(rawPeak)
 colnames(rawPeak)[1:3] <- c("chr", "start", "end" )
 peaks <- GRanges(rawPeak[,1:3])
 strand(peaks) <- rawPeak$V6
@@ -79,12 +81,15 @@ ratio <- as.numeric(args$ratio)
   curNegSites <- extract_motif_list(seqRegion = curGTF,
                                     genome = genome,
                                     motif = motif)
-  interRes <- findOverlaps(query = curNegSites, subject = curPosSites)
-  idx <- unique(queryHits(interRes))
-  curNegSites <- curNegSites[setdiff(1:length(curNegSites), idx)]
-  
-  if(length(curNegSites) >= curPosSitesLen){
+  if(is.null(curNegSites)){
+    curNegSites <- NA
+  }else{
+    interRes <- findOverlaps(query = curNegSites, subject = curPosSites)
+    idx <- unique(queryHits(interRes))
+    curNegSites <- curNegSites[setdiff(1:length(curNegSites), idx)]
+    if(length(curNegSites) >= curPosSitesLen){
     curNegSites <- curNegSites[sample(1:length(curNegSites), curPosSitesLen)]
+    }
   }
   curList <- list(posSites = curPosSites, negSites = curNegSites)
   # cat(i, ":", curPosSitesLen, ": ", length(curNegSites), "\n")
@@ -131,8 +136,18 @@ for(i in 1:length(res)){
   resNeg <- c(resNeg, res[[i]]$negSites)
 }
 
+
 resPos <- do.call(what = c, args = resPos)
 resPos <- unique(resPos)
+
+idx <- NULL
+for(i in 1:length(resNeg)){
+  if(all(is.na(resNeg[[i]]))){
+    idx <- c(idx, i)
+  }
+}
+remainIdx <- setdiff(1:length(resNeg), idx)
+resNeg <- resNeg[remainIdx]
 
 resNeg <- do.call(what = c, args = resNeg)
 resNeg <- unique(resNeg)

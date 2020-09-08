@@ -3,11 +3,11 @@
     <command><![CDATA[
     #if $analysis_type.train_or_predict == "train":
         #if $analysis_type.ifCV.cv == "true":
-	Rscript ${__tool_directory__}/03_mlClassification.R -type "train" -method $analysis_type.algorithm -posMat $analysis_type.posMat -negMat $analysis_type.negMat -k $analysis_type.ifCV.kfold -perc $analysis_type.perc -outModel $model -outCV $CV_evaluation -outTest $test_evaluation;
-	mv ${test_evaluation}".pdf" ${test_evaluation};
+	       Rscript ${__tool_directory__}/03_mlClassification.R -type "train" -method $analysis_type.algorithm -posMat $analysis_type.posMat -negMat $analysis_type.negMat -k $analysis_type.ifCV.kfold -perc $analysis_type.perc -outModel $model -outCV $CV_evaluation -outTest $test_evaluation -cpus $analysis_type.cpus;
+	       mv ${test_evaluation}".pdf" ${test_evaluation};
         #else:
-	Rscript ${__tool_directory__}/03_mlClassification.R -type "train" -method $analysis_type.algorithm -posMat $analysis_type.posMat -negMat $analysis_type.negMat -k 0 -perc $analysis_type.perc -outModel $model -outTest $test_evaluation;
-	mv ${test_evaluation}".pdf" ${test_evaluation};
+	       Rscript ${__tool_directory__}/03_mlClassification.R -type "train" -method $analysis_type.algorithm -posMat $analysis_type.posMat -negMat $analysis_type.negMat -k 0 -perc $analysis_type.perc -outModel $model -outTest $test_evaluation;
+	       mv ${test_evaluation}".pdf" ${test_evaluation};
         #end if
     #elif $analysis_type.train_or_predict == "predict_built_in":
         Rscript ${__tool_directory__}/03_mlClassification.R -type "bulit_in" -candidate $analysis_type.featureMat -outScore $outScore;
@@ -76,7 +76,7 @@
             <filter>analysis_type['train_or_predict'] == "train"</filter>
         </data>
         <data format="pdf" name="CV_evaluation" label="${analysis_type.algorithm}_CV_evaluation.pdf">
-            <filter>analysis_type['train_or_predict'] == "train"</filter>
+            <filter>analysis_type['train_or_predict'] == "train" and analysis_type['ifCV']['cv'] == "true"</filter>
         </data>
         <data format="pdf" name="test_evaluation" label="${analysis_type.algorithm}_hold-out_test_evaluation.pdf">
             <filter>analysis_type['train_or_predict'] == "train"</filter>

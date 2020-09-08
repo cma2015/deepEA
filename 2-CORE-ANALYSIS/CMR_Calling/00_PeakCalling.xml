@@ -10,12 +10,24 @@
 	#elif $Method.peakcalling_Method == "BayesPeak":
 		Rscript ${__tool_directory__}/00_peak_calling.R -ip $IP_BAM -input $input_BAM -gtf $Method.GTF -bin $Method.binSize -iterations $Method.iteration -out $m6A_out_peaks -m BayesPeak;
 	#else
-		#if $Method.nomodel_type.nomodel_type_selector == "create_model":
-			bash ${__tool_directory__}/00_macs2_callpeak.sh $IP_BAM $input_BAM $Method.format $Method.genomeSize "create_model" $Method.cutoff_options.cutoff_options_selector $Method.cutoff_options.measure $Method.nomodel_type.mfold_lower $Method.nomodel_type.mfold_upper $Method.nomodel_type.band_width;
-		#else
-			bash ${__tool_directory__}/00_macs2_callpeak.sh $IP_BAM $input_BAM $Method.format $Method.genomeSize "nomodel" $Method.cutoff_options.cutoff_options_selector $Method.cutoff_options.measure NA NA NA $Method.nomodel_type.extsize $Method.nomodel_type.shift;
+		/home/miniconda2/bin/macs2 callpeak
+		-t $IP_BAM
+		-c $input_BAM
+		-g $Method.genomeSize
+		#if $Method.nomodel_type.nomodel_type_selector == "nomodel":
+			--nomodel
+			--extsize $Method.nomodel_type.extsize
+			--shift $Method.nomodel_type.shift
+		#else:
+			-m $Method.nomodel_type.mfold_lower $Method.nomodel_type.mfold_upper
+			--bw $Method.nomodel_type.band_width 
 		#end if
-		mv  ${__tool_directory__}/out/macs2_peaks.narrowPeak $m6A_out_peaks;
+		#if $Method.cutoff_options.cutoff_options_selector == "pvalue":
+			-p $Method.cutoff_options.measure
+		#else:
+			-q $Method.cutoff_options.measure
+		#end if
+		-n ${__tool_directory__}/$$ && mv ${__tool_directory__}/$$"_peaks.narrowPeak" $m6A_out_peaks
     #end if
 
   ]]></command>
@@ -25,11 +37,11 @@
 
 	<conditional name="Method">
 		<param name="peakcalling_Method" type="select" format="bam,BAM" label="Peak calling methods"  display="radio">
-			<option value="SlidingWindow" selected="true">SlidingWindow</option>
+			<option value="MACS2" selected="true">MACS2</option>
+			<option value="SlidingWindow">SlidingWindow</option>
 			<option value="exomePeak">exomePeak</option>
 			<option value="MetPeak">MetPeak</option>
 			<option value="BayesPeak">BayesPeak</option>
-			<option value="MACS2">MACS2</option>
 		</param>
 
 		<when value="SlidingWindow">
@@ -58,11 +70,6 @@
 		</when>
 
 		<when value="MACS2">
-			<param name="format" type="select" label="Format of Input Files" help="For Paired-end BAM (BAMPE) the 'Build model step' will be ignored and the real fragments will be used for each template defined by leftmost and rightmost mapping positions. Default: Single-end BAM">
-				<option value="BAM" selected="True">Single-end BAM</option>
-				<option value="BAMPE">Paired-end BAM</option>
-        	</param>
-
 			<param name="genomeSize" type="text"  value="2.7e9"  label="Effective genome size"/>
 
 			<conditional name="nomodel_type">
