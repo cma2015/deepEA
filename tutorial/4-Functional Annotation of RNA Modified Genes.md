@@ -1,3 +1,5 @@
+<div align='center' ><font size='70'>Functional Annotation</font></div>
+
 ## 0. Introduction for Functional Annotation
 
 This module provided four functions to perform functional annotation of RNA modifications

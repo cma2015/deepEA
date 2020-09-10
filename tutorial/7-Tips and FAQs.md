@@ -1,4 +1,7 @@
+<div align='center' ><font size='70'>Tips and FAQs</font></div>
+
 ## Tips
+
 The folloing screenshot shows us:
 
 - **How to view the data in deepEA**

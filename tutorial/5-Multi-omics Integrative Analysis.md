@@ -1,3 +1,5 @@
+<div align='center' ><font size='70'>Multi-omics Integrative Analysis</font></div>
+
 ## 0. Introduction for Multi-omics Integrative Analysis
 
 This module consists of two functions: **Integrative Analysis of Two Omics Data Sets** and **Integrative Analysis of Three Omics Data Sets**.

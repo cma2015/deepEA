@@ -1,3 +1,6 @@
+<div align='center' ><font size='70'>deepEA user manual</font></div>
+
+
 ## deepEA installation
 
 - **Step 1**: Docker installation

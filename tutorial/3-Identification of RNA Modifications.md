@@ -1,3 +1,5 @@
+<div align='center' ><font size='70'>Identification of RNA Modifications</font></div>
+
 ## 0. Introduction for Identification of RNA Modifications
 
 This module provides step-by-step functions required for epitranscriptome reads mapping and identification of RNA modifications.

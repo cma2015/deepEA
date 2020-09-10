@@ -1,3 +1,5 @@
+<div align='center' ><font size='70'>Quality Control</font></div>
+
 ## 0. Introduction for Quality Control
 
 **Quality Control** module consists of a suite of tools focused on different levels of quality assessment, including reads quality, alignment quality and RNA modifications quality, Thus, three functions are implemented, including **Assess Reads Quality**, **Assess Alignment Quality** and **Assess RNA modifications Quality**. The details of as follows:

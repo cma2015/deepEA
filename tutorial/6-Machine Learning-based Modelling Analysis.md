@@ -1,3 +1,5 @@
+<div align='center' ><font size='70'>Prediction Analysis Based on Machine Learning</font></div>
+
 ## 0. Introduction for Prediction Analysis Based on Machine Learning
 
 This module provides a pipeline for transcriptome-wide RNA modification prediction using machine learning technology. This pipeline is consisted of **Sample generation, Feature Encoding and Prediction System Construction**.
