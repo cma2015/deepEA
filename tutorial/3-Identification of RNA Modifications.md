@@ -1,6 +1,11 @@
-<div align='center' ><font size='70'>Identification of RNA Modifications</font></div>
+<div align='center' >
+<p><font size='70'><strong>deepEA User Manual</strong></font></p>
+<font size='100'>(version 1.0)</font>
+</div>
 
-## 0. Introduction for Identification of RNA Modifications
+deepEA is a convenient, freely available, web-based platform that is capable to support deep analysis of epitranscriptome sequencing data with several general and specific functionalities. Currently, deepEA consists of six modules: **Data Preparation, Quality Control, Identification of RNA Modifications, Functional Annotation, Multi-omics Integrative Analysis and Prediction Analysis Based on Machine Learning**. deepEA project is hosted on https://github.com/cma2015/deepEA. The deepEA demo server can be accessed via https://deepea.nwafu.edu.cn or http://39.101.176.205:4006. The following part shows installation of deepEA docker image and detailed documentation for each function in deepEA.
+
+## Identification of RNA Modifications
 
 This module provides step-by-step functions required for epitranscriptome reads mapping and identification of RNA modifications.
 
@@ -64,7 +69,7 @@ Several commonly used aligners are wrapped to align epitranscriptome reads to ge
 | **Calling m<sup>5</sup>C from the RNA-BSseq data** | Perform bisulfite sequencing (BS-Seq) read mapping, comprehensive methylation calling using meRanTK | Sequencing reads in FASTQ format and reference genome sequences in FASTA format | m<sup>5</sup>C sites in BED format   | ~10 mins using 2 threads | <a href="https://academic.oup.com/bioinformatics/article/32/5/782/1744216" target="_blank">Rieder <I>et al</I>., 2016, Bioinformatics</a> |
 | **Calling Ψ from CeU-Seq data**                    | Identify pseudouridylation from CeU-Seq                      | Read alignments in SAM/BAM format and cDNA sequences in FASTA format | Pseudoridylation sites in BED format | ~1 mins                  | <a href="https://www.nature.com/articles/nchembio.1836" target="_blank">Li <I>et al</I>., 2015, Nature Chemical Biology</a> |
 
-## 1. Align reads to genome
+## Align reads to genome
 
 Currently, deepEA wrapped five aligners to map epitranscriptome reads to genome, here, we take <a href="https://ccb.jhu.edu/software/tophat/index.shtml" target="_blank">Tophat2</a> as an example to show how to use deepEA to run reads mapping, the other four aligners are similar.
 
@@ -87,7 +92,7 @@ Currently, deepEA wrapped five aligners to map epitranscriptome reads to genome,
   ![3-1](../assets/img/3-1.png)
 
 
-## 2. Peak calling from the MeRIP-Seq data
+## Peak calling from the MeRIP-Seq data
 
 **Peak calling** is used to identify enriched genomic regions in MeRIP-seq or ChIP-seq experiments. The function is implemented using the **peakCalling** function in PEA package (zhai *et al*., 2018)
 
@@ -134,7 +139,7 @@ Currently, deepEA wrapped five aligners to map epitranscriptome reads to genome,
 - **Step 1**: upload the data in directory `test_data/Identification_of_RNA_Modifications/Peak Calling from the MeRIP-Seq data/` to history panel, if you are not clear about how to upload local data to deepEA server, please see <a href="https://deepea.nwafu.edu.cn/static/tutorial/2-Quality%20Control.html" target="_blank">here</a> for details
 - **Step 2**: see the following screenshot to run this function![3-2](../assets/img/3-2.png)
 
-## 3. Calling m<sup>5</sup>C from the RNA-BSseq data
+## Calling m<sup>5</sup>C from the RNA-BSseq data
 
 This function integrated meRanTK (Rieder *et al*., 2016, *Bioinformatics*) to perform RNA bisulfite sequencing (BS-Seq) read mapping, comprehensive methylation calling.
 
@@ -152,7 +157,7 @@ This function integrated meRanTK (Rieder *et al*., 2016, *Bioinformatics*) to pe
 - **Step 2**: see the following screenshot to run this function
   ![3-3](../assets/img/3-3.png)
 
-## 4. Calling Ψ from CeU-Seq data
+## Calling Ψ from CeU-Seq data
 
 This function is used to identify pseudouridylation from CeU-Seq (Li *et al*., 2015). To be specific, for any given position on a reference transcript, the stop rate of position i was calculated using the equation N_i_stop/(N_i_stop + N_i_readthrough), where N_i_stop (stop reads) is the number of reads with the mapping position starting at base i+1 (one nucleotide 3′ to position i), and N_i_readthrough (readthrough reads) is the number of reads reading through position i; Then a position i is identified to be Ψ only when all of the following criteria were met:
 

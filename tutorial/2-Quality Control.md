@@ -1,6 +1,11 @@
-<div align='center' ><font size='70'>Quality Control</font></div>
+<div align='center' >
+<p><font size='70'><strong>deepEA User Manual</strong></font></p>
+<font size='100'>(version 1.0)</font>
+</div>
 
-## 0. Introduction for Quality Control
+deepEA is a convenient, freely available, web-based platform that is capable to support deep analysis of epitranscriptome sequencing data with several general and specific functionalities. Currently, deepEA consists of six modules: **Data Preparation, Quality Control, Identification of RNA Modifications, Functional Annotation, Multi-omics Integrative Analysis and Prediction Analysis Based on Machine Learning**. deepEA project is hosted on https://github.com/cma2015/deepEA. The deepEA demo server can be accessed via https://deepea.nwafu.edu.cn or http://39.101.176.205:4006. The following part shows installation of deepEA docker image and detailed documentation for each function in deepEA.
+
+## Quality Control
 
 **Quality Control** module consists of a suite of tools focused on different levels of quality assessment, including reads quality, alignment quality and RNA modifications quality, Thus, three functions are implemented, including **Assess Reads Quality**, **Assess Alignment Quality** and **Assess RNA modifications Quality**. The details of as follows:
 
@@ -10,7 +15,7 @@
 | **Assess Alignment Quality**         | Assess the quality of read-genome alignments (here reads from MeRIP-Seq experiments) | Reads alignments in SAM/BAM format                           | Alignment quality report in HTML format                      | ~1 min               | <a href="https://github.com/skyhorsetomoon/Trumpet" target="_blank">trumpet</a>         | <a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2266-3" target="_blank">Zhang <I>et al</I>., 2018, BMC Bioinformatics</a> |
 | **Assess RNA Modifications Quality** | Quantify RNA modifications signal strength by counting reads and calculating RPKM | RNA modifications in BED format and read alignments in SAM/BAM format | RNA modifications quantification matrix in HTML format       | ~1 min               | <a href="https://bioconductor.org/packages/release/bioc/html/DiffBind.html" target="_blank">DiffBind</a> | <a href="https://www.frontiersin.org/articles/10.3389/fgene.2015.00169/full" target="_blank">Wu <I>et al</I>., 2016, Frontiers in Genetics</a> |
 
-## 1. Assess Reads Quality
+## Assess Reads Quality
 
 In this function, two existing NGS tools **FastQC** (Andrews *et al*., 2010) and **fastp** (Chen *et al*., 2018) are integrated to check sequencing reads quality and obtain high-quality reads, respectively.
 
@@ -29,7 +34,7 @@ In this function, two existing NGS tools **FastQC** (Andrews *et al*., 2010) and
 
 	![2-1](../assets/img/2-1.png)
 
-## 2. Assess Alignment Quality
+## Assess Alignment Quality
 
 This function is used to generate alignment quality assessment for MeRIP-Seq (methylated RNA immunoprecipitation sequencing) experiments by using an R package "trumpet" (Zhang *et al*., 2018, *BMC Bioinformatics*).
 
@@ -57,7 +62,7 @@ This function is used to generate alignment quality assessment for MeRIP-Seq (me
 
 	![2-2](../assets/img/2-2.png)
 
-## **3. Assess RNA Modifications Quality**
+## **Assess RNA Modifications Quality**
 
 This tool aims to quantify RNA modifications (e.g. m6A, m1A) signal strength by counting reads and calculating RPKM in binding site intervals using an R package Diffbind (Wu *et al*., 2016, *Frontiers in Genetics*)
 

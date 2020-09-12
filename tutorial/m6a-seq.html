@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+		<meta charset="UTF-8">
+
+		<title>Progress Nav</title>
+
+		<meta name="description" content="">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="viewport" content="width=700, user-scalable=no" />
+
+		<link href="https://fonts.googleapis.com/css?family=Frank+Ruhl+Libre|Roboto" rel="stylesheet">
+		<link href="css/normalize.css" rel="stylesheet" type="text/css" />
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+
+	</head>
+
+	<body>
+
+		<nav class="toc">
+			<ul>
+				<li><a href="#intro">1. Introduction</a></li>
+				<li>
+					<a href="#title1">2. Download reference genome and annotation</a>
+				</li>
+				<li>
+					<a href="#title2">3. Download raw m<sup>6</sup>A sequencing reads</a>
+				</li>
+				<li>
+					<a href="#title3">4. Convert raw reads from SRA to FASTQ format</a>
+				</li>
+				<li>
+					<a href="#title4">5. Trim raw m<sup>6</sup>A sequencing reads</a>
+				</li>
+				<li>
+					<a href="#title5">6. Align clean reads to reference genome</a>
+				</li>
+				<li>
+					<a href="#title6">7. Identify m<sup>6</sup>A enriched peaks</a>
+				</li>
+				<li>
+					<a href="#title7">8. Functional annotation of m<sup>6</sup>A</a>
+				</li>
+				<li>
+					<a href="#title8">9. Multi-omics integrative analysis</a>
+				</li>
+				<li>
+					<a href="#title9">10. Build an m<sup>6</sup>A predictor based on machine learning</a>
+				</li>
+				<li>
+					<a href="#title10">11. Predict candidate m<sup>6</sup>A</a>
+				</li>
+			</ul>
+			<svg class="toc-marker" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+				<path stroke="#444" stroke-width="3" fill="transparent" stroke-dasharray="0, 0, 0, 1000" stroke-linecap="round" stroke-linejoin="round" transform="translate(-0.5, -0.5)" />
+			</svg>
+		</nav>
+
+		<article class="contents">
+			
+                <div id='write'  class=''><div align="center">
+                <p><font size="60"><strong>m<sup>6</sup>A-Seq pipeline</strong></font></p>
+                </div>
+			
+				<div class='' id='write'>
+				<section id="intro"><h2><a class="md-header-anchor" name="0-introduction"></a><span>1. Introduction</span></h2>
+    <p><span>In this tutorial, we will show how to use deepEA (</span><a class='url'
+                                                                         href='https://deepea.nwafu.edu.cn' target='_blank'>https://deepea.nwafu.edu.cn</a><span> or </span><a
+            class='url' href='http://39.101.176.205:4006' target='_blank'>http://39.101.176.205:4006</a><span>) to perform comprehensive m</span><sup><span>6</span></sup><span>A sequencing data analysis (take maize m<sup>6</sup>A-seq as an example). The m</span><sup><span>6</span></sup><span>A -immunoprecipitated (IP) and input (non-IP) samples with two biological replicates were extracted from the 14-day-old seedlings of maize (</span><em><span>Zea mays</span></em><span> L.) inbred line B73, and then sequenced with high-throughput sequencing technology. The SRA accessions of four datasets are listed in the following table. The More information regarding these maize m</span><sup><span>6</span></sup><span>A sequencing datasets is available in the reference (</span><a
+            href="http://www.plantphysiol.org/content/182/1/332" target="_blank"><span>Luo </span><I><span>et al</span></I><span>., 2020</span></a><span>).</span>
+    </p>
+    <figure>
+        <table>
+            <thead>
+            <tr>
+                <th style='text-align:center;'><span>Samples</span></th>
+                <th style='text-align:center;'><strong><span>Experiments</span></strong></th>
+                <th style='text-align:center;'><span>Replicates</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td style='text-align:center;'><span>SRR8383013</span></td>
+                <td style='text-align:center;'><span>IP</span></td>
+                <td style='text-align:center;'><span>Replicate 1</span></td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><span>SRR8383014</span></td>
+                <td style='text-align:center;'><span>IP</span></td>
+                <td style='text-align:center;'><span>Replicate 2</span></td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><span>SRR8383017</span></td>
+                <td style='text-align:center;'><span>input</span></td>
+                <td style='text-align:center;'><span>Replicate 1</span></td>
+            </tr>
+            <tr>
+                <td style='text-align:center;'><span>SRR8383018</span></td>
+                <td style='text-align:center;'><span>input</span></td>
+                <td style='text-align:center;'><span>Replicate 2</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </figure>
+	</section>
+	<section id="title1">
+    <h2><a class="md-header-anchor" name="1-download-zea-mays-reference-genome-sequences-and-annotation"></a><span>2. Download </span><span> reference genome and annotation</span>
+    </h2>
+    <p>
+        <span>Before analyzing m</span><sup><span>6</span></sup><span>A sequencing data, we firstly use the function </span><strong><span>Obtain Genome Sequences and Annotation</span></strong><span> in </span><strong><span>Data Preparation</span></strong><span> module to download </span><em><span>Zea mays</span></em><span> B73 reference genome sequences and GTF annotation, the following two screenshots shows details about how to execute this step:</span>
+    </p><h4><a class="md-header-anchor"
+               name="step-1-download-zea-mays-reference-genome-sequences-in-fasta-format"></a><span>2.1: download </span><em><span>Zea mays</span></em><span> reference genome sequences in FASTA format</span>
+    </h4>
+    <p><img alt="1" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/1.jpeg"></p><h4><a
+            class="md-header-anchor" name="step-2-download-zea-mays-genome-annotation-file-in-gtf-format"></a><span>2.2: download </span><em><span>Zea mays</span></em><span> genome annotation file in GTF format</span>
+    </h4>
+    <p><img alt="2" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/2.jpeg"></p>
+    <p><span>After that, reference genome sequences (named as </span><strong><span>zea_mays_release-47_Genome.txt</span></strong><span>) and annotation (named as </span><strong><span>zea_mays_release-47_GTF.txt</span></strong><span>) will be listed in your History Panel.</span>
+    </p>
+	</section>
+	<section id="title2">
+    <h2><a class="md-header-anchor"
+           name="2-download-raw-msup6supa-sequencing-reads"></a><span>3. Download raw m</span><sup><span>6</span></sup><span>A sequencing reads</span>
+    </h2>
+    <p><span>After finishing downloading </span><em><span>Zea mays</span></em><span> B73 reference genome sequences and annotation, we start to download raw m</span><sup><span>6</span></sup><span>A sequencing reads from NCBI SRA&#39;s database, this process can be finished by the function </span><strong><span>Obtain Epitranscriptome Sequencing Reads</span></strong><span> in </span><strong><span>Data Preparation</span></strong><span> module. Please see the following screenshots for details:</span>
+    </p><h4><a class="md-header-anchor"
+               name="step-1-download-ip-sample-for-biological-replicate-1-srr8383013"></a><span>3.1: download IP sample for biological replicate 1 (SRR8383013)</span>
+    </h4>
+    <p><img alt="3" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/3.jpeg"></p>
+    <p><span>Then download <strong>SRR8383014</strong>, <strong>SRR8383017</strong> and <strong>SRR8383018</strong> as the above picture shows, after that, four raw m</span><sup><span>6</span></sup><span>A sequencing reads named as </span><strong><span>SRR8383013.sra, SRR8383014.sra, SRR8383017.sra, SRR8383018.sra</span></strong><span> will be listed in your History Panel, respectively.</span>
+    </p>
+    <!-- <h4><a
+            class="md-header-anchor" name="step-2-download-ip-sample-for-biological-replicate-2-srr8383014"></a>
+            <span>Step 2: download IP sample for biological replicate 2 (SRR8383014)</span>
+    </h4> -->
+<!--     <p><img alt="4" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/4.jpeg"></p><h4><a
+            class="md-header-anchor"
+            name="step-3-download-input-sample-for-biological-replicate-1-srr8383017"></a><span>Step 3: download input sample for biological replicate 1 (SRR8383017)</span>
+    </h4>
+    <p><img alt="5" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/5.jpeg"></p><h4><a
+            class="md-header-anchor"
+            name="step-4-download-input-sample-for-biological-replicate-2-srr8383018"></a><span>Step 4: download input sample for biological replicate 2 (SRR8383018)</span>
+    </h4>
+    <p><img alt="6" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/6.jpeg"></p>
+    <p><span>After finishing the above four steps, four raw m</span><sup><span>6</span></sup><span>A sequencing reads named as </span><strong><span>SRR8383013.sra, SRR8383013.sra, SRR8383013.sra, SRR8383013.sra</span></strong><span>, respectively will be listed in your History Panel</span>
+    </p> -->
+	</section>
+	<section id="title3">
+    <h2><a class="md-header-anchor" name="3-convert-raw-msup6supa-sequencing-reads-from-sra-to-fastq-format"></a><span>4. Convert raw reads from SRA to FASTQ format</span>
+    </h2>
+    <p><span>Here, let&#39;s convert raw m</span><sup><span>6</span></sup><span>A sequencing reads from SRA to FASTQ format by the function </span><strong><span>Sequencing Data Preprocessing</span></strong><span> in </span><strong><span>Data Preparation</span></strong><span> module, please see the following screenshots for details:</span>
+    </p><h4><a class="md-header-anchor"
+               name="step-1-process-srr8383013sra"></a><span>4.1: process SRR8383013.sra</span></h4>
+    <p><span>This step will cost ~12 minutes</span>
+        <img alt="7" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/7.jpeg"></p>
+    <p><span>Then convert <strong>SRR8383014.sra</strong> (~26 minutes), <strong>SRR8383017.sra</strong> (~24 minutes) and <strong>SRR8383018.sra</strong> (~23 minutes) to FASTQ as the above picture shows. For each SRA accession, two FASTQ format files (forward reads and reverse reads) will be generated as this experiment is paired-end sequencing.</span></p>
+
+       <!--  <h4><a
+            class="md-header-anchor" name="step-2-process-srr8383014sra"></a><span>Step 2: process SRR8383014.sra</span>
+    </h4>
+    <p><span>This step will cost ~26 minutes</span>
+        <img alt="8" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/8.jpeg"></p><h4><a
+            class="md-header-anchor" name="step-3-process-srr8383017sra"></a><span>Step 3: process SRR8383017.sra</span>
+    </h4>
+    <p><span>This step will cost ~24 minutes</span>
+        <img alt="9" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/9.jpeg"></p><h4><a
+            class="md-header-anchor" name="step-4-process-srr8383018sra"></a><span>Step 4: process SRR8383018.sra</span>
+    </h4>
+    <p><span>This step will cost ~23 minutes</span>
+        <img alt="10" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/10.jpeg"></p>
+    <p><span>For each SRA accession, two FASTQ format files (forward reads and reverse reads) will be generated as this experiment is paired-end sequencing.</span>
+    </p> -->
+	</section>
+	<section id="title4">
+    <h2><a class="md-header-anchor"
+           name="4-trim-raw-msup6supa-sequencing-reads"></a><span>5. Trim raw m</span><sup><span>6</span></sup><span>A sequencing reads</span>
+    </h2>
+    <p><span>Before align m</span><sup><span>6</span></sup><span>A sequencing reads to genome, trim low-quality reads is necessary in all NGS (Next Generation Sequencing) analyses as which may cause incorrect mapping of reads to a reference genome, and even result in incorrect identification of RNA modifications. deepEA provided the function </span><strong><span>Assess Reads Quality</span></strong><span> in </span><strong><span>Quality Control</span></strong><span> module to filter raw reads to clean reads, please see the following screenshots for details:</span>
+    </p><h4><a class="md-header-anchor" name="step-1-trim-srr8383013"></a><span>5.1: trim SRR8383013</span></h4>
+    <p><span>This step will cost ~16 minutes</span>
+        <img alt="11" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/11.jpeg"></p><!-- <h4><a
+            class="md-header-anchor" name="step-2-trim-srr8383014"></a><span>Step 2: trim SRR8383014</span></h4>
+    <p><span>This step will cost ~12 minutes</span>
+        <img alt="12" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/12.jpeg"></p><h4><a
+            class="md-header-anchor" name="step-3-trim-srr8383017"></a><span>Step 3: trim SRR8383017</span></h4>
+    <p><span>This step will cost ~13 minutes</span>
+        <img alt="13" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/12.jpeg"></p><h4><a
+            class="md-header-anchor" name="step-4-trim-srr8383018"></a><span>Step 4: trim SRR8383018</span></h4>
+    <p><span>This step will cost ~12 minutes</span>
+        <img alt="14" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/14.jpeg"></p> -->
+    <p><span>Then trim <strong>SRR8383014, SRR8383017 and SRR8383018</strong> as the above picture show. After that, three files will be output for each SRA accession, please see the following screenshot for detail:</span>
+    </p>
+    <p><img alt="27" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/27.jpeg"></p>
+    </section>
+	<section id="title5">
+	<h2><a class="md-header-anchor"
+           name="5-align-clean-msup6supa-sequencing-reads-to-zea-mays-b73-reference-genome-with-hisat2"></a><span>6. Align clean reads to reference genome</span>
+    </h2>
+    <p>
+        <span>Here, we start to align clean reads to reference genome with HISAT2 provided in module </span><strong><span>Identification of RNA Modifications</span></strong><span>, see the following screenshots for details:</span>
+    </p><h4><a class="md-header-anchor" name="step-1-align-srr8383013"></a><span>6.1: align SRR8383013</span></h4>
+    <p><span>This step will cost ~48 minutes</span>
+        <img alt="15" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/15.jpeg"></p><!-- <h4><a
+            class="md-header-anchor" name="step-2-align-srr8383014"></a><span>Step 2: align SRR8383014</span></h4>
+    <p><span>This step will cost ~40 minutes</span>
+        <img alt="16" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/16.jpeg"></p><h4><a
+            class="md-header-anchor" name="step-3-align-srr8383017"></a><span>Step 3: align SRR8383017</span></h4>
+    <p><span>This step will cost ~44 minutes</span>
+        <img alt="17" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/17.jpeg"></p><h4><a
+            class="md-header-anchor" name="step-4-align-srr8383018"></a><span>Step 4: align SRR8383018</span></h4>
+    <p><span>This step will cost ~42 minutes</span>
+        <img alt="18" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/18.jpeg"></p> -->
+    <p><span>Then align clean reads of <strong>SRR8383014, SRR8383017 and SRR8383018</strong> to reference genome as the above picture shows, after that, reads-genome alignments in BAM format and alignment summary will be generated, see the following screenshot for details:</span>
+        <img alt="28" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/28.jpeg"></p>
+    </section>
+	<section id="title6">
+	<h2><a class="md-header-anchor"
+           name="6-call-msup6supa-enriched-peaks-with-macs2"></a><span>7. Identify m<sup>6</sup>A enriched peaks</span>
+    </h2>
+    <p><span>After finishing aligning reads to genome, let&#39;s start to call m</span><sup><span>6</span></sup><span>A enriched peaks with macs2, the following screenshots show details about parameter settings:</span>
+    </p><h4><a class="md-header-anchor" name="step-1-call-msup6supa-peaks-for-biological-replicate-1"></a><span>7.1: call m</span><sup><span>6</span></sup><span>A peaks for biological replicate 1</span>
+    </h4>
+    <p><span>This step will cost ~8 minutes</span>
+        <img alt="19" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/19.jpeg"></p>
+    <p><span>This step will generate ~16,400 peaks for biological replicate 1</span></p><h4><a
+            class="md-header-anchor" name="step-2-call-msup6supa-peaks-for-biological-replicate-2"></a><span>7.2: call m</span><sup><span>6</span></sup><span>A peaks for biological replicate 2</span>
+    </h4>
+    <p><span>This step will cost ~7 minutes</span>
+        <img alt="20" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/20.jpeg"></p>
+    <p><span>This step will generate ~16,100 peaks for biological replicate 2</span></p><h4><a
+            class="md-header-anchor" name="step-3-obtain-consistent-peaks-between-two-biological-replicates"></a><span>7.3: obtain consistent peaks between two biological replicates</span>
+    </h4>
+    <p><span>After finishing peak calling for two replicates, deepEA also provided a function </span><strong><span>Merge two biological replicates</span></strong><span> to obtain consistent peaks between two biological replicates, see the following screenshots for details:</span>
+    </p>
+    <p><span>This step will cost ~2 seconds</span>
+        <img alt="21" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/21.jpeg"></p>
+    <p><span>Then the consistent peaks named as </span><strong><span>intersect.bed</span></strong><span> (about ~14,000 consistent peaks) will be shown in your History Panel.</span>
+    </p>
+	</section>
+	<section id="title7">
+    <h2><a class="md-header-anchor" name="7-perform-functional-annotation-for-msup6supa"></a><span>8. Functional annotation of m</span><sup><span>6</span></sup><span>A</span>
+    </h2><h4><a class="md-header-anchor" name="msup6supa-distribution"></a>8.1 <span>m</span><sup><span>6</span></sup><span>A distribution</span>
+    </h4>
+    <p><span>The distribution of m</span><sup><span>6</span></sup><span>A  in the genome and transcriptome can be visualized by the function </span><strong><span>RNA Modification Distribution</span></strong><span> in </span><strong><span>Functional Annotation</span></strong><span> module, see the following screenshot for detail:</span>
+    </p>
+    <p><span>This step will cost ~5 minutes</span>
+        <img alt="29" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/29.jpeg"></p>
+    <p><span>Then an interactively HTML will be generated, please see </span><a
+            href="http://39.101.176.205:4006/static/demo/RNA_modifications_distribution.html"
+            target="_blank"><span>here</span></a><span> to preview this results</span></p><h4><a
+            class="md-header-anchor"
+            name="link-msup6supa-modifications-with-genes"></a><span>8.2 Link m</span><sup><span>6</span></sup><span>A modifications with genes</span>
+    </h4>
+    <p><span>This step will cost ~2 minutes</span>
+        <img alt="22" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/22.jpeg"></p>
+    <p><span>This output for this function are shown in the following the screenshot</span>
+        <img alt="30" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/30.jpeg"></p><h4><a
+            class="md-header-anchor" name="de-novo-motif-discovery"></a>8.3 <em><span>De-novo</span></em><span> motif discovery</span>
+    </h4>
+    <p><span>This following screenshot shows how to use homer to perform </span><em><span>de-novo</span></em><span> motif discovery</span>
+    </p>
+    <p><span>This step will cost ~6 minutes</span>
+        <img alt="32" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/32.jpeg"></p>
+    <p><span>Then an HTML document will be generated, please click </span><a
+            href="http://39.101.176.205:4006/static/demo/homer_motifs.html" target="_blank"><span>here</span></a><span> to preview this results</span>
+    </p><h4><a class="md-header-anchor" name="go-functional-enrichment-analysis"></a>8.4 <span>GO functional enrichment analysis</span>
+    </h4>
+    <p><span>deepEA provided the function </span><strong><span>Functional Enrichment Analysis</span></strong><span> to perform GO enrichment analysis, see the following screenshot for detail:</span>
+    </p>
+    <p><span>This step will cost ~1 minute</span>
+        <img alt="31" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/31.jpeg"></p>
+    <p><span>Then a figure in PDF format and a TAB separated matrix will be generated, please click  </span><a
+            href="http://39.101.176.205:4006/static/demo/GO_enrichment.pdf" target="_blank"><span>here</span></a><span>   for details.</span>
+    </p>
+	</section>
+	<section id="title8">
+    <h2><a class="md-header-anchor" name="8-multi-omics-integrative-analysis"></a><span>9. Multi-omics integrative analysis</span>
+    </h2>
+    <p><span>To run this module, you have to download test data provided by deepEA, and then upload the data in directory </span><code>test_data/Multi-omics
+        Integrative Analysis/</code><span> to deepEA server. If you are not sure how to upload local data into deepEA server, please see </span><a
+            href="https://www.youtube.com/watch?reload=9&v=vDd9yQHiYYQ" target="_blank"><span>here</span></a><span> for details. Then you can run the function </span><strong><span>Integrative Analysis of Three Omics Data Sets</span></strong><span> in </span><strong><span>Multi-omics Integrative Analysis</span></strong><span> module as the following screenshot shows:</span>
+    </p>
+    <p><span>This step will cost ~6 seconds</span>
+        <img alt="33" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/33.jpeg"></p>
+    <p><span>Then an interactively HTML document will be output, click </span><a
+            href="http://39.101.176.205:4006/static/demo/multi-omics.html" target="_blank"><span>here</span></a><span>  to preview this results.</span>
+    </p>
+    </section>
+	<section id="title9">
+	<h2><a class="md-header-anchor" name="9-build-an-msup6supa-predictor-based-on-machine-learning"></a><span>10. Build an m</span><sup><span>6</span></sup><span>A predictor based on machine learning</span>
+    </h2>
+    <p><span>The following four steps shows us how to use </span><strong><span>Prediction Analysis Based on Machine Learning</span></strong><span> module to build an m</span><sup><span>6</span></sup><span>A predictor and perform cross-validation experiments.</span>
+    </p><h4><a class="md-header-anchor"
+               name="step-1-generate-positive-and-negative-samples-for-msup6supa-predictor-construction"></a><span>10.1: generate positive and negative samples for m</span><sup><span>6</span></sup><span>A predictor construction</span>
+    </h4>
+    <p><span>The function </span><strong><span>Sample Generation</span></strong><span> can be used to generate positive and negative samples.</span>
+    </p>
+    <p><span>This step will cost </span><strong><span>~5 hours</span></strong><span>, please wait patiently</span>
+        <img alt="23" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/23.jpeg"></p><h4><a
+            class="md-header-anchor" name="step-2-encoding-positive-samples-by-function-feature-encoding"></a><span>10.2: encoding positive samples by function Feature Encoding</span>
+    </h4>
+    <p><span>This step will cost ~13 minutes</span>
+        <img alt="24" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/24.jpeg"></p><h4><a
+            class="md-header-anchor" name="step-3-encoding-negative-samples-by-function-feature-encoding"></a><span>10.3: encoding negative samples by function Feature Encoding</span>
+    </h4>
+    <p><span>This step will cost ~13 minutes</span>
+        <img alt="25" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/25.jpeg"></p><h4><a
+            class="md-header-anchor"
+            name="step-4-msup6supa-predictor-construction-and-evaluation"></a><span>10.4: m</span><sup><span>6</span></sup><span>A predictor construction and evaluation</span>
+    </h4>
+    <p><img alt="26" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/26.jpeg"></p>
+    <p><span>After finishing predictor construction and evaluation, three documents will be output, please see the following screenshot:</span>
+        <img alt="34" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/34.jpeg"></p>
+    </section>
+	<section id="title10">
+	<h2><a class="md-header-anchor" name="9-predict-candidate-msup6supa-using-the-msup6supa-predictor"></a><span>11. Predict candidate m</span><sup><span>6</span></sup><span>A
+    </h2>
+    <p><span>After building an m</span><sup><span>6</span></sup><span>A predictor, we can use the predictor to prioritize candidate m</span><sup><span>6</span></sup><span> modifications, to do this, you have to prepare a file in BED format, see the following table:</span>
+    </p>
+    <figure>
+        <table>
+            <thead>
+            <tr>
+                <th><span>Chr</span></th>
+                <th><span>Start</span></th>
+                <th><span>End</span></th>
+                <th><span>GeneID</span></th>
+                <th><span>NA</span></th>
+                <th><span>Strand</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span>1</span></td>
+                <td><span>49625</span></td>
+                <td><span>49751</span></td>
+                <td><span>Zm00001d027230</span></td>
+                <td><span>.</span></td>
+                <td><span>+</span></td>
+            </tr>
+            <tr>
+                <td><span>1</span></td>
+                <td><span>50925</span></td>
+                <td><span>51026</span></td>
+                <td><span>Zm00001d027231</span></td>
+                <td><span>.</span></td>
+                <td><span>-</span></td>
+            </tr>
+            <tr>
+                <td><span>1</span></td>
+                <td><span>92303</span></td>
+                <td><span>92526</span></td>
+                <td><span>Zm00001d027232</span></td>
+                <td><span>.</span></td>
+                <td><span>-</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </figure>
+    <p><span>Then upload this file into deepEA server and run the function </span><strong><span>Sample Generation</span></strong><span> in </span><strong><span>Prediction Analysis Based on Machine Learning</span></strong><span> module as the following screenshot shows:</span>
+    </p>
+    <p><img alt="35" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/35.jpeg"></p>
+    <p><span>Then encoding the candidate samples using the same feature encoding methods as m</span><sup><span>6</span></sup><span>A predictor construction:</span>
+    </p>
+    <p><img alt="36" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/36.jpeg"></p>
+    <p><span>After encoding the candidate samples, we can predict the candidate m</span><sup><span>6</span></sup><span>A:</span>
+        <img alt="37" referrerpolicy="no-referrer" src="../assets/img/maize-m6A-seq-tutorial/37.jpeg"></p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p></div>
+
+
+			</section>
+		</article>
+
+		<script src="js/script.js"></script>
+
+	
+		<style type="text/css" media="screen">
+			.credits {
+				position: fixed;
+				left: 3em;
+				bottom: 4em;
+				font-size: 1em;
+				z-index: 20;
+				color: #444;
+				vertical-align: middle;
+			}
+
+			.credits * + * {
+				margin-top: 15px;
+			}
+
+			.credits a {
+				display: block;
+				padding: 8px 10px;
+				color: #777;
+				border: 2px solid #bbb;
+				background: #fff;
+				text-decoration: none;
+			}
+
+			.credits a:hover {
+				border-color: #555;
+				color: #222;
+			}
+
+			@media screen and (max-height: 700px) {
+				.credits {
+					display: none;
+				}
+			}
+		</style>		
+
+	</body>
+
+</html>

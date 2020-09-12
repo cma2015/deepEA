@@ -16,6 +16,7 @@ a:active, a:hover { outline: 0px; }
 .for-image #write { padding-left: 8px; padding-right: 8px; }
 body.typora-export { padding-left: 30px; padding-right: 30px; }
 .typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
 @media screen and (max-width: 500px) { 
   body.typora-export { padding-left: 0px; padding-right: 0px; }
   #write { padding-left: 20px; padding-right: 20px; }
@@ -86,7 +87,7 @@ blockquote > :first-child, li > :first-child { margin-top: 0px; }
   #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
   .typora-export * { -webkit-print-color-adjust: exact; }
   html.blink-to-pdf { font-size: 13px; }
-  .typora-export #write { padding-left: 32px; padding-right: 32px; padding-bottom: 0px; break-after: avoid-page; }
+  .typora-export #write { break-after: avoid-page; }
   .typora-export #write::after { height: 0px; }
   .is-mac table { break-inside: avoid; }
 }
@@ -153,6 +154,10 @@ svg[id^="mermaidChart"] { line-height: 1em; }
 mark { background-color: rgb(255, 255, 0); color: rgb(0, 0, 0); background-position: initial initial; background-repeat: initial initial; }
 .md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
 mark .md-meta { color: rgb(0, 0, 0); opacity: 0.3 !important; }
+@media print { 
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+  .typora-export h1::after, .typora-export h2::after, .typora-export h3::after, .typora-export h4::after, .typora-export h5::after, .typora-export h6::after { content: ""; display: block; height: 100px; margin-bottom: -100px; }
+}
 
 
 .CodeMirror { height: auto; }
@@ -322,17 +327,30 @@ h6 code {
     font-size: inherit;
 }
 h1 {
-    padding-bottom: .3em;
     font-size: 2.25em;
     line-height: 1.2;
     border-bottom: 1px solid #eee;
 }
 h2 {
-   padding-bottom: .3em;
     font-size: 1.75em;
     line-height: 1.225;
     border-bottom: 1px solid #eee;
 }
+
+@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        border-top: 1px solid #eee;
+        margin-top: .3em;
+    }
+}
+
 h3 {
     font-size: 1.5em;
     line-height: 1.43;
@@ -595,8 +613,16 @@ header, .context-menu, .megamenu-content, footer{
  .typora-export li, .typora-export p, .typora-export,  .footnote-line {white-space: normal;} 
 </style>
 </head>
-<body class='typora-export' >
-<div  id='write'  class = ''><h2><a name="tips" class="md-header-anchor"></a><span>Tips</span></h2><p><span>The folloing screenshot shows us:</span></p><ul><li><p><strong><span>How to view the data in deepEA</span></strong></p></li><li><p><strong><span>How to re-run a job</span></strong></p></li><li><p><strong><span>How to save data to your local disk</span></strong></p><p><img src="../assets/img/0-0.png" referrerpolicy="no-referrer" alt="0-0"></p></li></ul><p>&nbsp;</p><h2><a name="frequently-asked-questions-faqs" class="md-header-anchor"></a><span>Frequently Asked Questions (FAQs)</span></h2><h3><a name="how-to-upload-in-house-data-into-deepea-local-server" class="md-header-anchor"></a><span>How to upload in-house data into deepEA local server</span></h3><p><a href="https://youtu.be/vDd9yQHiYYQ" target="_blank">
+<body class='typora-export'>
+<div id='write'  class=''><div align="center">
+<p><font size="70"><strong>deepEA User Manual</strong></font></p>
+<font size="100">(version 1.0)</font>
+</div><p><span>deepEA is a convenient, freely available, web-based platform that is capable to support deep analysis of epitranscriptome sequencing data with several general and specific functionalities. Currently, deepEA consists of six modules: </span><strong><span>Data Preparation, Quality Control, Identification of RNA Modifications, Functional Annotation, Multi-omics Integrative Analysis and Prediction Analysis Based on Machine Learning</span></strong><span>. deepEA project is hosted on </span><a href='https://github.com/cma2015/deepEA' target='_blank' class='url'>https://github.com/cma2015/deepEA</a><span>. The deepEA demo server can be accessed via </span><a href='https://deepea.nwafu.edu.cn' target='_blank' class='url'>https://deepea.nwafu.edu.cn</a><span> or </span><a href='http://39.101.176.205:4006' target='_blank' class='url'>http://39.101.176.205:4006</a><span>. The following part shows installation of deepEA docker image and detailed documentation for each function in deepEA.</span></p><h2><a name="tips-and-faqs" class="md-header-anchor"></a><span>Tips and FAQs</span></h2><p><span>The folloing screenshot shows us:</span></p><ul><li><p><strong><span>How to view the data in deepEA</span></strong></p></li><li><p><strong><span>How to re-run a job</span></strong></p></li><li><p><strong><span>How to save data to your local disk</span></strong></p><p><img src="../assets/img/0-0.png" referrerpolicy="no-referrer" alt="0-0"></p></li></ul><p>&nbsp;</p><h3><a name="i-can-not-access-the-deepea-server" class="md-header-anchor"></a><span>I can not access the deepEA server</span></h3><p><span>For the first access of </span><a href='https://deepea.nwafu.edu.cn' target='_blank' class='url'>https://deepea.nwafu.edu.cn</a><span>, the browser may warn that </span><strong><span>This Connection Is Not Provate</span></strong><span>, see the following pictures to solve the problem:</span></p><ul><li><span>For Safari</span>
+<img src="../assets/img/Safari.jpg" referrerpolicy="no-referrer" alt="Safari"></li><li><span>For Chrome</span>
+<img src="../assets/img/chrome-1.jpg" referrerpolicy="no-referrer" alt="Chrom-1">
+<img src="../assets/img/chrome-2.jpg" referrerpolicy="no-referrer" alt="Chrom-2"></li><li><span>For Firefox</span>
+<img src="../assets/img/Firefox-1.jpg" referrerpolicy="no-referrer" alt="Firefox-1">
+<img src="../assets/img/Firefox-2.jpg" referrerpolicy="no-referrer" alt="Firefox-2"></li></ul><h3><a name="how-to-upload-in-house-data-into-deepea-local-server" class="md-header-anchor"></a><span>How to upload in-house data into deepEA local server</span></h3><p><a href="https://youtu.be/vDd9yQHiYYQ" target="_blank">
 <span>    </span><img border="0" src="../assets/img/how_to_upload_data.png" />
 </a></p><h3><a name="how-to-become-an-admin-user" class="md-header-anchor"></a><span>How to become an admin user</span></h3><ul><li><span>First, register with email </span><code>admin@example.org</code><span>, set the password arbitrary.</span></li><li><span>Then, login with </span><code>admin@example.org</code></li></ul><h3><a name="how-to-stop-deepea-local-server" class="md-header-anchor"></a><span>How to stop deepEA local server</span></h3><ul><li><span>Press </span><code>Ctrl + C</code><span> (for windows and unix users) or </span><code>Cmd + C</code><span> (for Mac OS users)</span></li></ul><h3><a name="how-to-re-launch-deepea-local-server-when-i-exited-the-docker-container" class="md-header-anchor"></a><span>How to re-launch deepEA local server when I exited the docker container</span></h3><ul><li><p><span>First, using the following command to check the container ID</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.32635498046875px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">docker <span class="cm-builtin">ps</span> <span class="cm-attribute">-a</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 22px;"></div><div class="CodeMirror-gutters" style="display: none; height: 22px;"></div></div></div></pre></li><li><p><span>Then run the following command</span></p><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.32635498046875px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">docker container <span class="cm-builtin">start</span>  container ID</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">docker exec <span class="cm-attribute">-it</span> container ID <span class="cm-builtin">bash</span></span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-builtin">bash</span> /home/galaxy/run.sh</span></pre></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 67px;"></div><div class="CodeMirror-gutters" style="display: none; height: 67px;"></div></div></div></pre></li></ul><h3><a name="how-to-mount-local-disk-into-deepea-docker-container" class="md-header-anchor"></a><span>How to mount local disk into deepEA docker container</span></h3><pre spellcheck="false" class="md-fences md-end-block ty-contain-cm modeLoaded" lang="bash"><div class="CodeMirror cm-s-inner CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 7.326416015625px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">docker run <span class="cm-attribute">-it</span> <span class="cm-attribute">-v</span> /your home directory:/home/galaxy/database/files/000 <span class="cm-attribute">-p</span> <span class="cm-number">8080</span>:8080 malab/deepea <span class="cm-builtin">bash</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 22px;"></div><div class="CodeMirror-gutters" style="display: none; height: 22px;"></div></div></div></pre><p>&nbsp;</p><p>&nbsp;</p></div>
 </body>

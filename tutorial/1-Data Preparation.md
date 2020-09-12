@@ -1,6 +1,11 @@
-<div align='center' ><font size='70'>Data Preparation</font></div>
+<div align='center' >
+<p><font size='70'><strong>deepEA User Manual</strong></font></p>
+<font size='100'>(version 1.0)</font>
+</div>
 
-## 0. Introduction for Data Preparation
+deepEA is a convenient, freely available, web-based platform that is capable to support deep analysis of epitranscriptome sequencing data with several general and specific functionalities. Currently, deepEA consists of six modules: **Data Preparation, Quality Control, Identification of RNA Modifications, Functional Annotation, Multi-omics Integrative Analysis and Prediction Analysis Based on Machine Learning**. deepEA project is hosted on https://github.com/cma2015/deepEA. The deepEA demo server can be accessed via https://deepea.nwafu.edu.cn or http://39.101.176.205:4006. The following part shows installation of deepEA docker image and detailed documentation for each function in deepEA.
+
+## Data Preparation
 
 This module provides three funcitons (see following table for details) to prepare epitranscriptome data.
 
@@ -10,7 +15,7 @@ This module provides three funcitons (see following table for details) to prepar
 | **Obtain Epitranscriptome Sequencing Reads** | Directly fetch epitranscriptome sequencing reads from NCBI's SRA database | SRR accession or HTTP/FTP link                        | Sequencing reads in SRA format                               | Depends on the network speed | <a href="https://github.com/ncbi/sra-tools" target="_blank">SRA Toolkit</a> |
 | **Sequence Data Preprocessing**              | Convert epitranscriptome sequencing reads from SRA to FASTQ format | Epitranscriptome sequencing reads in SRA format       | Epitranscriptome sequencing reads in FASTQ format            | ~2 mins                      | <a href="https://github.com/ncbi/sra-tools" target="_blank">SRA Toolkit</a> |
 
-## 1. Obtain Genome Sequences and Annotation
+## Obtain Genome Sequences and Annotation
 
 This function is designed to download sequences (Genome sequences, cDNA, CDS, proteins) and genome annotation (GTF/GFF3) automatically from Ensembl plants (https://plants.ensembl.org/index.html).
 
@@ -27,7 +32,7 @@ This function is designed to download sequences (Genome sequences, cDNA, CDS, pr
 
 	![1-1](../assets/img/1-1.png)
 
-## 2. Obtain Epitranscriptome Sequencing Reads
+## Obtain Epitranscriptome Sequencing Reads
 
 This function is designed to download epitranscriptome sequencing reads from NCBI SRA (Short Read Archive) database or from an user-specified HTTP/FTP link automatically. For the former, the **prefetch** function implemented in <a href="https://github.com/ncbi/sra-tools" target="_blank">SRA Toolkit</a> is wrapped to enable users to download sequencing data from NCBI SRA database; For the latter, **wget** command line is used to download the file according to an user-specified HTTP/FTP link.
 
@@ -55,7 +60,7 @@ This function is designed to download epitranscriptome sequencing reads from NCB
 
   ![1-2](../assets/img/1-2.png)
 
-## 3. Sequence Data Preprocessing
+## Sequence Data Preprocessing
 This function wrapped **fastq-dump** function implemented in SRA Toolkit. See http://trace.ncbi.nlm.nih.gov/Traces/sra/sra.cgi?view=software for details.
 
 #### Input

@@ -135,9 +135,9 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a class="page-scroll" href="#about">About</a></li>
-					<li><a class="page-scroll" href="#tutorial">Tutorial</a></li>
+<!-- 					<li><a class="page-scroll" href="#tutorial">Tutorial</a></li>
 					<li><a class="page-scroll" href="https://hub.docker.com/r/malab/deepea" target="_blank">Docker image</a></li>
-					<li><a class="page-scroll" href="https://github.com/cma2015/deepEA" target="_blank">Source code</a></li>
+					<li><a class="page-scroll" href="https://github.com/cma2015/deepEA" target="_blank">Source code</a></li> -->
 					<li><a class="page-scroll" href="#how-to-access-help">Contact</a></li>
 				</ul>
 			</div>
@@ -157,18 +157,27 @@
 							<h3>A Containerized Web Server for Interactive Analysis of Epitranscriptome Sequencing Data</h3>
 							<div class="panel">
 								<div class="button-effect">
-									<a class="effect effect-2" style='text-decoration:none;' href="https://deepea.nwafu.edu.cn" tilte="deepEA demo" target="_blank">Demo Server 1</a>
-									<a class="effect effect-2" style='text-decoration:none;' href="http://39.101.176.205:4006" tilte="Tutorial"  target="_blank">Demo Server 2</a>
-									<a class="effect effect-2" style='text-decoration:none;' href="https://deepEA.nwafu.edu.cn/static/test_data.zip" title="Test data">Test Data</a>
+									<a class="effect effect-2" style='text-decoration:none;' href="https://hub.docker.com/r/malab/deepea" tilte="deepEA docker image" target="_blank">Docker Image</a>
+									<a class="effect effect-2" style='text-decoration:none;' data-toggle="modal" href="#login-modal" title="deepEA server">deepEA Server</a>
+									<a class="effect effect-2" style='text-decoration:none;' href="#tutorial" tilte="Tutorial">Tutorial</a>
+									<a class="effect effect-2" style='text-decoration:none;' href="http://39.101.176.205:4006/static/test_data.zip" title="Test data">Test Data</a>
+									<a class="effect effect-2" style='text-decoration:none;' href="https://github.com/cma2015/deepEA"	>Source Code</a>
 								</div>
 							</div>
+							<div class="modal" id="login-modal">
+						        <a class="close" data-dismiss="modal">×</a>
+						        <h1>Web server</h1>
+						        <div class="button-effect">
+									<a class="effect effect-2"  style='text-decoration:none;' href="https://deepea.nwafu.edu.cn" target="_blank">deepEA server 1</a></br></br>
+									<a class="effect effect-2" style='text-decoration:none;' href="http://39.101.176.205:4006" target="_blank">deepEA server 2</a></br></br>
+        						</div>
+</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- /.container -->
 		</div>
-		<!-- /.intro-header -->
+		
 	</section>
 
 	<div class="content-section-a">
@@ -177,11 +186,11 @@
 				<div id="welcome">
 					<h1 id="about">About</h1>
 					<p>
-						<a href="http://deepea.nwafu.edu.cn" target="_blank"><img src="https://img.shields.io/badge/Web_server-ready-red.svg"></a>
+<!-- 						<a href="http://deepea.nwafu.edu.cn" target="_blank"><img src="https://img.shields.io/badge/Web_server-ready-red.svg"></a> -->
 						<a href="https://hub.docker.com/r/malab/deepea" target="_blank"><img src="https://img.shields.io/badge/Docker_image-ready-red.svg"></a>
-						<a href="https://hub.docker.com/r/malab/deepea" target="_blank"><img src="https://img.shields.io/docker/pulls/malab/deepea"></a>
+<!-- 						<a href="https://hub.docker.com/r/malab/deepea" target="_blank"><img src="https://img.shields.io/docker/pulls/malab/deepea"></a> -->
 						<a href="https://github.com/cma2015/deepEA" target="_blank"><img src="https://img.shields.io/badge/Source_code-support-blue.svg"></a>
-						<a href="https://deepea.nwafu.edu.cn/static/test_data.zip" target="_blank"><img src="https://img.shields.io/badge/Test_data-support-blue.svg"></a>
+						<a href="http://39.101.176.205:4006/static/test_data.zip" target="_blank"><img src="https://img.shields.io/badge/Test_data-support-blue.svg"></a>
 
 						
 					</p>
@@ -189,7 +198,7 @@
 					<p>deepEA is a convenient, freely available, web-based platform that is capable to support deep analysis of 
 					epitranscriptome sequencing data with several general and specific functionalities. Currently, deepEA 
 					consists of six modules: Data Preparation, Quality Control, Identification of RNA Modifications, Functional Annotation, Multi-omics Integrative Analysis and Prediction Analysis Based on Machine Learning.
-					deepEA project is hosted on <a href="https://github.com/cma2015/deepEA" target="_blank">https://github.com/cma2015/deepEA</a>. The deepEA demo server can be accessed via <a href="https://deepea.nwafu.edu.cn" target="_blank">https://deepea.nwafu.edu.cn</a>.</p>
+					deepEA project is hosted on <a href="https://github.com/cma2015/deepEA" target="_blank">https://github.com/cma2015/deepEA</a>. The deepEA demo server can be accessed via <a href="http://39.101.176.205:4006" target="_blank">http://39.101.176.205:4006</a> or <a href="https://deepea.nwafu.edu.cn" target="_blank">https://deepea.nwafu.edu.cn</a>.</p>
 				</div>
 
 				<div id="boxcarousel" style="margin-top:10px;">
@@ -223,15 +232,14 @@
 
 				<h1 id="tutorial">Tutorial</h1>
 				<ul>
-				  <li>Cpmprehensive m<sup>6</sup>A sequencing data analysis pipeline: <a href="tutorial/0-maize-m6A-seq-tutorial.html" target="_blank"><font color="#3E9CF9"><u>Webpage</u></font></a>, <a href="tutorial/0-maize-m6A-seq-tutorial.pdf" target="_blank"><font color="#3E9CF9"><u>PDF</u></font></a></li>
-				  <li>Detailed documentation for each function: <a href="tutorial/index.html" target="_blank"><font color="#3E9CF9"><u>Webpage</u></font></a>, <a href="tutorial/tutorial.pdf" target="_blank"><font color="#3E9CF9"><u>PDF</u></font></a>, <a href="https://www.youtube.com/channel/UCkeaQHfOL1uMn92_nGp2wTw/videos" target="_blank"><font color="#3E9CF9"><u>Video</u></font></a></li>
+				  <li><a href="http://39.101.176.205:4006/static/tutorial/m6a-seq.html" target="_blank"><font color="#3E9CF9"><u>Comprehensive m<sup>6</sup>A sequencing data analysis pipeline</u></font></a></li>
+				  <li><a href="http://39.101.176.205:4006/static/tutorial/index.html" target="_blank"><font color="#3E9CF9"><u>Detailed documentation for each function</u></font></a></li>
 				</ul>
 
 
 				<h1 id="how-to-access-help">How to access help</h1>
 				<ul>
-				  <li>If users encounter any bugs or issues, feel free to leave a message at Github <a href="https://github.com/cma2015/deepEA/issues" target="_blank">issues</a>. We will try our best to deal with all issues as soon as possible.</li>
-				  <li>In addition, if any suggestions are available, feel free to contact: Jingjing Zhai <a href="mailto:zhaijingjing603@gmail.com" target="_blank">zhaijingjing603@gmail.com</a> or Chuang Ma <a href="mailto:chuangma2006@gmail.com" target="_blank">chuangma2006@gmail.com</a>.</li>
+				  <li>Comments/suggestions/bugs/issues are welcome reported <a href="https://github.com/cma2015/deepEA/issues" target="_blank">here</a> or contact: Jingjing Zhai <a href="mailto:zhaijingjing603@gmail.com" target="_blank">zhaijingjing603@gmail.com</a> or Chuang Ma <a href="mailto:chuangma2006@gmail.com" target="_blank">chuangma2006@gmail.com</a></li>
 				</ul>
             </div>
         </div>

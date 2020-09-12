@@ -1,6 +1,11 @@
-<div align='center' ><font size='70'>Functional Annotation</font></div>
+<div align='center' >
+<p><font size='70'><strong>deepEA User Manual</strong></font></p>
+<font size='100'>(version 1.0)</font>
+</div>
 
-## 0. Introduction for Functional Annotation
+deepEA is a convenient, freely available, web-based platform that is capable to support deep analysis of epitranscriptome sequencing data with several general and specific functionalities. Currently, deepEA consists of six modules: **Data Preparation, Quality Control, Identification of RNA Modifications, Functional Annotation, Multi-omics Integrative Analysis and Prediction Analysis Based on Machine Learning**. deepEA project is hosted on https://github.com/cma2015/deepEA. The deepEA demo server can be accessed via https://deepea.nwafu.edu.cn or http://39.101.176.205:4006. The following part shows installation of deepEA docker image and detailed documentation for each function in deepEA.
+
+## Functional Annotation
 
 This module provided four functions to perform functional annotation of RNA modifications
 
@@ -11,7 +16,7 @@ This module provided four functions to perform functional annotation of RNA modi
 | **Link RNA Modifications to Genes** | Link RNA modifications to nearest genes based on genomic coordinate | RNA modifications in BED format and genome annotation in GTF/GFF3 format |           Detailed RNA modifications-related genes           | ~5s               |                       In-house scripts                       |
 | **Functional Enrichment Analysis**  |    Perform GO or KEGG enrichment analysis for any species    |                          Gene list                           |                  The enriched GO/KEGG terms                  | ~6 mins           | <a href="https://doi.org/10.1089/omi.2011.0118" target="_blank">Yu <I>et al</I>., 2012, OMICS</a> |
 
-## 1. **RNA Modification Distribution**
+## **RNA Modification Distribution**
 
 This function is designed to provide insights into spatial and functional associations of RNA modifications. This function takes the RNA modifications in BED format and genome annotation in GTF (Gene Transfer Format) format as input, then the manner of distribution of RNA modifications in the genome and transcriptome is statistically analyzed and visualized, including the number of peaks in genomic feature (e.g. promoter, exon, intron, etc), the regions of enrichment of RNA modifications within transcripts, the enrichment of RNA modifications in transcriptional start/stop site and the enrichment of RNA modifications in splicing sites.
 
@@ -30,7 +35,7 @@ This function is designed to provide insights into spatial and functional associ
 - **Step 2**: see the following screenshot to run this function
 	![4-1](../assets/img/4-1.png)
 
-## 2. Motif Analysis
+## Motif Analysis
 
 This function integrates MEME-ChIP and DREME to perform *de-novo* motif discovery.
 
@@ -50,7 +55,7 @@ This function integrates MEME-ChIP and DREME to perform *de-novo* motif discover
   ![4-2](../assets/img/4-2.png)
 
 
-## 3. **RNA Modifications Annotation with Gene**
+## **RNA Modifications Annotation with Gene**
 This function is designed to annotate RNA modifications with genes, users can specify the minimum overlapped length with genes.
 
 #### Input
@@ -75,7 +80,7 @@ This function is designed to annotate RNA modifications with genes, users can sp
 - **Step 2**: see the following screenshot to run this function
   ![4-3](../assets/img/4-3.png)
 
-## 4. Functional Enrichment Analysis
+## Functional Enrichment Analysis
 
 This function is designed to perform GO or KEGG enrichment analysis for any species through R package "clusterProfiler".
 

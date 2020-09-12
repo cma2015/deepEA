@@ -1,6 +1,11 @@
-<div align='center' ><font size='70'>Tips and FAQs</font></div>
+<div align='center' >
+<p><font size='70'><strong>deepEA User Manual</strong></font></p>
+<font size='100'>(version 1.0)</font>
+</div>
 
-## Tips
+deepEA is a convenient, freely available, web-based platform that is capable to support deep analysis of epitranscriptome sequencing data with several general and specific functionalities. Currently, deepEA consists of six modules: **Data Preparation, Quality Control, Identification of RNA Modifications, Functional Annotation, Multi-omics Integrative Analysis and Prediction Analysis Based on Machine Learning**. deepEA project is hosted on https://github.com/cma2015/deepEA. The deepEA demo server can be accessed via https://deepea.nwafu.edu.cn or http://39.101.176.205:4006. The following part shows installation of deepEA docker image and detailed documentation for each function in deepEA.
+
+## Tips and FAQs
 
 The folloing screenshot shows us:
 
@@ -12,7 +17,21 @@ The folloing screenshot shows us:
 
 
 
-## Frequently Asked Questions (FAQs)
+### I can not access the deepEA server
+
+For the first access of https://deepea.nwafu.edu.cn, the browser may warn that **This Connection Is Not Provate**, see the following pictures to solve the problem:
+
+- For Safari
+![Safari](../assets/img/Safari.jpg)
+
+- For Chrome
+  ![Chrom-1](../assets/img/chrome-1.jpg)
+  ![Chrom-2](../assets/img/chrome-2.jpg)
+
+- For Firefox
+  ![Firefox-1](../assets/img/Firefox-1.jpg)
+  ![Firefox-2](../assets/img/Firefox-2.jpg)
+  
 
 ### How to upload in-house data into deepEA local server
 

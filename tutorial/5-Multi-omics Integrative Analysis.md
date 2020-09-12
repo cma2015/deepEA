@@ -1,6 +1,11 @@
-<div align='center' ><font size='70'>Multi-omics Integrative Analysis</font></div>
+<div align='center' >
+<p><font size='70'><strong>deepEA User Manual</strong></font></p>
+<font size='100'>(version 1.0)</font>
+</div>
 
-## 0. Introduction for Multi-omics Integrative Analysis
+deepEA is a convenient, freely available, web-based platform that is capable to support deep analysis of epitranscriptome sequencing data with several general and specific functionalities. Currently, deepEA consists of six modules: **Data Preparation, Quality Control, Identification of RNA Modifications, Functional Annotation, Multi-omics Integrative Analysis and Prediction Analysis Based on Machine Learning**. deepEA project is hosted on https://github.com/cma2015/deepEA. The deepEA demo server can be accessed via https://deepea.nwafu.edu.cn or http://39.101.176.205:4006. The following part shows installation of deepEA docker image and detailed documentation for each function in deepEA.
+
+## Multi-omics Integrative Analysis
 
 This module consists of two functions: **Integrative Analysis of Two Omics Data Sets** and **Integrative Analysis of Three Omics Data Sets**.
 
@@ -11,7 +16,7 @@ This module consists of two functions: **Integrative Analysis of Two Omics Data 
 
 
 
-## 1. **Integrative Analysis of Two Omics Data Sets**
+## **Integrative Analysis of Two Omics Data Sets**
 
 This function is designed to perform integrative analysis of two omics data sets (e.g., m6A and RNA-Seq). Taking a quantification matrix as input, deepEA firstly normalize raw quantification based on user-specific normalization method (currently, three normalization methods including **cumulative distribution, Z-score normalization and min-max normalization** are available), then using kmeans clustering method to cluster genes into four groups and visualize genes by an interactive scatter plot.
 
@@ -37,7 +42,7 @@ This function is designed to perform integrative analysis of two omics data sets
 - **Step 2**: see the following screenshot to run this function
 ![5-1](../assets/img/5-1.png)
 
-## 2. Integrative Analysis of Three Omics Data Sets
+## Integrative Analysis of Three Omics Data Sets
 
 This function is designed to perform integrative analysis of three omics data sets. According RNA modifications-related genes' relative abundace in three omics data sets, deepEA grouped genes into seven categories. For example, if users would like to integrate m6A with gene expression and translation, the following categories will be illustrated in a ternary plot:
   - **Balanced**

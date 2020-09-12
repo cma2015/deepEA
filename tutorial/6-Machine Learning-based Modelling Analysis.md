@@ -1,6 +1,11 @@
-<div align='center' ><font size='70'>Prediction Analysis Based on Machine Learning</font></div>
+<div align='center' >
+<p><font size='70'><strong>deepEA User Manual</strong></font></p>
+<font size='100'>(version 1.0)</font>
+</div>
 
-## 0. Introduction for Prediction Analysis Based on Machine Learning
+deepEA is a convenient, freely available, web-based platform that is capable to support deep analysis of epitranscriptome sequencing data with several general and specific functionalities. Currently, deepEA consists of six modules: **Data Preparation, Quality Control, Identification of RNA Modifications, Functional Annotation, Multi-omics Integrative Analysis and Prediction Analysis Based on Machine Learning**. deepEA project is hosted on https://github.com/cma2015/deepEA. The deepEA demo server can be accessed via https://deepea.nwafu.edu.cn or http://39.101.176.205:4006. The following part shows installation of deepEA docker image and detailed documentation for each function in deepEA.
+
+## Prediction Analysis Based on Machine Learning
 
 This module provides a pipeline for transcriptome-wide RNA modification prediction using machine learning technology. This pipeline is consisted of **Sample generation, Feature Encoding and Prediction System Construction**.
 
@@ -10,7 +15,7 @@ This module provides a pipeline for transcriptome-wide RNA modification predicti
 | **Feature Encoding**               | Characterize each sample with more than 900 numeric features. | Genome sequences in FASTA format and RNA modifications in BED format |       Feature matrix seperated by TAB       | ~6 mins          | In-house scripts |
 | **Prediction System Construction** | Several commonly-used machine learning classification algorithms are provided to construct a predictor to classify RNA modifications from non RNA modifications. |     Positive feature matrix and negative feature matrix      |  A predictor and model evaluation results   | ~15s             | In-house scripts |
 
-## 1. Sample Generation
+## Sample Generation
 
 This function was designed to generate positive and negative samples based RNA modification regions. To be specific, this function takes RNA modification regions in BED format, genomic sequences in FASTA format and annotaiton in GTF format as input, then searches consensus motif (e.g. RRACH) in the RNA modification regions and treat them as positive samples, the remaining consensus motif in the same transcript of positive samples are randomly selected (user can specify the ratio between positive and negative samples) as negative samples.
 
@@ -35,7 +40,7 @@ This function was designed to generate positive and negative samples based RNA m
 
   ![6-1](../assets/img/6-1.png)
 
-## 2. Feature Encoding
+## Feature Encoding
 
 This function can be used to encode RNA modifications flanking sequences into a feature matrix. To be specific, **Sequence-derived features** integrated several commonly used feature encoding strategies including **Nucleic acid composition related features**, **Autocorerlation-based features**, **Pseudo nucleotide composition** and **Binary encoding**; For **Genomic-derived features**, we adopted feature encoding strategy used in <a href="https://academic.oup.com/nar/article/47/7/e41/5319125" target="_blank">WHISTLE</a> (Chen *et al*., 2019, *Nucleic Acids Research*) project.
 
@@ -60,7 +65,7 @@ This function can be used to encode RNA modifications flanking sequences into a 
   ![6-2](../assets/img/6-2.png)
 
 
-## 3. **Prediction System Construction** 
+## **Prediction System Construction** 
 
 In this module, several commonly-used machine learning classification algorithms are implemented to construct an RNA modification predictor. In the current version of DeepEA, the following five classical algorithms are inlcuded:
 
