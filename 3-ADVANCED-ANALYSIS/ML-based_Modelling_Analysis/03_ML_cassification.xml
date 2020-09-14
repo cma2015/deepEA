@@ -21,7 +21,8 @@
         <conditional name="analysis_type">
             <param name="train_or_predict" type="select" label="Train a CMR predictor or predict" display="radio">
                 <option value="train">Train a CMR predictor</option>
-                <option value="predict_your_own">Predicting using model stored in history</option>
+                <option value="predict_your_own">Predict using model stored in history</option>
+                <option value="predict_with_backend">Predict using trained model stored in deepEA backend</option>
             </param>
 
             <when value="train">
@@ -64,6 +65,18 @@
                     <option value="Logistic_regression">Logistic Regression</option>
                 </param>
             </when>
+
+            <when value="predict_with_backend">
+                <param name="featureMat" type="data" format="txt" label="Feature matrix of candidate samples."/>
+                <param name="model" type="select" label="Select an m6A predictor"  display="radio">
+                    <option value="maize" selected="True">Maize</option>
+                    <option value="arabidopsis">Arabidopsis</option>
+                    <option value="rice">Rice</option>
+                    <option value="tomato">Tomato</option>
+                </param>
+            </when>
+
+
         </conditional>
         
 
