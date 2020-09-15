@@ -5,6 +5,7 @@
 
 - deepEA is a convenient, freely available, web-based platform that is capable to support deep analysis of epitranscriptome sequencing data with several general and specific functionalities. deepEA consists of six modules: **Data Preparation, Quality Control, Identification of RNA Modifications, Functional Annotation, Multi-omics Integrative Analysis and Prediction Analysis Based on Machine Learning**. 
 - deepEA project is hosted on https://cma2015.github.io/deepEA. 
+- deepEA docker image is available in https://hub.docker.com/r/malab/deepea.
 - The deepEA demo server can be accessed via http://deepea.omicstudio.cloud.
 - The following part shows installation of deepEA docker image and detailed documentation for each function in deepEA.
 
@@ -18,22 +19,6 @@ The folloing screenshot shows us:
 
 	![0-0](../assets/img/0-0.png)
 
-
-
-### I can not access the deepEA server
-
-For the first access of https://deepea.nwafu.edu.cn, the browser may warn that **This Connection Is Not Provate**, see the following pictures to solve the problem:
-
-- For Safari
-![Safari](../assets/img/Safari.jpg)
-
-- For Chrome
-  ![Chrom-1](../assets/img/chrome-1.jpg)
-  ![Chrom-2](../assets/img/chrome-2.jpg)
-
-- For Firefox
-  ![Firefox-1](../assets/img/Firefox-1.jpg)
-  ![Firefox-2](../assets/img/Firefox-2.jpg)
   
 
 ### How to upload in-house data into deepEA local server

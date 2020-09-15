@@ -5,6 +5,7 @@
 
 - deepEA is a convenient, freely available, web-based platform that is capable to support deep analysis of epitranscriptome sequencing data with several general and specific functionalities. deepEA consists of six modules: **Data Preparation, Quality Control, Identification of RNA Modifications, Functional Annotation, Multi-omics Integrative Analysis and Prediction Analysis Based on Machine Learning**. 
 - deepEA project is hosted on https://cma2015.github.io/deepEA. 
+- deepEA docker image is available in https://hub.docker.com/r/malab/deepea.
 - The deepEA demo server can be accessed via http://deepea.omicstudio.cloud.
 - The following part shows installation of deepEA docker image and detailed documentation for each function in deepEA.
 
@@ -88,7 +89,7 @@ Currently, deepEA wrapped five aligners to map epitranscriptome reads to genome,
 
 #### How to use this function
 
-- **Step 1**: upload the data in directory `test_data/Identification_of_RNA_Modifications/Align_Reads_to_Genome/` to history panel, if you are not clear about how to upload local data to deepEA server, please see <a href="https://deepea.nwafu.edu.cn/static/tutorial/2-Quality%20Control.html" target="_blank">here</a> for details
+- **Step 1**: upload the data in directory `test_data/Identification_of_RNA_Modifications/Align_Reads_to_Genome/` to history panel, if you are not clear about how to upload local data to deepEA server, please see <a href="https://www.youtube.com/watch?v=vDd9yQHiYYQ" target="_blank">here</a> for details
 
 - **Step 2**: see the following screenshot to run this function
 
@@ -139,7 +140,7 @@ Currently, deepEA wrapped five aligners to map epitranscriptome reads to genome,
   - For **macs2** method: please see <a href="https://github.com/macs3-project/MACS" target="_blank">macs2</a>
   
 #### How to use this function
-- **Step 1**: upload the data in directory `test_data/Identification_of_RNA_Modifications/Peak Calling from the MeRIP-Seq data/` to history panel, if you are not clear about how to upload local data to deepEA server, please see <a href="https://deepea.nwafu.edu.cn/static/tutorial/2-Quality%20Control.html" target="_blank">here</a> for details
+- **Step 1**: upload the data in directory `test_data/Identification_of_RNA_Modifications/Peak Calling from the MeRIP-Seq data/` to history panel, if you are not clear about how to upload local data to deepEA server, please see <a href="https://www.youtube.com/watch?v=vDd9yQHiYYQ" target="_blank">here</a> for details
 - **Step 2**: see the following screenshot to run this function![3-2](../assets/img/3-2.png)
 
 ## Calling m<sup>5</sup>C from the RNA-BSseq data
@@ -156,7 +157,7 @@ This function integrated meRanTK (Rieder *et al*., 2016, *Bioinformatics*) to pe
 
 #### How to use this function
 
-- **Step 1**: upload the data in directory `test_data/Identification_of_RNA_Modifications/Calling m5C from the RNA-BSseq data/` to history panel, if you are not clear about how to upload local data to deepEA server, please see <a href="https://deepea.nwafu.edu.cn/static/tutorial/2-Quality%20Control.html" target="_blank">here</a> for details
+- **Step 1**: upload the data in directory `test_data/Identification_of_RNA_Modifications/Calling m5C from the RNA-BSseq data/` to history panel, if you are not clear about how to upload local data to deepEA server, please see <a href="https://www.youtube.com/watch?v=vDd9yQHiYYQ" target="_blank">here</a> for details
 - **Step 2**: see the following screenshot to run this function
   ![3-3](../assets/img/3-3.png)
 
@@ -179,5 +180,5 @@ This function is used to identify pseudouridylation from CeU-Seq (Li *et al*., 2
 - A matrix containing the candidate pseudouridine sites
 
 #### How to use this function
-- **Step 1**: upload the data in directory `test_data/Identification_of_RNA_Modifications/Calling pseudouridylation from CeU-Seq/` to history panel, if you are not clear about how to upload local data to deepEA server, please see [here](2-Quality Control.md) for details
+- **Step 1**: upload the data in directory `test_data/Identification_of_RNA_Modifications/Calling pseudouridylation from CeU-Seq/` to history panel, if you are not clear about how to upload local data to deepEA server, please see <a href="https://www.youtube.com/watch?v=vDd9yQHiYYQ" target="_blank">here</a> for details
 - **Step 2**: see the following screenshot to run this function![3-4](../assets/img/3-4.png)

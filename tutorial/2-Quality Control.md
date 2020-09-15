@@ -5,6 +5,7 @@
 
 - deepEA is a convenient, freely available, web-based platform that is capable to support deep analysis of epitranscriptome sequencing data with several general and specific functionalities. deepEA consists of six modules: **Data Preparation, Quality Control, Identification of RNA Modifications, Functional Annotation, Multi-omics Integrative Analysis and Prediction Analysis Based on Machine Learning**. 
 - deepEA project is hosted on https://cma2015.github.io/deepEA. 
+- deepEA docker image is available in https://hub.docker.com/r/malab/deepea.
 - The deepEA demo server can be accessed via http://deepea.omicstudio.cloud.
 - The following part shows installation of deepEA docker image and detailed documentation for each function in deepEA.
 
@@ -52,7 +53,7 @@ This function is used to generate alignment quality assessment for MeRIP-Seq (me
 - An HTML report recording the alignment quality.
 
 #### How to use this function
-- **Step 1**: download test data provided by deepEA (https://deepea.nwafu.edu.cn/static/test_data.zip)
+- **Step 1**: download test data provided by deepEA (http://deepea.omicstudio.cloud//static/test_data.zip)
 
 - **Step 2**: upload test data in directory `test_data/Quality_Control/` to history panel
 ![2-2-1](../assets/img/2-2-1.png)
