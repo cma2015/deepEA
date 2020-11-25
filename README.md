@@ -11,6 +11,9 @@
 ## How to use deepEA
 - Test data and tutorial of deepEA are presented at https://cma2015.github.io/deepEA
 
+## How to cite deepEA
+- Jingjing Zhai, Jie Song, Shang Xie, Chuang Ma. deepEA: a containerized web server for interactive analysis of epitranscriptome sequencing data. Plant Physiology.  kiaa008, https://doi.org/10.1093/plphys/kiaa008
+
 ## How to access help
 * Comments/suggestions/bugs/issues are welcome reported [here](https://github.com/cma2015/deepEA/issues) or contact: Jingjing Zhai zhaijingjing603@gmail.com or Chuang Ma chuangma2006@gmail.com
 
